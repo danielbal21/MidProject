@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import Entities.Order;
+import ProtocolHandler.RequestType;
+import client.Client;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -63,17 +65,16 @@ public class OrdersMenuController implements Initializable {
 	private ComboBox<?> colorComboBox;
 
 	public void addOrdersToTable() {
-
+		
 		orderTable.setEditable(true);
+		Client.ProtocolHandler.Invoke(RequestType.GetAllOrders, null, null, true);
+		
+		
 		observableList = FXCollections.observableArrayList();
-		Order order1 = new Order(1, 10, "hello", "yellow", "afsd", "a", "oa", "sadf");
-		Order order2 = new Order(2, 20, "hellooooo", "white", "dsf", "b", "og", "fsfgh");
-		Order order3 = new Order(3, 200, "hejhllooooo", "black", "DFG", "c", "o4", "cxv");
-		Order order4 = new Order(4, 300, "hadsasdllooooo", "blue", "f", "d", "o3", "ngh");
-		observableList.add(order1);
-		observableList.add(order2);
-		observableList.add(order3);
-		observableList.add(order4);
+		observableList.add();
+		observableList.add();
+		observableList.add();
+		observableList.add();
 
 		orderTable.setItems(observableList);
 	}

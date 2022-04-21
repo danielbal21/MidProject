@@ -15,7 +15,7 @@ public class Client{
 
 	public static void main(String[] args) throws IOException {
 		ClientConnection = new ClientConn("localhost", DEFAULT_PORT);
-		ProtocolHandler.Invoke(RequestType.GetAllOrders, null, null, true);
+		
 		//System.out.println();
 	}
 	
