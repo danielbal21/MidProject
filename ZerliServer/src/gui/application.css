@@ -1,7 +1,7 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
 
 .pressbtn{
-	  -fx-padding: 15px 20px;
+	-fx-padding: 15px 20px;
 }
 
 .pressbtn:pressed{
@@ -47,7 +47,7 @@
 }
 
 .Left-btn:active {
-  -fx-background-color: #FFF0000;
+  -fx-background-color: #FF0000;
 }
  
 .Reg-btn {
