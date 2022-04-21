@@ -20,9 +20,7 @@ public class ServerPanelController implements Initializable{
 	
     @FXML
     private Button exitBtn;
-    
-    @FXML
-    private Button updateBtn;
+   
     
     @FXML
     private TableView<ClientInfo> clientTable;
@@ -42,20 +40,25 @@ public class ServerPanelController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		ipCol.setCellValueFactory(new PropertyValueFactory<>("ip"));	
 		hostCol.setCellValueFactory(new PropertyValueFactory<>("hostName"));	
-		statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));	
+		statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
+		
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				while(true) {
+					clientsInfo = FXCollections.observableArrayList();
+					for (int i= 0; i<ServerUI.server.getNumberOfClients();i++) {
+						byte[] ip = ((ConnectionToClient)ServerUI.server.getClientConnections()[i]).getInetAddress().getAddress();
+			    		String host = ((ConnectionToClient)ServerUI.server.getClientConnections()[i]).getInetAddress().getHostName();
+						clientsInfo.add(new ClientInfo(ip, host, "Active"));
+					}
+					clientTable.setItems(clientsInfo);
+					try {Thread.sleep(2000);} 
+					catch (InterruptedException e) {e.printStackTrace();}
+				}
+			}
+		}).start();
 	}
-
-    @FXML
-    void updatePressed(ActionEvent event) {
-    	clientsInfo = FXCollections.observableArrayList();
-    	System.out.println(ServerUI.server.getNumberOfClients());
-     	for (int i= 0; i<ServerUI.server.getNumberOfClients();i++) {
-			byte[] ip = ((ConnectionToClient)ServerUI.server.getClientConnections()[i]).getInetAddress().getAddress();
-    		String host = ((ConnectionToClient)ServerUI.server.getClientConnections()[i]).getInetAddress().getHostName();
-			clientsInfo.add(new ClientInfo(ip, host, "Active"));
-    	}
-    	clientTable.setItems(clientsInfo);
-    }
    
     @FXML
     void exitPressed(ActionEvent event) {

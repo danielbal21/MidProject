@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="424.0" prefWidth="495.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ServerPanelController">
+<AnchorPane prefHeight="473.0" prefWidth="409.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ServerPanelController">
    <children>
-      <TableView fx:id="clientTable" layoutX="86.0" layoutY="77.0" prefHeight="271.0" prefWidth="308.0">
+      <TableView fx:id="clientTable" layoutX="47.0" layoutY="132.0" prefHeight="300.0" prefWidth="316.0">
         <columns>
           <TableColumn fx:id="ipCol" prefWidth="137.0" text="IP" />
             <TableColumn fx:id="hostCol" minWidth="0.0" prefWidth="82.0" text="Host" />
@@ -20,21 +20,15 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Label layoutX="162.0" layoutY="24.0" text="Zerli Server">
+      <Label layoutX="119.0" layoutY="77.0" text="Zerli Server">
          <font>
             <Font name="Maiandra GD" size="35.0" />
          </font>
       </Label>
-      <Button fx:id="exitBtn" layoutX="432.0" layoutY="14.0" mnemonicParsing="false" onAction="#exitPressed" prefHeight="43.0" prefWidth="49.0" stylesheets="@../../../../../Documents/Java%20Projects/ZerliGUI/src/gui/application.css" text="X">
+      <Button fx:id="exitBtn" layoutX="349.0" layoutY="20.0" mnemonicParsing="false" onAction="#exitPressed" prefHeight="37.0" prefWidth="42.0" stylesheets="@../../../../../Documents/Java%20Projects/ZerliGUI/src/gui/application.css" text="X">
          <styleClass>
             <String fx:value="X-btn" />
             <String fx:value="pressbtn" />
-         </styleClass>
-      </Button>
-      <Button fx:id="updateBtn" layoutX="176.0" layoutY="362.0" mnemonicParsing="false" onAction="#updatePressed" stylesheets="@application.css" text="Update Table">
-         <styleClass>
-            <String fx:value="pressbtn" />
-            <String fx:value="Reg-btn" />
          </styleClass>
       </Button>
    </children>

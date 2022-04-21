@@ -13,6 +13,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class ClientUI extends Application { 
 	
@@ -31,8 +32,9 @@ public class ClientUI extends Application {
 			loader.setLocation(getClass().getResource("../gui/orderMenu.fxml"));
 			root =  loader.load(); 
 			c = loader.getController();
+			Utilities.GenericUtilties.SetWindowMovable(root, stage);
 			Scene scene = new Scene(root);
-			stage.setTitle("Orders");
+			stage.initStyle(StageStyle.UNDECORATED);
 			stage.setScene(scene); 		
 			stage.show();
 			c.addOrdersToTable();

@@ -1,5 +1,6 @@
 package controllers;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import Entities.Order;
@@ -9,6 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -46,7 +48,8 @@ public class OrdersMenuController implements Initializable {
 	private Label orderLabel;
 	@FXML
 	private Label colorLabel;
-
+    @FXML
+    private Button exitBtn;
 	@FXML
 	private Label dateLabel;
 
@@ -85,7 +88,19 @@ public class OrdersMenuController implements Initializable {
 			
 
     }
-
+	
+    @FXML
+    void exitPressed(ActionEvent event) {
+    	try {
+			ClientUI.ClientConnection.closeConnection();
+			System.out.println(ClientUI.ClientConnection.isConnected());
+			System.exit(0);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+		}
+    	
+    }
+    
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		orderNumberColumn.setCellValueFactory(new PropertyValueFactory<>("orderNumber"));
