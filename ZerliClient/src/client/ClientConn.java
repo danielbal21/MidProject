@@ -15,13 +15,7 @@ public class ClientConn extends AbstractClient{
 
 	@Override
 	protected void handleMessageFromServer(Object msg) {
-	    System.out.println("Message received: " + msg);
-	    
-	    if(msg != null) {
-		    if(msg instanceof ArrayList<?>) {
-		    
-		    }
-	    }
+		Client.ProtocolHandler.Handle(msg);
 	    
 	}
 
