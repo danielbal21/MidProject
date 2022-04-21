@@ -28,7 +28,7 @@ public class ClientUI extends Application {
 		try 
 		{
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("/gui/orderMenu.fxml"));
+			loader.setLocation(getClass().getResource("../gui/orderMenu.fxml"));
 			root =  loader.load(); 
 			c = loader.getController();
 			Scene scene = new Scene(root);

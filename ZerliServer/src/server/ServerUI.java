@@ -36,7 +36,7 @@ public class ServerUI extends Application{
 		try 
 		{
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("/gui/ServerPanel.fxml"));
+			loader.setLocation(getClass().getResource("../gui/ServerPanel.fxml"));
 			root =  loader.load(); 
 			serverPanelController = loader.getController();
 			Scene scene = new Scene(root);
