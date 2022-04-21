@@ -60,7 +60,7 @@ public class OrdersMenuController implements Initializable {
 	@FXML
 	private DatePicker datePicker;
 	@FXML
-	private ComboBox<?> colorComboBox;
+	private ComboBox<String> colorComboBox;
 
 	public void addOrdersToTable() {
 
@@ -94,10 +94,17 @@ public class OrdersMenuController implements Initializable {
 			orderIDLabel.setVisible(true);
 			orderLabel.setVisible(true);
 			colorLabel.setVisible(true);
-			
+			colorComboBox.setVisible(true);
+			datePicker.setVisible(true);
+			dateLabel.setVisible(true);
 			orderIDLabel.setText(String.valueOf(orderTable.getSelectionModel().getSelectedItem().getOrderNumber()));
 
+			colorComboBox.getItems().add("yellow");
+			colorComboBox.getItems().add("pink");
+			colorComboBox.getItems().add("white");
+			colorComboBox.getItems().add("green");
 			
+
 		}
 			
 
