@@ -2,7 +2,11 @@ package ProtocolHandler;
 
 import java.io.Serializable;
 
+<<<<<<< HEAD
 public class Transaction implements Serializable {
+=======
+public class Transaction implements Serializable{
+>>>>>>> refs/heads/master
 	//Identifier
 	String requestee;
 	

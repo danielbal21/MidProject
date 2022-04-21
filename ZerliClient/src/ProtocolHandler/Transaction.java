@@ -3,6 +3,7 @@ package ProtocolHandler;
 import java.io.Serializable;
 
 public class Transaction implements Serializable {
+
 	//Identifier
 	String requestee;
 	

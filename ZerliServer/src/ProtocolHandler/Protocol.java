@@ -51,7 +51,7 @@ public class Protocol {
 	    try {
 			client.sendToClient(trans);
 		} catch (IOException e) {
-			throw new Exception("Cannot reply to client : " + e.getStackTrace().toString());
+			throw new Exception("Cannot reply to client : " + e.getMessage() +e.getStackTrace().toString());
 		}
 	}
 }

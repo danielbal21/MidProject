@@ -2,10 +2,12 @@ package server;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import Entities.Order;
 
@@ -62,6 +64,20 @@ public class ServerConnSQL{
 	            System.err.println(e.getMessage());
 	        }
 		 System.out.println("Get Orders!");
+	}
+
+	public void UpdateOrder_ColorAndDate_ByNumber(Order data) {
+		PreparedStatement stmt;
+		try 
+		{
+			stmt = conn.prepareStatement("UPDATE Orders SET color=?,date=? WHERE orderNumber=?");
+			stmt.setString(1, data.getColor());
+			stmt.setString(2, data.getDate());
+			stmt.setString(3, data.getOrderDate());
+			stmt.executeUpdate();
+		} catch (SQLException e) {e.printStackTrace();}	
+		System.out.println("Updated order "+data.getOrderNumber());	
+		
 	}
 	
 	
