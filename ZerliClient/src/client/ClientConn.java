@@ -16,7 +16,8 @@ public class ClientConn extends AbstractClient{
 	@Override
 	protected void handleMessageFromServer(Object msg) {
 		Client.ProtocolHandler.Handle(msg);
-	    
+		
+		
 	}
 
 }
