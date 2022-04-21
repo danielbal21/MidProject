@@ -1,4 +1,4 @@
-package gui;
+package controllers;
 
 import java.io.IOException;
 import java.net.URL;
@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import Entities.Order;
 import ProtocolHandler.RequestType;
 import client.Client;
+import client.ClientUI;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;

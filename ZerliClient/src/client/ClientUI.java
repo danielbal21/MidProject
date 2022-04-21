@@ -1,10 +1,9 @@
-package gui;
+package client;
 import java.io.IOException;
 import java.lang.ModuleLayer.Controller;
 import java.util.ArrayList;
 import Entities.Order;
 import ProtocolHandler.Protocol;
-import client.ClientConn;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

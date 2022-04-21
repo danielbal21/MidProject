@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import Entities.Order;
-import gui.ClientUI;
 import ocsf.client.*;
 
 public class ClientConn extends AbstractClient{

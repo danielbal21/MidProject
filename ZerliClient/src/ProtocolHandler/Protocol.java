@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import client.Client;
-import gui.ClientUI;
+import client.ClientUI;
 
 public class Protocol {
 	
