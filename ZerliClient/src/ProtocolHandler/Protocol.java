@@ -21,7 +21,10 @@ public class Protocol {
 	}
 	public Object GetResponse(RequestType requestType)
 	{
-		while(onHold);
+		while(onHold) {
+			try {Thread.sleep(20);} 
+			catch (InterruptedException e) {e.printStackTrace();}
+		}
 		return Responses.get(requestType);
 	}
 	public Protocol()

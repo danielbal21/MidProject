@@ -14,7 +14,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-
 public class ClientUI extends Application { 
 	
 	final public static int DEFAULT_PORT = 5555;
