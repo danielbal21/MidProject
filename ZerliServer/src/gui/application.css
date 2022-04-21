@@ -1,0 +1,70 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+
+.pressbtn{
+	  -fx-padding: 15px 20px;
+}
+
+.pressbtn:pressed{
+	-fx-scale-x: 0.9;
+	-fx-scale-y: 0.9;
+}
+
+
+.X-btn {
+  -fx-shape:"M 250 250 A 50 50 0 1 1 500 250 A 50 50 0 1 1 250 250  ";
+  -fx-padding: 15px 20px;
+  -fx-font-size: 12px;
+  -fx-cursor: hand;
+  -fx-color: #fff;
+  -fx-background-color: #D3D3D3;
+  -fx-border-radius: 15px;
+  -fx-effect:dropshadow(gaussian, #000000, 5, 0.5, 0.0, 0.0) ;
+}
+
+.X-btn:hover {
+	-fx-background-color: #DC143C;
+	-fx-effect: innershadow(gaussian, #000000, 10, 0.5, 0.0, 0.0) ;
+}
+
+.X-btn:active {
+  -fx-background-color: #FFFFFF;
+}
+
+
+
+.Left-btn{
+	-fx-shape:"M 350 450 L 350 350 L 500 350 L 500 250 L 350 250 L 350 150 L 200 300 L 350 450 ";
+    -fx-background-color: #F2A3A3;
+    -fx-padding: 15px 20px;
+	-fx-font-size: 20px;
+	-fx-effect:dropshadow(gaussian, #000000, 5, 0.5, 0.0, 0.0) ;
+	-fx-cursor: hand;  
+}
+
+.Left-btn:hover {
+	-fx-background-color: #FF0000;
+	-fx-effect: innershadow(gaussian, #000000, 10, 0.5, 0.0, 0.0) ;
+}
+
+.Left-btn:active {
+  -fx-background-color: #FFF0000;
+}
+ 
+.Reg-btn {
+  -fx-padding: 5px 5px;
+  -fx-font-size: 20px;
+  -fx-cursor: hand;
+  -fx-color: #fff;
+  -fx-background-color: #D3D3D3;
+  -fx-border-radius: 30px;
+  -fx-effect:dropshadow(gaussian, #000000, 5, 0.5, 0.0, 0.0) ;
+}
+
+.Reg-btn:hover {
+	-fx-background-color: #FFFFFF;
+	-fx-effect: innershadow(gaussian, #000000, 10, 0.5, 0.0, 0.0) ;
+}
+
+.Reg-btn:active {
+  -fx-background-color: #FFFFFF;
+}

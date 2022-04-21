@@ -37,8 +37,16 @@ public class ServerConnSQL{
 	        }
 	}
 	
-	public void getOrderNumber1(ArrayList<Order> orders) throws SQLException{
-		Statement stmt = conn.createStatement();
+	public void getOrders(ArrayList<Order> orders){
+		Statement stmt = null;
+		try {
+			stmt = conn.createStatement();
+			} 
+		catch (SQLException e1) {
+            System.err.println("Failed on createStatement()");
+			e1.printStackTrace();
+		}
+		
 		Order newOrder=null;
 		ResultSet rs;
 		 try {
@@ -53,6 +61,9 @@ public class ServerConnSQL{
 	            System.err.println("Got an exception! ");
 	            System.err.println(e.getMessage());
 	        }
-		 System.out.println("Get Order!");
+		 System.out.println("Get Orders!");
 	}
+	
+	
+	
 }

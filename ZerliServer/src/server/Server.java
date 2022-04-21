@@ -26,36 +26,16 @@ public class Server extends AbstractServer{
 		Order result = null;
 		
 	    System.out.println("Message received: " + msg + " from " + client);
-	   	if(((String)msg).equals("Order1"))
-			try {
-				serverConnSql.getOrderNumber1(orders);
-				for(Order s:orders) {
-					System.out.println(s);
-				}
-				
-			} catch (SQLException e1) {e1.printStackTrace();}
-	   
+	    
+	   	if(((String)msg).equals("Order1")) {// protocol handler
+			serverConnSql.getOrders(orders);
+	   	}
+
+	   	
 	    try {
 			client.sendToClient(result);
 		} catch (IOException e) {e.printStackTrace();}
 	    
 	}
-	
-	public static void main(String[] args) throws IOException {
-		Server ser = new Server(DEFAULT_PORT);
-		
-		 try 
-        {
-		 ser.listen(); //Start listening for connections
-        } 
-        catch (Exception ex) 
-        {
-          System.out.println("ERROR - Could not listen for clients!");
-        }
-		
-	}
-	
-	
-	
 
 }
