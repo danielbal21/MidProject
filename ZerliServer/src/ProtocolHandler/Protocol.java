@@ -39,7 +39,7 @@ public class Protocol {
 			return FAIL;
 		if(transaction.shouldRespond())
 		{
-			transaction.setResponse(response);
+			transaction.setResponse(response.getResponse());
 			send(sender,transaction);
 		}
 		

@@ -20,6 +20,7 @@ public class Protocol {
 	}
 	public Object GetResponse(RequestType requestType)
 	{
+		while(onHold);
 		return Responses.get(requestType);
 	}
 	public Protocol()
@@ -46,9 +47,9 @@ public class Protocol {
 	public boolean Handle(Object msg) {
 		if(!onHold || !(msg instanceof Transaction)) return false;
 		
-		onHold = false;
 		Transaction response = (Transaction)msg;
 		Responses.put(response.requestType, Handlers.get(response.getRequestType()).HandleResponse(response.getResponse()));
+		onHold = false;
 		return PASS;
 		
 	}
