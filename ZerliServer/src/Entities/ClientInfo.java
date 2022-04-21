@@ -4,13 +4,13 @@ public class ClientInfo {
 	
 	 private String ip;
 	 private String hostName;
-	 private String Status;
+	 private String status;
 	 
 
 	public ClientInfo(byte[] ip, String hostName, String status) { 		
 		this.ip = ip[0]+ "." + ip[1]+ "." +ip[2]+ "." +ip[3];
 		this.hostName = hostName;
-		this.Status = status;
+		this.status = status;
 	}
 
 	public String getIp() {
@@ -22,6 +22,6 @@ public class ClientInfo {
 	}
 
 	public String getStatus() {
-		return Status;
+		return status;
 	}
 }

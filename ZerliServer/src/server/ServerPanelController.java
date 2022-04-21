@@ -2,23 +2,17 @@ package server;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Iterator;
-import java.util.Observable;
 import java.util.ResourceBundle;
 import Entities.ClientInfo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
 import ocsf.server.ConnectionToClient;
 
 public class ServerPanelController implements Initializable{
@@ -47,12 +41,11 @@ public class ServerPanelController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		ipCol.setCellValueFactory(new PropertyValueFactory<>("ip"));	
 		hostCol.setCellValueFactory(new PropertyValueFactory<>("hostName"));	
-		statusCol.setCellValueFactory(new PropertyValueFactory<>("Status"));	
+		statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));	
 	}
 
     @FXML
     void updatePressed(ActionEvent event) {
-    	clientsInfo = null;
     	clientsInfo = FXCollections.observableArrayList();
      	for (int i= 0; i<ServerUI.server.getNumberOfClients();i++) {
 			byte[] ip = ((ConnectionToClient)ServerUI.server.getClientConnections()[i]).getInetAddress().getAddress();
@@ -70,6 +63,7 @@ public class ServerPanelController implements Initializable{
 			System.out.println("Falied close Server");
 			e.printStackTrace();
 		}
+    	System.exit(0);
     }
 }
 
