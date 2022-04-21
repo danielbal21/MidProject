@@ -2,5 +2,5 @@ package ProtocolHandler;
 
 public interface IHandler {
 	
-	public boolean HandleResponse(Object response);
+	public Object HandleResponse(Object response);
 }
