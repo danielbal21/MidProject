@@ -1,9 +1,6 @@
 package client;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
-import Entities.Order;
 import ocsf.client.*;
 
 public class ClientConn extends AbstractClient{
