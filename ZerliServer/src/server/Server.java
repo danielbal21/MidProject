@@ -14,7 +14,7 @@ public class Server extends AbstractServer{
 	
 	final public static int DEFAULT_PORT = 5555;
 	
-	ServerConnSQL serverConnSql = new ServerConnSQL();
+	public static ServerConnSQL SqlServerManager = new ServerConnSQL();
 	
 	public Server(int port) {
 		super(port);
@@ -28,7 +28,8 @@ public class Server extends AbstractServer{
 	    System.out.println("Message received: " + msg + " from " + client);
 	    
 	   	if(((String)msg).equals("Order1")) {// protocol handler
-			serverConnSql.getOrders(orders);
+	   		SqlServerManager.getOrders(orders);
+			System.out.println(((ConnectionToClient)super.getClientConnections()[0]).toString());
 	   	}
 
 	   	
