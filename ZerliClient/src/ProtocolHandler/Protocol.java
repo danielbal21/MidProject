@@ -11,13 +11,17 @@ public class Protocol {
 	final boolean FAIL = false;
 	
 	static HashMap<RequestType,IHandler> Handlers = new HashMap<>();
+	static HashMap<RequestType,Object> Responses = new HashMap<>();
 	boolean onHold = false;
 	
 	public static void RegisterHandler(RequestType requestType, IHandler handler)
 	{
 		Handlers.put(requestType, handler);
 	}
-	
+	public Object GetResponse(RequestType requestType)
+	{
+		return Responses.get(requestType);
+	}
 	public Protocol()
 	{
 		HandlersRegisterer.RegisterHandlers();
@@ -27,9 +31,8 @@ public class Protocol {
 	{
 		//waiting for another response
 		while(onHold);
-		
+		onHold = expectingResponse;
 		Transaction transaction = new Transaction(requestType,"Not yet implemented",data,params,expectingResponse);
-		onHold = false;
 		try {
 			Client.ClientConnection.sendToServer(transaction);
 		} catch (IOException e) {
@@ -45,7 +48,8 @@ public class Protocol {
 		
 		onHold = false;
 		Transaction response = (Transaction)msg;
-		return Handlers.get(response.getRequestType()).HandleResponse(response.getResponse());
+		Responses.put(response.requestType, Handlers.get(response.getRequestType()).HandleResponse(response.getResponse()));
+		return PASS;
 		
 	}
 }

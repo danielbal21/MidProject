@@ -5,9 +5,8 @@ import ProtocolHandler.IHandler;
 public class PingHandler implements IHandler {
 
 	@Override
-	public boolean HandleResponse(Object response) {
-		System.out.println((String)response);
-		return true;
+	public Object HandleResponse(Object response) {
+		return response;
 	}
 
 }
