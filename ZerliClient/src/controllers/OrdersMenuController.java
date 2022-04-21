@@ -58,9 +58,8 @@ public class OrdersMenuController implements Initializable {
 	public void addOrdersToTable() {
 		
 		orderTable.setEditable(true);
-		ClientUI.ProtocolHandler.Invoke(RequestType.GetAllOrders, null, null, true);
+		ClientUI.ProtocolHandler.Invoke(RequestType.GetAllOrders, null, null, true); // send to server
 		observableList = (ObservableList<Order>) ClientUI.ProtocolHandler.GetResponse(RequestType.GetAllOrders);
-		System.out.println(observableList.toString());
 		orderTable.setItems(observableList);
 	}
 

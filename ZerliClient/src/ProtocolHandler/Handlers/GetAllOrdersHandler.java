@@ -15,7 +15,6 @@ public class GetAllOrdersHandler implements IHandler{
 			return FXCollections.observableArrayList((ArrayList<Order>)response);
 		}
 		return null;
-		
 	}
 
 }
