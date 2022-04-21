@@ -47,6 +47,7 @@ public class ServerPanelController implements Initializable{
     @FXML
     void updatePressed(ActionEvent event) {
     	clientsInfo = FXCollections.observableArrayList();
+    	System.out.println(ServerUI.server.getNumberOfClients());
      	for (int i= 0; i<ServerUI.server.getNumberOfClients();i++) {
 			byte[] ip = ((ConnectionToClient)ServerUI.server.getClientConnections()[i]).getInetAddress().getAddress();
     		String host = ((ConnectionToClient)ServerUI.server.getClientConnections()[i]).getInetAddress().getHostName();

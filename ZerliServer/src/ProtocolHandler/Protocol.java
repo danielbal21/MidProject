@@ -39,7 +39,7 @@ public class Protocol {
 			return FAIL;
 		if(transaction.shouldRespond())
 		{
-			transaction.setResponse(response);
+			transaction.setResponse(response.getResponse());
 			send(sender,transaction);
 		}
 		
@@ -51,7 +51,7 @@ public class Protocol {
 	    try {
 			client.sendToClient(trans);
 		} catch (IOException e) {
-			throw new Exception("Cannot reply to client : " + e.getStackTrace().toString());
+			throw new Exception("Cannot reply to client : " + e.getMessage() +e.getStackTrace().toString());
 		}
 	}
 }

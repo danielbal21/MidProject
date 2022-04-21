@@ -67,15 +67,9 @@ public class OrdersMenuController implements Initializable {
 	public void addOrdersToTable() {
 		
 		orderTable.setEditable(true);
-		Client.ProtocolHandler.Invoke(RequestType.GetAllOrders, null, null, true);
-		
-		
-		observableList = FXCollections.observableArrayList();
-		observableList.add();
-		observableList.add();
-		observableList.add();
-		observableList.add();
-
+		ClientUI.ProtocolHandler.Invoke(RequestType.GetAllOrders, null, null, true);
+		observableList = (ObservableList<Order>) ClientUI.ProtocolHandler.GetResponse(RequestType.GetAllOrders);
+		System.out.println(observableList.toString());
 		orderTable.setItems(observableList);
 	}
 
@@ -96,9 +90,7 @@ public class OrdersMenuController implements Initializable {
 			orderLabel.setVisible(true);
 			colorLabel.setVisible(true);
 			
-			orderIDLabel.setText(String.valueOf(orderTable.getSelectionModel().getSelectedItem().getOrderNumber()));
-
-			
+			orderIDLabel.setText(String.valueOf(orderTable.getSelectionModel().getSelectedItem().getOrderNumber()));	
 		}
 			
 
@@ -114,7 +106,6 @@ public class OrdersMenuController implements Initializable {
 		shopColumn.setCellValueFactory(new PropertyValueFactory<>("shop"));
 		dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
 		oDateColumn.setCellValueFactory(new PropertyValueFactory<>("orderDate"));
-
 	}
 
 }

@@ -1,6 +1,8 @@
 package ProtocolHandler;
 
-public class Transaction {
+import java.io.Serializable;
+
+public class Transaction implements Serializable{
 	//Identifier
 	String requestee;
 	

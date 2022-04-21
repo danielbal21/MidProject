@@ -3,6 +3,8 @@ import java.io.IOException;
 import java.lang.ModuleLayer.Controller;
 import java.util.ArrayList;
 import Entities.Order;
+import ProtocolHandler.Protocol;
+import client.ClientConn;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,8 +15,13 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 
-public class Main extends Application {
-
+public class ClientUI extends Application { 
+	
+	final public static int DEFAULT_PORT = 5555;
+	public static Protocol ProtocolHandler = new Protocol();
+	//final public static String DEFAULT_HOST = "localhost";
+	public static ClientConn ClientConnection = new ClientConn("localhost", DEFAULT_PORT);
+	
 	@Override
 	public void start(Stage stage) throws IOException {
 		OrdersMenuController c;		

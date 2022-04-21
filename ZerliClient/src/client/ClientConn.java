@@ -4,18 +4,21 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import Entities.Order;
+import gui.ClientUI;
 import ocsf.client.*;
 
 public class ClientConn extends AbstractClient{
 
-	public ClientConn(String host, int port) throws IOException {
+	public ClientConn(String host, int port) {
 		super(host, port);
-		openConnection();
+		try {
+			openConnection();
+		} catch (IOException e) {e.printStackTrace();}
 	}
 
 	@Override
 	protected void handleMessageFromServer(Object msg) {
-		Client.ProtocolHandler.Handle(msg);
+		ClientUI.ProtocolHandler.Handle(msg);
 		
 		
 	}

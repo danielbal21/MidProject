@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import client.Client;
+import gui.ClientUI;
 
 public class Protocol {
 	
@@ -34,7 +35,7 @@ public class Protocol {
 		onHold = expectingResponse;
 		Transaction transaction = new Transaction(requestType,"Not yet implemented",data,params,expectingResponse);
 		try {
-			Client.ClientConnection.sendToServer(transaction);
+			ClientUI.ClientConnection.sendToServer(transaction);
 		} catch (IOException e) {
 			e.printStackTrace();
 			return FAIL;
