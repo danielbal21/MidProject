@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 import Entities.Order;
 import ProtocolHandler.RequestType;
 import client.ClientUI;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,6 +24,7 @@ import javafx.scene.input.MouseEvent;
 public class OrdersMenuController implements Initializable {
 
 	private ObservableList<Order> observableList;
+	ObservableList<String> Colors = FXCollections.observableArrayList("Yellow", "Green", "Pink", "white", "blue", "red");
 
 	@FXML
 	private TableColumn<Order, Integer> orderNumberColumn;
@@ -56,7 +58,7 @@ public class OrdersMenuController implements Initializable {
 	@FXML
 	private DatePicker datePicker;
 	@FXML
-	private ComboBox<?> colorComboBox;
+	private ComboBox<String> colorComboBox;
 
 	public void addOrdersToTable() {
 		
@@ -82,11 +84,20 @@ public class OrdersMenuController implements Initializable {
 			orderIDLabel.setVisible(true);
 			orderLabel.setVisible(true);
 			colorLabel.setVisible(true);
-			
+			colorComboBox.setVisible(true);
+			datePicker.setVisible(true);
+			dateLabel.setVisible(true);
 			orderIDLabel.setText(String.valueOf(orderTable.getSelectionModel().getSelectedItem().getOrderNumber()));	
+			colorComboBox.setItems(Colors);
+			
+			
 		}
 			
 
+    }
+    @FXML
+    void getColorFromCombox(MouseEvent event) {
+    	colorLabel.setText(colorComboBox.getSelectionModel().getSelectedItem().toString());
     }
 	
     @FXML
