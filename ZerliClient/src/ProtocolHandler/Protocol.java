@@ -24,16 +24,15 @@ public class Protocol {
 			try {
 				Thread.sleep(20);
 				time += 20;
-			
-			if(time > 400)
-				onHold = false;
-				throw new TimeoutException("Command " + requestType.toString() + "did not respond!");
 			}
 			catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
-		return Responses.get(requestType);
+		onHold = false;
+			if(time > 400)
+				throw new TimeoutException("Command " + requestType.toString() + "did not respond!");
+			return Responses.get(requestType);
 	}
 	public Protocol()
 	{
