@@ -1,6 +1,7 @@
 package controllers;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.URL;
 import java.util.ResourceBundle;
 import Entities.ClientInfo;
@@ -48,7 +49,7 @@ public class ServerPanelController implements Initializable{
 				while(true) {
 					clientsInfo = FXCollections.observableArrayList();
 					for (int i= 0; i<ServerUI.server.getNumberOfClients();i++) {
-						byte[] ip = ((ConnectionToClient)ServerUI.server.getClientConnections()[i]).getInetAddress().getAddress();
+						String ip = ((ConnectionToClient)ServerUI.server.getClientConnections()[i]).getInetAddress().getHostAddress();
 			    		String host = ((ConnectionToClient)ServerUI.server.getClientConnections()[i]).getInetAddress().getHostName();
 						clientsInfo.add(new ClientInfo(ip, host, "Active"));
 					}

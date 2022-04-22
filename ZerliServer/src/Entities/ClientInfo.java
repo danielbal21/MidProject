@@ -7,8 +7,8 @@ public class ClientInfo {
 	 private String status;
 	 
 
-	public ClientInfo(byte[] ip, String hostName, String status) { 		
-		this.ip = ip[0]+ "." + ip[1]+ "." +ip[2]+ "." +ip[3];
+	public ClientInfo(String ip, String hostName, String status) { 		
+		this.ip= ip;
 		this.hostName = hostName;
 		this.status = status;
 	}

@@ -7,6 +7,9 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
+
+import com.oracle.tools.packager.Platform;
+
 import Entities.Order;
 import ProtocolHandler.Protocol;
 import ProtocolHandler.RequestType;
@@ -206,9 +209,15 @@ public class OrdersMenuController implements Initializable {
 				while (true) {
 					try {
 						ClientUI.ProtocolHandler.Invoke(RequestType.GetAllOrders, null, null, true); // send to server
-						observableList = (ObservableList<Order>) ClientUI.ProtocolHandler
-								.GetResponse(RequestType.GetAllOrders);
-						orderTable.setItems(observableList);
+						
+						javafx.application.Platform.runLater(new Runnable() {
+							
+							@Override
+							public void run() {
+								observableList = (ObservableList<Order>) ClientUI.ProtocolHandler.GetResponse(RequestType.GetAllOrders);
+								orderTable.setItems(observableList);
+							}
+						});
 						Thread.sleep(1500);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
