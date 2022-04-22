@@ -1,17 +1,20 @@
-package controllers;
+package gui;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import Entities.Order;
-import ProtocolHandler.RequestType;
-import client.ClientUI;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -20,11 +23,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 public class OrdersMenuController implements Initializable {
 
 	private ObservableList<Order> observableList;
-	ObservableList<String> Colors = FXCollections.observableArrayList("Yellow", "Green", "Pink", "white", "blue", "red");
 
 	@FXML
 	private TableColumn<Order, Integer> orderNumberColumn;
@@ -50,8 +53,7 @@ public class OrdersMenuController implements Initializable {
 	private Label orderLabel;
 	@FXML
 	private Label colorLabel;
-    @FXML
-    private Button exitBtn;
+
 	@FXML
 	private Label dateLabel;
 
@@ -61,10 +63,18 @@ public class OrdersMenuController implements Initializable {
 	private ComboBox<String> colorComboBox;
 
 	public void addOrdersToTable() {
-		
+
 		orderTable.setEditable(true);
-		ClientUI.ProtocolHandler.Invoke(RequestType.GetAllOrders, null, null, true); // send to server
-		observableList = (ObservableList<Order>) ClientUI.ProtocolHandler.GetResponse(RequestType.GetAllOrders);
+		observableList = FXCollections.observableArrayList();
+		Order order1 = new Order(1, 10, "hello", "yellow", "afsd", "a", "oa", "sadf");
+		Order order2 = new Order(2, 20, "hellooooo", "white", "dsf", "b", "og", "fsfgh");
+		Order order3 = new Order(3, 200, "hejhllooooo", "black", "DFG", "c", "o4", "cxv");
+		Order order4 = new Order(4, 300, "hadsasdllooooo", "blue", "f", "d", "o3", "ngh");
+		observableList.add(order1);
+		observableList.add(order2);
+		observableList.add(order3);
+		observableList.add(order4);
+
 		orderTable.setItems(observableList);
 	}
 
@@ -87,31 +97,19 @@ public class OrdersMenuController implements Initializable {
 			colorComboBox.setVisible(true);
 			datePicker.setVisible(true);
 			dateLabel.setVisible(true);
-			orderIDLabel.setText(String.valueOf(orderTable.getSelectionModel().getSelectedItem().getOrderNumber()));	
-			colorComboBox.setItems(Colors);
+			orderIDLabel.setText(String.valueOf(orderTable.getSelectionModel().getSelectedItem().getOrderNumber()));
+
+			colorComboBox.getItems().add("yellow");
+			colorComboBox.getItems().add("pink");
+			colorComboBox.getItems().add("white");
+			colorComboBox.getItems().add("green");
 			
-			
+
 		}
 			
 
     }
-    @FXML
-    void getColorFromCombox(MouseEvent event) {
-    	colorLabel.setText(colorComboBox.getSelectionModel().getSelectedItem().toString());
-    }
-	
-    @FXML
-    void exitPressed(ActionEvent event) {
-    	try {
-			ClientUI.ClientConnection.closeConnection();
-			System.out.println(ClientUI.ClientConnection.isConnected());
-			System.exit(0);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-		}
-    	
-    }
-    
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		orderNumberColumn.setCellValueFactory(new PropertyValueFactory<>("orderNumber"));
@@ -122,6 +120,7 @@ public class OrdersMenuController implements Initializable {
 		shopColumn.setCellValueFactory(new PropertyValueFactory<>("shop"));
 		dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
 		oDateColumn.setCellValueFactory(new PropertyValueFactory<>("orderDate"));
+
 	}
 
 }
