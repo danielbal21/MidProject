@@ -17,6 +17,7 @@ import javafx.stage.StageStyle;
 
 public class ClientUI extends Application { 
 	
+	
 	final public static int DEFAULT_PORT = 5555;
 	public static Protocol ProtocolHandler = new Protocol();
 	//final public static String DEFAULT_HOST = "localhost";
