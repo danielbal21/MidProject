@@ -14,8 +14,8 @@ import Entities.Order;
 public class ServerConnSQL{
 		
 	private Connection conn;
-	private String mySQLpassword = "123456";
-	
+	//private String mySQLpassword = "123456";
+	private String mySQLpassword = "CFcf3719";
 	
 	public ServerConnSQL() {  
 	    try 

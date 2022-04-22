@@ -18,16 +18,16 @@
             <Font name="Maiandra GD" size="50.0" />
          </font>
       </Label>
-      <TableView fx:id="orderTable" layoutX="12.0" layoutY="127.0" onMousePressed="#getOrderInfo" prefHeight="367.0" prefWidth="912.0" style="-fx-background-color: C3E3EE;">
+      <TableView fx:id="orderTable" layoutX="12.0" layoutY="127.0" onMousePressed="#getOrderInfo" prefHeight="367.0" prefWidth="896.0" style="-fx-background-color: C3E3EE;">
         <columns>
-          <TableColumn fx:id="orderNumberColumn" prefWidth="61.333343505859375" text="Order Number" />
-          <TableColumn fx:id="priceColumn" prefWidth="43.33331298828125" text="Price" />
-            <TableColumn fx:id="greetingCradColumn" prefWidth="88.66665649414062" text="Greeting Card" />
-            <TableColumn fx:id="colorColumn" onEditCommit="#EditColor" prefWidth="68.0" text="Color" />
-            <TableColumn fx:id="dOrderColumn" prefWidth="114.0" text="Order Description" />
-            <TableColumn fx:id="shopColumn" prefWidth="90.0" text="Shop" />
-            <TableColumn fx:id="dateColumn" onEditCommit="#EditDate" prefWidth="76.0" text="Supply Date" />
-            <TableColumn fx:id="oDateColumn" prefWidth="88.0" text="Order Date" />
+          <TableColumn fx:id="orderNumberColumn" minWidth="-Infinity" prefWidth="90.0" resizable="false" text="Order Number" />
+          <TableColumn fx:id="priceColumn" prefWidth="79.0" resizable="false" text="Price" />
+            <TableColumn fx:id="greetingCradColumn" prefWidth="131.0" resizable="false" text="Greeting Card" />
+            <TableColumn fx:id="colorColumn" onEditCommit="#EditColor" resizable="false" text="Color" />
+            <TableColumn fx:id="dOrderColumn" prefWidth="151.0" resizable="false" text="Order Description" />
+            <TableColumn fx:id="shopColumn" prefWidth="82.0" resizable="false" text="Shop" />
+            <TableColumn fx:id="dateColumn" onEditCommit="#EditDate" prefWidth="129.0" resizable="false" text="Supply Date" />
+            <TableColumn fx:id="oDateColumn" prefWidth="150.0" resizable="false" text="Order Date" />
         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
