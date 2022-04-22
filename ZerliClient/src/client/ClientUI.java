@@ -37,7 +37,6 @@ public class ClientUI extends Application {
 			stage.initStyle(StageStyle.UNDECORATED);
 			stage.setScene(scene); 		
 			stage.show();
-			c.addOrdersToTable();
 			
 		}
 		catch (Exception e) {

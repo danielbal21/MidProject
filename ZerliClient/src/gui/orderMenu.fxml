@@ -7,6 +7,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -56,5 +57,24 @@
             <String fx:value="pressbtn" />
          </styleClass>
       </Button>
+      <Label layoutX="903.0" layoutY="297.0" text="Hour">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="1010.0" layoutY="300.0" text="Minutes">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="hourField" layoutX="896.0" layoutY="341.0" prefHeight="25.0" prefWidth="60.0" />
+      <Label layoutX="980.0" layoutY="320.0" text=":">
+         <font>
+            <Font size="38.0" />
+         </font>
+      </Label>
+      <Label fx:id="errorLabel" layoutX="971.0" layoutY="495.0" text="Error" visible="false" />
+      <TextField fx:id="minutesField" layoutX="1016.0" layoutY="341.0" prefHeight="25.0" prefWidth="60.0" />
+      <Button fx:id="updateButton" layoutX="971.0" layoutY="483.0" mnemonicParsing="false" onAction="#updatePresseed" text="Update" visible="false" />
    </children>
 </AnchorPane>
