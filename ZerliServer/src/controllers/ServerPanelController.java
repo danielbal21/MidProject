@@ -40,7 +40,7 @@ public class ServerPanelController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		ipCol.setCellValueFactory(new PropertyValueFactory<>("ip"));	
 		hostCol.setCellValueFactory(new PropertyValueFactory<>("hostName"));	
-		statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
+		statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));	
 		
 		new Thread(new Runnable() {
 			@Override
