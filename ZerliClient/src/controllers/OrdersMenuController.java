@@ -32,8 +32,12 @@ import javafx.scene.input.MouseEvent;
 public class OrdersMenuController implements Initializable {
 
 	private ObservableList<Order> observableList;
+<<<<<<< HEAD
 	ObservableList<String> Colors = FXCollections.observableArrayList("Yellow", "Green", "Pink", "White", "Blue",
 			"Red");
+=======
+	ObservableList<String> Colors = FXCollections.observableArrayList("Yellow", "Green", "Pink", "white", "blue", "red");
+>>>>>>> refs/heads/Michael
 
 	@FXML
 	private TableColumn<Order, Integer> orderNumberColumn;
@@ -68,12 +72,15 @@ public class OrdersMenuController implements Initializable {
 	private DatePicker datePicker;
 	@FXML
 	private ComboBox<String> colorComboBox;
+<<<<<<< HEAD
 	@FXML
 	private TextField timeField;
 	@FXML
 	private Button updateButton;
 	@FXML
 	private TextField hourField;
+=======
+>>>>>>> refs/heads/Michael
 
 	@FXML
 	private TextField minutesField;
@@ -99,6 +106,7 @@ public class OrdersMenuController implements Initializable {
 			colorComboBox.setVisible(true);
 			datePicker.setVisible(true);
 			dateLabel.setVisible(true);
+<<<<<<< HEAD
 			updateButton.setVisible(true);
 			orderIDLabel.setText(String.valueOf(orderTable.getSelectionModel().getSelectedItem().getOrderNumber()));
 			colorComboBox.setItems(Colors);
@@ -108,14 +116,32 @@ public class OrdersMenuController implements Initializable {
 			datePicker.setValue(localTime.toLocalDate());
 			hourField.setText(String.valueOf(localTime.getHour()));
 			minutesField.setText(String.valueOf(localTime.getMinute()));
+=======
+			orderIDLabel.setText(String.valueOf(orderTable.getSelectionModel().getSelectedItem().getOrderNumber()));	
+			colorComboBox.setItems(Colors);
+			
+			
+>>>>>>> refs/heads/Michael
 		}
 
+<<<<<<< HEAD
 	}
 
 
 	@FXML
 	void exitPressed(ActionEvent event) {
 		try {
+=======
+    }
+    @FXML
+    void getColorFromCombox(MouseEvent event) {
+    	colorLabel.setText(colorComboBox.getSelectionModel().getSelectedItem().toString());
+    }
+	
+    @FXML
+    void exitPressed(ActionEvent event) {
+    	try {
+>>>>>>> refs/heads/Michael
 			ClientUI.ClientConnection.closeConnection();
 			System.out.println(ClientUI.ClientConnection.isConnected());
 			System.exit(0);
