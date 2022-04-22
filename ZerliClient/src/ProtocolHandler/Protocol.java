@@ -20,12 +20,8 @@ public class Protocol {
 	public Object GetResponse(RequestType requestType)
 	{
 		while(onHold) {
-			try {
-				Thread.sleep(20);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			try {Thread.sleep(20);} 
+			catch (InterruptedException e) {e.printStackTrace();}
 		}
 		return Responses.get(requestType);
 	}

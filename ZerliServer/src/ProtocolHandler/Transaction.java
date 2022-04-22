@@ -1,16 +1,8 @@
 package ProtocolHandler;
 
-<<<<<<< Daniel
 import java.io.Serializable;
 
-<<<<<<< HEAD
-public class Transaction implements Serializable {
-=======
 public class Transaction implements Serializable{
->>>>>>> refs/heads/master
-=======
-public class Transaction {
->>>>>>> 898de87 [Daniel] Serializable
 	//Identifier
 	String requestee;
 	

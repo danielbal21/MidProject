@@ -69,11 +69,11 @@ public class Order implements Serializable{
 		this.color = color;
 	}
 
-	public String getdOrder() {
+	public String getDOrder() {
 		return dOrder;
 	}
 
-	public void setdOrder(String dOrder) {
+	public void setDOrder(String dOrder) {
 		this.dOrder = dOrder;
 	}
 
