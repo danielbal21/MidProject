@@ -19,9 +19,19 @@ public class Protocol {
 	}
 	public Object GetResponse(RequestType requestType)
 	{
-		while(onHold) {
-			try {Thread.sleep(20);} 
-			catch (InterruptedException e) {e.printStackTrace();}
+		int time = 0;
+		while(onHold && time < 400) {
+			try {
+				Thread.sleep(20);
+				time += 20;
+			
+			if(time > 400)
+				onHold = false;
+				throw new TimeoutException("Command " + requestType.toString() + "did not respond!");
+			}
+			catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 		return Responses.get(requestType);
 	}
@@ -43,7 +53,7 @@ public class Protocol {
 			return FAIL;
 		}
 		
-		return true;
+		return PASS;
 	}
 
 	public boolean Handle(Object msg) {
