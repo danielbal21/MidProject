@@ -54,8 +54,8 @@ public class ServerConnSQL{
 		 try {
 	           	rs = stmt.executeQuery("SELECT * FROM Orders");
 	            while (rs.next()) {
-	            	newOrder = new Order(rs.getInt(1), rs.getInt(2), rs.getString(3), 
-	            			rs.getString(4), rs.getString(5), rs.getString(6), 
+	            	newOrder = new Order(rs.getInt(1), rs.getInt(2), rs.getString(3).equals("null")? "" : rs.getString(3), 
+	            			rs.getString(4), rs.getString(5).equals("null")? "" : rs.getString(5), rs.getString(6), 
 	            			rs.getString(7), rs.getString(8));
 	            	orders.add(newOrder);
 	            	}
