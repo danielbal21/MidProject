@@ -9,13 +9,10 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-
 public class ServerUI extends Application{ 
 	
 	final public static int DEFAULT_PORT = 5555;
 	public static Server server = new Server(DEFAULT_PORT) ;
-//	private double xOffset = 0; 
-//	private double yOffset = 0;
 	
 	public static void main(String[] args) {
         try 

@@ -27,6 +27,6 @@
             <String fx:value="pressbtn" />
          </styleClass>
       </Button>
-      <Label fx:id="errrorLabel" layoutX="34.0" layoutY="214.0" text="Error in IP Address" textFill="RED" visible="false" />
+      <Label fx:id="errrorLabel" layoutX="34.0" layoutY="214.0" text="Connection Failed" textFill="RED" visible="false" />
    </children>
 </AnchorPane>

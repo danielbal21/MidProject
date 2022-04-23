@@ -1,7 +1,5 @@
 package ProtocolHandler;
 
-import com.mysql.cj.x.protobuf.MysqlxCrud.Update;
-
 import ProtocolHandler.Operations.GetAllOrdersOperation;
 import ProtocolHandler.Operations.PingOperation;
 import ProtocolHandler.Operations.UpdateOrderOperation;
