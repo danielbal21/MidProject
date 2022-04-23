@@ -1,5 +1,14 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
 
+#orderHeaderLabel{
+	 -fx-font-size: 35px;
+}
+
+#editPaneHeaderLabel{
+	-fx-font-size: 35px;
+}
+
+
 .label{
 	 -fx-font-family: 'Maiandra GD';
 	 -fx-font-size: 20px; 
@@ -23,10 +32,12 @@
     -fx-border-color: transparent;
     -fx-padding: 2 0 2 10px;
 }
+
 .table-row-cell:hover {
     -fx-background-color: #93f9b911;
     -fx-text-background-color: red;
 }
+
 .table-row-cell:odd{
     -fx-background-color: #93f9b911;
     -fx-background-insets: 0, 0 0 1 0;
@@ -45,6 +56,9 @@
     -fx-padding: 0 0 0 0;
 }
 
+.table-view {
+    -fx-background-color: transparent;
+}
 .pressbtn{
 	-fx-padding: 15px 20px;
 }

@@ -38,7 +38,10 @@ public class OrdersMenuController implements Initializable {
 	private ObservableList<Order> observableList;
 	ObservableList<String> Colors = FXCollections.observableArrayList("Yellow", "Green", "Pink", "White", "Blue",
 			"Red");
-
+    @FXML
+    private Label orderHeaderLabel;
+    @FXML
+    private Label editPaneHeaderLabel;
 	@FXML
 	private TableColumn<Order, Integer> orderNumberColumn;
 	@FXML
@@ -126,14 +129,12 @@ public class OrdersMenuController implements Initializable {
 	@FXML
 	void exitPressed(ActionEvent event) {
 		try {
-
 			ClientUI.ClientConnection.closeConnection();
 			System.out.println(ClientUI.ClientConnection.isConnected());
 			System.exit(0);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 		}
-
 	}
 
 	@FXML
