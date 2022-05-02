@@ -9,11 +9,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="843.0" prefWidth="1207.0" style="-fx-background-color: E5E5E5;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.StartIPconfigController">
+<AnchorPane prefHeight="843.0" prefWidth="1207.0" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.StartIPconfigController">
    <children>
       <ImageView fitHeight="940.0" fitWidth="1266.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../png/W2.jpg" />
+            <Image url="@../../../png/W2.jpg" />
          </image>
       </ImageView>
       <Label fx:id="enterIPLabel" layoutX="480.0" layoutY="313.0" prefHeight="73.0" prefWidth="220.0" styleClass="MainLabel" text="Enter IP">
@@ -33,12 +33,12 @@
       </Button>
       <ImageView fitHeight="69.0" fitWidth="70.0" layoutX="1183.0" layoutY="18.0" onMousePressed="#exitPressed" pickOnBounds="true" preserveRatio="true" styleClass="imageasbtn">
          <image>
-            <Image url="@../../png/X-btn.png" />
+            <Image url="@../../../png/X-btn.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="216.0" fitWidth="449.0" layoutX="396.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../png/ZerliLogo.PNG" />
+            <Image url="@../../../png/ZerliLogo.PNG" />
          </image>
       </ImageView>
       <Label layoutX="453.0" layoutY="814.0" text="All Rights Reserved To Group VI 2022 ©" textAlignment="CENTER">

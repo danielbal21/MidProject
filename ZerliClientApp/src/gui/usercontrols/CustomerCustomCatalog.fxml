@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="activePanelContainer" prefHeight="663.0" prefWidth="957.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="activePanelContainer" prefHeight="663.0" prefWidth="957.0" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ScrollPane layoutX="15.0" layoutY="94.0" prefHeight="497.0" prefWidth="928.0" style="-fx-border-color: black;">
          <content>
@@ -36,7 +36,7 @@
                      <children>
                         <ImageView fitHeight="134.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../png/F1.jpg" />
+                              <Image url="@../../../png/F1.jpg" />
                            </image>
                         </ImageView>
                         <VBox alignment="CENTER" prefHeight="232.0" prefWidth="199.0" spacing="10.0">
@@ -108,7 +108,7 @@
                      <children>
                         <ImageView fitHeight="134.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../png/F1.jpg" />
+                              <Image url="@../../../png/F1.jpg" />
                            </image>
                         </ImageView>
                         <VBox alignment="CENTER" prefHeight="232.0" prefWidth="199.0" spacing="10.0">
@@ -180,7 +180,7 @@
                      <children>
                         <ImageView fitHeight="134.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../png/F1.jpg" />
+                              <Image url="@../../../png/F1.jpg" />
                            </image>
                         </ImageView>
                         <VBox alignment="CENTER" prefHeight="232.0" prefWidth="199.0" spacing="10.0">
@@ -252,7 +252,7 @@
                      <children>
                         <ImageView fitHeight="134.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../png/F1.jpg" />
+                              <Image url="@../../../png/F1.jpg" />
                            </image>
                         </ImageView>
                         <VBox alignment="CENTER" prefHeight="232.0" prefWidth="199.0" spacing="10.0">
@@ -324,7 +324,7 @@
                      <children>
                         <ImageView fitHeight="134.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../png/F1.jpg" />
+                              <Image url="@../../../png/F1.jpg" />
                            </image>
                         </ImageView>
                         <VBox alignment="CENTER" prefHeight="232.0" prefWidth="199.0" spacing="10.0">
@@ -396,79 +396,7 @@
                      <children>
                         <ImageView fitHeight="134.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../png/F1.jpg" />
-                           </image>
-                        </ImageView>
-                        <VBox alignment="CENTER" prefHeight="232.0" prefWidth="199.0" spacing="10.0">
-                           <children>
-                              <Label prefHeight="52.0" prefWidth="117.0" text="Pink Rose">
-                                 <font>
-                                    <Font name="Maiandra GD" size="26.0" />
-                                 </font>
-                              </Label>
-                              <HBox alignment="CENTER" prefHeight="59.0" prefWidth="137.0">
-                                 <children>
-                                    <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="44.0" prefWidth="46.0" stylesheets="@../../bin/gui/application.css" text="-" textAlignment="CENTER">
-                                       <font>
-                                          <Font name="System Bold" size="25.0" />
-                                       </font>
-                                       <styleClass>
-                                          <String fx:value="X-btn" />
-                                          <String fx:value="Reg-btn" />
-                                       </styleClass>
-                                    </Button>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="46.0" prefWidth="38.0" text="2" textAlignment="CENTER">
-                                       <font>
-                                          <Font name="Maiandra GD" size="26.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets />
-                                       </HBox.margin>
-                                    </Label>
-                                    <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="44.0" prefWidth="46.0" stylesheets="@../../bin/gui/application.css" text="+" textAlignment="CENTER">
-                                       <font>
-                                          <Font name="System Bold" size="25.0" />
-                                       </font>
-                                       <styleClass>
-                                          <String fx:value="X-btn" />
-                                          <String fx:value="Reg-btn" />
-                                       </styleClass>
-                                    </Button>
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
-                                 <padding>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" />
-                                 </padding>
-                              </HBox>
-                              <Button mnemonicParsing="false" stylesheets="@application.css" text="Add to cart">
-                                 <font>
-                                    <Font name="Maiandra GD" size="12.0" />
-                                 </font>
-                                 <styleClass>
-                                    <String fx:value="Reg-btn" />
-                                    <String fx:value="pressbtn" />
-                                 </styleClass>
-                              </Button>
-                           </children>
-                           <padding>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </padding>
-                        </VBox>
-                     </children>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </padding>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="175.0" prefWidth="300.0">
-                     <children>
-                        <ImageView fitHeight="134.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../png/F1.jpg" />
+                              <Image url="@../../../png/F1.jpg" />
                            </image>
                         </ImageView>
                         <VBox alignment="CENTER" prefHeight="232.0" prefWidth="199.0" spacing="10.0">
@@ -540,79 +468,7 @@
                      <children>
                         <ImageView fitHeight="134.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../png/F1.jpg" />
-                           </image>
-                        </ImageView>
-                        <VBox alignment="CENTER" prefHeight="232.0" prefWidth="199.0" spacing="10.0">
-                           <children>
-                              <Label prefHeight="52.0" prefWidth="117.0" text="Pink Rose">
-                                 <font>
-                                    <Font name="Maiandra GD" size="26.0" />
-                                 </font>
-                              </Label>
-                              <HBox alignment="CENTER" prefHeight="59.0" prefWidth="137.0">
-                                 <children>
-                                    <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="44.0" prefWidth="46.0" stylesheets="@../../bin/gui/application.css" text="-" textAlignment="CENTER">
-                                       <font>
-                                          <Font name="System Bold" size="25.0" />
-                                       </font>
-                                       <styleClass>
-                                          <String fx:value="X-btn" />
-                                          <String fx:value="Reg-btn" />
-                                       </styleClass>
-                                    </Button>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="46.0" prefWidth="38.0" text="2" textAlignment="CENTER">
-                                       <font>
-                                          <Font name="Maiandra GD" size="26.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets />
-                                       </HBox.margin>
-                                    </Label>
-                                    <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="44.0" prefWidth="46.0" stylesheets="@../../bin/gui/application.css" text="+" textAlignment="CENTER">
-                                       <font>
-                                          <Font name="System Bold" size="25.0" />
-                                       </font>
-                                       <styleClass>
-                                          <String fx:value="X-btn" />
-                                          <String fx:value="Reg-btn" />
-                                       </styleClass>
-                                    </Button>
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
-                                 <padding>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" />
-                                 </padding>
-                              </HBox>
-                              <Button mnemonicParsing="false" stylesheets="@application.css" text="Add to cart">
-                                 <font>
-                                    <Font name="Maiandra GD" size="12.0" />
-                                 </font>
-                                 <styleClass>
-                                    <String fx:value="Reg-btn" />
-                                    <String fx:value="pressbtn" />
-                                 </styleClass>
-                              </Button>
-                           </children>
-                           <padding>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </padding>
-                        </VBox>
-                     </children>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </padding>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="175.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                     <children>
-                        <ImageView fitHeight="134.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../png/F1.jpg" />
+                              <Image url="@../../../png/F1.jpg" />
                            </image>
                         </ImageView>
                         <VBox alignment="CENTER" prefHeight="232.0" prefWidth="199.0" spacing="10.0">

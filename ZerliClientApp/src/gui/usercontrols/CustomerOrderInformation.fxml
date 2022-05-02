@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="activePanelContainer" prefHeight="663.0" prefWidth="959.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="activePanelContainer" prefHeight="663.0" prefWidth="959.0" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <DatePicker layoutX="427.0" layoutY="500.0" prefHeight="34.0" prefWidth="174.0" />
       <RadioButton layoutX="257.0" layoutY="311.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="161.0" styleClass="subLabel" text="Pick Up" />

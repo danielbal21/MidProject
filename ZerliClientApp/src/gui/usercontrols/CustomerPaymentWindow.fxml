@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="activePanelContainer2" prefHeight="663.0" prefWidth="957.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="activePanelContainer2" prefHeight="663.0" prefWidth="957.0" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Button layoutX="857.0" layoutY="600.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="92.0" stylesheets="@application.css" text="Next">
          <font>
@@ -132,7 +132,7 @@
          <children>
             <ImageView fitHeight="252.0" fitWidth="396.0" layoutX="36.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../png/CreditCardFront.jpg" />
+                  <Image url="@../../../png/CreditCardFront.jpg" />
                </image>
             </ImageView>
             <TextField alignment="CENTER" layoutX="179.0" layoutY="169.0" prefHeight="25.0" prefWidth="49.0" promptText="XXXX" />

@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="activePanelContainer" prefHeight="663.0" prefWidth="957.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="activePanelContainer" prefHeight="663.0" prefWidth="957.0" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ComboBox layoutX="383.0" layoutY="231.0" prefHeight="42.0" prefWidth="151.0" />
       <Label layoutX="216.0" layoutY="237.0" styleClass="subLabel" text="Reports Type">

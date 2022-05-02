@@ -24,7 +24,7 @@ public class Main extends Application {
 		try 
 		{
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("/gui/StartIPconfig.fxml"));
+			loader.setLocation(getClass().getResource("/gui/mainframes/StartIPconfig.fxml"));
 			root =  loader.load(); 
 			c = loader.getController();
 			Utilities.GenericUtilties.SetWindowMovable(root, stage);

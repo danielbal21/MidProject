@@ -8,20 +8,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="663.0" prefWidth="959.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="663.0" prefWidth="959.0" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button layoutX="20.0" layoutY="603.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" stylesheets="@application.css" text="Back btn" visible="false">
-         <styleClass>
-            <String fx:value="Left-btn" />
-            <String fx:value="pressbtn" />
-         </styleClass>
-      </Button>
-      <Button layoutX="897.0" layoutY="603.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" stylesheets="@application.css" text="Ridht btn" visible="false">
-         <styleClass>
-            <String fx:value="Right-btn" />
-            <String fx:value="pressbtn" />
-         </styleClass>
-      </Button>
       <Label layoutX="318.0" layoutY="14.0" prefHeight="76.0" prefWidth="323.0" styleClass="MainLabel" text="Home Page " textAlignment="CENTER">
          <font>
             <Font name="Maiandra GD" size="53.0" />
@@ -31,22 +19,22 @@
          <children>
             <ImageView fitHeight="76.0" fitWidth="92.0" layoutX="26.0" layoutY="57.0">
                <image>
-                  <Image url="@../../png/sunflower.png" />
+                  <Image url="@../../../png/sunflower.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="76.0" fitWidth="92.0" layoutX="134.0" layoutY="57.0">
                <image>
-                  <Image url="@../../png/sprout.png" />
+                  <Image url="@../../../png/sprout.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="76.0" fitWidth="92.0" layoutX="263.0" layoutY="57.0">
                <image>
-                  <Image url="@../../png/branch.png" />
+                  <Image url="@../../../png/branch.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="76.0" fitWidth="92.0" layoutX="396.0" layoutY="59.0">
                <image>
-                  <Image url="@../../png/soil.png" />
+                  <Image url="@../../../png/soil.png" />
                </image>
             </ImageView>
             <Label layoutX="29.0" layoutY="29.0" styleClass="subLabel" text="Flowers">
@@ -75,7 +63,7 @@
          <children>
             <ImageView fitHeight="76.0" fitWidth="92.0" layoutX="35.0" layoutY="76.0">
                <image>
-                  <Image url="@../../png/flower-bouquet.png" />
+                  <Image url="@../../../png/flower-bouquet.png" />
                </image>
             </ImageView>
             <Label layoutX="35.0" layoutY="40.0" styleClass="subLabel" text="Bouquet">
@@ -90,12 +78,12 @@
             </Label>
             <ImageView fitHeight="76.0" fitWidth="92.0" layoutX="183.0" layoutY="76.0">
                <image>
-                  <Image url="@../../png/bouquet.png" />
+                  <Image url="@../../../png/bouquet.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="76.0" fitWidth="92.0" layoutX="341.0" layoutY="72.0">
                <image>
-                  <Image url="@../../png/flower-pot.png" />
+                  <Image url="@../../../png/flower-pot.png" />
                </image>
             </ImageView>
             <Label layoutX="361.0" layoutY="37.0" styleClass="subLabel" text="Pots">

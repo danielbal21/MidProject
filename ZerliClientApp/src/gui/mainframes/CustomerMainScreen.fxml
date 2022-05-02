@@ -9,11 +9,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="843.0" prefWidth="1207.0" style="-fx-background-color: DEDEDE;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.userControl">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="843.0" prefWidth="1207.0" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.userControl">
    <children>
       <ImageView fitHeight="843.0" fitWidth="1289.0" layoutX="-34.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../png/W2.jpg" />
+            <Image url="@../../../png/W2.jpg" />
          </image>
       </ImageView>
       <AnchorPane layoutX="8.0" layoutY="10.0" prefHeight="107.0" prefWidth="1185.0" style="-fx-border-color: black;">
@@ -28,7 +28,7 @@
                </styleClass></Button>
             <ImageView fx:id="bellBtn" fitHeight="60.0" fitWidth="60.0" layoutX="887.0" layoutY="22.0" onMousePressed="#bellPressed" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../png/notification.png" />
+                  <Image url="@../../../png/notification.png" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -40,7 +40,7 @@
             </ImageView>
             <ImageView fx:id="homeBtn" fitHeight="70.0" fitWidth="70.0" layoutX="23.0" layoutY="20.0" onMousePressed="#homePressed">
                <image>
-                  <Image url="@../../png/homePage.png" />
+                  <Image url="@../../../png/homePage.png" />
                </image>
                <styleClass>
                   <String fx:value="pressbtn" />
@@ -49,7 +49,7 @@
             </ImageView>
             <ImageView fx:id="cartBtn" fitHeight="70.0" fitWidth="70.0" layoutX="118.0" layoutY="21.0" onMousePressed="#cartPressed">
                <image>
-                  <Image url="@../../png/shopping-cart.png" />
+                  <Image url="@../../../png/shopping-cart.png" />
                </image>
                <styleClass>
                   <String fx:value="pressbtn" />
@@ -58,12 +58,12 @@
             </ImageView>
             <ImageView fitHeight="100.0" fitWidth="207.0" layoutX="468.0" layoutY="3.0">
                <image>
-                  <Image url="@../../png/ZerliLogo.PNG" />
+                  <Image url="@../../../png/ZerliLogo.PNG" />
                </image>
             </ImageView>
             <ImageView fx:id="exitBtn" fitHeight="70.0" fitWidth="70.0" layoutX="1103.0" layoutY="22.0" onMousePressed="#exitPressed">
                <image>
-                  <Image url="@../../png/X-btn.png" />
+                  <Image url="@../../../png/X-btn.png" />
                </image>
                <styleClass>
                   <String fx:value="imageasbtn" />
