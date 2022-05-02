@@ -16,7 +16,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import ocsf.server.ConnectionToClient;
-import server.Main;
+import server.ServerApp;
 
 public class ServerPanelController implements Initializable{
 	
@@ -43,7 +43,7 @@ public class ServerPanelController implements Initializable{
     @FXML
     void exitPressed(ActionEvent event) {
     	try {
-    		Main.server.close();
+    		ServerApp.server.close();
 		} catch (IOException e) {
 			System.out.println("Falied close Server");
 			e.printStackTrace();
@@ -64,9 +64,9 @@ public class ServerPanelController implements Initializable{
 			public void run() {
 				while(true) {
 					clientsInfo = FXCollections.observableArrayList();
-					for (int i= 0; i<Main.server.getNumberOfClients();i++) {
-						String ip = ((ConnectionToClient)Main.server.getClientConnections()[i]).getInetAddress().getHostAddress();
-			    		String host = ((ConnectionToClient)Main.server.getClientConnections()[i]).getInetAddress().getHostName();
+					for (int i= 0; i<ServerApp.server.getNumberOfClients();i++) {
+						String ip = ((ConnectionToClient)ServerApp.server.getClientConnections()[i]).getInetAddress().getHostAddress();
+			    		String host = ((ConnectionToClient)ServerApp.server.getClientConnections()[i]).getInetAddress().getHostName();
 						clientsInfo.add(new ClientInfo(ip, host, "Active"));
 					}
 					clientTable.setItems(clientsInfo);

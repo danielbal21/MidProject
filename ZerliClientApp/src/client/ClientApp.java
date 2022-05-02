@@ -11,9 +11,10 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-public class Main extends Application { 
+public class ClientApp extends Application { 
 	final public static int DEFAULT_PORT = 5555;
 	public static Protocol ProtocolHandler = new Protocol();
+	public static String UserID = "NO-AUTH";
 	//final public static String DEFAULT_HOST = "localhost";
 	public static ClientConn ClientConnection;
 	

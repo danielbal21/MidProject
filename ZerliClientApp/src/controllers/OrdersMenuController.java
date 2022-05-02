@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import Entities.Order;
 import ProtocolHandler.RequestType;
-import client.Main;
+import client.ClientApp;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -27,6 +27,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 public class OrdersMenuController implements Initializable {
 
@@ -124,8 +125,8 @@ public class OrdersMenuController implements Initializable {
 	@FXML
 	void exitPressed(ActionEvent event) {
 		try {
-			Main.ClientConnection.closeConnection();
-			System.out.println(Main.ClientConnection.isConnected());
+			ClientApp.ClientConnection.closeConnection();
+			System.out.println(ClientApp.ClientConnection.isConnected());
 			System.exit(0);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -179,10 +180,10 @@ public class OrdersMenuController implements Initializable {
 				.atTime(LocalTime.parse(time, DateTimeFormatter.ofPattern("H:m:ss")));
 		System.out.println(local.toString());
 		data[1] = local.toString();
-		Main.ProtocolHandler.Invoke(RequestType.UpdateOrder, data, orderID, false);
+		ClientApp.ProtocolHandler.Invoke(RequestType.UpdateOrder, data, orderID, false);
 
-		Main.ProtocolHandler.Invoke(RequestType.GetAllOrders, null, null, true); // send to server
-		observableList = (ObservableList<Order>) Main.ProtocolHandler.GetResponse(RequestType.GetAllOrders);
+		ClientApp.ProtocolHandler.Invoke(RequestType.GetAllOrders, null, null, true); // send to server
+		observableList = (ObservableList<Order>) ClientApp.ProtocolHandler.GetResponse(RequestType.GetAllOrders);
 		orderTable.setItems(observableList);
 
 	}
@@ -204,13 +205,13 @@ public class OrdersMenuController implements Initializable {
 			public void run() {
 				while (true) {
 					try {
-						Main.ProtocolHandler.Invoke(RequestType.GetAllOrders, null, null, true); // send to server
+						ClientApp.ProtocolHandler.Invoke(RequestType.GetAllOrders, null, null, true); // send to server
 						
 						javafx.application.Platform.runLater(new Runnable() {
 							
 							@Override
 							public void run() {
-								observableList = (ObservableList<Order>) Main.ProtocolHandler.GetResponse(RequestType.GetAllOrders);
+								observableList = (ObservableList<Order>) ClientApp.ProtocolHandler.GetResponse(RequestType.GetAllOrders);
 								orderTable.setItems(observableList);
 							}
 						});
@@ -233,5 +234,7 @@ public class OrdersMenuController implements Initializable {
 		});
 
 	}
+
+
 
 }

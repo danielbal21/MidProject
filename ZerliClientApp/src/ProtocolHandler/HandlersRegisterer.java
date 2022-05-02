@@ -12,5 +12,6 @@ public class HandlersRegisterer {
 		Protocol.RegisterHandler(RequestType.Ping, new PingHandler());
 		Protocol.RegisterHandler(RequestType.GetAllOrders, new GetAllOrdersHandler());
 		Protocol.RegisterHandler(RequestType.UpdateOrder, null);
+		Protocol.RegisterHandler(RequestType.AuthenticateUser,null);
 	}
 }

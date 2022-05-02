@@ -3,7 +3,7 @@ package ProtocolHandler;
 import java.io.IOException;
 import java.util.HashMap;
 
-import client.Main;
+import client.ClientApp;
 
 public class Protocol {
 	
@@ -45,9 +45,9 @@ public class Protocol {
 		//waiting for another response
 		while(onHold);
 		onHold = expectingResponse;
-		Transaction transaction = new Transaction(requestType,"Not yet implemented",data,params,expectingResponse);
+		Transaction transaction = new Transaction(requestType,ClientApp.UserID,data,params,expectingResponse);
 		try {
-			Main.ClientConnection.sendToServer(transaction);
+			ClientApp.ClientConnection.sendToServer(transaction);
 		} catch (IOException e) {
 			e.printStackTrace();
 			return FAIL;
@@ -60,7 +60,10 @@ public class Protocol {
 		if(!onHold || !(msg instanceof Transaction)) return false;
 		
 		Transaction response = (Transaction)msg;
-		Responses.put(response.requestType, Handlers.get(response.getRequestType()).HandleResponse(response.getResponse()));
+		if(Handlers.get(response.getRequestType()) != null)
+			Responses.put(response.requestType, Handlers.get(response.getRequestType()).HandleResponse(response.getResponse()));
+		else
+			Responses.put(response.requestType, response.getResponse());
 		onHold = false;
 		return PASS;
 		

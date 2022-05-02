@@ -1,7 +1,7 @@
 package controllers;
 
 import client.ClientConn;
-import client.Main;
+import client.ClientApp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -37,25 +37,26 @@ public class StartIPconfigController {
     		ip = "localhost";
     	}
     	
-    	Main.ClientConnection = new ClientConn(ip, Main.DEFAULT_PORT);
-    	if(!Main.ClientConnection.isConnected()) {
+    	ClientApp.ClientConnection = new ClientConn(ip, ClientApp.DEFAULT_PORT);
+    	if(!ClientApp.ClientConnection.isConnected()) {
     		errrorLabel.setVisible(true);
     	}
     	else {
     		stage.close();
     		Stage newStage = new Stage();
-    		OrdersMenuController c;
+    		LoginController c;
     		Parent root = null;
     		try 
     		{
     			FXMLLoader loader = new FXMLLoader();
-    			loader.setLocation(getClass().getResource("/gui/Login.fxml"));
+    			loader.setLocation(getClass().getResource("/gui/mainframes/Login.fxml"));
     			root =  loader.load(); 
-    			//c = loader.getController();
+    			c = loader.getController();
     			Utilities.GenericUtilties.SetWindowMovable(root, newStage);
     			Scene scene = new Scene(root);
     			newStage.initStyle(StageStyle.UNDECORATED);
-    			newStage.setScene(scene); 		
+    			newStage.setScene(scene); 
+    			c.setStage(newStage);
     			newStage.show();
     			
     		}

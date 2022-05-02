@@ -1,5 +1,6 @@
 package ProtocolHandler;
 
+import ProtocolHandler.Operations.AuthenticationOperation;
 import ProtocolHandler.Operations.GetAllOrdersOperation;
 import ProtocolHandler.Operations.PingOperation;
 import ProtocolHandler.Operations.UpdateOrderOperation;
@@ -11,5 +12,6 @@ public class RequestRegisterer {
 		Protocol.RegisterOperation(RequestType.Ping, new PingOperation());
 		Protocol.RegisterOperation(RequestType.GetAllOrders, new GetAllOrdersOperation());
 		Protocol.RegisterOperation(RequestType.UpdateOrder, new UpdateOrderOperation());
+		Protocol.RegisterOperation(RequestType.AuthenticateUser, new AuthenticationOperation());
 	}
 }

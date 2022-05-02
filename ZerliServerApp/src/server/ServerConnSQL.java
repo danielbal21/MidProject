@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import Entities.Order;
+import Entities.*;
 
 public class ServerConnSQL{
 		
@@ -78,5 +78,24 @@ public class ServerConnSQL{
 		} catch (SQLException e) {e.printStackTrace();}	
 		System.out.println("Updated order "+orderNumber);	
 	}
-	
+
+	public Roles Authenticate(String username, String password) {
+		PreparedStatement stmt = null;
+		ResultSet rs;
+		try {
+			stmt = conn.prepareStatement("SELECT role FROM logindetails WHERE username=? AND password=?");
+			stmt.setString(1,username);
+			stmt.setString(2, password);
+           	rs = stmt.executeQuery();
+           	if(rs.next() != false)
+           		return Roles.valueOf(rs.getString(1));
+           	else
+    			return Roles.noaut;
+		} 
+		catch (SQLException e1) {
+            System.err.println("Failed on Authenticate()");
+			e1.printStackTrace();
+			return Roles.noaut;
+		}
+	}
 }
