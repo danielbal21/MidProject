@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="activePanelContainer" prefHeight="663.0" prefWidth="957.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <BarChart layoutX="27.0" layoutY="168.0" prefHeight="481.0" prefWidth="912.0" styleClass="chart-plot-background" title="Order Reports Histogram">
+        <xAxis>
+          <CategoryAxis label="Item Type" side="BOTTOM">
+               <tickLabelFont>
+                  <Font name="Maiandra GD" size="12.0" />
+               </tickLabelFont>
+            </CategoryAxis>
+        </xAxis>
+        <yAxis>
+          <NumberAxis label="Amount" side="LEFT" />
+        </yAxis>
+      </BarChart>
+      <Label layoutX="389.0" layoutY="99.0" prefHeight="67.0" prefWidth="168.0" styleClass="subLabel" stylesheets="@application.css" text="Date: &#10;Branch:">
+         <font>
+            <Font name="Maiandra GD" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="290.0" layoutY="26.0" prefHeight="73.0" prefWidth="366.0" styleClass="MainLabel" stylesheets="@application.css" text="Order Report" textAlignment="CENTER">
+         <font>
+            <Font name="Maiandra GD" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="483.0" layoutY="134.0" prefHeight="30.0" prefWidth="83.0" styleClass="subLabel" stylesheets="@application.css" text="North" textAlignment="CENTER">
+         <font>
+            <Font name="Maiandra GD" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="483.0" layoutY="105.0" styleClass="subLabel" stylesheets="@application.css" text="06/2022" />
+      <Label layoutX="146.0" layoutY="609.0" stylesheets="@application.css" text="Flowers">
+         <font>
+            <Font name="Maiandra GD" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="332.0" layoutY="609.0" stylesheets="@application.css" text="Pots">
+         <font>
+            <Font name="Maiandra GD" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="606.0" layoutY="606.0" stylesheets="@application.css" text="Bouquet">
+         <font>
+            <Font name="Maiandra GD" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="757.0" layoutY="604.0" stylesheets="@application.css" text="Seeds">
+         <font>
+            <Font name="Maiandra GD" size="16.0" />
+         </font>
+      </Label>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="288.0" layoutX="146.0" layoutY="316.0" stroke="BLACK" strokeType="INSIDE" width="46.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="182.0" layoutX="324.0" layoutY="422.0" stroke="BLACK" strokeType="INSIDE" width="46.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="220.0" layoutX="613.0" layoutY="384.0" stroke="BLACK" strokeType="INSIDE" width="46.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="67.0" layoutX="753.0" layoutY="537.0" stroke="BLACK" strokeType="INSIDE" width="46.0" />
+   </children>
+</AnchorPane>

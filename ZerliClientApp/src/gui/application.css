@@ -1,0 +1,111 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+
+.MainLabel{
+    -fx-font-family: 'Maiandra GD';
+    -fx-font-size: 60px;
+}
+
+.subLabel{
+    -fx-font-family: 'Maiandra GD';
+    -fx-font-size: 25px;
+}
+
+.chart-plot-background {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane{
+   -fx-background-color:transparent;
+}
+
+.scroll-pane .viewport {
+       -fx-background-color: transparent;
+}
+
+.pressbtn{
+	  -fx-padding: 15px 20px;
+}
+
+.pressbtn:pressed{
+	-fx-scale-x: 0.9;
+	-fx-scale-y: 0.9;
+}
+
+.CartXbtn
+{
+  -fx-shape:"M 250 250 A 50 50 0 1 1 500 250 A 50 50 0 1 1 250 250  ";
+  -fx-padding: 15px 20px;
+  -fx-font-size: 20px;
+  -fx-cursor: hand;
+  -fx-color: #b30000;
+  -fx-border-radius: 10px;
+  -fx-effect:dropshadow(gaussian, #000000, 5, 0.5, 0.0, 0.0) ;
+}
+
+.Left-btn{
+	-fx-shape:"M 350 450 L 350 350 L 500 350 L 500 250 L 350 250 L 350 150 L 200 300 L 350 450 ";
+    -fx-background-color: #F2A3A3;
+    -fx-padding: 15px 20px;
+	-fx-font-size: 20px;
+	-fx-effect:dropshadow(gaussian, #000000, 5, 0.5, 0.0, 0.0) ;
+	-fx-cursor: hand;  
+}
+
+.Left-btn:hover {
+	-fx-background-color: #FF0000;
+	-fx-effect: innershadow(gaussian, #000000, 10, 0.5, 0.0, 0.0) ;
+}
+
+.Left-btn:active {
+  -fx-background-color: #FF0000;
+}
+
+.Next-btn{
+	-fx-shape:"M 500 450 L 500 350 L 350 350 L 350 250 L 500 250 L 500 150 L 600 300 L 500 450 ";
+    -fx-background-color: #ccffd9;
+    -fx-padding: 15px 20px;
+	-fx-font-size: 18px;
+	-fx-effect:dropshadow(gaussian, #000000, 5, 0.5, 0.0, 0.0) ;
+	-fx-cursor: hand;  
+}
+
+.Next-btn:hover {
+	-fx-background-color: #80ff9f;
+	-fx-effect: innershadow(gaussian, #000000, 10, 0.5, 0.0, 0.0) ;
+}
+
+.Next-btn:active {
+  -fx-background-color: #FFF0000;
+}
+
+.Reg-btn {
+  -fx-padding: 5px 5px;
+  -fx-font-size: 20px;
+   -fx-cursor: hand;
+  -fx-cursor: hand;
+   -fx-color: #fff;
+  -fx-background-color: transparent;
+  -fx-border-color: #000000;
+  -fx-border-radius: 10px;
+}
+
+.Reg-btn:hover {
+	
+	-fx-background-color: #FFFFFF;
+	 -fx-cursor: hand;
+	-fx-effect: innershadow(gaussian, #000000, 10, 0.5, 0.0, 0.0) ;
+}
+
+.Reg-btn:active {
+  -fx-background-color: #FFFFFF;
+}
+
+.imageasbtn:hover {
+	-fx-background-color: #000000;
+	 -fx-cursor: hand;
+	-fx-effect: dropshadow(gaussian, #00b3b3, 5, 0.5, 0.0, 0.0) ;
+}
+
+.imageasbtn:active {
+	-fx-background-color: #FFFFFF;
+}
