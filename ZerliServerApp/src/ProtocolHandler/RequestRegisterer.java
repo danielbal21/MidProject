@@ -2,6 +2,8 @@ package ProtocolHandler;
 
 import ProtocolHandler.Operations.AuthenticationOperation;
 import ProtocolHandler.Operations.GetAllOrdersOperation;
+import ProtocolHandler.Operations.LoggedInOperation;
+import ProtocolHandler.Operations.LoggedOutOperation;
 import ProtocolHandler.Operations.PingOperation;
 import ProtocolHandler.Operations.UpdateOrderOperation;
 
@@ -13,5 +15,9 @@ public class RequestRegisterer {
 		Protocol.RegisterOperation(RequestType.GetAllOrders, new GetAllOrdersOperation());
 		Protocol.RegisterOperation(RequestType.UpdateOrder, new UpdateOrderOperation());
 		Protocol.RegisterOperation(RequestType.AuthenticateUser, new AuthenticationOperation());
+		Protocol.RegisterOperation(RequestType.IsLoggedIn, new LoggedInOperation());
+		Protocol.RegisterOperation(RequestType.SetLogOut, new LoggedOutOperation());
+
+
 	}
 }

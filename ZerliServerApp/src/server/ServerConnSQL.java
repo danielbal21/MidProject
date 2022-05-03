@@ -98,4 +98,43 @@ public class ServerConnSQL{
 			return Roles.noaut;
 		}
 	}
+
+	public String LoggedIn(String username) {
+		PreparedStatement stmt = null;
+		ResultSet rs;
+		try {
+			stmt = conn.prepareStatement("SELECT LoggedIn FROM logindetails WHERE username=?");
+			stmt.setString(1,username);
+           	rs = stmt.executeQuery();
+           	if(rs.next() != false) {
+           		String loggedin = rs.getString(1);
+           		if(loggedin.equals("0")) {
+           			stmt = conn.prepareStatement("UPDATE logindetails SET LoggedIn='1'");
+           			stmt.executeUpdate();
+           		}
+           		return loggedin;
+           	}	
+           	else
+    			return "Error";
+		} 
+		catch (SQLException e1) {
+            System.err.println("Failed on LoggedIn()");
+			e1.printStackTrace();
+			return "Error";
+		}
+	}
+
+	public void LoggedOut(String username) {
+		PreparedStatement stmt = null;
+		ResultSet rs;
+		try {
+			stmt = conn.prepareStatement("UPDATE logindetails SET LoggedIn='0' WHERE username=?" );
+			stmt.setString(1,username);
+           	stmt.executeUpdate(); 	
+		} 
+		catch (SQLException e1) {
+            System.err.println("Failed on LoggedOut()");
+			e1.printStackTrace();
+		}
+	}
 }

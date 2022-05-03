@@ -65,7 +65,7 @@
       </AnchorPane>
       <AnchorPane layoutX="7.0" layoutY="125.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="663.0" prefWidth="220.0" style="-fx-border-color: black;">
          <children>
-            <Button layoutX="46.0" layoutY="200.0" mnemonicParsing="false" stylesheets="@application.css" text="View Reports">
+            <Button layoutX="52.0" layoutY="211.0" mnemonicParsing="false" stylesheets="@application.css" text="View Reports">
                <font>
                   <Font name="Maiandra GD" size="12.0" />
                </font>
@@ -93,7 +93,7 @@
                   <Font name="Maiandra GD" size="66.0" />
                </font>
             </Label>
-            <Button layoutX="35.0" layoutY="251.0" mnemonicParsing="false" stylesheets="@application.css" text="Manage Orders">
+            <Button layoutX="41.0" layoutY="262.0" mnemonicParsing="false" stylesheets="@application.css" text="Manage Orders">
                <font>
                   <Font name="Maiandra GD" size="12.0" />
                </font>
@@ -104,7 +104,19 @@
             </Button>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="controlContainer" layoutX="235.0" layoutY="125.0" prefHeight="663.0" prefWidth="959.0" style="-fx-border-color: black;" />
+      <AnchorPane fx:id="controlContainer" layoutX="235.0" layoutY="125.0" prefHeight="663.0" prefWidth="959.0" style="-fx-border-color: black;">
+         <children>
+            <ImageView fitHeight="223.0" fitWidth="423.0" layoutX="243.0" layoutY="248.0">
+               <image>
+                  <Image url="@../../../png/ZerliLogo.PNG" />
+               </image>
+            </ImageView>
+            <Label layoutX="322.0" layoutY="178.0" prefHeight="81.0" prefWidth="316.0" styleClass="MainLabel" text="Welcom to">
+               <font>
+                  <Font name="Maiandra GD" size="66.0" />
+               </font>
+            </Label>
+         </children></AnchorPane>
       <Label layoutX="443.0" layoutY="804.0" text="All Rights Reserved To Group VI 2022 ©" textAlignment="CENTER">
          <font>
             <Font name="Maiandra GD" size="18.0" />
