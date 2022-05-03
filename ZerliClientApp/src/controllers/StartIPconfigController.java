@@ -44,19 +44,19 @@ public class StartIPconfigController {
     	else {
     		stage.close();
     		Stage newStage = new Stage();
-    		LoginController c;
+    		LoginController loginController;
     		Parent root = null;
     		try 
     		{
     			FXMLLoader loader = new FXMLLoader();
     			loader.setLocation(getClass().getResource("/gui/mainframes/Login.fxml"));
     			root =  loader.load(); 
-    			c = loader.getController();
+    			loginController = loader.getController();
     			Utilities.GenericUtilties.SetWindowMovable(root, newStage);
     			Scene scene = new Scene(root);
     			newStage.initStyle(StageStyle.UNDECORATED);
     			newStage.setScene(scene); 
-    			c.setStage(newStage);
+    			loginController.setStage(newStage);
     			newStage.show();
     			
     		}

@@ -13,5 +13,7 @@ public class HandlersRegisterer {
 		Protocol.RegisterHandler(RequestType.GetAllOrders, new GetAllOrdersHandler());
 		Protocol.RegisterHandler(RequestType.UpdateOrder, null);
 		Protocol.RegisterHandler(RequestType.AuthenticateUser,null);
+		Protocol.RegisterHandler(RequestType.IsLoggedIn,null);
+		Protocol.RegisterHandler(RequestType.SetLogOut,null);
 	}
 }

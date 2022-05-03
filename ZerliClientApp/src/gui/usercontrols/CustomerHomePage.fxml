@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="663.0" prefWidth="959.0" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="663.0" prefWidth="959.0" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CustomerHomePageController">
    <children>
       <Label layoutX="318.0" layoutY="14.0" prefHeight="76.0" prefWidth="323.0" styleClass="MainLabel" text="Home Page " textAlignment="CENTER">
          <font>
@@ -98,7 +98,7 @@
             <Font name="Maiandra GD" size="44.0" />
          </font>
       </Label>
-      <Button layoutX="374.0" layoutY="127.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="212.0" text="Pre-defined Catalog">
+      <Button fx:id="prePefineBtn" layoutX="374.0" layoutY="127.0" mnemonicParsing="false" onAction="#preDefinePressed" prefHeight="60.0" prefWidth="212.0" text="Pre-defined Catalog">
          <font>
             <Font size="18.0" />
          </font>
@@ -107,7 +107,7 @@
             <String fx:value="pressbtn" />
          </styleClass>
       </Button>
-      <Button layoutX="379.0" layoutY="416.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="203.0" text="Custom Catalog">
+      <Button fx:id="castumBtn" layoutX="379.0" layoutY="416.0" mnemonicParsing="false" onAction="#customPressed" prefHeight="60.0" prefWidth="203.0" text="Custom Catalog">
          <font>
             <Font size="18.0" />
          </font>
