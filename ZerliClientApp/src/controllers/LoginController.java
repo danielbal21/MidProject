@@ -18,7 +18,8 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class LoginController {
-
+	CustomerHomePageController customerHomePageController;
+	CustomerFrameController customerFrameController;
     @FXML
     private Button loginBtn;
 
@@ -32,7 +33,8 @@ public class LoginController {
     private TextField userNameText;
 
 	private Stage stage;
-
+	
+	
     @FXML
     void exitPressed(MouseEvent event) {
     	try {
@@ -69,32 +71,54 @@ public class LoginController {
     	{
     		loginLabel.setVisible(true);
     		loginLabel.setText("The Credentials entered are wrong");
+    		
     		return;
     	}
-    	else if(role == Roles.customer)
+    	else
     	{
-    		stage.close();
-    		stage = new Stage();
     		ClientApp.UserID = userNameText.getText();
-			loader.setLocation(getClass().getResource("/gui/mainframes/CustomerMainScreen.fxml"));
-			try {
-				root =  loader.load();
-			} catch (IOException e) {
-				e.printStackTrace();
-			} 
-			//c = loader.getController();
+    		ClientApp.ProtocolHandler.Invoke(RequestType.IsLoggedIn,null,null,true);
+        	String logIn=(String)ClientApp.ProtocolHandler.GetResponse(RequestType.IsLoggedIn);
+			if(logIn.equals("1"))
+    		{
+    			loginLabel.setVisible(true);
+        		loginLabel.setText("You are already logged In");
+        		return;
+    		}
+    		else 
+    		{
+    			if(role == Roles.customer)
+	    		{
+	    		
+	    			stage.close();
+		    		stage = new Stage();
+		    		
+					loader.setLocation(getClass().getResource("/gui/mainframes/CustomerMainScreen.fxml"));
+					try {
+						root =  loader.load();
+					} catch (IOException e) {
+						e.printStackTrace();
+					} 
+					customerFrameController = loader.getController();
+					customerHomePageController=(customerFrameController.setControlContainer("/gui/usercontrols/CustomerHomePage.fxml")).getController();
+					customerFrameController.setStage(stage);
+					customerHomePageController.setController(customerFrameController);
+	    		}
+    		}
+			Utilities.GenericUtilties.SetWindowMovable(root, stage);
+			Scene scene = new Scene(root);
+			stage.initStyle(StageStyle.UNDECORATED);
+			stage.setScene(scene); 	
+			//c.setStage(stage);
+			stage.show();
+
     	}
-		//Utilities.GenericUtilties.SetWindowMovable(root, stage);
-		Scene scene = new Scene(root);
-		stage.initStyle(StageStyle.UNDECORATED);
-		stage.setScene(scene); 	
-		//c.setStage(stage);
-		stage.show();
-		}
+	}
 
 	public void setStage(Stage newStage) {
 		// TODO Auto-generated method stub
 		this.stage = newStage;
 	}
+	
 
 }
