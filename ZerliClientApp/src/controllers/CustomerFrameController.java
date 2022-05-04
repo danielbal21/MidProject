@@ -63,7 +63,11 @@ public class CustomerFrameController implements IContainable{
 
     @FXML
     void cartPressed(MouseEvent event) {
+<<<<<<< HEAD
     	
+=======
+    	//gotocart viewer
+>>>>>>> refs/heads/Ido
     }
 
     @FXML

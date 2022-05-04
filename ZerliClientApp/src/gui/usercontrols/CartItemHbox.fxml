@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+
+<HBox alignment="CENTER" stylesheets="@../application.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17" fx:controller="controllers.CartItemHboxControllers">
+   <children>
+      <ImageView fitHeight="114.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../png/F1.jpg" />
+         </image>
+      </ImageView>
+      <Label fx:id="itemNameLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="52.0" prefWidth="117.0" text="Pink Rose" textAlignment="CENTER">
+         <font>
+            <Font name="Maiandra GD" size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="quntityLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="52.0" prefWidth="101.0" text="x 4" textAlignment="CENTER">
+         <font>
+            <Font name="Maiandra GD" size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="catalogTypeLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="52.0" prefWidth="117.0" text="Custom" textAlignment="CENTER">
+         <font>
+            <Font name="Maiandra GD" size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="itemTypeLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="52.0" prefWidth="117.0" text="Flowers" textAlignment="CENTER">
+         <font>
+            <Font name="Maiandra GD" size="24.0" />
+         </font>
+      </Label>
+      <Button fx:id="deleteBtn" alignment="CENTER_RIGHT" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#DeleteBtnPressed" prefHeight="47.0" prefWidth="53.0" text="X" textAlignment="CENTER">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <styleClass>
+            <String fx:value="CartXbtn" />
+            <String fx:value="pressbtn" />
+         </styleClass>
+         <font>
+            <Font name="Maiandra GD" size="15.0" />
+         </font>
+      </Button>
+   </children>
+</HBox>

@@ -1,7 +1,10 @@
 package ProtocolHandler;
 
+
 import ProtocolHandler.Operations.AuthenticationOperation;
 import ProtocolHandler.Operations.GetAllOrdersOperation;
+import ProtocolHandler.Operations.GetCart;
+import ProtocolHandler.Operations.GetCatalog;
 import ProtocolHandler.Operations.LoggedInOperation;
 import ProtocolHandler.Operations.LoggedOutOperation;
 import ProtocolHandler.Operations.PingOperation;
@@ -17,6 +20,8 @@ public class RequestRegisterer {
 		Protocol.RegisterOperation(RequestType.AuthenticateUser, new AuthenticationOperation());
 		Protocol.RegisterOperation(RequestType.IsLoggedIn, new LoggedInOperation());
 		Protocol.RegisterOperation(RequestType.SetLogOut, new LoggedOutOperation());
+		Protocol.RegisterOperation(RequestType.GetCatalog,new GetCatalog());
+		Protocol.RegisterOperation(RequestType.GetCart,new GetCart());
 
 
 	}
