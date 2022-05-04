@@ -98,4 +98,20 @@ public class ServerConnSQL{
 			return Roles.noaut;
 		}
 	}
+
+	public ArrayList<String> GetBranches() {
+		ArrayList<String> branches = new ArrayList<String>();
+		PreparedStatement stmt = null;
+		ResultSet rs;
+		try {
+			stmt = conn.prepareStatement("SELECT branchName FROM branches");
+           	rs = stmt.executeQuery();
+           	while(rs.next())
+           		branches.add(rs.getString(1));
+		} 
+		catch (SQLException e1) {
+			return null;
+		}
+		return branches;
+	}
 }

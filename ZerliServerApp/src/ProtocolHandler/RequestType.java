@@ -5,4 +5,5 @@ public enum RequestType {
 	UpdateOrder,
 	Ping,
 	AuthenticateUser,
+	GetBranches
 }
