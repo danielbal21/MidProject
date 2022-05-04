@@ -4,6 +4,8 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -21,12 +23,11 @@
             <String fx:value="pressbtn" />
          </styleClass>
       </Button>
-      <Button fx:id="exitBtn" layoutX="163.0" layoutY="14.0" mnemonicParsing="false" onAction="#exitPressed" prefHeight="43.0" prefWidth="40.0" text="X">
-         <styleClass>
-            <String fx:value="X-btn" />
-            <String fx:value="pressbtn" />
-         </styleClass>
-      </Button>
       <Label fx:id="errrorLabel" layoutX="34.0" layoutY="214.0" text="Connection Failed" textFill="RED" visible="false" />
+      <ImageView fx:id="exitBtn" fitHeight="54.0" fitWidth="55.0" layoutX="152.0" layoutY="14.0" onMousePressed="#exitPressed" pickOnBounds="true" preserveRatio="true" styleClass="imageasbtn">
+         <image>
+            <Image url="@../../png/X-btn.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

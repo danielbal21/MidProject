@@ -91,7 +91,7 @@
                   <Font name="Maiandra GD" size="20.0" />
                </font>
             </Label>
-            <Button fx:id="backBtn" layoutX="58.0" layoutY="589.0" mnemonicParsing="false" onAction="#backPressed" stylesheets="@application.css" text="Back">
+            <Button fx:id="backBtn" layoutX="58.0" layoutY="589.0" mnemonicParsing="false" onAction="#backPressed" stylesheets="@application.css" text="Back" visible="false">
                <styleClass>
                   <String fx:value="pressbtn" />
                   <String fx:value="Left-btn" />

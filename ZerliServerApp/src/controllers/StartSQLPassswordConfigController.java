@@ -8,6 +8,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import server.*;
@@ -23,7 +25,7 @@ public class StartSQLPassswordConfigController {
     private Label errrorLabel;
 
     @FXML
-    private Button exitBtn;
+    private ImageView exitBtn;
 
     @FXML
     private TextField SqlTextField;
@@ -70,10 +72,11 @@ public class StartSQLPassswordConfigController {
     }
 
     @FXML
-    void exitPressed(ActionEvent event) {
+    void exitPressed(MouseEvent event) {
     	System.exit(0);
     }
-
+    
+  
 	public void setStage(Stage stage) {
 		this.stage= stage;
 		

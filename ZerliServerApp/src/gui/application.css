@@ -45,8 +45,30 @@
     -fx-padding: 0 0 0 0;
 }
 
+.MainLabel{
+    -fx-font-family: 'Maiandra GD';
+    -fx-font-size: 60px;
+}
+
+.subLabel{
+    -fx-font-family: 'Maiandra GD';
+    -fx-font-size: 25px;
+}
+
+.chart-plot-background {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane{
+   -fx-background-color:transparent;
+}
+
+.scroll-pane .viewport {
+       -fx-background-color: transparent;
+}
+
 .pressbtn{
-	-fx-padding: 15px 20px;
+	  -fx-padding: 15px 20px;
 }
 
 .pressbtn:pressed{
@@ -54,62 +76,37 @@
 	-fx-scale-y: 0.9;
 }
 
-
-.X-btn {
-  -fx-shape:"M 250 250 A 50 50 0 1 1 500 250 A 50 50 0 1 1 250 250  ";
-  -fx-padding: 15px 20px;
-  -fx-font-size: 12px;
-  -fx-cursor: hand;
-  -fx-color: #fff;
-  -fx-background-color: #D3D3D3;
-  -fx-border-radius: 15px;
-  -fx-effect:dropshadow(gaussian, #000000, 5, 0.5, 0.0, 0.0) ;
-}
-
-.X-btn:hover {
-	-fx-background-color: #DC143C;
-	-fx-effect: innershadow(gaussian, #000000, 10, 0.5, 0.0, 0.0) ;
-}
-
-.X-btn:active {
-  -fx-background-color: #FFFFFF;
-}
-
-
-
-.Left-btn{
-	-fx-shape:"M 350 450 L 350 350 L 500 350 L 500 250 L 350 250 L 350 150 L 200 300 L 350 450 ";
-    -fx-background-color: #F2A3A3;
-    -fx-padding: 15px 20px;
-	-fx-font-size: 20px;
-	-fx-effect:dropshadow(gaussian, #000000, 5, 0.5, 0.0, 0.0) ;
-	-fx-cursor: hand;  
-}
-
-.Left-btn:hover {
-	-fx-background-color: #FF0000;
-	-fx-effect: innershadow(gaussian, #000000, 10, 0.5, 0.0, 0.0) ;
-}
-
-.Left-btn:active {
-  -fx-background-color: #FF0000;
-}
- 
 .Reg-btn {
   -fx-padding: 5px 5px;
   -fx-font-size: 20px;
+   -fx-cursor: hand;
   -fx-cursor: hand;
-  -fx-color: #fff;
-  -fx-background-color: #D3D3D3;
-  -fx-border-radius: 30px;
-  -fx-effect:dropshadow(gaussian, #000000, 5, 0.5, 0.0, 0.0) ;
+   -fx-color: #fff;
+  -fx-background-color: transparent;
+  -fx-border-color: #000000;
+  -fx-border-radius: 10px;
 }
 
 .Reg-btn:hover {
+	
 	-fx-background-color: #FFFFFF;
+	-fx-cursor: hand;
+	-fx-border-radius: 10px;
 	-fx-effect: innershadow(gaussian, #000000, 10, 0.5, 0.0, 0.0) ;
 }
 
 .Reg-btn:active {
   -fx-background-color: #FFFFFF;
 }
+
+.imageasbtn:hover {
+	-fx-background-color: #000000;
+	 -fx-cursor: hand;
+	-fx-effect: dropshadow(gaussian, #00b3b3, 5, 0.5, 0.0, 0.0) ;
+}
+
+.imageasbtn:active {
+	-fx-background-color: #FFFFFF;
+}
+
+

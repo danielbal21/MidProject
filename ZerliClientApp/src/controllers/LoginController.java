@@ -18,8 +18,8 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class LoginController {
-	CustomerHomePageController customerHomePageController;
-	CustomerFrameController customerFrameController;
+	public static WindowControl windowControl;
+	
     @FXML
     private Button loginBtn;
 
@@ -32,18 +32,13 @@ public class LoginController {
     @FXML
     private TextField userNameText;
 
-	private Stage stage;
-	
-	
     @FXML
     void exitPressed(MouseEvent event) {
     	try {
 			ClientApp.ClientConnection.closeConnection();
 			System.out.println(ClientApp.ClientConnection.isConnected());
 			System.exit(0);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-		}
+		} catch (IOException e) {e.printStackTrace();}
     }
     
     private boolean validateInput()
@@ -87,38 +82,47 @@ public class LoginController {
     		}
     		else 
     		{
+    			Stage newStage = new Stage();
+    			
     			if(role == Roles.customer)
 	    		{
-	    		
-	    			stage.close();
-		    		stage = new Stage();
-		    		
+    				WindowControl.stage.close();
 					loader.setLocation(getClass().getResource("/gui/mainframes/CustomerMainScreen.fxml"));
+			
 					try {
 						root =  loader.load();
 					} catch (IOException e) {
 						e.printStackTrace();
 					} 
-					customerFrameController = loader.getController();
-					customerHomePageController=(customerFrameController.setControlContainer("/gui/usercontrols/CustomerHomePage.fxml")).getController();
-					customerFrameController.setStage(stage);
-					customerHomePageController.setController(customerFrameController);
+					windowControl = new WindowControl(loader.getController());
+					windowControl.frameController.loadAll();
+					
 	    		}
+    			if(role == Roles.manager)
+    			{
+    				stage.close();
+		    		stage = new Stage();
+		    		
+					loader.setLocation(getClass().getResource("/gui/usercontrols/ManagerOrderManager.fxml"));
+					try {
+						root =  loader.load();
+					} catch (IOException e) {
+						e.printStackTrace();
+					} 
+					
+					
+    			}
+    			
+    			
+    			Utilities.GenericUtilties.SetWindowMovable(root, newStage);
+    			Scene scene = new Scene(root);
+    			newStage.initStyle(StageStyle.UNDECORATED);
+    			newStage.setScene(scene); 	
+    			newStage.show();
+    			WindowControl.stage = newStage;
     		}
-			Utilities.GenericUtilties.SetWindowMovable(root, stage);
-			Scene scene = new Scene(root);
-			stage.initStyle(StageStyle.UNDECORATED);
-			stage.setScene(scene); 	
-			//c.setStage(stage);
-			stage.show();
-
-    	}
-	}
-
-	public void setStage(Stage newStage) {
-		// TODO Auto-generated method stub
-		this.stage = newStage;
-	}
 	
+    	}
+	}	
 
 }

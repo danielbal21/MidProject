@@ -14,16 +14,17 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import ocsf.server.ConnectionToClient;
 import server.ServerApp;
 
 public class ServerPanelController implements Initializable{
 	
-    @FXML
-    private Button exitBtn;
-   
-    
+ 	@FXML
+	private ImageView exitBtn;
+	 
     @FXML
     private TableView<ClientInfo> clientTable;
 
@@ -40,9 +41,10 @@ public class ServerPanelController implements Initializable{
     
 	private Stage stage;
    
-    @FXML
-    void exitPressed(ActionEvent event) {
-    	try {
+	
+	 @FXML
+     void exitPressed(MouseEvent event) {
+	 try {
     		ServerApp.server.close();
 		} catch (IOException e) {
 			System.out.println("Falied close Server");
@@ -50,6 +52,7 @@ public class ServerPanelController implements Initializable{
 		}
     	System.exit(0);
     }
+ 
 
 
 

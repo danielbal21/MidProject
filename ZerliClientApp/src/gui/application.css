@@ -92,7 +92,8 @@
 .Reg-btn:hover {
 	
 	-fx-background-color: #FFFFFF;
-	 -fx-cursor: hand;
+	-fx-cursor: hand;
+	-fx-border-radius: 10px;
 	-fx-effect: innershadow(gaussian, #000000, 10, 0.5, 0.0, 0.0) ;
 }
 

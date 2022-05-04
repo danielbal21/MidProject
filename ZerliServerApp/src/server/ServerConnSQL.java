@@ -39,31 +39,55 @@ public class ServerConnSQL{
 	        }
 	}
 	
-	public void getOrders(ArrayList<Order> orders){
-		Statement stmt = null;
-		try {
-			stmt = conn.createStatement();
-			} 
-		catch (SQLException e1) {
-            System.err.println("Failed on createStatement()");
-			e1.printStackTrace();
-		}
-		
+	public void getOrders(ArrayList<Order> orders, String[] params){
+		PreparedStatement stmt = null;
 		Order newOrder=null;
 		ResultSet rs;
-		 try {
-	           	rs = stmt.executeQuery("SELECT * FROM Orders");
-	            while (rs.next()) {
-	            	newOrder = new Order(rs.getInt(1), rs.getInt(2), rs.getString(3).equals("null")? "" : rs.getString(3), 
-	            			rs.getString(4), rs.getString(5).equals("null")? "" : rs.getString(5), rs.getString(6), 
-	            			rs.getString(7), rs.getString(8));
-	            	orders.add(newOrder);
-	            	}
-	        } catch (Exception e) {
-	            System.err.println("Got an exception! ");
-	            System.err.println(e.getMessage());
-	        }
-		 System.out.println("Get Orders!");
+		try
+		{
+			if(params ==null)
+			{
+				stmt = conn.prepareStatement("SELECT * FROM Orders");
+			}
+			else 
+			{
+				if(params[0].equals(""))
+				{
+					stmt = conn.prepareStatement("SELECT * FROM Orders WHERE branch = ? AND status = 'pending'");
+					stmt.setString(1,params[1]);
+				}
+				else
+				{
+					stmt = conn.prepareStatement("SELECT * FROM Orders WHERE username = ? ");
+					stmt.setString(1,params[0]);
+				}
+			}
+			rs = stmt.executeQuery();
+			while (rs.next()) {
+				newOrder = new Order(rs.getInt(1), rs.getInt(2), rs.getString(3).equals("null") ? "" : rs.getString(3),
+						rs.getString(4), rs.getString(5).equals("null") ? "" : rs.getString(5), rs.getString(6),
+						rs.getString(7), rs.getString(8),rs.getString(9));
+				orders.add(newOrder);
+			}
+		}
+	catch(Exception e)
+	{
+		System.err.println("Got an exception! ");
+		System.err.println(e.getMessage());
+	}System.out.println("Get Orders!");
+	}
+
+	public void UpdateOrder_ColorAndDate_ByNumber(String orderNumber,String newColor, String newDate) {
+		PreparedStatement stmt;
+		try 
+		{
+			stmt = conn.prepareStatement("UPDATE Orders SET color=?,date=? WHERE orderNumber=?");
+			stmt.setString(1, newColor);
+			stmt.setString(2, newDate);
+			stmt.setString(3, orderNumber);
+			stmt.executeUpdate();
+		} catch (SQLException e) {e.printStackTrace();}	
+		System.out.println("Updated order "+orderNumber);	
 	}
 
 	public void UpdateOrder_ColorAndDate_ByNumber(String orderNumber,String newColor, String newDate) {
@@ -109,7 +133,8 @@ public class ServerConnSQL{
            	if(rs.next() != false) {
            		String loggedin = rs.getString(1);
            		if(loggedin.equals("0")) {
-           			stmt = conn.prepareStatement("UPDATE logindetails SET LoggedIn='1'");
+           			stmt = conn.prepareStatement("UPDATE logindetails SET LoggedIn='1' WHERE username=?");
+           			stmt.setString(1,username);
            			stmt.executeUpdate();
            		}
            		return loggedin;
@@ -126,7 +151,6 @@ public class ServerConnSQL{
 
 	public void LoggedOut(String username) {
 		PreparedStatement stmt = null;
-		ResultSet rs;
 		try {
 			stmt = conn.prepareStatement("UPDATE logindetails SET LoggedIn='0' WHERE username=?" );
 			stmt.setString(1,username);

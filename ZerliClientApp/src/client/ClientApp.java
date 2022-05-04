@@ -2,8 +2,10 @@ package client;
 
 import java.io.IOException;
 import ProtocolHandler.Protocol;
+import controllers.LoginController;
 import controllers.OrdersMenuController;
 import controllers.StartIPconfigController;
+import controllers.WindowControl;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,21 +21,20 @@ public class ClientApp extends Application {
 	public static ClientConn ClientConnection;
 	
 	@Override
-	public void start(Stage stage) throws IOException {
-		StartIPconfigController c;		
+	public void start(Stage stage) throws IOException {	
 		Parent root = null;
 		try 
 		{
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(getClass().getResource("/gui/mainframes/StartIPconfig.fxml"));
 			root =  loader.load(); 
-			c = loader.getController();
 			Utilities.GenericUtilties.SetWindowMovable(root, stage);
 			Scene scene = new Scene(root);
 			stage.initStyle(StageStyle.UNDECORATED);
 			stage.setScene(scene); 	
-			c.setStage(stage);
 			stage.show();
+			LoginController.windowControl.stage = stage;
+			
 			
 		}
 		catch (Exception e) {

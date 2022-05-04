@@ -15,7 +15,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class StartIPconfigController {
-	private Stage stage;
 
     @FXML
     private Label errrorLabel;
@@ -42,22 +41,20 @@ public class StartIPconfigController {
     		errrorLabel.setVisible(true);
     	}
     	else {
-    		stage.close();
-    		Stage newStage = new Stage();
-    		LoginController loginController;
+    		WindowControl.stage.close();
+    		Stage newstage = new Stage();
     		Parent root = null;
     		try 
     		{
     			FXMLLoader loader = new FXMLLoader();
     			loader.setLocation(getClass().getResource("/gui/mainframes/Login.fxml"));
     			root =  loader.load(); 
-    			loginController = loader.getController();
-    			Utilities.GenericUtilties.SetWindowMovable(root, newStage);
+    			Utilities.GenericUtilties.SetWindowMovable(root, newstage);
     			Scene scene = new Scene(root);
-    			newStage.initStyle(StageStyle.UNDECORATED);
-    			newStage.setScene(scene); 
-    			loginController.setStage(newStage);
-    			newStage.show();
+    			newstage.initStyle(StageStyle.UNDECORATED);
+    			newstage.setScene(scene); 
+    			newstage.show();
+    			LoginController.windowControl.stage = newstage;
     			
     		}
     		catch (Exception e) {e.printStackTrace();	}
@@ -69,10 +66,5 @@ public class StartIPconfigController {
     void exitPressed(MouseEvent event) {
     	System.exit(0);
     }
-
-	public void setStage(Stage stage) {
-		this.stage = stage;
-		 ipTextField.setFocusTraversable(false);
-	}
     
 }
