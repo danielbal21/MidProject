@@ -137,4 +137,58 @@ public class ServerConnSQL{
 			e1.printStackTrace();
 		}
 	}
+
+	public void getCartItems(ArrayList<Item> cartItems) {
+		Statement stmt = null;
+		try {
+			stmt = conn.createStatement();
+			} 
+		catch (SQLException e1) {
+            System.err.println("Failed on createStatement()");
+			e1.printStackTrace();
+		}
+		
+		Item item=null;
+		ResultSet rs;
+		 try {
+	           	rs = stmt.executeQuery("SELECT * FROM Orders");//table for item
+	            while (rs.next()) {
+	            	item = new Item(rs.getInt(1), rs.getString(2), rs.getInt(3), 
+	            			(CatalogType)rs.getObject(4), (ItemType)rs.getObject(5), (Color)rs.getObject(6));
+	            	cartItems.add(item);
+	            	}
+	        } catch (Exception e) {
+	            System.err.println("Got an exception! ");
+	            System.err.println(e.getMessage());
+	        }
+		 System.out.println("Get Cart Items!");
+		
+	}
+
+	public void getCatalogItems(ArrayList<Item> catalogItems) {
+		Statement stmt = null;
+		try {
+			stmt = conn.createStatement();
+			} 
+		catch (SQLException e1) {
+            System.err.println("Failed on createStatement()");
+			e1.printStackTrace();
+		}
+		
+		Item item=null;
+		ResultSet rs;
+		 try {
+	           	rs = stmt.executeQuery("SELECT * FROM Orders");//table for item
+	            while (rs.next()) {
+	            	item = new Item(rs.getInt(1), rs.getString(2), rs.getInt(3), 
+	            			(CatalogType)rs.getObject(4), (ItemType)rs.getObject(5), (Color)rs.getObject(6));
+	            	catalogItems.add(item);
+	            	}
+	        } catch (Exception e) {
+	            System.err.println("Got an exception! ");
+	            System.err.println(e.getMessage());
+	        }
+		 System.out.println("Get Catalog Items!");
+		
+	}
 }

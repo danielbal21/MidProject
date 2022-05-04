@@ -7,4 +7,6 @@ public enum RequestType {
 	AuthenticateUser,
 	IsLoggedIn,
 	SetLogOut,
+	GetCatalog,
+	GetCart,
 }

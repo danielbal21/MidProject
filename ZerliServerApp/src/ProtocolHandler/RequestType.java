@@ -6,5 +6,7 @@ public enum RequestType {
 	Ping,
 	AuthenticateUser,
 	IsLoggedIn,
-	SetLogOut,
+	SetLogOut, 
+	GetCatalog,
+	GetCart,
 }
