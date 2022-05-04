@@ -7,6 +7,7 @@
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -14,9 +15,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="activePanelContainer2" prefHeight="663.0" prefWidth="957.0" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="activePanelContainer2" prefHeight="663.0" prefWidth="957.0" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PaymentController">
    <children>
-      <Button layoutX="857.0" layoutY="600.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="92.0" stylesheets="@application.css" text="Next">
+      <Button fx:id="nextBtn" layoutX="857.0" layoutY="600.0" mnemonicParsing="false" onAction="#nextBtn_Click" prefHeight="57.0" prefWidth="92.0" stylesheets="@application.css" text="Next">
          <font>
             <Font name="Maiandra GD" size="12.0" />
          </font>
@@ -26,11 +27,14 @@
          </styleClass>
       </Button>
       <ProgressBar layoutX="214.0" layoutY="600.0" prefHeight="50.0" prefWidth="517.0" progress="0.66" />
-      <RadioButton layoutX="414.0" layoutY="134.0" mnemonicParsing="false" styleClass="subLabel" text="Credit card">
+      <RadioButton fx:id="creditCardRB" layoutX="414.0" layoutY="134.0" mnemonicParsing="false" styleClass="subLabel" text="Credit card">
          <font>
             <Font name="Maiandra GD" size="22.0" />
-         </font></RadioButton>
-      <RadioButton layoutX="603.0" layoutY="134.0" mnemonicParsing="false" styleClass="subLabel" text="Zerli coins">
+         </font>
+         <toggleGroup>
+            <ToggleGroup fx:id="paymentMethod" />
+         </toggleGroup></RadioButton>
+      <RadioButton fx:id="zerliCoinsRB" layoutX="603.0" layoutY="134.0" mnemonicParsing="false" styleClass="subLabel" text="Zerli coins" toggleGroup="$paymentMethod">
          <font>
             <Font name="Maiandra GD" size="22.0" />
          </font></RadioButton>
@@ -47,7 +51,7 @@
                      <font>
                         <Font name="Maiandra GD" size="18.0" />
                      </font></Label>
-                  <Label prefHeight="45.0" prefWidth="116.0" styleClass="subLabel" text="400 ₪ ">
+                  <Label fx:id="netPriceLabel" prefHeight="45.0" prefWidth="116.0" styleClass="subLabel" text="400 ₪ ">
                      <font>
                         <Font name="Maiandra GD" size="18.0" />
                      </font></Label>
@@ -59,7 +63,7 @@
                      <font>
                         <Font name="Maiandra GD" size="18.0" />
                      </font></Label>
-                  <Label prefHeight="45.0" prefWidth="116.0" styleClass="subLabel" text="-10%">
+                  <Label fx:id="discountPercentageLabel" prefHeight="45.0" prefWidth="116.0" styleClass="subLabel" text="-10%">
                      <font>
                         <Font name="Maiandra GD" size="18.0" />
                      </font></Label>
@@ -71,7 +75,7 @@
                      <font>
                         <Font name="Maiandra GD" size="18.0" />
                      </font></Label>
-                  <Label prefHeight="45.0" prefWidth="116.0" styleClass="subLabel" text="15 ₪">
+                  <Label fx:id="w" prefHeight="45.0" prefWidth="116.0" styleClass="subLabel" text="15 ₪">
                      <font>
                         <Font name="Maiandra GD" size="18.0" />
                      </font></Label>
@@ -83,7 +87,7 @@
                      <font>
                         <Font name="Maiandra GD" size="18.0" />
                      </font></Label>
-                  <Label prefHeight="45.0" prefWidth="109.0" styleClass="subLabel" text="375 ₪">
+                  <Label fx:id="totalPriceLabel" prefHeight="45.0" prefWidth="109.0" styleClass="subLabel" text="375 ₪">
                      <font>
                         <Font name="Maiandra GD" size="18.0" />
                      </font></Label>
@@ -135,19 +139,19 @@
                   <Image url="@../../../png/CreditCardFront.jpg" />
                </image>
             </ImageView>
-            <TextField alignment="CENTER" layoutX="179.0" layoutY="169.0" prefHeight="25.0" prefWidth="49.0" promptText="XXXX" />
-            <TextField alignment="CENTER" layoutX="237.0" layoutY="169.0" prefHeight="25.0" prefWidth="49.0" promptText="XXXX" />
-            <TextField alignment="CENTER" layoutX="300.0" layoutY="169.0" prefHeight="25.0" prefWidth="49.0" promptText="XXXX" />
-            <TextField alignment="CENTER" layoutX="363.0" layoutY="169.0" prefHeight="25.0" prefWidth="49.0" promptText="XXXX" />
-            <TextField alignment="CENTER" layoutX="198.0" layoutY="319.0" prefHeight="30.0" prefWidth="141.0" promptText="XXXXXXXXX" />
-            <ComboBox layoutX="223.0" layoutY="214.0" prefHeight="25.0" prefWidth="56.0" promptText="09" visibleRowCount="6" />
-            <ComboBox layoutX="291.0" layoutY="214.0" prefHeight="25.0" prefWidth="70.0" promptText="2024" visibleRowCount="6" />
+            <TextField fx:id="cardNumTxt1" alignment="CENTER" layoutX="179.0" layoutY="169.0" prefHeight="25.0" prefWidth="49.0" promptText="XXXX" />
+            <TextField fx:id="cardNumTxt2" alignment="CENTER" layoutX="237.0" layoutY="169.0" prefHeight="25.0" prefWidth="49.0" promptText="XXXX" />
+            <TextField fx:id="cardNumTxt3" alignment="CENTER" layoutX="300.0" layoutY="169.0" prefHeight="25.0" prefWidth="49.0" promptText="XXXX" />
+            <TextField fx:id="cardNumTxt4" alignment="CENTER" layoutX="363.0" layoutY="169.0" prefHeight="25.0" prefWidth="49.0" promptText="XXXX" />
+            <TextField fx:id="holderID" alignment="CENTER" layoutX="198.0" layoutY="319.0" prefHeight="30.0" prefWidth="141.0" promptText="XXXXXXXXX" />
+            <ComboBox fx:id="expMonthCB" layoutX="223.0" layoutY="214.0" prefHeight="25.0" prefWidth="56.0" promptText="09" visibleRowCount="6" />
+            <ComboBox fx:id="yearCB" layoutX="291.0" layoutY="214.0" prefHeight="25.0" prefWidth="70.0" promptText="2024" visibleRowCount="6" />
             <Label layoutX="49.0" layoutY="166.0" text="Card Number">
                <font>
                   <Font name="Maiandra GD" size="20.0" />
                </font>
             </Label>
-            <TextField alignment="CENTER" layoutX="195.0" layoutY="280.0" prefHeight="30.0" prefWidth="56.0" promptText="XXX" />
+            <TextField fx:id="cvvText" alignment="CENTER" layoutX="195.0" layoutY="280.0" prefHeight="30.0" prefWidth="56.0" promptText="XXX" />
             <Label layoutX="49.0" layoutY="282.0" text="CVV">
                <font>
                   <Font name="Maiandra GD" size="20.0" />

@@ -40,8 +40,8 @@ public class CustomerCartController {
 		for (Item item : itemList) {
 			totalCost+=item.getPrice();
 			
-			HBox itemHBoxController=new CartItemHboxController(item.getId(),item.getName(),item.getItemType(),item.getCatalogType(),item.get);
-			Vbox.getChildren().add(itemHBoxController);
+			//HBox itemHBoxController=new CartItemHboxController(item.getId(),item.getName(),item.getItemType(),item.getCatalogType(),item.get);
+			//Vbox.getChildren().add(itemHBoxController);
 		}
 		totalCostLabel.setText(String.valueOf(totalCost));
     }

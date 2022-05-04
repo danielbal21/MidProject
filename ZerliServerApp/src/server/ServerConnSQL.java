@@ -64,10 +64,10 @@ public class ServerConnSQL{
 			}
 			rs = stmt.executeQuery();
 			while (rs.next()) {
-				newOrder = new Order(rs.getInt(1), rs.getInt(2), rs.getString(3).equals("null") ? "" : rs.getString(3),
+				/*newOrder = new Order(rs.getInt(1), rs.getInt(2), rs.getString(3).equals("null") ? "" : rs.getString(3),
 						rs.getString(4), rs.getString(5).equals("null") ? "" : rs.getString(5), rs.getString(6),
 						rs.getString(7), rs.getString(8),rs.getString(9));
-				orders.add(newOrder);
+				orders.add(newOrder);*/
 			}
 		}
 	catch(Exception e)
@@ -75,19 +75,6 @@ public class ServerConnSQL{
 		System.err.println("Got an exception! ");
 		System.err.println(e.getMessage());
 	}System.out.println("Get Orders!");
-	}
-
-	public void UpdateOrder_ColorAndDate_ByNumber(String orderNumber,String newColor, String newDate) {
-		PreparedStatement stmt;
-		try 
-		{
-			stmt = conn.prepareStatement("UPDATE Orders SET color=?,date=? WHERE orderNumber=?");
-			stmt.setString(1, newColor);
-			stmt.setString(2, newDate);
-			stmt.setString(3, orderNumber);
-			stmt.executeUpdate();
-		} catch (SQLException e) {e.printStackTrace();}	
-		System.out.println("Updated order "+orderNumber);	
 	}
 
 	public void UpdateOrder_ColorAndDate_ByNumber(String orderNumber,String newColor, String newDate) {
@@ -213,6 +200,20 @@ public class ServerConnSQL{
 	            System.err.println(e.getMessage());
 	        }
 		 System.out.println("Get Catalog Items!");
-		
+	}
+	public ArrayList<String> GetBranches() {
+		ArrayList<String> branches = new ArrayList<String>();
+		PreparedStatement stmt = null;
+		ResultSet rs;
+		try {
+			stmt = conn.prepareStatement("SELECT branchName FROM branches");
+           	rs = stmt.executeQuery();
+           	while(rs.next())
+           		branches.add(rs.getString(1));
+		} 
+		catch (SQLException e1) {
+			return null;
+		}
+		return branches;
 	}
 }

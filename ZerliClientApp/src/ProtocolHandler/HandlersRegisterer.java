@@ -1,8 +1,10 @@
 package ProtocolHandler;
 
-import ProtocolHandler.Handlers.GetAllOrdersHandler;
+
 import ProtocolHandler.Handlers.GetCart;
 import ProtocolHandler.Handlers.GetCatalog;
+import ProtocolHandler.Handlers.ArrayListToObservableHandler;
+
 import ProtocolHandler.Handlers.PingHandler;
 
 public class HandlersRegisterer {
@@ -12,12 +14,13 @@ public class HandlersRegisterer {
 	public static void RegisterHandlers()
 	{
 		Protocol.RegisterHandler(RequestType.Ping, new PingHandler());
-		Protocol.RegisterHandler(RequestType.GetAllOrders, new GetAllOrdersHandler());
+		Protocol.RegisterHandler(RequestType.GetAllOrders, new ArrayListToObservableHandler());
 		Protocol.RegisterHandler(RequestType.UpdateOrder, null);
 		Protocol.RegisterHandler(RequestType.AuthenticateUser,null);
 		Protocol.RegisterHandler(RequestType.IsLoggedIn,null);
 		Protocol.RegisterHandler(RequestType.SetLogOut,null);
 		Protocol.RegisterHandler(RequestType.GetCatalog,new GetCatalog());
 		Protocol.RegisterHandler(RequestType.GetCart,new GetCart());
+		Protocol.RegisterHandler(RequestType.GetBranches, new ArrayListToObservableHandler());
 	}
 }

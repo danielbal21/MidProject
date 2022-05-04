@@ -100,7 +100,9 @@ public class LoginController {
 	    		}
     			if(role == Roles.manager)
     			{
-    				stage.close();
+    				
+    				/*Implement new WindowControl Infra
+    				 * stage.close();
 		    		stage = new Stage();
 		    		
 					loader.setLocation(getClass().getResource("/gui/usercontrols/ManagerOrderManager.fxml"));
@@ -110,7 +112,7 @@ public class LoginController {
 						e.printStackTrace();
 					} 
 					
-					
+					*/
     			}
     			
     			

@@ -1,24 +1,21 @@
 package ProtocolHandler.Operations;
 
-import java.util.ArrayList;
-
-import Entities.Order;
 import ProtocolHandler.IOperation;
 import ProtocolHandler.ResponseWrapper;
 import server.Server;
 
-public class GetAllOrdersOperation implements IOperation {
+public class GetBranchesOperation implements IOperation {
 
 	@Override
 	public boolean Perform(String requestee, Object data, Object params) {
+		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean Perform(String requestee, Object data, Object params, ResponseWrapper response) {
-		ArrayList<Order> allOrders = new ArrayList<Order>();
-	    Server.SqlServerManager.getOrders(allOrders,new String[] {});
-	    response.SetResponse(allOrders);
+		var branches = Server.SqlServerManager.GetBranches();
+		response.SetResponse(branches);
 		return true;
 	}
 

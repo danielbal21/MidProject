@@ -9,4 +9,5 @@ public enum RequestType {
 	SetLogOut,
 	GetCatalog,
 	GetCart,
+	GetBranches,
 }
