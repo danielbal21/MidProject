@@ -19,9 +19,10 @@ public class AuthenticationOperation implements IOperation {
 		if(params instanceof String[])
 		{
 			String creds[] = (String[])params;
-			Roles role = Server.SqlServerManager.Authenticate(creds[0],creds[1]);
-			response.SetResponse(role);
-			System.out.println("sent: " + role.toString());
+			Object[] loginDetails = Server.SqlServerManager.Authenticate(creds[0],creds[1]);
+			
+			response.SetResponse(loginDetails);
+			System.out.println("sent: loginDetails " );
 			return true;
 		}
 		else

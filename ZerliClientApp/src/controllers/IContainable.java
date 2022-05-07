@@ -1,8 +1,9 @@
 package controllers;
 
+import javafx.scene.layout.AnchorPane;
+
 public interface IContainable {
 	
-	public void setControlContainer(String path);
-	public void loadAll();
+	public AnchorPane getControlContainer();
 
 }

@@ -11,7 +11,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-public class PaymentController {
+public class PaymentController implements UserControl {
 
     @FXML
     private AnchorPane activePanelContainer2;
@@ -74,5 +74,17 @@ public class PaymentController {
     void nextBtn_Click(ActionEvent event) {
 
     }
+
+	@Override
+	public void onEnter() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onExit() {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

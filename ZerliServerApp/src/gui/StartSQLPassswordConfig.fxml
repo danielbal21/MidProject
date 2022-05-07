@@ -11,22 +11,27 @@
 
 <AnchorPane prefHeight="250.0" prefWidth="217.0" style="-fx-background-color: E5E5E5;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.StartSQLPassswordConfigController">
    <children>
-      <Label fx:id="enterSQLLabel" layoutX="9.0" layoutY="61.0" prefHeight="43.0" prefWidth="206.0" text="Enter mySQL password">
+      <ImageView fitHeight="277.0" fitWidth="374.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../png/W2.jpg" />
+         </image>
+      </ImageView>
+      <Label fx:id="enterSQLLabel" layoutX="90.0" layoutY="56.0" prefHeight="43.0" prefWidth="206.0" text="Enter mySQL password">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="SqlTextField" alignment="CENTER" layoutX="22.0" layoutY="104.0" prefHeight="43.0" prefWidth="170.0" promptText="SQL password" styleClass="label" />
-      <Button fx:id="connectBtn" layoutX="66.0" layoutY="162.0" mnemonicParsing="false" onAction="#connectPressed" text="Connect">
+      <TextField fx:id="SqlTextField" alignment="CENTER" layoutX="108.0" layoutY="103.0" prefHeight="43.0" prefWidth="170.0" promptText="SQL password" styleClass="label" />
+      <Button fx:id="connectBtn" layoutX="144.0" layoutY="158.0" mnemonicParsing="false" onAction="#connectPressed" text="Connect">
          <styleClass>
             <String fx:value="Reg-btn" />
             <String fx:value="pressbtn" />
          </styleClass>
       </Button>
       <Label fx:id="errrorLabel" layoutX="34.0" layoutY="214.0" text="Connection Failed" textFill="RED" visible="false" />
-      <ImageView fx:id="exitBtn" fitHeight="54.0" fitWidth="55.0" layoutX="152.0" layoutY="14.0" onMousePressed="#exitPressed" pickOnBounds="true" preserveRatio="true" styleClass="imageasbtn">
+      <ImageView fx:id="exitBtn" fitHeight="54.0" fitWidth="55.0" layoutX="321.0" onMousePressed="#exitPressed" pickOnBounds="true" preserveRatio="true" styleClass="imageasbtn">
          <image>
-            <Image url="@../../png/X-btn.png" />
+            <Image url="@../png/X-btn.png" />
          </image>
       </ImageView>
    </children>

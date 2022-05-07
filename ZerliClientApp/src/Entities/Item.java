@@ -1,21 +1,29 @@
 package Entities;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.Serializable;
 
-public class Item {
+import javafx.scene.image.Image;
+
+public class Item implements Serializable {
 	private int id;
 	private String name;
 	private int price;
-	private CatalogType catalogType ;
+	private  CatalogType catalogType ;
 	private ItemType itemType;
 	private Color color;
-
-	public Item( int id, String name,int price, CatalogType catalogType, ItemType itemType, Color color) {
+	private byte[] image;
+	
+	public Item( int id, String name,int price, CatalogType catalogType, ItemType itemType, Color color, byte[] image) {
 		this.id = id;
 		this.name = name;
 		this.price = price;
 		this.catalogType = catalogType;
 		this.itemType = itemType;
 		this.color = color;
+		this.image =image;
 	}
 	public String getName() {
 		return name;
@@ -51,6 +59,17 @@ public class Item {
 		return color;
 	}
 	public void setColor(Color color) {
-		this.color = color;
+		this.color = color;	
+	}
+	
+	public byte[] getImage() {
+		return image;
+	}
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
+	public Image getJXImage() {
+		// TODO Auto-generated method stub
+		return new Image(new ByteArrayInputStream(image));
 	}
 }

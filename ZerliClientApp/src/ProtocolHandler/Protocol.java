@@ -9,7 +9,7 @@ public class Protocol {
 	
 	final boolean PASS = true;
 	final boolean FAIL = false;
-	
+	final long TIMEOUT = 20000;
 	static HashMap<RequestType,IHandler> Handlers = new HashMap<>();
 	static HashMap<RequestType,Object> Responses = new HashMap<>();
 	boolean onHold = false;
@@ -21,7 +21,7 @@ public class Protocol {
 	public Object GetResponse(RequestType requestType)
 	{
 		int time = 0;
-		while(onHold && time < 400) {
+		while(onHold && time < TIMEOUT) {
 			try {
 				Thread.sleep(20);
 				time += 20;
@@ -31,8 +31,11 @@ public class Protocol {
 			}
 		}
 		onHold = false;
-			if(time > 400)
+			if(time > TIMEOUT)
+			{
+				//System.out.println("timeOut");
 				throw new TimeoutException("Command " + requestType.toString() + "did not respond!");
+			}
 			return Responses.get(requestType);
 	}
 	public Protocol()

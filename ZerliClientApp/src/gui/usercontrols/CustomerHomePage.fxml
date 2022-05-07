@@ -19,22 +19,22 @@
          <children>
             <ImageView fitHeight="76.0" fitWidth="92.0" layoutX="26.0" layoutY="57.0">
                <image>
-                  <Image url="@../../../png/sunflower.png" />
+                  <Image url="@../../png/sunflower.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="76.0" fitWidth="92.0" layoutX="134.0" layoutY="57.0">
                <image>
-                  <Image url="@../../../png/sprout.png" />
+                  <Image url="@../../png/sprout.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="76.0" fitWidth="92.0" layoutX="263.0" layoutY="57.0">
                <image>
-                  <Image url="@../../../png/branch.png" />
+                  <Image url="@../../png/branch.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="76.0" fitWidth="92.0" layoutX="396.0" layoutY="59.0">
                <image>
-                  <Image url="@../../../png/soil.png" />
+                  <Image url="@../../png/soil.png" />
                </image>
             </ImageView>
             <Label layoutX="29.0" layoutY="29.0" styleClass="subLabel" text="Flowers">
@@ -63,7 +63,7 @@
          <children>
             <ImageView fitHeight="76.0" fitWidth="92.0" layoutX="35.0" layoutY="76.0">
                <image>
-                  <Image url="@../../../png/flower-bouquet.png" />
+                  <Image url="@../../png/flower-bouquet.png" />
                </image>
             </ImageView>
             <Label layoutX="35.0" layoutY="40.0" styleClass="subLabel" text="Bouquet">
@@ -78,12 +78,12 @@
             </Label>
             <ImageView fitHeight="76.0" fitWidth="92.0" layoutX="183.0" layoutY="76.0">
                <image>
-                  <Image url="@../../../png/bouquet.png" />
+                  <Image url="@../../png/bouquet.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="76.0" fitWidth="92.0" layoutX="341.0" layoutY="72.0">
                <image>
-                  <Image url="@../../../png/flower-pot.png" />
+                  <Image url="@../../png/flower-pot.png" />
                </image>
             </ImageView>
             <Label layoutX="361.0" layoutY="37.0" styleClass="subLabel" text="Pots">

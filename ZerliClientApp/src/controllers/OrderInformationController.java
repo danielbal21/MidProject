@@ -17,7 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 
-public class OrderInformationController {
+public class OrderInformationController implements UserControl {
 
 	public void loadBranches()
 	{
@@ -94,5 +94,17 @@ public class OrderInformationController {
     	errorLabel.setText(errorNotification.toString());
     	return valid;
     }
+
+	@Override
+	public void onEnter() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onExit() {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

@@ -136,7 +136,7 @@
          <children>
             <ImageView fitHeight="252.0" fitWidth="396.0" layoutX="36.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../png/CreditCardFront.jpg" />
+                  <Image url="@../../png/CreditCardFront.jpg" />
                </image>
             </ImageView>
             <TextField fx:id="cardNumTxt1" alignment="CENTER" layoutX="179.0" layoutY="169.0" prefHeight="25.0" prefWidth="49.0" promptText="XXXX" />

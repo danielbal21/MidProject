@@ -15,7 +15,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class CustomerCartController {
+public class CustomerCartController implements UserControl {
 	private ObservableList<Item> itemList;
 	private int totalCost=0;
     @FXML
@@ -35,15 +35,24 @@ public class CustomerCartController {
 
     }
     public CustomerCartController() {
+		
+    }
+	@Override
+	public void onEnter() {
 		ClientApp.ProtocolHandler.Invoke(RequestType.GetCart, null, null, true);
 		itemList=(ObservableList<Item>) ClientApp.ProtocolHandler.GetResponse(RequestType.GetCart);
 		for (Item item : itemList) {
 			totalCost+=item.getPrice();
-			
 			//HBox itemHBoxController=new CartItemHboxController(item.getId(),item.getName(),item.getItemType(),item.getCatalogType(),item.get);
 			//Vbox.getChildren().add(itemHBoxController);
 		}
 		totalCostLabel.setText(String.valueOf(totalCost));
-    }
+		
+	}
+	@Override
+	public void onExit() {
+		// TODO Auto-generated method stub
+		
+	}
 }
 

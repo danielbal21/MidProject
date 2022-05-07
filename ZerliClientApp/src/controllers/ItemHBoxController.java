@@ -13,14 +13,17 @@ import javafx.scene.layout.VBox;
 public class ItemHBoxController extends HBox {
 	private int counter=0;
 	private int id;
-    public ItemHBoxController(Integer id,String name,String costLabel,Image image) {
+    public ItemHBoxController() {
     	super();
+	
+	}
+    public void init(int id,String name,String costLabel,Image image) 
+    {
     	this.id=id;
-		CostLabel.setText(costLabel);
+    	CostLabel.setText(costLabel+ " ₪");
 		nameLabel.setText(name);
 		itemImage.setImage(image);
-	}
-
+    }
     @FXML
     private Label nameLabel;
     

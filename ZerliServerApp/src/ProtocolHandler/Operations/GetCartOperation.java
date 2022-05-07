@@ -8,7 +8,7 @@ import ProtocolHandler.IOperation;
 import ProtocolHandler.ResponseWrapper;
 import server.Server;
 
-public class GetCart implements IOperation{
+public class GetCartOperation implements IOperation{
 
 	@Override
 	public boolean Perform(String requestee, Object data, Object params) {
@@ -20,7 +20,7 @@ public class GetCart implements IOperation{
 		ArrayList<Item> cartItems = new ArrayList<Item>();
 	    Server.SqlServerManager.getCartItems(cartItems);
 	    response.SetResponse(cartItems);
-		return false;
+		return true;
 	}
 
 }

@@ -41,7 +41,7 @@ public class StartIPconfigController {
     		errrorLabel.setVisible(true);
     	}
     	else {
-    		WindowControl.stage.close();
+    		LoginController.windowControl.stage.close();
     		Stage newstage = new Stage();
     		Parent root = null;
     		try 

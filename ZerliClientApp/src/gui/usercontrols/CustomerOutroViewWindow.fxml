@@ -16,7 +16,7 @@
       <ProgressBar layoutX="224.0" layoutY="610.0" prefHeight="50.0" prefWidth="517.0" progress="1.0" />
       <ImageView fitHeight="146.0" fitWidth="147.0" layoutX="372.0" layoutY="126.0">
          <image>
-            <Image url="@../../../png/check.png" />
+            <Image url="@../../png/check.png" />
          </image>
       </ImageView>
    </children>

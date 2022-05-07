@@ -5,7 +5,6 @@ public enum RequestType {
 	UpdateOrder,
 	Ping,
 	AuthenticateUser,
-	IsLoggedIn,
 	SetLogOut, 
 	GetCatalog,
 	GetCart,

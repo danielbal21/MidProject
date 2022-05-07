@@ -8,7 +8,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
+
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.net.URL;
+import java.sql.Blob;
+
 import Entities.*;
+import javafx.scene.image.Image;
 
 public class ServerConnSQL{
 		
@@ -90,56 +98,44 @@ public class ServerConnSQL{
 		System.out.println("Updated order "+orderNumber);	
 	}
 
-	public Roles Authenticate(String username, String password) {
+	public Object[] Authenticate(String username, String password) {
 		PreparedStatement stmt = null;
+		Object[] logindetails=new Object[3]; 
 		ResultSet rs;
 		try {
-			stmt = conn.prepareStatement("SELECT role FROM logindetails WHERE username=? AND password=?");
+			stmt = conn.prepareStatement
+					("SELECT ld.loggedin,ld.access,ud.role FROM login_details ld,user_details ud "
+							+ "WHERE ld.user_id=? AND ld.user_id = ud.user_id "
+							+ "And ld.password=?");
 			stmt.setString(1,username);
 			stmt.setString(2, password);
            	rs = stmt.executeQuery();
-           	if(rs.next() != false)
-           		return Roles.valueOf(rs.getString(1));
+           	if(rs.next() == false)
+           	{
+           		logindetails[1]=Access.noaut;
+           		
+           		return logindetails;
+           	}
            	else
-    			return Roles.noaut;
+           		logindetails[0]=rs.getInt(1);
+           		logindetails[1]=Access.valueOf(rs.getString(2));
+           		logindetails[2]=Roles.valueOf(rs.getString(3));
+    			return logindetails;
 		} 
 		catch (SQLException e1) {
             System.err.println("Failed on Authenticate()");
 			e1.printStackTrace();
-			return Roles.noaut;
+			logindetails[1]=Access.noaut;
+       		
+			return logindetails;
 		}
 	}
 
-	public String LoggedIn(String username) {
-		PreparedStatement stmt = null;
-		ResultSet rs;
-		try {
-			stmt = conn.prepareStatement("SELECT LoggedIn FROM logindetails WHERE username=?");
-			stmt.setString(1,username);
-           	rs = stmt.executeQuery();
-           	if(rs.next() != false) {
-           		String loggedin = rs.getString(1);
-           		if(loggedin.equals("0")) {
-           			stmt = conn.prepareStatement("UPDATE logindetails SET LoggedIn='1' WHERE username=?");
-           			stmt.setString(1,username);
-           			stmt.executeUpdate();
-           		}
-           		return loggedin;
-           	}	
-           	else
-    			return "Error";
-		} 
-		catch (SQLException e1) {
-            System.err.println("Failed on LoggedIn()");
-			e1.printStackTrace();
-			return "Error";
-		}
-	}
 
 	public void LoggedOut(String username) {
 		PreparedStatement stmt = null;
 		try {
-			stmt = conn.prepareStatement("UPDATE logindetails SET LoggedIn='0' WHERE username=?" );
+			stmt = conn.prepareStatement("UPDATE login_details SET LoggedIn='0' WHERE username=?" );
 			stmt.setString(1,username);
            	stmt.executeUpdate(); 	
 		} 
@@ -150,7 +146,7 @@ public class ServerConnSQL{
 	}
 
 	public void getCartItems(ArrayList<Item> cartItems) {
-		Statement stmt = null;
+		/*Statement stmt = null;
 		try {
 			stmt = conn.createStatement();
 			} 
@@ -173,31 +169,52 @@ public class ServerConnSQL{
 	            System.err.println(e.getMessage());
 	        }
 		 System.out.println("Get Cart Items!");
-		
+		*/
 	}
 
-	public void getCatalogItems(ArrayList<Item> catalogItems) {
-		Statement stmt = null;
+	public void getCatalogItems(ArrayList<Item> catalogItems,CatalogType catalogType) {
+		PreparedStatement stmt = null;
 		try {
-			stmt = conn.createStatement();
+			stmt = conn.prepareStatement("SELECT * FROM items where catalog_type=?");
+			stmt.setString(1, catalogType.toString());
+			System.out.println(stmt.toString());
 			} 
 		catch (SQLException e1) {
             System.err.println("Failed on createStatement()");
 			e1.printStackTrace();
 		}
-		
+		Blob image;
 		Item item=null;
 		ResultSet rs;
+		InputStream stream;
 		 try {
-	           	rs = stmt.executeQuery("SELECT * FROM Orders");//table for item
+	           	rs = stmt.executeQuery();
 	            while (rs.next()) {
-	            	item = new Item(rs.getInt(1), rs.getString(2), rs.getInt(3), 
-	            			(CatalogType)rs.getObject(4), (ItemType)rs.getObject(5), (Color)rs.getObject(6));
+
+	            	//need to change blob to long blob 
+	            	Image bufferImage;
+	            	System.out.println("ENTERING LOOP");
+	            	image=rs.getBlob(7);
+	            	System.out.println("GOT BLOB");
+	            	if (image == null)
+	            	{
+	            		stream = getClass().getResourceAsStream("/png/no-image.png");
+	            		//stream =new FileInputStream("/png/no-image.png");
+	            	}
+	            	else {
+	            		stream = image.getBinaryStream();
+		            	//bufferImage = new Image(input);
+	            	}
+	            	
+	            	item = new Item(rs.getInt(1), rs.getString(2), rs.getInt(3),CatalogType.valueOf(rs.getString(4)), 
+	            			ItemType.valueOf(rs.getString(5)), 
+	            			Color.valueOf(rs.getString(6)==null?"non_color":rs.getString(6)),stream.readAllBytes());
 	            	catalogItems.add(item);
 	            	}
 	        } catch (Exception e) {
 	            System.err.println("Got an exception! ");
 	            System.err.println(e.getMessage());
+	            System.err.println(e.getStackTrace());
 	        }
 		 System.out.println("Get Catalog Items!");
 	}

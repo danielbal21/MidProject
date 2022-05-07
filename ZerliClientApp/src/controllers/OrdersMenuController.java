@@ -29,7 +29,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class OrdersMenuController implements Initializable {
+public class OrdersMenuController implements UserControl {
 
 	private ObservableList<Order> observableList;
 	ObservableList<String> Colors = FXCollections.observableArrayList("Yellow", "Green", "Pink", "White", "Blue",
@@ -187,7 +187,7 @@ public class OrdersMenuController implements Initializable {
 		orderTable.setItems(observableList);
 
 	}
-
+/*
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		orderNumberColumn.setCellValueFactory(new PropertyValueFactory<>("orderNumber"));
@@ -233,6 +233,20 @@ public class OrdersMenuController implements Initializable {
 			}
 		});
 
+	}
+*/
+	
+
+	@Override
+	public void onEnter() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onExit() {
+		// TODO Auto-generated method stub
+		
 	}
 
 

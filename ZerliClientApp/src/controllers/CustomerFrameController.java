@@ -22,7 +22,7 @@ import javafx.stage.StageStyle;
 public class CustomerFrameController implements IContainable{
 	
 	Map<String,Parent> map = new HashMap<>();
-
+	Map<String,UserControl> uc_map = new HashMap<String, UserControl>();
     @FXML
     private Button backBtn;
 
@@ -49,6 +49,10 @@ public class CustomerFrameController implements IContainable{
 
     @FXML
     private Button ordersBtn;
+    
+    void init(){
+    	nameLabel.setText(ClientApp.UserID.toString());
+    }
     
     @FXML
     void backPressed(ActionEvent event) {
@@ -77,7 +81,7 @@ public class CustomerFrameController implements IContainable{
 
     @FXML
     void homePressed(MouseEvent event) {
-    	LoginController.windowControl.frameController.setControlContainer("/gui/usercontrols/CustomerHomePage.fxml");
+    	LoginController.windowControl.setUserControl("/gui/usercontrols/CustomerHomePage.fxml");
     }
 
     @FXML
@@ -107,51 +111,35 @@ public class CustomerFrameController implements IContainable{
 	
     }
 
-    @Override
-	public void setControlContainer(String path) {
-		if(controlContainer.getChildren()!=null)
-			controlContainer.getChildren().clear();
-		
-		if(map.get(path) == null ) {
-			throw new RuntimeException("No such user control: "+ path);
-		}
-		
-		controlContainer.getChildren().add(map.get(path));
-	}
+//    @Override
+//	public void setControlContainer(String path) {
+//		if(controlContainer.getChildren()!=null)
+//			controlContainer.getChildren().clear();
+//		
+//		if(map.get(path) == null ) {
+//			
+//			FXMLLoader loader;
+//			Parent root;
+//			
+//			loader = new FXMLLoader();
+//			loader.setLocation(getClass().getResource(path));
+//			root = null;
+//			try {root = loader.load();	} 
+//			catch (IOException e) {e.printStackTrace();} 
+//			map.put(path, root);
+//			//throw new RuntimeException("No such user control: "+ path);
+//		}
+//		
+//		controlContainer.getChildren().add(map.get(path));
+//		
+//	}
 
 	@Override
-	public void loadAll() {
-		FXMLLoader loader;
-		Parent root;
-		
-		loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("/gui/usercontrols/CustomerHomePage.fxml"));
-		root = null;
-		try {root = loader.load();	} 
-		catch (IOException e) {e.printStackTrace();} 
-		map.put("/gui/usercontrols/CustomerHomePage.fxml", root);
-		
-		
-		loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("/gui/usercontrols/CustomerCatalogViewer.fxml"));
-		root = null;
-		try {root = loader.load();	} 
-		catch (IOException e) {e.printStackTrace();} 
-		map.put("/gui/usercontrols/CustomerCatalogViewer.fxml", root);
-		
-		
-	
-		/*
-		 * loader = new FXMLLoader();
-		 * loader.setLocation(getClass().getResource(path));
-		 * root = null;
-		 * try {root = loader.load();	} 
-		 * catch (IOException e) {e.printStackTrace();} 
-		 * map.put(path, root);
-		 * */
-		
-		
-		LoginController.windowControl.frameController.setControlContainer("/gui/usercontrols/CustomerHomePage.fxml");
+	public AnchorPane getControlContainer() {
+		return controlContainer;		
 	}
+
+	
+
 
 }

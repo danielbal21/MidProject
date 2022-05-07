@@ -12,11 +12,7 @@
 
 <HBox alignment="CENTER" prefHeight="255.0" prefWidth="360.0" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ItemHBoxController">
    <children>
-      <ImageView fx:id="itemImage" fitHeight="213.0" fitWidth="170.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../png/F1.jpg" />
-         </image>
-      </ImageView>
+      <ImageView fx:id="itemImage" fitHeight="213.0" fitWidth="170.0" pickOnBounds="true" preserveRatio="true" />
       <VBox fx:id="V" alignment="CENTER" prefHeight="221.0" prefWidth="199.0" spacing="10.0">
          <children>
             <Label fx:id="nameLabel" alignment="CENTER" prefHeight="52.0" prefWidth="207.0" styleClass="subLabel" text="Pink Rose">
@@ -24,7 +20,7 @@
                   <Font name="Maiandra GD" size="26.0" />
                </font>
             </Label>
-            <Label fx:id="CostLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="229.0" styleClass="subLabel" text="Price :  " textAlignment="CENTER">
+            <Label fx:id="CostLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="118.0" styleClass="subLabel" text="Price :  " textAlignment="CENTER">
                <font>
                   <Font name="Maiandra GD" size="18.0" />
                </font>
@@ -33,7 +29,7 @@
                <children>
                   <ImageView fitHeight="53.0" fitWidth="34.0" onMousePressed="#MinusBtnPressed" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../png/minusBtn%20(2).png" />
+                        <Image url="@../../png/minusBtn%20(2).png" />
                      </image>
                      <styleClass>
                         <String fx:value="imageasbtn" />
@@ -50,7 +46,7 @@
                   </Label>
                   <ImageView fx:id="plusBtn" fitHeight="44.0" fitWidth="36.0" onMousePressed="#PlusBtnPressed" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../png/plusBtn%20(1).png" />
+                        <Image url="@../../png/plusBtn%20(1).png" />
                      </image>
                      <styleClass>
                         <String fx:value="pressbtn" />

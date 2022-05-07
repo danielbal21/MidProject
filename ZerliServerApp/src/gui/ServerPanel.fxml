@@ -11,7 +11,12 @@
 
 <AnchorPane prefHeight="473.0" prefWidth="409.0" style="-fx-background-color: E5E5E5;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ServerPanelController">
    <children>
-      <TableView fx:id="clientTable" layoutX="32.0" layoutY="132.0" prefHeight="300.0" prefWidth="347.0" stylesheets="@application.css">
+      <ImageView fitHeight="494.0" fitWidth="742.0" layoutY="-16.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../png/W2.jpg" />
+         </image>
+      </ImageView>
+      <TableView fx:id="clientTable" layoutX="23.0" layoutY="95.0" prefHeight="358.0" prefWidth="347.0" stylesheets="@application.css">
         <columns>
           <TableColumn fx:id="ipCol" prefWidth="101.0" text="IP" />
             <TableColumn fx:id="hostCol" minWidth="0.0" prefWidth="167.0" text="Host" />
@@ -22,14 +27,14 @@
             <String fx:value="table-cell" />
          </styleClass>
       </TableView>
-      <Label layoutX="64.0" layoutY="50.0" styleClass="MainLabel" text="Zerli Server">
+      <Label layoutX="231.0" layoutY="21.0" styleClass="MainLabel" text="Zerli Server">
          <font>
             <Font name="Maiandra GD" size="35.0" />
          </font>
       </Label>
-      <ImageView fx:id="exitBtn" fitHeight="54.0" fitWidth="55.0" layoutX="341.0" layoutY="14.0" onMousePressed="#exitPressed" pickOnBounds="true" preserveRatio="true" styleClass="imageasbtn">
+      <ImageView fx:id="exitBtn" fitHeight="54.0" fitWidth="55.0" layoutX="681.0" layoutY="4.0" onMousePressed="#exitPressed" pickOnBounds="true" preserveRatio="true" styleClass="imageasbtn">
          <image>
-            <Image url="@../../png/X-btn.png" />
+            <Image url="@../png/X-btn.png" />
          </image>
       </ImageView>
    </children>

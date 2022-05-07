@@ -11,4 +11,5 @@ public enum Color {
 	orange,
 	yellow,
 	brown,
+	non_color,
 }

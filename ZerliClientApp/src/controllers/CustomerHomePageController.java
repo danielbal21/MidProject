@@ -7,7 +7,7 @@ import Entities.CatalogType;
 import controllers.CustomerFrameController;
 import controllers.CatalogViewerController;
 
-public class CustomerHomePageController {
+public class CustomerHomePageController implements UserControl{
 
     @FXML
     private Button castumBtn;
@@ -17,15 +17,24 @@ public class CustomerHomePageController {
 
     @FXML
     void customPressed(ActionEvent event) {
-    	LoginController.windowControl.frameController.setControlContainer("/gui/usercontrols/CustomerCatalogViewer.fxml");
-    	//Fix global user control access
-    	//CatalogViewerController.setCatalogType(CatalogType.custom);
+    	LoginController.windowControl.putPipe("catalog", CatalogType.custom);
+    	LoginController.windowControl.setUserControl("/gui/usercontrols/CustomerCatalogViewer.fxml");
     }
 
     @FXML
     void preDefinePressed(ActionEvent event) {
-    	LoginController.windowControl.frameController.setControlContainer("/gui/usercontrols/CustomerCatalogViewer.fxml");
-    	//Fix global user control access
-    	//CatalogViewerController.setCatalogType(CatalogType.pre_define);
+    	LoginController.windowControl.putPipe("catalog", CatalogType.pre_define);
+    	LoginController.windowControl.setUserControl("/gui/usercontrols/CustomerCatalogViewer.fxml");
+    	
     }
+
+	@Override
+	public void onEnter() {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void onExit() {
+		// TODO Auto-generated method stub
+	}
 }

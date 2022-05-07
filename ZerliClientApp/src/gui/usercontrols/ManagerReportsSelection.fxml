@@ -57,7 +57,6 @@
             <Font name="Maiandra GD" size="24.0" />
          </font>
       </Label>
-      <Label layoutX="418.0" layoutY="237.0" styleClass="subLabel" text="Income" />
       <AnchorPane layoutX="126.0" layoutY="358.0" prefHeight="63.0" prefWidth="432.0">
          <children>
             <Label layoutX="30.0" layoutY="17.0" styleClass="subLabel" text="Second Report Date">

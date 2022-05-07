@@ -13,7 +13,7 @@
    <children>
       <ImageView fitHeight="940.0" fitWidth="1266.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../png/W2.jpg" />
+            <Image url="@../../png/W2.jpg" />
          </image>
       </ImageView>
       <Button fx:id="loginBtn" layoutX="547.0" layoutY="504.0" mnemonicParsing="false" onAction="#loginPressed" prefHeight="58.0" prefWidth="129.0" text="Login">
@@ -24,12 +24,12 @@
       </Button>
       <ImageView fitHeight="69.0" fitWidth="70.0" layoutX="1183.0" layoutY="18.0" onMousePressed="#exitPressed" pickOnBounds="true" preserveRatio="true" styleClass="imageasbtn">
          <image>
-            <Image url="@../../../png/X-btn.png" />
+            <Image url="@../../png/X-btn.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="216.0" fitWidth="449.0" layoutX="396.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../png/ZerliLogo.PNG" />
+            <Image url="@../../png/ZerliLogo.PNG" />
          </image>
       </ImageView>
       <Label layoutX="453.0" layoutY="814.0" text="All Rights Reserved To Group VI 2022 ©" textAlignment="CENTER">
@@ -37,7 +37,7 @@
             <Font name="Maiandra GD" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="loginLabel" layoutX="546.0" layoutY="575.0" styleClass="subLabel" text="Login Failed" textFill="RED" visible="false" />
+      <Label fx:id="loginLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="546.0" layoutY="575.0" styleClass="subLabel" text="Login Failed" textFill="RED" visible="false" />
       <AnchorPane layoutX="392.0" layoutY="317.0" prefHeight="187.0" prefWidth="445.0">
          <children>
             <Label layoutX="14.0" layoutY="14.0" prefHeight="73.0" prefWidth="129.0" styleClass="subLabel" text="User name">
