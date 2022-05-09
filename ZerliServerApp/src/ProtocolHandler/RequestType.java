@@ -9,4 +9,5 @@ public enum RequestType {
 	GetCatalog,
 	GetCart,
 	GetBranches,
+	GetManagerBranch,
 }

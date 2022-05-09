@@ -1,96 +1,74 @@
 package Entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
-public class Order implements Serializable{
+public class Order  {
 	
-	/*Unique Number for order*/
-	private int orderNumber;
-	private int price;
+	private String userID;
 	
-	/*can be null*/
-	private String grettingCard=null;
-	private String color;
+	private String orderID;
 	
-	/*can be null - text for custom order*/
-	private String dOrder;
+	private String paymentMethod;
 	
-	private String shop;
+	private String shippingtMethod;
 	
-	/*Estimated arrive time and date */
-	private String date;
-	
-	/*Order time and date */
 	private String orderDate;
+	
+	private String shippingDate;
+	
+	private String branchName;
+	
+	private int totalPrice;
+	
+	private String status;
+	
+	private ArrayList<Item> items;
 
 	
-
-	public Order(int orderNumber, int price, String grettingCard, String color, String dOrder, String shop, String date,
-			String orderDate) {
-		this.orderNumber = orderNumber;
-		this.price = price;
-		this.grettingCard = grettingCard;
-		this.color = color;
-		this.dOrder = dOrder;
-		this.shop = shop;
-		this.date = date;
+	public Order(String userID, String orderID, String paymentMethod, String shippingtMethod, String orderDate,
+			String shippingDate, String branchName, int totalPrice, String status, ArrayList<Item> items) {
+		this.userID = userID;
+		this.orderID = orderID;
+		this.paymentMethod = paymentMethod;
+		this.shippingtMethod = shippingtMethod;
 		this.orderDate = orderDate;
+		this.shippingDate = shippingDate;
+		this.branchName = branchName;
+		this.totalPrice = totalPrice;
+		this.status = status;
+		this.items = items;
+	}
+	public String getUserID() {
+		return userID;
 	}
 
-	public int getOrderNumber() {
-		return orderNumber;
+	public void setUserID(String userID) {
+		this.userID = userID;
 	}
 
-	public void setOrderNumber(int orderNumber) {
-		this.orderNumber = orderNumber;
+	public String getOrderID() {
+		return orderID;
 	}
 
-	public int getPrice() {
-		return price;
+	public void setOrderID(String orderID) {
+		this.orderID = orderID;
 	}
 
-	public void setPrice(int price) {
-		this.price = price;
+	public String getPaymentMethod() {
+		return paymentMethod;
 	}
 
-	public String getGrettingCard() {
-		return grettingCard;
+	public void setPaymentMethod(String paymentMethod) {
+		this.paymentMethod = paymentMethod;
 	}
 
-	public void setGrettingCard(String grettingCard) {
-		this.grettingCard = grettingCard;
+	public String getShippingtMethod() {
+		return shippingtMethod;
 	}
 
-	public String getColor() {
-		return color;
-	}
-
-	public void setColor(String color) {
-		this.color = color;
-	}
-
-	public String getDOrder() {
-		return dOrder;
-	}
-
-	public void setDOrder(String dOrder) {
-		this.dOrder = dOrder;
-	}
-
-	public String getShop() {
-		return shop;
-	}
-
-	public void setShop(String shop) {
-		this.shop = shop;
-	}
-
-	public String getDate() {
-		return date;
-	}
-
-	public void setDate(String date) {
-		this.date = date;
+	public void setShippingtMethod(String shippingtMethod) {
+		this.shippingtMethod = shippingtMethod;
 	}
 
 	public String getOrderDate() {
@@ -101,11 +79,49 @@ public class Order implements Serializable{
 		this.orderDate = orderDate;
 	}
 
-	@Override
-	public String toString() {
-		return "Order [orderNumber=" + orderNumber + ", price=" + price + ", grettingCard=" + grettingCard + ", color="
-				+ color + ", dOrder=" + dOrder + ", shop=" + shop + ", date=" + date + ", orderDate=" + orderDate + "]";
+	public String getShippingDate() {
+		return shippingDate;
 	}
+
+	public void setShippingDate(String shippingDate) {
+		this.shippingDate = shippingDate;
+	}
+
+	public String getBranchName() {
+		return branchName;
+	}
+
+	public void setBranchName(String branchName) {
+		this.branchName = branchName;
+	}
+
+	public int getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(int totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public ArrayList<Item> getItems() {
+		return items;
+	}
+
+	public void setItems(ArrayList<Item> items) {
+		this.items = items;
+	}
+
+
 	
+	
+
 	
 }

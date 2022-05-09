@@ -135,7 +135,7 @@ public class ServerConnSQL{
 	public void LoggedOut(String username) {
 		PreparedStatement stmt = null;
 		try {
-			stmt = conn.prepareStatement("UPDATE login_details SET LoggedIn='0' WHERE username=?" );
+			stmt = conn.prepareStatement("UPDATE login_details SET LoggedIn='0' WHERE user_id=?" );
 			stmt.setString(1,username);
            	stmt.executeUpdate(); 	
 		} 
@@ -233,4 +233,30 @@ public class ServerConnSQL{
 		}
 		return branches;
 	}
+
+	public String GetManagerBranch(String managerID) {
+		// TODO Auto-generated method stub
+		PreparedStatement stmt = null; 
+		ResultSet rs;
+		try {
+			stmt = conn.prepareStatement
+					("SELECT branch_name FROM manager_details WHERE user_id = ?");
+			stmt.setString(1,managerID);
+           	rs = stmt.executeQuery();
+           	if(rs.next() == false)
+			{
+           		
+           		return "no branch";
+           	}
+           	else
+           		return rs.getString(1);
+			}
+		catch (SQLException e1) {
+            System.err.println("Failed on GetManagerBranch()");
+			e1.printStackTrace();
+			return "";
+	
+		}
+	}
+	
 }

@@ -91,20 +91,21 @@ public class LoginController {
     				windowControl.setUserControl("/gui/usercontrols/CustomerHomePage.fxml");
     					
     	    	}
-        			/*if(role == Roles.manager)
-        			{
-        				
-        				windowControl.stage.close();
-    					loader.setLocation(getClass().getResource("/gui/mainframes/ManagerMainScreen.fxml"));
-    			
-    					try {
-    						root =  loader.load();
-    					} catch (IOException e) {
-    						e.printStackTrace();
-    					} 
-    					windowControl = new WindowControl(loader.getController());
-    					windowControl.frameController.loadAll();
-        			}*/
+        		if(role == Roles.manager)
+        		{
+        			windowControl.stage.close();
+    				loader.setLocation(getClass().getResource("/gui/mainframes/ManagerMainScreen.fxml"));
+
+    				try {
+    					root =  loader.load();
+    				} catch (IOException e) {
+    					e.printStackTrace();
+    				} 
+    				ManagerFrameController mfc= loader.getController();
+    				windowControl = new WindowControl(mfc);
+					mfc.init();
+    				windowControl.setUserControl("/gui/usercontrols/ManagerHomePage.fxml");
+        			}
 
         		Stage newStage = new Stage();
         		Utilities.GenericUtilties.SetWindowMovable(root, newStage);
