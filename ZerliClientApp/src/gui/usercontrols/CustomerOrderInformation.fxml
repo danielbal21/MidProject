@@ -51,7 +51,7 @@
          </font>
       </Label>
       <ComboBox fx:id="branchCombobox" layoutX="427.0" layoutY="365.0" prefHeight="34.0" prefWidth="150.0" />
-      <Label layoutX="42.0" layoutY="309.0" prefHeight="37.0" prefWidth="199.0" styleClass="subLabel" text="Delievery method">
+      <Label layoutX="42.0" layoutY="309.0" prefHeight="37.0" prefWidth="199.0" styleClass="subLabel" text="Delivery method">
          <font>
             <Font name="Maiandra GD" size="24.0" />
          </font>
