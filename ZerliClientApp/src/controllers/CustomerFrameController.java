@@ -23,8 +23,6 @@ public class CustomerFrameController implements IContainable{
 	
 	Map<String,Parent> map = new HashMap<>();
 	Map<String,UserControl> uc_map = new HashMap<String, UserControl>();
-    @FXML
-    private Button backBtn;
 
     @FXML
     private ImageView bellBtn;
@@ -52,11 +50,6 @@ public class CustomerFrameController implements IContainable{
     
     void init(){
     	nameLabel.setText(ClientApp.UserID.toString());
-    }
-    
-    @FXML
-    void backPressed(ActionEvent event) {
-    	
     }
 
     @FXML

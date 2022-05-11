@@ -113,20 +113,23 @@ public class ServerConnSQL{
            	if(rs.next() == false)
            	{
            		logindetails[1]=Access.noaut;
-           		
            		return logindetails;
            	}
            	else
            		logindetails[0]=rs.getInt(1);
            		logindetails[1]=Access.valueOf(rs.getString(2));
            		logindetails[2]=Roles.valueOf(rs.getString(3));
+           		stmt = conn.prepareStatement
+    					("UPDATE login_details SET loggedin=? WHERE user_id=?");
+    			stmt.setInt(1,1);
+    			stmt.setString(2, username);
+    			stmt.executeUpdate();
     			return logindetails;
 		} 
 		catch (SQLException e1) {
             System.err.println("Failed on Authenticate()");
 			e1.printStackTrace();
 			logindetails[1]=Access.noaut;
-       		
 			return logindetails;
 		}
 	}
@@ -135,7 +138,7 @@ public class ServerConnSQL{
 	public void LoggedOut(String username) {
 		PreparedStatement stmt = null;
 		try {
-			stmt = conn.prepareStatement("UPDATE login_details SET LoggedIn='0' WHERE username=?" );
+			stmt = conn.prepareStatement("UPDATE login_details SET loggedin='0' WHERE user_id=?" );
 			stmt.setString(1,username);
            	stmt.executeUpdate(); 	
 		} 
@@ -177,7 +180,6 @@ public class ServerConnSQL{
 		try {
 			stmt = conn.prepareStatement("SELECT * FROM items where catalog_type=?");
 			stmt.setString(1, catalogType.toString());
-			System.out.println(stmt.toString());
 			} 
 		catch (SQLException e1) {
             System.err.println("Failed on createStatement()");
@@ -193,9 +195,7 @@ public class ServerConnSQL{
 
 	            	//need to change blob to long blob 
 	            	Image bufferImage;
-	            	System.out.println("ENTERING LOOP");
 	            	image=rs.getBlob(7);
-	            	System.out.println("GOT BLOB");
 	            	if (image == null)
 	            	{
 	            		stream = getClass().getResourceAsStream("/png/no-image.png");
@@ -232,5 +232,44 @@ public class ServerConnSQL{
 			return null;
 		}
 		return branches;
+	}
+
+	public void AddToCart(String username, int item_id, int quantity) {
+		PreparedStatement stmt = null;
+		ResultSet rs;
+		try {
+			stmt = conn.prepareStatement
+					("SELECT ci.quantity FROM cart_item ci WHERE item_id=? "
+							+ "AND cart_id = (SELECT c.cart_id FROM carts c WHERE user_id=?)");
+			stmt.setInt(1,item_id);
+			stmt.setString(2,username);
+           	rs = stmt.executeQuery();
+           	if(rs.next() == false) {
+           		//insert
+           		stmt = conn.prepareStatement("INSERT INTO cart_item "
+           				+ "VALUES ((SELECT c.cart_id FROM carts c WHERE user_id=?),?,?)");
+           		stmt.setString(1,username);
+           		stmt.setInt(2,item_id);
+           		stmt.setInt(3,quantity);
+           		stmt.executeUpdate();
+           	}
+           	else {
+           	//update
+           		stmt = conn.prepareStatement("UPDATE cart_item SET quantity=? WHERE item_id=? "
+           				+ "AND cart_id = (SELECT c.cart_id FROM carts c WHERE user_id=?)");
+           		stmt.setInt(1, quantity + rs.getInt(1));
+           		stmt.setInt(2,item_id);
+           		stmt.setString(3,username);
+           		stmt.executeUpdate();
+           	}
+           		
+		} 
+		catch (SQLException e1) {
+            System.err.println("Failed on AddToCart()");
+			e1.printStackTrace();
+		}
+		 System.out.println("Add to cart I"+ item_id + " Q="+ quantity);
+		 
+		
 	}
 }

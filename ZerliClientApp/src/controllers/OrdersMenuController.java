@@ -101,26 +101,26 @@ public class OrdersMenuController implements UserControl {
 
 	}
 
-	@FXML
-	void getOrderInfo(MouseEvent event) {
-		if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 2) {
-			editPanelContainer.setVisible(true);
-			errorLabel.setVisible(false);
-			orderIDLabel.setText(String.valueOf(orderTable.getSelectionModel().getSelectedItem().getOrderNumber()));
-			colorComboBox.setItems(Colors);
-			colorComboBox.getSelectionModel()
-					.select(String.valueOf(orderTable.getSelectionModel().getSelectedItem().getColor()));
-			;
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-			LocalDateTime localTime = LocalDateTime
-					.parse(String.valueOf(orderTable.getSelectionModel().getSelectedItem().getDate()), formatter);
-			datePicker.setValue(localTime.toLocalDate());
-			hourField.setText(String.valueOf(localTime.getHour()));
-			minutesField.setText(String.valueOf(localTime.getMinute()));
-
-		}
-
-	}
+//	@FXML
+//	void getOrderInfo(MouseEvent event) {
+//		if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 2) {
+//			editPanelContainer.setVisible(true);
+//			errorLabel.setVisible(false);
+//			orderIDLabel.setText(String.valueOf(orderTable.getSelectionModel().getSelectedItem().getOrderNumber()));
+//			colorComboBox.setItems(Colors);
+//			colorComboBox.getSelectionModel()
+//					.select(String.valueOf(orderTable.getSelectionModel().getSelectedItem().getColor()));
+//			;
+//			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+//			LocalDateTime localTime = LocalDateTime
+//					.parse(String.valueOf(orderTable.getSelectionModel().getSelectedItem().getDate()), formatter);
+//			datePicker.setValue(localTime.toLocalDate());
+//			hourField.setText(String.valueOf(localTime.getHour()));
+//			minutesField.setText(String.valueOf(localTime.getMinute()));
+//
+//		}
+//
+//	}
 
 	@FXML
 	void exitPressed(ActionEvent event) {
