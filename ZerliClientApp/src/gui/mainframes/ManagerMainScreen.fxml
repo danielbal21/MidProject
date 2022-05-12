@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="843.0" prefWidth="1207.0" style="-fx-background-color: DEDEDE;" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ManagerFrameController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="843.0" prefWidth="1207.0" style="-fx-background-color: DEDEDE;" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ManagerFrameController">
    <children>
       <ImageView fitHeight="843.0" fitWidth="1289.0" layoutX="-34.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -18,7 +18,7 @@
       </ImageView>
       <AnchorPane layoutX="8.0" layoutY="10.0" prefHeight="107.0" prefWidth="1185.0" style="-fx-border-color: black;">
          <children>
-            <Button layoutX="978.0" layoutY="35.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="112.0" stylesheets="@application.css" text="Log out">
+            <Button layoutX="978.0" layoutY="35.0" mnemonicParsing="false" onAction="#pressLogout" prefHeight="40.0" prefWidth="112.0" stylesheets="@application.css" text="Log out">
                <font>
                   <Font name="Maiandra GD" size="14.0" />
                </font>
@@ -26,7 +26,7 @@
                   <String fx:value="Reg-btn" />
                   <String fx:value="pressbtn" />
                </styleClass></Button>
-            <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="887.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="887.0" layoutY="22.0" onMousePressed="#bellBtn" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../png/notification.png" />
                </image>
@@ -38,7 +38,7 @@
                   <String fx:value="imageasbtn" />
                </styleClass>
             </ImageView>
-            <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="23.0" layoutY="20.0">
+            <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="23.0" layoutY="20.0" onMousePressed="#homePressed">
                <image>
                   <Image url="@../../png/homePage.png" />
                </image>
@@ -52,7 +52,7 @@
                   <Image url="@../../png/ZerliLogo.PNG" />
                </image>
             </ImageView>
-            <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="1103.0" layoutY="22.0">
+            <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="1103.0" layoutY="22.0" onMousePressed="#exitPressed">
                <image>
                   <Image url="@../../png/X-btn.png" />
                </image>
@@ -65,7 +65,7 @@
       </AnchorPane>
       <AnchorPane layoutX="7.0" layoutY="125.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="663.0" prefWidth="220.0" style="-fx-border-color: black;">
          <children>
-            <Button layoutX="52.0" layoutY="211.0" mnemonicParsing="false" stylesheets="@application.css" text="View Reports">
+            <Button layoutX="52.0" layoutY="211.0" mnemonicParsing="false" onAction="#viewReportsPress" stylesheets="@application.css" text="View Reports">
                <font>
                   <Font name="Maiandra GD" size="12.0" />
                </font>
@@ -82,18 +82,12 @@
                   <Font name="Maiandra GD" size="20.0" />
                </font>
             </Label>
-            <Button layoutX="58.0" layoutY="589.0" mnemonicParsing="false" stylesheets="@application.css" text="Back">
-               <styleClass>
-                  <String fx:value="pressbtn" />
-                  <String fx:value="Left-btn" />
-               </styleClass>
-            </Button>
-            <Label layoutX="17.0" layoutY="58.0" prefHeight="81.0" prefWidth="198.0" styleClass="MainLabel" text="Daniel">
+            <Label fx:id="userLabel" layoutX="46.0" layoutY="58.0" prefHeight="81.0" prefWidth="140.0" styleClass="subLabel" text="Manager">
                <font>
-                  <Font name="Maiandra GD" size="66.0" />
+                  <Font name="Maiandra GD" size="36.0" />
                </font>
             </Label>
-            <Button layoutX="41.0" layoutY="262.0" mnemonicParsing="false" stylesheets="@application.css" text="Manage Orders">
+            <Button layoutX="41.0" layoutY="262.0" mnemonicParsing="false" onAction="#manageOrdersPress" stylesheets="@application.css" text="Manage Orders">
                <font>
                   <Font name="Maiandra GD" size="12.0" />
                </font>
@@ -104,19 +98,7 @@
             </Button>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="controlContainer" layoutX="235.0" layoutY="125.0" prefHeight="663.0" prefWidth="959.0" style="-fx-border-color: black;">
-         <children>
-            <ImageView fitHeight="223.0" fitWidth="423.0" layoutX="243.0" layoutY="248.0">
-               <image>
-                  <Image url="@../../png/ZerliLogo.PNG" />
-               </image>
-            </ImageView>
-            <Label layoutX="322.0" layoutY="178.0" prefHeight="81.0" prefWidth="316.0" styleClass="MainLabel" text="Welcom to">
-               <font>
-                  <Font name="Maiandra GD" size="66.0" />
-               </font>
-            </Label>
-         </children></AnchorPane>
+      <AnchorPane fx:id="controlContainer" layoutX="235.0" layoutY="125.0" prefHeight="663.0" prefWidth="959.0" style="-fx-border-color: black;" />
       <Label layoutX="443.0" layoutY="804.0" text="All Rights Reserved To Group VI 2022 ©" textAlignment="CENTER">
          <font>
             <Font name="Maiandra GD" size="18.0" />

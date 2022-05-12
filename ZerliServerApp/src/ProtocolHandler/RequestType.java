@@ -1,15 +1,24 @@
 package ProtocolHandler;
-
+/** Command Name **/
 public enum RequestType {
-	GetAllOrders,
 	UpdateOrder,
 	Ping,
 	AuthenticateUser,
-	SetLogOut,
+	SetLogOut, 
 	GetCatalog,
 	GetCart,
 	GetBranches,
-	GetUserCurrency,
+	GetUserCurrency, 
 	UpdateZerliCoins,
 	InsertOrder,
+	GetManagerBranch,
+	GetOrdersByBranch,
+	GetOrdersByUsername,
+	GetItemsOfOrder,
+	ConfirmOrder,
+	AddToCart,
+	GetAllCustomerOrders,
+	DeleteItemFromCart,
+	GetNotification,
+	UpdateNotification,
 }

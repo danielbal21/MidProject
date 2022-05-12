@@ -3,7 +3,7 @@ package client;
 import java.io.IOException;
 import ProtocolHandler.Protocol;
 import controllers.LoginController;
-import controllers.OrdersMenuController;
+import controllers.ManagerOrderManagerController;
 import controllers.StartIPconfigController;
 import controllers.WindowControl;
 import javafx.application.Application;

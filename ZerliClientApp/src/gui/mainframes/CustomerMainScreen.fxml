@@ -70,6 +70,25 @@
                   <String fx:value="pressbtn" />
                </styleClass>
             </ImageView>
+            <ImageView fitHeight="50.0" fitWidth="60.0" layoutX="917.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../png/icons8-red-circle-48.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="bellRedCricleLable" alignment="CENTER" contentDisplay="CENTER" layoutX="928.0" layoutY="53.0" prefHeight="30.0" prefWidth="28.0" styleClass="NotificationLabel" text="2" textFill="WHITE">
+               <font>
+                  <Font size="19.0" />
+               </font></Label>
+            <ImageView fitHeight="50.0" fitWidth="60.0" layoutX="161.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../png/icons8-red-circle-48.png" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="172.0" layoutY="20.0" prefHeight="30.0" prefWidth="28.0" styleClass="NotificationLabel" text="2" textFill="WHITE">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
       <AnchorPane layoutX="7.0" layoutY="125.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="663.0" prefWidth="220.0" style="-fx-border-color: black;">
@@ -91,12 +110,6 @@
                   <Font name="Maiandra GD" size="20.0" />
                </font>
             </Label>
-            <Button fx:id="backBtn" layoutX="58.0" layoutY="589.0" mnemonicParsing="false" onAction="#backPressed" stylesheets="@application.css" text="Back" visible="false">
-               <styleClass>
-                  <String fx:value="pressbtn" />
-                  <String fx:value="Left-btn" />
-               </styleClass>
-            </Button>
             <Label fx:id="nameLabel" alignment="CENTER" layoutX="12.0" layoutY="52.0" prefHeight="74.0" prefWidth="200.0" styleClass="MainLabel" text="client">
                <font>
                   <Font name="Maiandra GD" size="66.0" />
@@ -104,7 +117,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="controlContainer" layoutX="235.0" layoutY="125.0" prefHeight="663.0" prefWidth="959.0" style="-fx-border-color: black;" />
+      <AnchorPane fx:id="controlContainer" layoutX="234.0" layoutY="125.0" prefHeight="663.0" prefWidth="959.0" style="-fx-border-color: black;" />
       <Label layoutX="443.0" layoutY="804.0" text="All Rights Reserved To Group VI 2022 ©" textAlignment="CENTER">
          <font>
             <Font name="Maiandra GD" size="18.0" />

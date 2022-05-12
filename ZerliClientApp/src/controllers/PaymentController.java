@@ -200,10 +200,9 @@ public class PaymentController implements UserControl {
 		payDetails = (paymentInfo)ClientApp.ProtocolHandler.GetResponse(RequestType.GetUserCurrency);
 		isShipping = (boolean)LoginController.windowControl.getPipe("isShipping");
 		currentOrder = (Order)LoginController.windowControl.getPipe("orderInfo");
-    	int netPrice = 25 /*Get from dudush currentOrder.getTotalPrice() */; 
+    	int netPrice = (int) LoginController.windowControl.getPipe("totalCost");
     	int discount = payDetails.newUser ? (int)(0.1f * netPrice) : 0;
     	int shipping = isShipping ? 15 : 0;
-
     	currentOrder.setTotalPrice(netPrice - discount + shipping);
     	
     	/** credit card view **/

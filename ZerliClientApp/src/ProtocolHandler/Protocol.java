@@ -60,6 +60,7 @@ public class Protocol {
 	}
 
 	public boolean Handle(Object msg) {
+		
 		if(!onHold || !(msg instanceof Transaction)) return false;
 		
 		Transaction response = (Transaction)msg;

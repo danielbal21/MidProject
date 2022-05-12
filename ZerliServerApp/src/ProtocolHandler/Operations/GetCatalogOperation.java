@@ -19,7 +19,6 @@ public class GetCatalogOperation implements IOperation{
 		ArrayList<Item> catalogItems = new ArrayList<Item>();
 	    Server.SqlServerManager.getCatalogItems(catalogItems,(CatalogType)params);
 	    response.SetResponse(catalogItems);
-	    System.out.println(catalogItems.size());
 		return true;
 	}
 }

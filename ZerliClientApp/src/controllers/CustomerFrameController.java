@@ -23,8 +23,6 @@ public class CustomerFrameController implements IContainable{
 	
 	Map<String,Parent> map = new HashMap<>();
 	Map<String,UserControl> uc_map = new HashMap<String, UserControl>();
-    @FXML
-    private Button backBtn;
 
     @FXML
     private ImageView bellBtn;
@@ -50,23 +48,27 @@ public class CustomerFrameController implements IContainable{
     @FXML
     private Button ordersBtn;
     
+    @FXML
+    private ImageView cartRedCircleImage;
+    @FXML
+    private ImageView bellRedCircleImage;
+    @FXML
+    private Label cartRedCricleLable;
+    @FXML
+    private Label bellRedCricleLable;
+    
     void init(){
     	nameLabel.setText(ClientApp.UserID.toString());
-    }
-    
-    @FXML
-    void backPressed(ActionEvent event) {
-    	
     }
 
     @FXML
     void bellPressed(MouseEvent event) {
-
+    	LoginController.windowControl.setUserControl("/gui/usercontrols/NotificationWindow.fxml");
     }
 
     @FXML
     void cartPressed(MouseEvent event) {
-
+    	LoginController.windowControl.setUserControl("/gui/usercontrols/CustomerCart.fxml");
     }
 
     @FXML
@@ -86,7 +88,7 @@ public class CustomerFrameController implements IContainable{
 
     @FXML
     void ordersPressed(ActionEvent event) {
-    	//setOrderContainer();
+    	LoginController.windowControl.setUserControl("/gui/usercontrols/CustomerViewOrders.fxml");
     }
 
     @FXML
@@ -110,29 +112,6 @@ public class CustomerFrameController implements IContainable{
 		catch (Exception e) {e.printStackTrace();	}
 	
     }
-
-//    @Override
-//	public void setControlContainer(String path) {
-//		if(controlContainer.getChildren()!=null)
-//			controlContainer.getChildren().clear();
-//		
-//		if(map.get(path) == null ) {
-//			
-//			FXMLLoader loader;
-//			Parent root;
-//			
-//			loader = new FXMLLoader();
-//			loader.setLocation(getClass().getResource(path));
-//			root = null;
-//			try {root = loader.load();	} 
-//			catch (IOException e) {e.printStackTrace();} 
-//			map.put(path, root);
-//			//throw new RuntimeException("No such user control: "+ path);
-//		}
-//		
-//		controlContainer.getChildren().add(map.get(path));
-//		
-//	}
 
 	@Override
 	public AnchorPane getControlContainer() {

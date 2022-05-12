@@ -10,6 +10,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -30,6 +32,22 @@ public class StartIPconfigController {
 
     @FXML
     void connectPressed(ActionEvent event) {
+    	startConnaction();
+    	
+    }
+
+
+    @FXML
+    void Enter(KeyEvent event) {
+    	if(event.getCode() == KeyCode.ENTER)
+    		startConnaction();
+    }
+    @FXML
+    void exitPressed(MouseEvent event) {
+    	System.exit(0);
+    }
+    private void startConnaction() 
+    {
     	errrorLabel.setVisible(false);
     	String ip = ipTextField.getText();
     	if(ip.equals("")) {
@@ -59,12 +77,5 @@ public class StartIPconfigController {
     		}
     		catch (Exception e) {e.printStackTrace();	}
     	}
-    	
     }
-
-    @FXML
-    void exitPressed(MouseEvent event) {
-    	System.exit(0);
-    }
-    
 }

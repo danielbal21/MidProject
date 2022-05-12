@@ -66,8 +66,6 @@ public class ServerPanelController implements Initializable{
     }
  
 
-
-
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		ipCol.setCellValueFactory(new PropertyValueFactory<>("ip"));	

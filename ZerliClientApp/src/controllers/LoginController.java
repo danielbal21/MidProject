@@ -14,6 +14,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -56,10 +58,9 @@ public class LoginController {
     		return false;
     	}
     }
-    @FXML
-    void loginPressed(ActionEvent event) 
-    {
-    	loginLabel.setVisible(false);
+
+	private void logIn() {
+		loginLabel.setVisible(false);
     	if(!validateInput()) return;
     	ClientApp.ProtocolHandler.Invoke(RequestType.AuthenticateUser, null, new String[] {userNameText.getText(),passwordText.getText()}, true);
     	Object[] loginDetails;
@@ -91,20 +92,21 @@ public class LoginController {
     				windowControl.setUserControl("/gui/usercontrols/CustomerHomePage.fxml");
     					
     	    	}
-        			/*if(role == Roles.manager)
-        			{
-        				
-        				windowControl.stage.close();
-    					loader.setLocation(getClass().getResource("/gui/mainframes/ManagerMainScreen.fxml"));
-    			
-    					try {
-    						root =  loader.load();
-    					} catch (IOException e) {
-    						e.printStackTrace();
-    					} 
-    					windowControl = new WindowControl(loader.getController());
-    					windowControl.frameController.loadAll();
-        			}*/
+        		if(role == Roles.manager)
+        		{
+        			windowControl.stage.close();
+    				loader.setLocation(getClass().getResource("/gui/mainframes/ManagerMainScreen.fxml"));
+
+    				try {
+    					root =  loader.load();
+    				} catch (IOException e) {
+    					e.printStackTrace();
+    				} 
+    				ManagerFrameController mfc= loader.getController();
+    				windowControl = new WindowControl(mfc);
+					mfc.init();
+    				windowControl.setUserControl("/gui/usercontrols/ManagerHomePage.fxml");
+        			}
 
         		Stage newStage = new Stage();
         		Utilities.GenericUtilties.SetWindowMovable(root, newStage);
@@ -140,5 +142,32 @@ public class LoginController {
     		loginLabel.setText("Your acount is frozen please contact Zerli's administration");
     		return;	
 		}
-    }	
+	}
+    @FXML
+    void loginPressed(ActionEvent event) 
+    {
+    	logIn();
+    }
+    @FXML
+    void enterPressed(KeyEvent event) {
+    	if(event.getCode() == KeyCode.ENTER)
+    	{
+    		logIn();
+    	}
+    }
+    @FXML
+    void passwordEnterPressed(KeyEvent event) {
+    	if(event.getCode() == KeyCode.ENTER)
+    	{
+    		logIn();
+    	}
+    }
+
+    @FXML
+    void userNameEnterprassed(KeyEvent event) {
+    	if(event.getCode() == KeyCode.ENTER)
+    	{
+    		logIn();
+    	}
+    }
 }

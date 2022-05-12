@@ -149,15 +149,12 @@ public class OrderInformationController implements UserControl {
     void changeDateEvent(ActionEvent event) {
 
     }
-    @FXML
+    @SuppressWarnings("unchecked")
+	@FXML
     void nextBtn_Click(ActionEvent event) {
     	if(!isInputValid()) return;
     	order.setBranchName(branchCombobox.getSelectionModel().getSelectedItem().toString());
-    	//order.setItems((ArrayList<ItemInList>)LoginController.windowControl.getPipe("CartItems")); get from dudush
-    	var items = new ArrayList<ItemInList>();
-    	items.add(new ItemInList(1,3));
-    	items.add(new ItemInList(2,1));
-    	order.setItems(items);
+    	order.setItems((ArrayList<ItemInList>)LoginController.windowControl.getPipe("CartItems"));
     	LocalTime time = LocalTime.of((int)(hourSlider.getValue()), (int)(minutesSlider.getValue()));
     	order.setOrderDate(Utilities.GenericUtilties.Convert_LocalDate_To_SQLDate(LocalDateTime.now().toLocalDate(),time));
 

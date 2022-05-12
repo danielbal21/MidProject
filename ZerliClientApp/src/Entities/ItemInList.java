@@ -1,16 +1,42 @@
 package Entities;
 
+import java.io.ByteArrayInputStream;
 import java.io.Serializable;
+
+import javafx.scene.image.Image;
 
 public class ItemInList implements Serializable{
 
 	private int item_id;
 	private int quantity;
-	
+	private int price;
 	private String item_name;
 	private ItemType item_type;
 	private CatalogType catalog_type;
+	private byte[] image;
+	public ItemInList() {
 		
+	}
+	public ItemInList(byte[] image,int item_id, int quantity, int price,String item_name, ItemType item_type, CatalogType catalog_type) {
+		super();
+		this.image=image;
+		this.item_id = item_id;
+		this.quantity = quantity;
+		this.price=price;
+		this.item_name = item_name;
+		this.item_type = item_type;
+		this.catalog_type = catalog_type;
+		
+	}	
+	public ItemInList(String item_name,CatalogType catalog_type, 
+			ItemType item_type, int price, int quantity) {
+		this.quantity = quantity;
+		this.price = price;
+		this.item_name = item_name;
+		this.item_type = item_type;
+		this.catalog_type = catalog_type;
+	}
+
 	public ItemInList(int item_id, int quantity) {
 		this.item_id = item_id;
 		this.quantity = quantity;
@@ -22,6 +48,29 @@ public class ItemInList implements Serializable{
 		this.item_name = item_name;
 		this.item_type = item_type;
 		this.catalog_type = catalog_type;
+	}
+	
+	public ItemInList(int item_id, int quantity, int price, String item_name, ItemType item_type,
+			CatalogType catalog_type) {
+		this.item_id = item_id;
+		this.quantity = quantity;
+		this.price = price;
+		this.item_name = item_name;
+		this.item_type = item_type;
+		this.catalog_type = catalog_type;
+	}
+	public byte[] getImage() {
+		return image;
+	}
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
 	}
 
 	public int getItem_id() {
@@ -64,4 +113,14 @@ public class ItemInList implements Serializable{
 		this.catalog_type = catalog_type;
 	}
 
+	@Override
+	public String toString() {
+		return "ItemInList [quantity=" + quantity + ", price=" + price + ", item_name=" + item_name + ", item_type="
+				+ item_type + ", catalog_type=" + catalog_type + "]";
+	}
+	
+	public Image getJXImage() {
+		// TODO Auto-generated method stub
+		return new Image(new ByteArrayInputStream(image));
+	}
 }
