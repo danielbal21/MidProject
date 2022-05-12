@@ -2,12 +2,13 @@ package ProtocolHandler.Operations;
 
 import java.util.ArrayList;
 
+import Entities.Item;
 import Entities.Order;
 import ProtocolHandler.IOperation;
 import ProtocolHandler.ResponseWrapper;
 import server.Server;
 
-public class GetAllOrdersOperation implements IOperation {
+public class GetItemsOfOrderOperation implements IOperation {
 
 	@Override
 	public boolean Perform(String requestee, Object data, Object params) {
@@ -16,9 +17,10 @@ public class GetAllOrdersOperation implements IOperation {
 
 	@Override
 	public boolean Perform(String requestee, Object data, Object params, ResponseWrapper response) {
-		ArrayList<Order> allOrders = new ArrayList<Order>();
-	    Server.SqlServerManager.getOrders(allOrders,new String[] {});
-	    response.SetResponse(allOrders);
+		ArrayList<Item> items = new ArrayList<Item>();
+		Order order = (Order)data;
+	    Server.SqlServerManager.GetItemsOfOrder(items,  Integer.valueOf(order.getOrderID()));
+	    response.SetResponse(items);
 		return true;
 	}
 

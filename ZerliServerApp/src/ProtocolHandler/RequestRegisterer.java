@@ -8,7 +8,7 @@ public class RequestRegisterer {
 	{
 		/*** Add the mapping between your requests and operations ***/
 		Protocol.RegisterOperation(RequestType.Ping, new PingOperation());
-		Protocol.RegisterOperation(RequestType.GetAllOrders, new GetAllOrdersOperation());
+		//Protocol.RegisterOperation(RequestType.GetAllOrders, new GetAllOrdersOperation());
 		Protocol.RegisterOperation(RequestType.UpdateOrder, new UpdateOrderOperation());
 		Protocol.RegisterOperation(RequestType.AuthenticateUser, new AuthenticationOperation());
 		Protocol.RegisterOperation(RequestType.SetLogOut, new LoggedOutOperation());
