@@ -3,7 +3,11 @@ package Entities;
 import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Formatter;
+
+import Utilities.GenericUtilties;
 
 public class Order implements Serializable {
 	
@@ -140,13 +144,15 @@ public class Order implements Serializable {
 	}
 	
 	public String getOrder_date() {
-		return Utilities.GenericUtilties.Convert_LocalDate_To_SQLDate(orderDate).toString();
+		return DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm").
+				format(GenericUtilties.Convert_LocalDate_To_SQLDate(orderDate));
 	}
 	public void setOrder_date(String order_date) {
 		this.order_date = order_date;
 	}
 	public String getShipping_date() {
-		return Utilities.GenericUtilties.Convert_LocalDate_To_SQLDate(shippingDate).toString();
+		return DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm").
+				format(GenericUtilties.Convert_LocalDate_To_SQLDate(shippingDate));
 	}
 	public void setShipping_date(String shipping_date) {
 		this.shipping_date = shipping_date;
@@ -179,9 +185,9 @@ public class Order implements Serializable {
 		switch(getStatus()){
 		case pending_confirm:  return "Pending confirm";
 		case pending_cancel:  return "Pending cancel";
-		case confirm: return "Confirm";
-		case cancel:return  "Cancel" ;
-		case complete:return "Complete";
+		case confirmed: return "Confirm";
+		case canceled:return  "Cancel" ;
+		case completed:return "Complete";
 		default: break;
 	}
 	return null;

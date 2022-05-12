@@ -120,7 +120,7 @@ public class CustomerViewOrdersSpecificController implements UserControl{
 		statusOrder.setText(order.getOrder_status());
 		price.setText(String.valueOf(order.getTotalPrice()));
 		
-		if(order.getStatus() == OrderStatus.complete || order.getStatus() == OrderStatus.cancel) {
+		if(order.getStatus() == OrderStatus.completed || order.getStatus() == OrderStatus.canceled) {
 			cancelOrder.setVisible(false);
 		}
 		else {

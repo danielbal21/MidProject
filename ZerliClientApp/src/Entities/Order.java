@@ -185,9 +185,9 @@ public class Order implements Serializable {
 		switch(getStatus()){
 		case pending_confirm:  return "Pending confirm";
 		case pending_cancel:  return "Pending cancel";
-		case confirm: return "Confirm";
-		case cancel:return  "Cancel" ;
-		case complete:return "Complete";
+		case confirmed: return "Confirm";
+		case canceled:return  "Cancel" ;
+		case completed:return "Complete";
 		default: break;
 	}
 	return null;
