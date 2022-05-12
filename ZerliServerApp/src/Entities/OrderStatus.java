@@ -5,5 +5,5 @@ public enum OrderStatus {
 	pending_cancel,
 	confirm,
 	cancel,
-	completed,
+	complete,
 }

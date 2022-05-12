@@ -79,7 +79,7 @@ public class CustomerFrameController implements IContainable{
 
     @FXML
     void ordersPressed(ActionEvent event) {
-    	//setOrderContainer();
+    	LoginController.windowControl.setUserControl("/gui/usercontrols/CustomerViewOrders.fxml");
     }
 
     @FXML
@@ -103,29 +103,6 @@ public class CustomerFrameController implements IContainable{
 		catch (Exception e) {e.printStackTrace();	}
 	
     }
-
-//    @Override
-//	public void setControlContainer(String path) {
-//		if(controlContainer.getChildren()!=null)
-//			controlContainer.getChildren().clear();
-//		
-//		if(map.get(path) == null ) {
-//			
-//			FXMLLoader loader;
-//			Parent root;
-//			
-//			loader = new FXMLLoader();
-//			loader.setLocation(getClass().getResource(path));
-//			root = null;
-//			try {root = loader.load();	} 
-//			catch (IOException e) {e.printStackTrace();} 
-//			map.put(path, root);
-//			//throw new RuntimeException("No such user control: "+ path);
-//		}
-//		
-//		controlContainer.getChildren().add(map.get(path));
-//		
-//	}
 
 	@Override
 	public AnchorPane getControlContainer() {

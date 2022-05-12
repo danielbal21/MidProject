@@ -14,6 +14,9 @@ public class RequestRegisterer {
 		Protocol.RegisterOperation(RequestType.GetCatalog,new GetCatalogOperation());
 		Protocol.RegisterOperation(RequestType.GetCart,new GetCartOperation());
 		Protocol.RegisterOperation(RequestType.AddToCart,new AddToCartOperation());
+		Protocol.RegisterOperation(RequestType.GetAllCustomerOrders,new GetAllCustomerOrdersOperation());
+		
+		
 
 
 	}

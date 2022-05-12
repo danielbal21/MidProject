@@ -10,4 +10,5 @@ public enum RequestType {
 	GetCart,
 	GetBranches,
 	AddToCart,
+	GetAllCustomerOrders,
 }
