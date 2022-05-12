@@ -258,5 +258,15 @@ public class ServerConnSQL{
 	
 		}
 	}
+
+	public void GetOrdersByBranch(ArrayList<Order> orders, String data) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void GetOrdersByUsername(ArrayList<Order> orders, String requestee) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }
