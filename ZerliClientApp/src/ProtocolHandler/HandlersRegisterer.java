@@ -11,7 +11,6 @@ public class HandlersRegisterer {
 	public static void RegisterHandlers()
 	{
 		Protocol.RegisterHandler(RequestType.Ping, new PingHandler());
-		Protocol.RegisterHandler(RequestType.GetAllOrders, new ArrayListToObservableHandler());
 		Protocol.RegisterHandler(RequestType.UpdateOrder, null);
 		Protocol.RegisterHandler(RequestType.AuthenticateUser,null);
 		Protocol.RegisterHandler(RequestType.SetLogOut,null);
@@ -19,5 +18,11 @@ public class HandlersRegisterer {
 		Protocol.RegisterHandler(RequestType.GetCart,new ArrayListToObservableHandler());
 		Protocol.RegisterHandler(RequestType.GetBranches, new ArrayListToObservableHandler());
 		Protocol.RegisterHandler(RequestType.GetManagerBranch, null);
+		Protocol.RegisterHandler(RequestType.GetOrdersByBranch, new ArrayListToObservableHandler());
+		Protocol.RegisterHandler(RequestType.GetOrdersByUsername, new ArrayListToObservableHandler());
+		Protocol.RegisterHandler(RequestType.GetItemsOfOrder, new ArrayListToObservableHandler());
+		Protocol.RegisterHandler(RequestType.ConfirmOrder, null);
+		
+		
 	}
 }

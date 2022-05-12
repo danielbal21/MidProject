@@ -1,13 +1,16 @@
 package ProtocolHandler;
 /** Command Name **/
 public enum RequestType {
-	GetAllOrders,
 	UpdateOrder,
 	Ping,
 	AuthenticateUser,
-	SetLogOut,
+	SetLogOut, 
 	GetCatalog,
 	GetCart,
 	GetBranches,
 	GetManagerBranch,
+	GetOrdersByBranch,
+	GetOrdersByUsername,
+	GetItemsOfOrder,
+	ConfirmOrder,
 }

@@ -13,6 +13,7 @@ import client.ClientApp;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -74,76 +75,38 @@ public class ManagerOrderManagerController implements UserControl {
 
 	
 
-/*@FXML
-	void getOrderInfo(MouseEvent event) {
+	    @FXML
+	    void getOrderInfo(MouseEvent event) {
 		if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 2) {
-			editPanelContainer.setVisible(true);
-			errorLabel.setVisible(false);
-			orderIDLabel.setText(String.valueOf(orderTable.getSelectionModel().getSelectedItem().getOrderNumber()));
-			colorComboBox.setItems(Colors);
-			colorComboBox.getSelectionModel()
-					.select(String.valueOf(orderTable.getSelectionModel().getSelectedItem().getColor()));
-			;
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-			LocalDateTime localTime = LocalDateTime
-					.parse(String.valueOf(orderTable.getSelectionModel().getSelectedItem().getDate()), formatter);
-			datePicker.setValue(localTime.toLocalDate());
-			hourField.setText(String.valueOf(localTime.getHour()));
-			minutesField.setText(String.valueOf(localTime.getMinute()));
+			Order OrderChoose = ordersTable.getSelectionModel().getSelectedItem();
+			LoginController.windowControl.putPipe("Order select", OrderChoose );
+			LoginController.windowControl.setUserControl("/gui/usercontrols/ManagerViewOrderDetails.fxml");
 
 		}
 
-	}*/
+	}
 
 
 	@Override
 	public void onEnter() {
 	
 		branchName.setText((String) LoginController.windowControl.peekPipe("Manager Branch"));
-		/*orderNumberColumn.setCellValueFactory(new PropertyValueFactory<>("orderNumber"));
-		priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
-		greetingCradColumn.setCellValueFactory(new PropertyValueFactory<>("grettingCard"));
-		colorColumn.setCellValueFactory(new PropertyValueFactory<>("color"));
-		dOrderColumn.setCellValueFactory(new PropertyValueFactory<>("dOrder"));
-		shopColumn.setCellValueFactory(new PropertyValueFactory<>("shop"));
-		dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
-		oDateColumn.setCellValueFactory(new PropertyValueFactory<>("orderDate"));
-		orderTable.setEditable(true);
-		new Thread(new Runnable() {
-
-			@Override
-			public void run() {
-				while (true) {
-					try {
-						ClientApp.ProtocolHandler.Invoke(RequestType.GetAllOrders, null, null, true); // send to server
-						
-						javafx.application.Platform.runLater(new Runnable() {
-							
-							@Override
-							public void run() {
-								observableList = (ObservableList<Order>) ClientApp.ProtocolHandler.GetResponse(RequestType.GetAllOrders);
-								orderTable.setItems(observableList);
-							}
-						});
-						Thread.sleep(1500);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				}
-			}
-
-		}).start();
-
-		datePicker.setDayCellFactory(picker -> new DateCell() {
-			public void updateItem(LocalDate date, boolean empty) {
-				super.updateItem(date, empty);
-				LocalDate today = LocalDate.now();
-
-				setDisable(empty || date.compareTo(today) < 0);
-			}
-		});
-
-		*/
+		orderDateColumn.setCellValueFactory(new PropertyValueFactory<>("orderDate"));
+		orderIDcolumn.setCellValueFactory(new PropertyValueFactory<>("orderID"));
+		paymentMethodColumn.setCellValueFactory(new PropertyValueFactory<>("paymentMethod"));
+		priceColumn.setCellValueFactory(new PropertyValueFactory<>("totalPrice"));
+		expectedDateColumn.setCellValueFactory(new PropertyValueFactory<>("shippingDate"));
+		shippingMethodColumn.setCellValueFactory(new PropertyValueFactory<>("shippingtMethod"));
+		statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
+		userIDColumn.setCellValueFactory(new PropertyValueFactory<>("userID"));
+		
+		ClientApp.ProtocolHandler.Invoke(RequestType.GetOrdersByBranch,  LoginController.windowControl.peekPipe("Manager Branch"), null, true);
+		
+		observableList = (ObservableList<Order>)ClientApp.ProtocolHandler.GetResponse(RequestType.GetOrdersByBranch);
+		
+		ordersTable.setItems(observableList);
+		//ordersTable.setEditable(true);
+	
 	}
 
 	@Override

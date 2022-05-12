@@ -3,8 +3,16 @@ package Entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Order  {
+public class Order implements Serializable {
 	
+	@Override
+	public String toString() {
+		return "Order [userID=" + userID + ", orderID=" + orderID + ", paymentMethod=" + paymentMethod
+				+ ", shippingtMethod=" + shippingtMethod + ", orderDate=" + orderDate + ", shippingDate=" + shippingDate
+				+ ", branchName=" + branchName + ", totalPrice=" + totalPrice + ", status=" + status + ", items="
+				+ items + "]";
+	}
+
 	private String userID;
 	
 	private String orderID;
@@ -39,6 +47,21 @@ public class Order  {
 		this.status = status;
 		this.items = items;
 	}
+	
+	public Order(String userID, String orderID, String paymentMethod, String shippingtMethod, String orderDate,
+			String shippingDate, String branchName, int totalPrice, String status) {
+		this.userID = userID;
+		this.orderID = orderID;
+		this.paymentMethod = paymentMethod;
+		this.shippingtMethod = shippingtMethod;
+		this.orderDate = orderDate;
+		this.shippingDate = shippingDate;
+		this.branchName = branchName;
+		this.totalPrice = totalPrice;
+		this.status = status;
+	
+	}
+	
 	public String getUserID() {
 		return userID;
 	}

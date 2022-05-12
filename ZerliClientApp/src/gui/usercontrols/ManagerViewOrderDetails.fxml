@@ -8,10 +8,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane fx:id="activePanelContainer" prefHeight="663.0" prefWidth="957.0" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ManagerViewOrderDetailsController">
    <children>
-      <TableView layoutX="156.0" layoutY="204.0" prefHeight="283.0" prefWidth="632.0">
+      <TableView fx:id="itemTable" layoutX="156.0" layoutY="204.0" prefHeight="283.0" prefWidth="632.0">
          <columns>
             <TableColumn fx:id="itemIDColumn" prefWidth="75.0" text="Item ID" />
             <TableColumn fx:id="itemNameColumn" prefWidth="112.0" text="Item name" />
