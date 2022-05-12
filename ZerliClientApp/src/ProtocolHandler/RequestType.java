@@ -13,4 +13,6 @@ public enum RequestType {
 	GetOrdersByUsername,
 	GetItemsOfOrder,
 	ConfirmOrder,
+	AddToCart,
+	GetAllCustomerOrders,
 }

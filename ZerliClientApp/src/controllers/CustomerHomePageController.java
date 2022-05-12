@@ -25,7 +25,6 @@ public class CustomerHomePageController implements UserControl{
     void preDefinePressed(ActionEvent event) {
     	LoginController.windowControl.putPipe("catalog", CatalogType.pre_define);
     	LoginController.windowControl.setUserControl("/gui/usercontrols/CustomerCatalogViewer.fxml");
-    	
     }
 
 	@Override

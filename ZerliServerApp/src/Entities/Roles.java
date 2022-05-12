@@ -1,10 +1,10 @@
 package Entities;
 
 public enum Roles {
-	ceo,
-	manager,
-	customer,
-	delivery,
-	marketing,
+	ceo, 
+	manager, 
+	customer, 
+	delivery, 
+	marketing, 
 	service
 }

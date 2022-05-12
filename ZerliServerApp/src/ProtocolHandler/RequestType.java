@@ -1,7 +1,6 @@
 package ProtocolHandler;
 
 public enum RequestType {
-	GetAllOrders,
 	UpdateOrder,
 	Ping,
 	AuthenticateUser,
@@ -10,4 +9,10 @@ public enum RequestType {
 	GetCart,
 	GetBranches,
 	GetManagerBranch,
+	GetOrdersByBranch,
+	GetOrdersByUsername,
+	GetItemsOfOrder,
+	ConfirmOrder,
+	AddToCart,
+	GetAllCustomerOrders,
 }

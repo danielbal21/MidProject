@@ -90,7 +90,6 @@ public class Item implements Serializable {
 		this.image = image;
 	}
 	public Image getJXImage() {
-		// TODO Auto-generated method stub
 		return new Image(new ByteArrayInputStream(image));
 	}
 }

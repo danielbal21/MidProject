@@ -2,23 +2,25 @@ package ProtocolHandler.Operations;
 
 import java.util.ArrayList;
 
-import Entities.CatalogType;
-import Entities.Item;
+import Entities.*;
 import ProtocolHandler.IOperation;
 import ProtocolHandler.ResponseWrapper;
 import server.Server;
+import server.ServerApp;
 
-public class GetCatalogOperation implements IOperation{
+public class GetAllCustomerOrdersOperation implements IOperation{
+
 	@Override
 	public boolean Perform(String requestee, Object data, Object params) {
 		return false;
 	}
+
 	@Override
 	public boolean Perform(String requestee, Object data, Object params, ResponseWrapper response) {
-		
-		ArrayList<Item> catalogItems = new ArrayList<Item>();
-	    Server.SqlServerManager.getCatalogItems(catalogItems,(CatalogType)params);
-	    response.SetResponse(catalogItems);
+		ArrayList<Order> customerOrders = new ArrayList<>();
+		Server.SqlServerManager.GetAllCustomerOrders(requestee,customerOrders);
+		response.SetResponse(customerOrders);
 		return true;
 	}
+
 }

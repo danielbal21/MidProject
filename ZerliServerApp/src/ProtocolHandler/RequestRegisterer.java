@@ -2,7 +2,6 @@ package ProtocolHandler;
 
 import ProtocolHandler.Operations.*;
 
-
 public class RequestRegisterer {
 	public static void RegisterProtocol()
 	{
@@ -15,6 +14,10 @@ public class RequestRegisterer {
 		Protocol.RegisterOperation(RequestType.GetCatalog,new GetCatalogOperation());
 		Protocol.RegisterOperation(RequestType.GetCart,new GetCartOperation());
 		Protocol.RegisterOperation(RequestType.GetManagerBranch,new GetManagerBranchOperation());
+		Protocol.RegisterOperation(RequestType.AddToCart,new AddToCartOperation());
+		Protocol.RegisterOperation(RequestType.GetAllCustomerOrders,new GetAllCustomerOrdersOperation());
+		
+		
 
 
 	}

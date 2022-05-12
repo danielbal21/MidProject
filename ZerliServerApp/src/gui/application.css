@@ -18,6 +18,7 @@
 }
 
 .table-view .table-cell{
+	-fx-alignment: CENTER;
 	-fx-font-family: 'Maiandra GD';
 	-fx-font-size: 15px;
     -fx-border-color: transparent;
