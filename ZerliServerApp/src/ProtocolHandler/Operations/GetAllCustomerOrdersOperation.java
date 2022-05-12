@@ -19,7 +19,6 @@ public class GetAllCustomerOrdersOperation implements IOperation{
 	public boolean Perform(String requestee, Object data, Object params, ResponseWrapper response) {
 		ArrayList<Order> customerOrders = new ArrayList<>();
 		Server.SqlServerManager.GetAllCustomerOrders(requestee,customerOrders);
-		System.out.println(customerOrders);
 		response.SetResponse(customerOrders);
 		return true;
 	}

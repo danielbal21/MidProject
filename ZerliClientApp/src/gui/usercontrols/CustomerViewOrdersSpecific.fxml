@@ -18,17 +18,17 @@
             <String fx:value="pressbtn" />
          </styleClass>
       </Button>
-      <TableView fx:id="ItemTable" layoutX="173.0" layoutY="219.0" prefHeight="192.0" prefWidth="766.0">
+      <TableView fx:id="ItemTable" layoutX="152.0" layoutY="219.0" prefHeight="192.0" prefWidth="787.0">
         <columns>
           <TableColumn fx:id="nameItem" prefWidth="200.0" text="name" />
             <TableColumn fx:id="catalogItem" prefWidth="200.0" text="Catalog" />
             <TableColumn fx:id="typeItem" prefWidth="200.0" text="Type" />
             <TableColumn fx:id="priceItem" prefWidth="80.79998779296875" text="Price" />
-            <TableColumn fx:id="quantityItem" prefWidth="82.39990234375" text="Quantity" />
+            <TableColumn fx:id="quantityItem" prefWidth="105.0" text="Quantity" />
         </columns>
       </TableView>
       <Label layoutX="41.0" layoutY="300.0" styleClass="subLabel" text="Item List:" />
-      <Label layoutX="15.0" layoutY="470.0" styleClass="subLabel" text="Gretting card:" />
+      <Label layoutX="43.0" layoutY="464.0" styleClass="subLabel" text="Gretting &#10;card:" textAlignment="CENTER" />
       <Button fx:id="cancelOrder" layoutX="422.0" layoutY="594.0" mnemonicParsing="false" onAction="#cancelOrderPressed" text="Cancel Order">
          <styleClass>
             <String fx:value="Reg-btn" />
@@ -110,7 +110,7 @@
       </AnchorPane>
       <Label layoutX="585.0" layoutY="479.0" styleClass="MainLabel" text="Price:" />
       <Label fx:id="price" layoutX="730.0" layoutY="483.0" prefHeight="30.0" prefWidth="118.0" styleClass="MainLabel" text="250" />
-      <Label fx:id="statusOrder" layoutX="658.0" layoutY="442.0" prefHeight="43.0" prefWidth="230.0" styleClass="subLabel" text="Pending confirm" />
+      <Label fx:id="statusOrder" layoutX="658.0" layoutY="442.0" prefHeight="43.0" prefWidth="194.0" styleClass="subLabel" text="Pending confirm" />
       <HBox alignment="CENTER" layoutX="229.0" layoutY="14.0" prefHeight="74.0" prefWidth="576.0">
          <children>
             <Label styleClass="MainLabel" text="Order">
@@ -129,7 +129,7 @@
          </padding>
       </HBox>
       <Label layoutX="585.0" layoutY="449.0" styleClass="subLabel" text="Status:" />
-      <Label fx:id="greetingCardText" alignment="TOP_CENTER" contentDisplay="TOP" layoutX="173.0" layoutY="422.0" prefHeight="140.0" prefWidth="302.0" style="-fx-border-color: black;" text="asasd&#10;asd&#10;">
+      <Label fx:id="greetingCardText" alignment="TOP_CENTER" contentDisplay="TOP" layoutX="152.0" layoutY="424.0" prefHeight="140.0" prefWidth="302.0" style="-fx-border-color: black;" text="asasd&#10;asd&#10;" textAlignment="CENTER">
          <font>
             <Font name="Maiandra GD" size="25.0" />
          </font>

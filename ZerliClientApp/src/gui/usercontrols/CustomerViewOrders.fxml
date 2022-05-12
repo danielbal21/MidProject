@@ -17,12 +17,12 @@
             <String fx:value="pressbtn" />
          </styleClass>
       </Button>
-      <TableView fx:id="OrderViewTable" layoutX="54.0" layoutY="100.0" onMouseClicked="#clickOnItem" prefHeight="423.0" prefWidth="849.0">
+      <TableView fx:id="OrderViewTable" layoutX="51.0" layoutY="101.0" onMouseClicked="#clickOnItem" prefHeight="423.0" prefWidth="856.0">
         <columns>
-          <TableColumn fx:id="OrderNumberCol" prefWidth="128.79998779296875" text="Order number" />
-            <TableColumn fx:id="OrderDateCol" prefWidth="210.0" text="Order date" />
-            <TableColumn fx:id="shippingDateCol" prefWidth="210.0" text="Shipping date" />
-            <TableColumn fx:id="priceCol" prefWidth="95.0" text="Price" />
+          <TableColumn fx:id="OrderNumberCol" prefWidth="150.0" text="Order number" />
+            <TableColumn fx:id="OrderDateCol" prefWidth="205.0" text="Order date" />
+            <TableColumn fx:id="shippingDateCol" prefWidth="205.0" text="Shipping date" />
+            <TableColumn fx:id="priceCol" prefWidth="90.0" text="Price" />
             <TableColumn fx:id="statusCol" prefWidth="200.0" text="Status" />
         </columns>
       </TableView>

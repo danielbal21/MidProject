@@ -116,6 +116,12 @@
     -fx-background-color: transparent;
 }
 
+.table-view .column-header {
+	-fx-font-family: 'Maiandra GD';
+	-fx-font-size: 20px;
+    -fx-background-color: transparent;
+}
+
 .table-view .column-header-background .filler {
     -fx-background-color: transparent;
 }
