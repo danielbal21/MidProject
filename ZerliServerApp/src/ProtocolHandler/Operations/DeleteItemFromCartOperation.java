@@ -1,25 +1,25 @@
 package ProtocolHandler.Operations;
 
-import java.util.ArrayList;
-
-import Entities.*;
 import ProtocolHandler.IOperation;
 import ProtocolHandler.ResponseWrapper;
-import server.Server;
 
-public class GetCartOperation implements IOperation{
+public class DeleteItemFromCartOperation implements IOperation {
 
 	@Override
 	public boolean Perform(String requestee, Object data, Object params) {
+		System.out.println(data);
+		if (data instanceof Integer)
+		{
+		server.Server.SqlServerManager.DeleteItemFromCart(requestee,(int)data);
+		return true;
+		}
 		return false;
 	}
 
 	@Override
 	public boolean Perform(String requestee, Object data, Object params, ResponseWrapper response) {
-		ArrayList<ItemInList> cartItems = new ArrayList<ItemInList>();
-	    Server.SqlServerManager.getCartItems(requestee,cartItems);
-	    response.SetResponse(cartItems);
-		return true;
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

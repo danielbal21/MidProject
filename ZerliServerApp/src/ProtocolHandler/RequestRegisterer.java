@@ -14,7 +14,10 @@ public class RequestRegisterer {
 		Protocol.RegisterOperation(RequestType.SetLogOut, new LoggedOutOperation());
 		Protocol.RegisterOperation(RequestType.GetCatalog,new GetCatalogOperation());
 		Protocol.RegisterOperation(RequestType.GetCart,new GetCartOperation());
-
+		Protocol.RegisterOperation(RequestType.DeleteItemFromCart,new DeleteItemFromCartOperation());
+		Protocol.RegisterOperation(RequestType.GetNotification,new GetNotificationOperation());
+		Protocol.RegisterOperation(RequestType.UpdateNotification,new UpdateNotificationOperation());
+		
 
 	}
 }
