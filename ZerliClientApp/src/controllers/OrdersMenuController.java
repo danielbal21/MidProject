@@ -103,7 +103,7 @@ public class OrdersMenuController implements UserControl {
 
 	@FXML
 	void getOrderInfo(MouseEvent event) {
-		if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 2) {
+	/*	if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 2) {
 			editPanelContainer.setVisible(true);
 			errorLabel.setVisible(false);
 			orderIDLabel.setText(String.valueOf(orderTable.getSelectionModel().getSelectedItem().getOrderNumber()));
@@ -119,7 +119,7 @@ public class OrdersMenuController implements UserControl {
 			minutesField.setText(String.valueOf(localTime.getMinute()));
 
 		}
-
+*/
 	}
 
 	@FXML

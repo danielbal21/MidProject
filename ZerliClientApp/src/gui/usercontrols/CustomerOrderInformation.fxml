@@ -8,6 +8,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
@@ -17,11 +18,11 @@
 <AnchorPane fx:id="activePanelContainer" prefHeight="663.0" prefWidth="959.0" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.OrderInformationController">
    <children>
       <DatePicker fx:id="arrivalDate" layoutX="427.0" layoutY="500.0" prefHeight="34.0" prefWidth="174.0" />
-      <RadioButton layoutX="257.0" layoutY="311.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="161.0" styleClass="subLabel" text="Pick Up">
+      <RadioButton fx:id="pickupRB" layoutX="257.0" layoutY="311.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="161.0" styleClass="subLabel" text="Pick Up">
          <toggleGroup>
             <ToggleGroup fx:id="deliveryMethod" />
          </toggleGroup></RadioButton>
-      <RadioButton layoutX="405.0" layoutY="311.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="161.0" styleClass="subLabel" text="Shipping" toggleGroup="$deliveryMethod" />
+      <RadioButton fx:id="shippingRB" layoutX="405.0" layoutY="311.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="161.0" styleClass="subLabel" text="Shipping" toggleGroup="$deliveryMethod" />
       <Label layoutX="249.0" layoutY="502.0" prefHeight="30.0" prefWidth="174.0" styleClass="subLabel" text="Scheduled date">
          <font>
             <Font name="Maiandra GD" size="24.0" />
@@ -61,7 +62,7 @@
             <Font name="Maiandra GD" size="24.0" />
          </font>
       </Label>
-      <Button fx:id="nextBtn" layoutX="853.0" layoutY="592.0" mnemonicParsing="false" onAction="#nextBtn_Click" prefHeight="50.0" prefWidth="92.0" stylesheets="@application.css" text="Next">
+      <Button fx:id="nextBtn" layoutX="853.0" layoutY="593.0" mnemonicParsing="false" onAction="#nextBtn_Click" prefHeight="50.0" prefWidth="92.0" stylesheets="@application.css" text="Next">
          <styleClass>
             <String fx:value="Next-btn" />
             <String fx:value="pressbtn" />
@@ -75,6 +76,20 @@
       <Label fx:id="errorLabel" layoutX="700.0" layoutY="357.0" textFill="RED">
          <font>
             <Font name="Maiandra GD" size="12.0" />
+         </font>
+      </Label>
+      <Button fx:id="backBtn" layoutX="14.0" layoutY="591.0" mnemonicParsing="false" onAction="#backBtn_press" prefHeight="50.0" prefWidth="92.0" styleClass="Left-btn" text="Back" />
+      <Slider fx:id="hourSlider" blockIncrement="1.0" layoutX="430.0" layoutY="542.0" max="23.0" onMouseReleased="#hourSlide" prefHeight="14.0" prefWidth="167.0" />
+      <Slider fx:id="minutesSlider" blockIncrement="1.0" layoutX="430.0" layoutY="564.0" max="59.0" onMouseReleased="#minuteSlide" prefHeight="14.0" prefWidth="167.0" />
+      <Label fx:id="timePresented" layoutX="619.0" layoutY="543.0" styleClass="subLabel" text="00:00" />
+      <Label layoutX="370.0" layoutY="540.0" text="hour">
+         <font>
+            <Font name="Maiandra GD" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="370.0" layoutY="562.0" text="minutes">
+         <font>
+            <Font name="Maiandra GD" size="14.0" />
          </font>
       </Label>
    </children>

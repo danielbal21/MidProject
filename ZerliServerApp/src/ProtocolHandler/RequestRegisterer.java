@@ -14,7 +14,9 @@ public class RequestRegisterer {
 		Protocol.RegisterOperation(RequestType.SetLogOut, new LoggedOutOperation());
 		Protocol.RegisterOperation(RequestType.GetCatalog,new GetCatalogOperation());
 		Protocol.RegisterOperation(RequestType.GetCart,new GetCartOperation());
-
-
+		Protocol.RegisterOperation(RequestType.GetBranches, new GetBranchesOperation());
+		Protocol.RegisterOperation(RequestType.GetUserCurrency, new GetUserCurrencyOperation());
+		Protocol.RegisterOperation(RequestType.UpdateZerliCoins, new UpdateZerliCoinsOperation());
+		Protocol.RegisterOperation(RequestType.InsertOrder, new InsertOrderOperation());
 	}
 }

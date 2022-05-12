@@ -5,8 +5,11 @@ public enum RequestType {
 	UpdateOrder,
 	Ping,
 	AuthenticateUser,
-	SetLogOut, 
+	SetLogOut,
 	GetCatalog,
 	GetCart,
 	GetBranches,
+	GetUserCurrency,
+	UpdateZerliCoins,
+	InsertOrder,
 }

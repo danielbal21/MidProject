@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
@@ -48,6 +49,7 @@ public class ServerConnSQL{
 	}
 	
 	public void getOrders(ArrayList<Order> orders, String[] params){
+		Server.Log("Database", "Executing GetOrders");
 		PreparedStatement stmt = null;
 		Order newOrder=null;
 		ResultSet rs;
@@ -80,6 +82,7 @@ public class ServerConnSQL{
 		}
 	catch(Exception e)
 	{
+		Server.Log("Database", "Executing GetOrders: FAILED");
 		System.err.println("Got an exception! ");
 		System.err.println(e.getMessage());
 	}System.out.println("Get Orders!");
@@ -99,6 +102,7 @@ public class ServerConnSQL{
 	}
 
 	public Object[] Authenticate(String username, String password) {
+		Server.Log("Database", "Executing Authenticate");
 		PreparedStatement stmt = null;
 		Object[] logindetails=new Object[3]; 
 		ResultSet rs;
@@ -123,7 +127,7 @@ public class ServerConnSQL{
     			return logindetails;
 		} 
 		catch (SQLException e1) {
-            System.err.println("Failed on Authenticate()");
+			Server.Log("Database", "Executing Authenticate: FAILED");
 			e1.printStackTrace();
 			logindetails[1]=Access.noaut;
        		
@@ -133,19 +137,22 @@ public class ServerConnSQL{
 
 
 	public void LoggedOut(String username) {
+		Server.Log("Database", "Executing Logout");
 		PreparedStatement stmt = null;
 		try {
-			stmt = conn.prepareStatement("UPDATE login_details SET LoggedIn='0' WHERE username=?" );
+			stmt = conn.prepareStatement("UPDATE login_details SET loggedin='0' WHERE user_id=?");
 			stmt.setString(1,username);
            	stmt.executeUpdate(); 	
 		} 
 		catch (SQLException e1) {
+			Server.Log("Database", "Executing Logout: FAILED");
             System.err.println("Failed on LoggedOut()");
 			e1.printStackTrace();
 		}
 	}
 
 	public void getCartItems(ArrayList<Item> cartItems) {
+		Server.Log("Database", "Executing GetCardItems");
 		/*Statement stmt = null;
 		try {
 			stmt = conn.createStatement();
@@ -173,6 +180,7 @@ public class ServerConnSQL{
 	}
 
 	public void getCatalogItems(ArrayList<Item> catalogItems,CatalogType catalogType) {
+		Server.Log("Database", "Executing GetCatalogItems");
 		PreparedStatement stmt = null;
 		try {
 			stmt = conn.prepareStatement("SELECT * FROM items where catalog_type=?");
@@ -212,6 +220,7 @@ public class ServerConnSQL{
 	            	catalogItems.add(item);
 	            	}
 	        } catch (Exception e) {
+	    		Server.Log("Database", "Executing GetCatalogItems: FAILED");
 	            System.err.println("Got an exception! ");
 	            System.err.println(e.getMessage());
 	            System.err.println(e.getStackTrace());
@@ -219,18 +228,114 @@ public class ServerConnSQL{
 		 System.out.println("Get Catalog Items!");
 	}
 	public ArrayList<String> GetBranches() {
+		Server.Log("Database", "Executing GetBranches");
 		ArrayList<String> branches = new ArrayList<String>();
 		PreparedStatement stmt = null;
 		ResultSet rs;
 		try {
-			stmt = conn.prepareStatement("SELECT branchName FROM branches");
+			stmt = conn.prepareStatement("SELECT branch_name FROM manager_details");
            	rs = stmt.executeQuery();
            	while(rs.next())
            		branches.add(rs.getString(1));
 		} 
 		catch (SQLException e1) {
-			return null;
+			Server.Log("Database", "Executing GetCatalogItems: FAILED");
+			e1.printStackTrace();
 		}
 		return branches;
+	}
+
+	public String[] GetCurrency(String requestee) {
+		Server.Log("Database", "Executing GetCurrency");
+		String[] details = null;
+		PreparedStatement stmt = null;
+		ResultSet rs;
+		try {
+			stmt = conn.prepareStatement("SELECT credit_card,cvv,exp_month,exp_year,zerli_coin,new_customer FROM customer_details WHERE user_id='" + requestee + "'");
+           	rs = stmt.executeQuery();
+           	while(rs.next())
+           		details = new String[] {rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6)};
+		} 
+		catch (SQLException e1) {
+			Server.Log("Database", "Executing GetCurrency: FAILED");
+			e1.printStackTrace();
+		}
+		return details;
+	}
+
+	public void UpdateZerliCoins(String requestee, int data) {
+		Server.Log("Database", "Executing UpdateZerliCoins");
+		PreparedStatement stmt = null;
+		try {
+			stmt = conn.prepareStatement("UPDATE customer_details SET zerli_coin=? WHERE user_id=?");
+			stmt.setInt(1, data);
+			stmt.setString(2, requestee);
+           	stmt.executeUpdate();
+		} 
+		catch (SQLException e1) {
+			Server.Log("Database", "Executing UpdateZerliCoins: FAILED");
+			e1.printStackTrace();
+		}
+	}
+	
+	public void InsertOrder(Order order,String requestee)
+	{
+		Server.Log("Database", "Executing InsertOrder");
+		PreparedStatement stmt = null;
+		try {
+			stmt = conn.prepareStatement("INSERT INTO orders (user_id,payment_method,shipping_method,order_date,shipping_date,branch_name,greeting_card,total_price,status,address,city)"
+					+ " VALUES (?,?,?,?,?,?,?,?,?,?,?)");
+			stmt.setString(1, requestee);
+			stmt.setString(2, order.getPaymentMethod().toString());
+			stmt.setString(3, order.getShippingMethod().toString());
+			stmt.setTimestamp(4, order.getOrderDate());
+			if(order.getShippingDate() != null)
+				stmt.setTimestamp(5, order.getShippingDate());
+			else
+				stmt.setNull(5,Types.TIMESTAMP);;
+			stmt.setString(6, order.getBranchName());
+			if(order.getGreetingCard() != null)
+				stmt.setString(7, order.getGreetingCard());
+			else
+				stmt.setNull(7,java.sql.Types.VARCHAR);
+			stmt.setInt(8, order.getTotalPrice());
+			stmt.setString(9,order.getStatus().toString());
+			if(order.getAddress() != null)
+				stmt.setString(10, order.getAddress());
+			else
+				stmt.setNull(10,Types.VARCHAR);;
+			if(order.getCity() != null)
+				stmt.setString(11, order.getCity());
+			else
+				stmt.setNull(11,Types.VARCHAR);;
+           	stmt.executeUpdate();
+           	
+           	stmt = conn.prepareStatement("SELECT order_id FROM orders WHERE user_id = ? AND order_date = ?");
+           	stmt.setString(1, requestee);
+           	stmt.setTimestamp(2, order.getOrderDate());
+           	ResultSet rs = stmt.executeQuery();
+           	int orderID = -1;
+           	while(rs.next())
+           	{
+           		orderID = rs.getInt(1);
+           	}
+           	if(orderID == -1){
+        		Server.Log("Database", "Executing InsertOrder: FAILED could not track OrderID");
+           		throw new RuntimeException("ERROR");
+           	}
+           	for(ItemInList item : order.getItems())
+           	{
+               	stmt = conn.prepareStatement("INSERT INTO order_item VALUES (?,?,?)");
+           		stmt.setInt(1, orderID);
+           		stmt.setInt(2, item.getItem_id());
+           		stmt.setInt(3, item.getQuantity());
+           		stmt.executeUpdate();
+           	}
+
+		} 
+		catch (SQLException e1) {
+    		Server.Log("Database", "Executing InsertOrder: FAILED");
+			e1.printStackTrace();
+		}
 	}
 }

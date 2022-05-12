@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="activePanelContainer" prefHeight="663.0" prefWidth="957.0" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="activePanelContainer" prefHeight="663.0" prefWidth="957.0" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.outroViewController">
    <children>
       <Label layoutX="59.0" layoutY="28.0" prefHeight="540.0" prefWidth="854.0" text="Thank you for your order.&#10;&#10;&#10;&#10;&#10;Your order is being processed at the moment.&#10;We will notify you with the confirmation&#10;as soon as possible.&#10;&#10;Have a great day." textAlignment="CENTER">
          <font>

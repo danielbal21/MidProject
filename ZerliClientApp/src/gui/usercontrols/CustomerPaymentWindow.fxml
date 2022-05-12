@@ -100,7 +100,7 @@
             <Font name="Maiandra GD" size="29.0" />
          </font>
       </Label>
-      <VBox fx:id="zerliCoinsDialog" layoutX="92.0" layoutY="282.0" prefHeight="100.0" prefWidth="418.0" visible="false">
+      <VBox fx:id="zerliCoinsDialog" layoutX="92.0" layoutY="282.0" prefHeight="100.0" prefWidth="474.0">
          <children>
             <HBox prefHeight="50.0" prefWidth="434.0">
                <children>
@@ -109,7 +109,7 @@
                         <Font name="Maiandra GD" size="29.0" />
                      </font>
                   </Label>
-                  <Label prefHeight="42.0" prefWidth="89.0" styleClass="subLabel" text="400 ₪">
+                  <Label fx:id="balanceLbl" prefHeight="42.0" prefWidth="204.0" styleClass="subLabel" text="400 ₪">
                      <font>
                         <Font name="Maiandra GD" size="29.0" />
                      </font>
@@ -123,7 +123,7 @@
                         <Font name="Maiandra GD" size="29.0" />
                      </font>
                   </Label>
-                  <Label prefHeight="44.0" prefWidth="84.0" styleClass="subLabel" text="25 ₪">
+                  <Label fx:id="postPayBalanceLbl" prefHeight="44.0" prefWidth="207.0" styleClass="subLabel" text="25 ₪">
                      <font>
                         <Font name="Maiandra GD" size="29.0" />
                      </font>
@@ -132,7 +132,7 @@
             </HBox>
          </children>
       </VBox>
-      <AnchorPane fx:id="creditCardDialog" layoutX="110.0" layoutY="176.0" prefHeight="371.0" prefWidth="463.0">
+      <AnchorPane fx:id="creditCardDialog" layoutX="110.0" layoutY="176.0" prefHeight="371.0" prefWidth="463.0" visible="false">
          <children>
             <ImageView fitHeight="252.0" fitWidth="396.0" layoutX="36.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -174,5 +174,11 @@
             <Font name="Maiandra GD" size="27.0" />
          </font>
       </Label>
+      <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="580.0" layoutY="431.0" prefHeight="145.0" prefWidth="334.0" styleClass="subLabel" textFill="#ff0505">
+         <font>
+            <Font name="Maiandra GD" size="12.0" />
+         </font>
+      </Label>
+      <Button fx:id="backBtn" layoutX="25.0" layoutY="589.0" mnemonicParsing="false" onAction="#backBtn_press" prefHeight="50.0" prefWidth="92.0" styleClass="Left-btn" text="Back" />
    </children>
 </AnchorPane>

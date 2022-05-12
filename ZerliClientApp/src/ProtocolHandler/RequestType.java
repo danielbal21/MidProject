@@ -9,4 +9,7 @@ public enum RequestType {
 	GetCatalog,
 	GetCart,
 	GetBranches,
+	GetUserCurrency, 
+	UpdateZerliCoins,
+	InsertOrder,
 }

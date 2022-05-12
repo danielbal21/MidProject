@@ -18,7 +18,8 @@ public class CustomerHomePageController implements UserControl{
     @FXML
     void customPressed(ActionEvent event) {
     	LoginController.windowControl.putPipe("catalog", CatalogType.custom);
-    	LoginController.windowControl.setUserControl("/gui/usercontrols/CustomerCatalogViewer.fxml");
+    	//LoginController.windowControl.setUserControl("/gui/usercontrols/CustomerCatalogViewer.fxml");
+    	LoginController.windowControl.setUserControl("/gui/usercontrols/CustomerOrderInformation.fxml");
     }
 
     @FXML

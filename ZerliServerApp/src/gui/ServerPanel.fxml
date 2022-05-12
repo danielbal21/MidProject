@@ -2,21 +2,23 @@
 
 <?import java.lang.String?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="473.0" prefWidth="409.0" style="-fx-background-color: E5E5E5;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ServerPanelController">
+<AnchorPane style="-fx-background-color: E5E5E5;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ServerPanelController">
    <children>
-      <ImageView fitHeight="494.0" fitWidth="742.0" layoutY="-16.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="654.0" fitWidth="1136.0" layoutY="-16.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../png/W2.jpg" />
          </image>
       </ImageView>
-      <TableView fx:id="clientTable" layoutX="23.0" layoutY="95.0" prefHeight="358.0" prefWidth="347.0" stylesheets="@application.css">
+      <TableView fx:id="clientTable" layoutX="23.0" layoutY="95.0" prefHeight="536.0" prefWidth="347.0" stylesheets="@application.css">
         <columns>
           <TableColumn fx:id="ipCol" prefWidth="101.0" text="IP" />
             <TableColumn fx:id="hostCol" minWidth="0.0" prefWidth="167.0" text="Host" />
@@ -27,15 +29,27 @@
             <String fx:value="table-cell" />
          </styleClass>
       </TableView>
-      <Label layoutX="231.0" layoutY="21.0" styleClass="MainLabel" text="Zerli Server">
+      <Label layoutX="350.0" layoutY="16.0" styleClass="MainLabel" text="Zerli Server">
          <font>
             <Font name="Maiandra GD" size="35.0" />
          </font>
       </Label>
-      <ImageView fx:id="exitBtn" fitHeight="54.0" fitWidth="55.0" layoutX="681.0" layoutY="4.0" onMousePressed="#exitPressed" pickOnBounds="true" preserveRatio="true" styleClass="imageasbtn">
+      <ImageView fx:id="exitBtn" fitHeight="54.0" fitWidth="55.0" layoutX="913.0" layoutY="11.0" onMousePressed="#exitPressed" pickOnBounds="true" preserveRatio="true" styleClass="imageasbtn">
          <image>
             <Image url="@../png/X-btn.png" />
          </image>
       </ImageView>
+      <ScrollPane layoutX="379.0" layoutY="95.0" prefHeight="536.0" prefWidth="578.0">
+         <content>
+            <TextArea fx:id="console" prefHeight="532.0" prefWidth="576.0" style="-fx-control-inner-background:#000000; -fx-font-family: Consolas; -fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #000000; -fx-text-fill: #00ff00; ">
+               <font>
+                  <Font name="Consolas" size="14.0" />
+               </font>
+                       
+            </TextArea>
+         </content>
+      </ScrollPane>
+      <Label fx:id="serverStatusLbl" layoutX="21.0" layoutY="26.0" style="-fx-text-fill: green;" text="Server    -   ONLINE" />
+      <Label fx:id="dbStatusServer" layoutX="23.0" layoutY="52.0" style="-fx-text-fill: green;" text="Database - ONLINE" />
    </children>
 </AnchorPane>
