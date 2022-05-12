@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="activePanelContainer" prefHeight="663.0" prefWidth="957.0" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.NotificationWindowController">
+   <children>
+      <Label fx:id="notificationTable" layoutX="206.0" layoutY="46.0" prefHeight="74.0" prefWidth="558.0" styleClass="MainLabel" text="Notifications Center" />
+      <ToggleButton fx:id="ureadOnlyBtn" layoutX="440.0" layoutY="593.0" mnemonicParsing="false" onMousePressed="#Unreadonly" prefHeight="48.0" prefWidth="146.0" styleClass="pressbtn" text="Unread only" />
+      <TableView fx:id="notificationsCenterTable" layoutX="43.0" layoutY="125.0" onMousePressed="#setStatus" prefHeight="452.0" prefWidth="856.0">
+        <columns>
+          <TableColumn fx:id="notificationNumber" prefWidth="107.99996948242188" text="Notification No." />
+          <TableColumn fx:id="sendFrom" prefWidth="75.99996948242188" text="Send from" />
+            <TableColumn fx:id="content" minWidth="0.0" prefWidth="587.2000885009766" text="Content" />
+            <TableColumn fx:id="status" prefWidth="99.199951171875" text="Status" />
+        </columns>
+      </TableView>
+      <Label fx:id="noNotifiLabel" layoutX="74.0" layoutY="248.0" prefHeight="154.0" prefWidth="834.0" styleClass="MainLabel" text="There are no new notifications " textFill="#e40707" />
+   </children>
+</AnchorPane>

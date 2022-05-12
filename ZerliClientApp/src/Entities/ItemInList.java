@@ -1,6 +1,9 @@
 package Entities;
 
+import java.io.ByteArrayInputStream;
 import java.io.Serializable;
+
+import javafx.scene.image.Image;
 
 public class ItemInList implements Serializable{
 
@@ -10,11 +13,21 @@ public class ItemInList implements Serializable{
 	private String item_name;
 	private ItemType item_type;
 	private CatalogType catalog_type;
-	
+	private byte[] image;
 	public ItemInList() {
 		
 	}
-			
+	public ItemInList(byte[] image,int item_id, int quantity, int price,String item_name, ItemType item_type, CatalogType catalog_type) {
+		super();
+		this.image=image;
+		this.item_id = item_id;
+		this.quantity = quantity;
+		this.price=price;
+		this.item_name = item_name;
+		this.item_type = item_type;
+		this.catalog_type = catalog_type;
+		
+	}	
 	public ItemInList(String item_name,CatalogType catalog_type, 
 			ItemType item_type, int price, int quantity) {
 		this.quantity = quantity;
@@ -46,7 +59,12 @@ public class ItemInList implements Serializable{
 		this.item_type = item_type;
 		this.catalog_type = catalog_type;
 	}
-
+	public byte[] getImage() {
+		return image;
+	}
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
 	public int getPrice() {
 		return price;
 	}
@@ -101,6 +119,8 @@ public class ItemInList implements Serializable{
 				+ item_type + ", catalog_type=" + catalog_type + "]";
 	}
 	
-	
-
+	public Image getJXImage() {
+		// TODO Auto-generated method stub
+		return new Image(new ByteArrayInputStream(image));
+	}
 }

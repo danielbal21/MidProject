@@ -6,6 +6,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+
+import javax.imageio.ImageIO;
+
+
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.sql.Blob;
 import Entities.*;
@@ -139,6 +145,73 @@ public class ServerConnSQL{
             System.err.println("Failed on LoggedOut()");
 			e1.printStackTrace();
 		}
+	}
+
+
+	public void getCartItems(String username,ArrayList<ItemInList> cartItems) {
+		PreparedStatement stmt = null;
+		try {
+			stmt = conn.prepareStatement("SELECT quantity FROM cart_item WHERE cart_id=(SELECT cart_id FROM carts WHERE user_id= ?)");
+			stmt.setString(1, username);
+		} 
+		catch (SQLException e1) {
+            System.err.println("Failed on createStatement()");
+			e1.printStackTrace();
+		}
+		ArrayList<Integer> quantityList=new ArrayList<Integer>();
+		ResultSet rs;
+		 try {
+			 	rs=stmt.executeQuery();
+			 	while (rs.next()) {
+			 		quantityList.add(rs.getInt(1));
+			 	}
+		 }
+		 catch (Exception e) {
+	            System.err.println("Got an exception! ");
+	            System.err.println(e.getMessage());
+	        }
+		try {
+			stmt = conn.prepareStatement("SELECT * FROM items WHERE item_id IN  (SELECT item_id FROM Cart_item WHERE cart_id=(SELECT cart_id FROM carts WHERE user_id= ?))");
+			stmt.setString(1, username);
+		} 
+		catch (SQLException e1) {
+            System.err.println("Failed on createStatement()");
+			e1.printStackTrace();
+		}
+		
+		ItemInList itemInListlist=null;
+		Blob image;
+		InputStream stream;
+		int i=0;
+		 try {
+			 	rs=stmt.executeQuery();
+	            while (rs.next()) {
+	            	Image bufferImage;
+	            	System.out.println("ENTERING LOOP");
+	            	image=rs.getBlob(7);
+	            	System.out.println("GOT BLOB");
+	            	if (image == null)
+	            	{
+	            		stream = getClass().getResourceAsStream("/png/no-image.png");
+	            		//stream =new FileInputStream("/png/no-image.png");
+	            	}
+	            	else {
+	            		stream = image.getBinaryStream();
+		            	//bufferImage = new Image(input);
+	            	}
+	            	itemInListlist = new ItemInList(stream.readAllBytes(),rs.getInt(1),quantityList.get(i),
+	            			rs.getInt(3), rs.getString(2),ItemType.valueOf(rs.getString(5)),
+	            			CatalogType.valueOf(rs.getString(4)));
+	            	cartItems.add(itemInListlist);
+	            	i++;
+	            	//System.out.println(""+itemInListlist.getItem_id()+itemInListlist.getQuantity());
+	            	}
+	        } catch (Exception e) {
+	            System.err.println("Got an exception! ");
+	            System.err.println(e.getMessage());
+	        }
+		 System.out.println("Get Cart Items!");
+		
 	}
 
 	public void getCatalogItems(ArrayList<Item> catalogItems,CatalogType catalogType) {
@@ -350,4 +423,64 @@ public class ServerConnSQL{
 	}
 
 
+
+	public void DeleteItemFromCart(String usernmae, int data) {
+		PreparedStatement stmt = null;
+		try {
+			stmt = conn.prepareStatement("DELETE FROM cart_item WHERE item_id=? and cart_id =(select cart_id from carts WHERE user_id=? )" );
+			stmt.setInt(1, data);
+			stmt.setString(2, usernmae);
+           	stmt.executeUpdate(); 	
+           	System.out.println("Delete item");
+		} 
+		catch (SQLException e1) {
+            System.err.println("Failed on DeleteItemFromCart()");
+			e1.printStackTrace();
+		}
+		System.out.println("Delete Item From Cart!");
+		
+	}
+
+	public void getNotification(String username, ArrayList<NotificationInTable> notificationList) {
+		PreparedStatement stmt = null;
+		try {
+			stmt = conn.prepareStatement("SELECT * FROM notifications WHERE user_id= ?");
+			stmt.setString(1, username);
+		} 
+		catch (SQLException e1) {
+            System.err.println("Failed on createStatement()");
+			e1.printStackTrace();
+		}
+		ResultSet rs;
+		 try {
+			 	rs=stmt.executeQuery();
+			 	while (rs.next()) {
+			 		notificationList.add(new NotificationInTable( rs.getInt(1),rs.getString(3),rs.getString(4),rs.getString(5)));
+			 	}
+		 }
+		 catch (Exception e) {
+	            System.err.println("Got an exception! ");
+	            System.err.println(e.getMessage());
+	        }
+		 System.out.println("Get Notification !");
+		}
+
+	public void UpdateNotification(String username, ArrayList<NotificationInTable> data) {
+		PreparedStatement stmt = null;
+		try {
+			for (NotificationInTable notificationInTable : data) {
+				System.out.println(notificationInTable+"999");
+				stmt = conn.prepareStatement("UPDATE notifications SET status = ? WHERE notification_id = ? " );
+				stmt.setString(1,notificationInTable.getStatus());
+				stmt.setInt(2,notificationInTable.getNotificationnumber());
+	           	stmt.executeUpdate(); 
+			}
+				
+		} 
+		catch (SQLException e1) {
+            System.err.println("Failed on UpdateNotification()");
+			e1.printStackTrace();
+		}
+		
+	}
 }

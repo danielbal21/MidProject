@@ -24,5 +24,9 @@ public class HandlersRegisterer {
 		
 		Protocol.RegisterHandler(RequestType.AddToCart, null);
 		Protocol.RegisterHandler(RequestType.GetAllCustomerOrders, new ArrayListToObservableHandler());
+		Protocol.RegisterHandler(RequestType.DeleteItemFromCart, null);
+		Protocol.RegisterHandler(RequestType.GetNotification, new ArrayListToObservableHandler());
+		Protocol.RegisterHandler(RequestType.UpdateNotification,null);
+		
 	}
 }

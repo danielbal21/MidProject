@@ -2,24 +2,24 @@ package ProtocolHandler.Operations;
 
 import java.util.ArrayList;
 
-import Entities.*;
+import Entities.NotificationInTable;
 import ProtocolHandler.IOperation;
 import ProtocolHandler.ResponseWrapper;
-import server.Server;
+import javafx.collections.ObservableList;
 
-public class GetCartOperation implements IOperation{
+public class UpdateNotificationOperation implements IOperation {
 
 	@Override
 	public boolean Perform(String requestee, Object data, Object params) {
-		return false;
+		if (data instanceof ArrayList<?>)
+			server.Server.SqlServerManager.UpdateNotification(requestee,(ArrayList<NotificationInTable>)data);
+		return true;
 	}
 
 	@Override
 	public boolean Perform(String requestee, Object data, Object params, ResponseWrapper response) {
-		ArrayList<ItemInList> cartItems = new ArrayList<ItemInList>();
-	    Server.SqlServerManager.getCartItems(requestee,cartItems);
-	    response.SetResponse(cartItems);
-		return true;
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

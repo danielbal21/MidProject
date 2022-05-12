@@ -15,4 +15,7 @@ public enum RequestType {
 	ConfirmOrder,
 	AddToCart,
 	GetAllCustomerOrders,
+	DeleteItemFromCart,
+	GetNotification,
+	UpdateNotification,
 }

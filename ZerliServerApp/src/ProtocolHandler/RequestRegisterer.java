@@ -16,9 +16,10 @@ public class RequestRegisterer {
 		Protocol.RegisterOperation(RequestType.GetManagerBranch,new GetManagerBranchOperation());
 		Protocol.RegisterOperation(RequestType.AddToCart,new AddToCartOperation());
 		Protocol.RegisterOperation(RequestType.GetAllCustomerOrders,new GetAllCustomerOrdersOperation());
+		Protocol.RegisterOperation(RequestType.DeleteItemFromCart,new DeleteItemFromCartOperation());
+		Protocol.RegisterOperation(RequestType.GetNotification,new GetNotificationOperation());
+		Protocol.RegisterOperation(RequestType.UpdateNotification,new UpdateNotificationOperation());
 		
-		
-
 
 	}
 }

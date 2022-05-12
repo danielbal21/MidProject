@@ -48,18 +48,27 @@ public class CustomerFrameController implements IContainable{
     @FXML
     private Button ordersBtn;
     
+    @FXML
+    private ImageView cartRedCircleImage;
+    @FXML
+    private ImageView bellRedCircleImage;
+    @FXML
+    private Label cartRedCricleLable;
+    @FXML
+    private Label bellRedCricleLable;
+    
     void init(){
     	nameLabel.setText(ClientApp.UserID.toString());
     }
 
     @FXML
     void bellPressed(MouseEvent event) {
-
+    	LoginController.windowControl.setUserControl("/gui/usercontrols/NotificationWindow.fxml");
     }
 
     @FXML
     void cartPressed(MouseEvent event) {
-
+    	LoginController.windowControl.setUserControl("/gui/usercontrols/CustomerCart.fxml");
     }
 
     @FXML
