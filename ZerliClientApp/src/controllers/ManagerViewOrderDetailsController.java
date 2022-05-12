@@ -92,20 +92,19 @@ public class ManagerViewOrderDetailsController implements UserControl{
 		colorColumn.setCellValueFactory(new PropertyValueFactory<>("color"));
 		typeColumn.setCellValueFactory(new PropertyValueFactory<>("itemType"));
 		priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
-		orderDateLabel.setText(order.getOrderDate());
-		shippingDateLabel.setText(order.getShippingDate());
-		paymentMethodLabel.setText(order.getPaymentMethod());
+		orderDateLabel.setText(order.getOrder_date());
+		shippingDateLabel.setText(order.getShipping_date());
+		paymentMethodLabel.setText(order.getPayment_method());
 		orderNumberLabel.setText(order.getOrderID());
 		costLabel.setText(String.valueOf(order.getTotalPrice()));
-		statusLabel.setText(order.getStatus());
-		shippingMethodLabel.setText(order.getShippingtMethod());
+		statusLabel.setText(order.getOrder_status());
+		shippingMethodLabel.setText(order.getShipping_method());
 		
 		ClientApp.ProtocolHandler.Invoke(RequestType.GetItemsOfOrder,  LoginController.windowControl.peekPipe("Order select"), null, true);
 		
 		observableList = (ObservableList<Item>)ClientApp.ProtocolHandler.GetResponse(RequestType.GetItemsOfOrder);
 		
 		itemTable.setItems(observableList);
-		
 		
 	}
 

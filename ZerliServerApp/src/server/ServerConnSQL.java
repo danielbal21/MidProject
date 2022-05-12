@@ -339,106 +339,15 @@ public class ServerConnSQL{
 		
 	}
 
-	public void AddToCart(String username, int item_id, int quantity) {
-		PreparedStatement stmt = null;
-		ResultSet rs;
-		try {
-			stmt = conn.prepareStatement
-					("SELECT ci.quantity FROM cart_item ci WHERE item_id=? "
-							+ "AND cart_id = (SELECT c.cart_id FROM carts c WHERE user_id=?)");
-			stmt.setInt(1,item_id);
-			stmt.setString(2,username);
-           	rs = stmt.executeQuery();
-           	if(rs.next() == false) {
-           		//insert
-           		stmt = conn.prepareStatement("INSERT INTO cart_item "
-           				+ "VALUES ((SELECT c.cart_id FROM carts c WHERE user_id=?),?,?)");
-           		stmt.setString(1,username);
-           		stmt.setInt(2,item_id);
-           		stmt.setInt(3,quantity);
-           		stmt.executeUpdate();
-           	}
-           	else {
-           	//update
-           		stmt = conn.prepareStatement("UPDATE cart_item SET quantity=? WHERE item_id=? "
-           				+ "AND cart_id = (SELECT c.cart_id FROM carts c WHERE user_id=?)");
-           		stmt.setInt(1, quantity + rs.getInt(1));
-           		stmt.setInt(2,item_id);
-           		stmt.setString(3,username);
-           		stmt.executeUpdate();
-           	}
-           		
-		} 
-		catch (SQLException e1) {
-            System.err.println("Failed on AddToCart()");
-			e1.printStackTrace();
-		}
-		 System.out.println("Add to cart I"+ item_id + " Q="+ quantity);
-		 
-		
-	}
-
-	public void GetAllCustomerOrders(String username, ArrayList<Order> customerOrders) {
-		PreparedStatement stmt = null;
-		ResultSet rs1,rs2;
-		Order order;
-		ItemInList itemInList;
-		ArrayList<ItemInList> itemList ;
-		try {
-			stmt = conn.prepareStatement("SELECT * FROM orders WHERE user_id=?");
-			stmt.setString(1,username);
-           	rs1 = stmt.executeQuery();
-           	while(rs1.next()) {
-           		order = new Order();
-           		order.setOrderID(String.valueOf(rs1.getInt(2)));
-           		order.setPaymentMethod(PaymentMethods.valueOf(rs1.getString(3)));
-           		order.setShippingMethod(ShippingMethods.valueOf(rs1.getString(4)));
-           		order.setOrderDate(rs1.getTimestamp(5));
-           		order.setShippingDate(rs1.getTimestamp(6));
-           		order.setBranchName(rs1.getString(7));
-           		order.setGreetingCard(rs1.getString(8));
-           		order.setTotalPrice(rs1.getInt(9));
-           		order.setStatus(OrderStatus.valueOf(rs1.getString(10)));
-           		order.setAddress(rs1.getString(11));
-           		order.setCity(rs1.getString(12));
-         
-   	       		stmt = conn.prepareStatement("SELECT i.name ,i.catalog_type,"
-                   		+"i.item_type,i.price, oi.quantity " 
-                   		+"FROM items i, order_item oi "
-                   		+"WHERE i.item_id = oi.item_id" 
-                   		+" AND oi.order_id=? " 
-                   		+"AND i.item_id IN (SELECT item_id "
-                   		+"from order_item"
-                   		+" where order_id=?)");
-           		stmt.setInt(1,rs1.getInt(2));
-           		stmt.setInt(2,rs1.getInt(2));
-           		rs2 = stmt.executeQuery();
-           		itemList = new ArrayList<>();
-           		while(rs2.next()) {
-           			itemInList = new ItemInList();
-           			itemInList.setItem_name(rs2.getString(1));
-           			itemInList.setCatalog_type(CatalogType.valueOf((rs2.getString(2))));
-           			itemInList.setItem_type(ItemType.valueOf(rs2.getString(3)));
-           			itemInList.setPrice(rs2.getInt(4));
-           			itemInList.setQuantity(rs2.getInt(5));
-           			itemList.add(itemInList);
-           		}
-           		order.setItems(itemList);
-           		customerOrders.add(order);
-           	}
-
-		
-		} 
-		catch (SQLException e1) {
-			System.err.println("Failed on GetAllCustomerOrders()");
-			e1.printStackTrace();
-		}
-		 System.out.println("Got All order to user id= "+username);
-	
-	}
-
-	public void getCartItems(ArrayList<Item> cartItems) {
+	public void GetItemsOfOrder(ArrayList<Item> items, Integer valueOf) {
 		// TODO Auto-generated method stub
 		
 	}
+
+	public void ConfirmOrder(String valueOf) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 }
