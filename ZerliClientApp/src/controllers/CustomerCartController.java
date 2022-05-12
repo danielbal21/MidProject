@@ -3,10 +3,7 @@ package controllers;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import Entities.CatalogType;
-import Entities.Item;
 import Entities.ItemInList;
-import Entities.ItemType;
 import ProtocolHandler.RequestType;
 import client.ClientApp;
 import javafx.collections.ObservableList;
@@ -15,7 +12,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
