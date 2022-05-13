@@ -5,14 +5,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.sql.Types;
 import java.util.ArrayList;
-
-
 import javax.imageio.ImageIO;
-
-
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.sql.Blob;
@@ -36,7 +31,7 @@ public class ServerConnSQL{
 	    
 	    try 
 	    {
-	        conn = DriverManager.getConnection("jdbc:mysql://localhost/midproject?serverTimezone=IST","root",mySQLpassword);
+	        conn = DriverManager.getConnection("jdbc:mysql://localhost/midproject?useLegacyDatetimeCode=false&serverTimezone=Israel","root",mySQLpassword);
 	        System.out.println("SQL connection succeed");
 	        return true;
 	 	} catch (SQLException ex) 
@@ -466,6 +461,9 @@ public class ServerConnSQL{
            		order.setShippingMethod(ShippingMethods.valueOf(rs1.getString(4)));
            		order.setOrderDate(rs1.getTimestamp(5));
            		order.setShippingDate(rs1.getTimestamp(6));
+           		
+           		System.out.println(rs1.getTimestamp(5).toString() + " | " + rs1.getTimestamp(6).toString());
+           		
            		order.setBranchName(rs1.getString(7));
            		order.setGreetingCard(rs1.getString(8));
            		order.setTotalPrice(rs1.getInt(9));
@@ -487,9 +485,9 @@ public class ServerConnSQL{
            		itemList = new ArrayList<>();
            		while(rs2.next()) {
            			itemInList = new ItemInList();
-           			itemInList.setItem_name(rs2.getString(1));
-           			itemInList.setCatalog_type(CatalogType.valueOf((rs2.getString(2))));
-           			itemInList.setItem_type(ItemType.valueOf(rs2.getString(3)));
+           			itemInList.setItemName(rs2.getString(1));
+           			itemInList.setCatalogType(CatalogType.valueOf((rs2.getString(2))));
+           			itemInList.setItemType(ItemType.valueOf(rs2.getString(3)));
            			itemInList.setPrice(rs2.getInt(4));
            			itemInList.setQuantity(rs2.getInt(5));
            			itemList.add(itemInList);

@@ -3,6 +3,7 @@ package Entities;
 import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Formatter;
@@ -144,29 +145,30 @@ public class Order implements Serializable {
 	}
 	
 	public String getOrder_date() {
-		return DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm").
-				format(GenericUtilties.Convert_LocalDate_To_SQLDate(orderDate));
+		return DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss").format(GenericUtilties.Convert_LocalDate_To_SQLDate(orderDate));
 	}
 	public void setOrder_date(String order_date) {
 		this.order_date = order_date;
 	}
+	
 	public String getShipping_date() {
-		return DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm").
-				format(GenericUtilties.Convert_LocalDate_To_SQLDate(shippingDate));
-	}
+		return DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss").format(GenericUtilties.Convert_LocalDate_To_SQLDate(shippingDate));
+		
+	}	
+	
 	public void setShipping_date(String shipping_date) {
 		this.shipping_date = shipping_date;
 	}
-	
 	
 	public String getPayment_method() {
 		switch(getPaymentMethod()){
 		case credit_card:  return "Credit card";
 		case zerli_coins:  return "Zerli coins";
 		default: break;
+		}
+		return null;
 	}
-	return null;
-	}
+	
 	public void setPayment_method(String payment_method) {
 		this.payment_method = payment_method;
 	}
@@ -185,9 +187,9 @@ public class Order implements Serializable {
 		switch(getStatus()){
 		case pending_confirm:  return "Pending confirm";
 		case pending_cancel:  return "Pending cancel";
-		case confirmed: return "Confirm";
-		case canceled:return  "Cancel" ;
-		case completed:return "Complete";
+		case confirmed: return "Confirmed";
+		case canceled:return  "Canceled" ;
+		case completed:return "Completed";
 		default: break;
 	}
 	return null;

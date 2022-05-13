@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import Entities.ItemInList;
 import ProtocolHandler.RequestType;
 import client.ClientApp;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -58,7 +60,7 @@ public class CustomerFrameController implements IContainable{
     private Label bellRedCricleLable;
     
     void init(){
-    	nameLabel.setText(ClientApp.UserID.toString());
+    	nameLabel.setText(ClientApp.UserID.toString());	
     }
 
     @FXML

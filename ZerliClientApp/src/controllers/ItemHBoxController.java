@@ -48,7 +48,8 @@ public class ItemHBoxController extends HBox {
     	
     	ItemInList newItem = new ItemInList(id, Integer.parseInt(quntityLabel.getText()));
     	ClientApp.ProtocolHandler.Invoke(RequestType.AddToCart, newItem, null, false);
-    	counter = 0;
+    	
+		counter = 0;
     	quntityLabel.setText("0");
     }
     

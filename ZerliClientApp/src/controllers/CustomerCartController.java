@@ -52,7 +52,9 @@ public class CustomerCartController implements UserControl {
 				continue;
 			}
 			CartItemHboxController cartItemHboxController=loader.getController();
-			cartItemHboxController.init(totalCostLabel,Vbox,itemInlist.getJXImage(),itemInlist.getItem_id(),itemInlist.getItem_name(),itemInlist.getItem_type(),itemInlist.getCatalog_type(),itemInlist.getQuantity(),itemInlist.getPrice());
+			cartItemHboxController.init(totalCostLabel,Vbox,itemInlist.getJXImage(),itemInlist.getItem_id(),
+					itemInlist.getItemName(),itemInlist.getItem_type(),itemInlist.getCatalog_Type(),
+					itemInlist.getQuantity(),itemInlist.getPrice());
 			Vbox.getChildren().add(root);
 		}
 		ArrayList<ItemInList> items = new ArrayList<ItemInList>();

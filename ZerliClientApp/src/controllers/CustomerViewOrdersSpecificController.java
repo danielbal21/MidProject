@@ -1,6 +1,7 @@
 package controllers;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import Entities.CatalogType;
 import Entities.ItemInList;
@@ -14,6 +15,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class CustomerViewOrdersSpecificController implements UserControl{
@@ -75,9 +78,6 @@ public class CustomerViewOrdersSpecificController implements UserControl{
     private Label statusOrder;
     
     @FXML
-    private Label linkWord;
-
-    @FXML
     void backPressed(ActionEvent event) {
     	LoginController.windowControl.setUserControl("/gui/usercontrols/CustomerViewOrders.fxml");
 
@@ -85,7 +85,23 @@ public class CustomerViewOrdersSpecificController implements UserControl{
     
     @FXML
     void cancelOrderPressed(ActionEvent event) {
-
+    	Alert confirmAlert = new Alert(AlertType.NONE);
+		confirmAlert.setTitle("Cancel Order!");
+		confirmAlert.setContentText("Aa=re you sure you want cancel the order?");
+		ButtonType yes = new ButtonType("Yes", ButtonData.YES);
+		ButtonType no = new ButtonType("No",ButtonData.NO);
+		confirmAlert.getDialogPane().getButtonTypes().add(yes);
+		confirmAlert.getDialogPane().getButtonTypes().add(no);
+		Optional<ButtonType> result = confirmAlert.showAndWait();
+		result.ifPresent(response -> { 
+			if(response == yes) {
+				//invoke()
+				statusOrder.setText("Pending cancel");
+				confirmAlert.close();
+				cancelOrder.setVisible(false);
+			}
+			confirmAlert.close();
+		});
     }
 
 	@Override
@@ -93,8 +109,8 @@ public class CustomerViewOrdersSpecificController implements UserControl{
 		order = (Order) LoginController.windowControl.peekPipe("chosenOrder");
 		itemListView = FXCollections.observableArrayList((ArrayList<ItemInList>)order.getItems());
 		
-		catalogItem.setCellValueFactory(new PropertyValueFactory<>("catalog_type"));
-		nameItem.setCellValueFactory(new PropertyValueFactory<>("item_name"));
+		catalogItem.setCellValueFactory(new PropertyValueFactory<>("catalog_Type"));
+		nameItem.setCellValueFactory(new PropertyValueFactory<>("itemName"));
 		priceItem.setCellValueFactory(new PropertyValueFactory<>("price"));
 		quantityItem.setCellValueFactory(new PropertyValueFactory<>("quantity"));
 		typeItem.setCellValueFactory(new PropertyValueFactory<>("item_type"));
@@ -105,33 +121,27 @@ public class CustomerViewOrdersSpecificController implements UserControl{
 		orderDate.setText(order.getOrder_date());
 		brachName.setText(order.getBranchName());
 		if(order.getShippingMethod()== ShippingMethods.shipping) {
-			shipMethod.setText("Shipping");
-			linkWord.setText("to");
+			shipMethod.setText("Shipping to");
 			fullAddress.setText(order.getAddress()+" "+order.getCity());
 		}
 		else {
-			shipMethod.setText("Pickup");
-			linkWord.setText("at");
+			shipMethod.setText("Pickup at");
 			fullAddress.setText(order.getBranchName()+ " branch");
 		}
-		shippingDate.setText(order.getShipping_date());
+		shippingDate.setText("at " + order.getShipping_date());
 		paymentMethod.setText(order.getPayment_method());
 		greetingCardText.setText(order.getGreetingCard()==null? "No greeting card" : order.getGreetingCard());
 		statusOrder.setText(order.getOrder_status());
 		price.setText(String.valueOf(order.getTotalPrice()));
 		
-		if(order.getStatus() == OrderStatus.completed || order.getStatus() == OrderStatus.canceled) {
+		if(order.getStatus() == OrderStatus.completed || order.getStatus() == OrderStatus.canceled)
 			cancelOrder.setVisible(false);
-		}
-		else {
+		else 
 			cancelOrder.setVisible(true);
-		}
+		
 	}
 
 	@Override
-	public void onExit() {
-		if(itemListView != null)
-			itemListView.clear();
-	}
+	public void onExit() {}
 
 }

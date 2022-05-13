@@ -20,7 +20,7 @@
       </Button>
       <TableView fx:id="ItemTable" layoutX="152.0" layoutY="219.0" prefHeight="192.0" prefWidth="787.0">
         <columns>
-          <TableColumn fx:id="nameItem" prefWidth="200.0" text="name" />
+          <TableColumn fx:id="nameItem" prefWidth="200.0" text="Name" />
             <TableColumn fx:id="catalogItem" prefWidth="200.0" text="Catalog" />
             <TableColumn fx:id="typeItem" prefWidth="200.0" text="Type" />
             <TableColumn fx:id="priceItem" prefWidth="80.79998779296875" text="Price" />
@@ -40,27 +40,17 @@
             <Label layoutX="14.0" layoutY="14.0" styleClass="subLabel" />
             <HBox alignment="CENTER" layoutX="12.0" layoutY="46.0" prefHeight="40.0" prefWidth="918.0">
                <children>
-                  <Label fx:id="shipMethod" contentDisplay="CENTER" styleClass="subLabel" text="Shipping">
+                  <Label fx:id="shipMethod" alignment="CENTER" contentDisplay="CENTER" styleClass="subLabel" text="Shipping to">
                      <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="linkWord" contentDisplay="CENTER" styleClass="subLabel" text="to">
+                  <Label fx:id="fullAddress" alignment="CENTER" contentDisplay="CENTER" styleClass="subLabel" text="Hakerem 20 Akko">
                      <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="fullAddress" contentDisplay="CENTER" styleClass="subLabel" text="Hakerem 20 Akko">
-                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </padding>
-                  </Label>
-                  <Label contentDisplay="CENTER" styleClass="subLabel" text="at">
-                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </padding>
-                  </Label>
-                  <Label fx:id="shippingDate" contentDisplay="CENTER" prefHeight="30.0" prefWidth="221.0" styleClass="subLabel" text="01/01/2000 20:20" />
+                  <Label fx:id="shippingDate" alignment="CENTER" contentDisplay="CENTER" styleClass="subLabel" text="at 01/01/2000 20:20" />
                </children>
             </HBox>
             <HBox alignment="CENTER" layoutX="15.0" layoutY="14.0" prefHeight="30.0" prefWidth="918.0">

@@ -45,7 +45,8 @@ public class CartItemHboxController extends HBox{
     public CartItemHboxController() {
 	super();	
     }
-    public void init (Label totalCost, VBox Vbox ,Image image1 ,int id,String name,ItemType itemType,CatalogType catalogType,int quntity,int price)
+    public void init (Label totalCost, VBox Vbox ,Image image1 ,int id,String name,
+    		String itemType,String catalogType,int quntity,int price)
     {
     	
     	this.totalCost=totalCost;
@@ -55,12 +56,13 @@ public class CartItemHboxController extends HBox{
     	this.quntity=quntity;
     	image.setImage(image1);
     	itemNameLabel.setText(name);
-    	itemTypeLabel.setText(itemType.toString());
-    	catalogTypeLabel.setText(catalogType.toString());
+    	itemTypeLabel.setText(itemType);
+    	catalogTypeLabel.setText(catalogType);
     	quntityLabel.setText(String.valueOf(quntity));
     }
     @FXML
     void DeleteBtnPressed(ActionEvent event) {
+    	
     	Vbox.getChildren().remove(hboxRoot);
     	ClientApp.ProtocolHandler.Invoke(RequestType.DeleteItemFromCart, id, null, false);
     	totalCost.setText(String.valueOf((int)LoginController.windowControl.getPipe("totalCost")-(price*quntity)));
