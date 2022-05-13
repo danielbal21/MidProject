@@ -12,13 +12,12 @@
    <children>
       <TableView fx:id="itemTable" layoutX="156.0" layoutY="204.0" prefHeight="283.0" prefWidth="632.0">
          <columns>
-            <TableColumn fx:id="itemIDColumn" prefWidth="75.0" text="Item ID" />
-            <TableColumn fx:id="itemNameColumn" prefWidth="112.0" text="Item name" />
-            <TableColumn fx:id="catalogColumn" prefWidth="104.0" text="Catalog" />
-            <TableColumn fx:id="typeColumn" prefWidth="96.0" text="Type" />
-            <TableColumn fx:id="colorColumn" prefWidth="88.0" text="Color" />
-            <TableColumn fx:id="priceColumn" prefWidth="78.0" text="Price" />
-            <TableColumn fx:id="quantityColumn" prefWidth="75.0" text="quantity" />
+            <TableColumn fx:id="itemIDColumn" prefWidth="82.0" text="Item ID" />
+            <TableColumn fx:id="itemNameColumn" prefWidth="122.0" text="Item name" />
+            <TableColumn fx:id="catalogColumn" prefWidth="97.0" text="Catalog" />
+            <TableColumn fx:id="typeColumn" prefWidth="113.0" text="Type" />
+            <TableColumn fx:id="priceColumn" prefWidth="83.0" text="Price" />
+            <TableColumn fx:id="quantityColumn" prefWidth="134.0" text="quantity" />
          </columns>
       </TableView>
       <Button layoutX="14.0" layoutY="589.0" mnemonicParsing="false" onAction="#backPressed" text="Back">

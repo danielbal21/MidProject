@@ -3,6 +3,7 @@ package controllers;
 import Entities.CatalogType;
 import Entities.Color;
 import Entities.Item;
+import Entities.ItemInList;
 import Entities.ItemType;
 import Entities.Order;
 import ProtocolHandler.RequestType;
@@ -20,29 +21,27 @@ public class ManagerViewOrderDetailsController implements UserControl{
 
 	private Order order;
 	
-	private ObservableList<Item> observableList;
+	private ObservableList<ItemInList> observableList;
 	
     @FXML
     private AnchorPane activePanelContainer;
 
 
     @FXML
-    private TableView<Item> itemTable;
+    private TableView<ItemInList> itemTable;
     
     @FXML
-    private TableColumn<Item, CatalogType> catalogColumn;
+    private TableColumn<ItemInList, CatalogType> catalogColumn;
 
-    @FXML
-    private TableColumn<Item, Color> colorColumn;
 
     @FXML
     private Label costLabel;
 
     @FXML
-    private TableColumn<Item, Integer> itemIDColumn;
+    private TableColumn<ItemInList, Integer> itemIDColumn;
 
     @FXML
-    private TableColumn<Item, String> itemNameColumn;
+    private TableColumn<ItemInList, String> itemNameColumn;
 
     @FXML
     private Label orderDateLabel;
@@ -54,10 +53,10 @@ public class ManagerViewOrderDetailsController implements UserControl{
     private Label paymentMethodLabel;
 
     @FXML
-    private TableColumn<Item, Integer> priceColumn;
+    private TableColumn<ItemInList, Integer> priceColumn;
 
     @FXML
-    private TableColumn<Item, Integer> quantityColumn;
+    private TableColumn<ItemInList, Integer> quantityColumn;
 
     @FXML
     private Label shippingDateLabel;
@@ -69,7 +68,7 @@ public class ManagerViewOrderDetailsController implements UserControl{
     private Label statusLabel;
 
     @FXML
-    private TableColumn<Item, ItemType> typeColumn;
+    private TableColumn<ItemInList, ItemType> typeColumn;
 
     @FXML
     void approvePressed(ActionEvent event) {
@@ -85,12 +84,11 @@ public class ManagerViewOrderDetailsController implements UserControl{
 	@Override
 	public void onEnter() {
 		order = (Order)LoginController.windowControl.peekPipe("Order select");
-		catalogColumn.setCellValueFactory(new PropertyValueFactory<>("catalogType"));
+		catalogColumn.setCellValueFactory(new PropertyValueFactory<>("catalog_type"));
 		quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
-		itemNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-		itemIDColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-		colorColumn.setCellValueFactory(new PropertyValueFactory<>("color"));
-		typeColumn.setCellValueFactory(new PropertyValueFactory<>("itemType"));
+		itemNameColumn.setCellValueFactory(new PropertyValueFactory<>("item_name"));
+		itemIDColumn.setCellValueFactory(new PropertyValueFactory<>("item_id"));
+		typeColumn.setCellValueFactory(new PropertyValueFactory<>("item_type"));
 		priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
 		orderDateLabel.setText(order.getOrder_date());
 		shippingDateLabel.setText(order.getShipping_date());
@@ -102,7 +100,7 @@ public class ManagerViewOrderDetailsController implements UserControl{
 		
 		ClientApp.ProtocolHandler.Invoke(RequestType.GetItemsOfOrder,  LoginController.windowControl.peekPipe("Order select"), null, true);
 		
-		observableList = (ObservableList<Item>)ClientApp.ProtocolHandler.GetResponse(RequestType.GetItemsOfOrder);
+		observableList = (ObservableList<ItemInList>)ClientApp.ProtocolHandler.GetResponse(RequestType.GetItemsOfOrder);
 		
 		itemTable.setItems(observableList);
 		

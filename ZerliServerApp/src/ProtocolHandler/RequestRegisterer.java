@@ -20,6 +20,12 @@ public class RequestRegisterer {
 		Protocol.RegisterOperation(RequestType.GetNotification,new GetNotificationOperation());
 		Protocol.RegisterOperation(RequestType.UpdateNotification,new UpdateNotificationOperation());
 		
+		Protocol.RegisterOperation(RequestType.GetOrdersByBranch,new GetOrdersByBranchOperation());
+		Protocol.RegisterOperation(RequestType.GetItemsOfOrder,new GetItemsOfOrderOperation());
+		Protocol.RegisterOperation(RequestType.ConfirmOrder,new ConfirmOrderOperation());
+		
+		
+		
 		Protocol.RegisterOperation(RequestType.GetBranches, new GetBranchesOperation());
 		Protocol.RegisterOperation(RequestType.GetUserCurrency, new GetUserCurrencyOperation());
 		Protocol.RegisterOperation(RequestType.UpdateZerliCoins, new UpdateZerliCoinsOperation());

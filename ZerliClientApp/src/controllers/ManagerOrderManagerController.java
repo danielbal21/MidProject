@@ -8,6 +8,8 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import Entities.Order;
+import Entities.PaymentMethods;
+import Entities.ShippingMethods;
 import ProtocolHandler.RequestType;
 import client.ClientApp;
 import javafx.collections.FXCollections;
@@ -96,7 +98,7 @@ public class ManagerOrderManagerController implements UserControl {
 		paymentMethodColumn.setCellValueFactory(new PropertyValueFactory<>("paymentMethod"));
 		priceColumn.setCellValueFactory(new PropertyValueFactory<>("totalPrice"));
 		expectedDateColumn.setCellValueFactory(new PropertyValueFactory<>("shippingDate"));
-		shippingMethodColumn.setCellValueFactory(new PropertyValueFactory<>("shippingtMethod"));
+		shippingMethodColumn.setCellValueFactory(new PropertyValueFactory<>("shippingMethod"));
 		statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
 		userIDColumn.setCellValueFactory(new PropertyValueFactory<>("userID"));
 		
@@ -105,7 +107,6 @@ public class ManagerOrderManagerController implements UserControl {
 		observableList = (ObservableList<Order>)ClientApp.ProtocolHandler.GetResponse(RequestType.GetOrdersByBranch);
 		
 		ordersTable.setItems(observableList);
-		//ordersTable.setEditable(true);
 	
 	}
 
