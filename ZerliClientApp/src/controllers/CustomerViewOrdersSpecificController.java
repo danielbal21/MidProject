@@ -4,13 +4,11 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Optional;
-
 import Entities.CatalogType;
 import Entities.ItemInList;
 import Entities.ItemType;
 import Entities.Order;
 import Entities.OrderStatus;
-import Entities.PaymentMethods;
 import Entities.ShippingMethods;
 import ProtocolHandler.RequestType;
 import client.ClientApp;
@@ -101,10 +99,10 @@ public class CustomerViewOrdersSpecificController implements UserControl{
 		result.ifPresent(response -> { 
 			if(response == yes) {
 				LocalDateTime cancelTime = LocalDateTime.now();
-				LocalDateTime orderTime = Utilities.GenericUtilties.
+				LocalDateTime shippingTime = Utilities.GenericUtilties.
 						Convert_LocalDate_To_SQLDate(order.getShippingDate());
 				
-				long diff = Math.abs(ChronoUnit.MINUTES.between(cancelTime,orderTime));
+				long diff = Math.abs(ChronoUnit.MINUTES.between(cancelTime,shippingTime));
 				int refundZerli=0;
 				int	orderPrice = order.getTotalPrice();
 				if(diff/60 >= 3 && diff%60 >0) {
