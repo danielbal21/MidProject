@@ -32,8 +32,14 @@ public class CustomerCartController implements UserControl {
     private Button nextBtn;
     @FXML
     void NextBtnPressed(ActionEvent event) {
-    	clearScreen();
-    	LoginController.windowControl.setUserControl("/gui/usercontrols/CustomerOrderInformation.fxml");
+    	ClientApp.ProtocolHandler.Invoke(RequestType.GetCart, null, null, true);
+		itemList=(ObservableList<ItemInList>) ClientApp.ProtocolHandler.GetResponse(RequestType.GetCart);
+    	if(itemList.size() == 0) return;
+    	else {
+    		clearScreen();
+        	LoginController.windowControl.setUserControl("/gui/usercontrols/CustomerOrderInformation.fxml");
+    	}
+    	
     }
 	@Override
 	public void onEnter() {

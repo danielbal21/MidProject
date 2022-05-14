@@ -7,8 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
-import javax.imageio.ImageIO;
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.sql.Blob;
 import Entities.*;
@@ -186,9 +184,7 @@ public class ServerConnSQL{
 			 	rs=stmt.executeQuery();
 	            while (rs.next()) {
 	            	Image bufferImage;
-	            	System.out.println("ENTERING LOOP");
 	            	image=rs.getBlob(7);
-	            	System.out.println("GOT BLOB");
 	            	if (image == null)
 	            	{
 	            		stream = getClass().getResourceAsStream("/png/no-image.png");
@@ -362,15 +358,25 @@ public class ServerConnSQL{
            		stmt.setInt(3, item.getQuantity());
            		stmt.executeUpdate();
            	}
+           	
+           	stmt = conn.prepareStatement("DELETE FROM cart_item WHERE "
+           			+ "cart_id = (SELECT cart_id FROM carts Where user_id=?)" );
+			stmt.setString(1, requestee);
+           	stmt.executeUpdate(); 
 
 		} 
 		catch (SQLException e1) {
     		Server.Log("Database", "Executing InsertOrder: FAILED");
 			e1.printStackTrace();
 		}
+		
+		
+		
+		
+		
+		
 	}
 	public String GetManagerBranch(String managerID) {
-		// TODO Auto-generated method stub
 		PreparedStatement stmt = null; 
 		ResultSet rs;
 		try {
@@ -395,12 +401,10 @@ public class ServerConnSQL{
 	}
 
 	public void GetOrdersByBranch(ArrayList<Order> orders, String data) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	public void GetOrdersByUsername(ArrayList<Order> orders, String requestee) {
-		// TODO Auto-generated method stub
 		
 	}
 	
@@ -461,9 +465,6 @@ public class ServerConnSQL{
            		order.setShippingMethod(ShippingMethods.valueOf(rs1.getString(4)));
            		order.setOrderDate(rs1.getTimestamp(5));
            		order.setShippingDate(rs1.getTimestamp(6));
-           		
-           		System.out.println(rs1.getTimestamp(5).toString() + " | " + rs1.getTimestamp(6).toString());
-           		
            		order.setBranchName(rs1.getString(7));
            		order.setGreetingCard(rs1.getString(8));
            		order.setTotalPrice(rs1.getInt(9));
@@ -507,17 +508,14 @@ public class ServerConnSQL{
 	}
 
 	public void getCartItems(ArrayList<Item> cartItems) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	public void GetItemsOfOrder(ArrayList<Item> items, Integer valueOf) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	public void ConfirmOrder(String valueOf) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -582,4 +580,38 @@ public class ServerConnSQL{
 		}
 		
 	}
+
+	public void cancelOrder(Integer refundZerli, Integer orderID) {
+		PreparedStatement stmt = null;
+		try {
+			stmt = conn.prepareStatement("UPDATE orders SET status = ?,"
+					+ "refund_zerli = ? WHERE order_id = ? " );
+			stmt.setString(1,OrderStatus.pending_cancel.toString());
+			stmt.setInt(2,refundZerli);
+			stmt.setInt(3,orderID);
+           	stmt.executeUpdate(); 
+			}
+		catch (SQLException e1) {
+            System.err.println("Failed on cancelOrder()");
+			e1.printStackTrace();
+		}
+	}
+
+	public void resetNewCustomer(String user_id) {
+		PreparedStatement stmt = null;
+		try {
+			stmt = conn.prepareStatement
+					("UPDATE customer_details "
+					+ "SET new_customer = 0 "
+					+ "WHERE user_id = ?");
+			stmt.setString(1,user_id);
+           	stmt.executeUpdate(); 
+			}
+		catch (SQLException e1) {
+            System.err.println("Failed on resetNewCustomer()");
+			e1.printStackTrace();
+		}
+		System.out.println("RESET new customer for "+user_id);
+	} 
+		
 }

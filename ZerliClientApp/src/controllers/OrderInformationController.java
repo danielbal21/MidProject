@@ -166,7 +166,7 @@ public class OrderInformationController implements UserControl {
     		LoginController.windowControl.putPipe("isShipping", false);
     		order.setAddress(null);
     		order.setCity(null);
-        	order.setShippingDate(null);
+        	order.setShippingDate(Utilities.GenericUtilties.Convert_LocalDate_To_SQLDate(arrivalDate.getValue(),time));
     	}
     	if(useGreeting.isSelected())
     		order.setGreetingCard(greetingText.getText());
@@ -226,6 +226,10 @@ public class OrderInformationController implements UserControl {
 	}
 	@Override
 	public void onEnter() {
+		if(LoginController.windowControl.getPipe("OrderCompleted")!=null) {
+			clearAll();
+		}
+		
 		arrivalDate.setDayCellFactory(picker -> new DateCell() {
 			public void updateItem(LocalDate date, boolean empty) {
 				super.updateItem(date, empty);
@@ -268,9 +272,9 @@ public class OrderInformationController implements UserControl {
 					{
 						cityText.setDisable(true);
 						streetAddressText.setDisable(true);
-						arrivalDate.setDisable(true);
-						hourSlider.setDisable(true);
-						minutesSlider.setDisable(true);
+						arrivalDate.setDisable(false);
+						hourSlider.setDisable(false);
+						minutesSlider.setDisable(false);
 					}
 					else
 					{

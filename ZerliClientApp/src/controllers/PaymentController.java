@@ -3,7 +3,6 @@ package controllers;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Optional;
-
 import Entities.Order;
 import Entities.OrderStatus;
 import Entities.PaymentMethods;
@@ -13,7 +12,6 @@ import client.ClientApp;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -135,6 +133,11 @@ public class PaymentController implements UserControl {
     	currentOrder.setStatus(OrderStatus.pending_confirm);
     	ClientApp.ProtocolHandler.Invoke(RequestType.InsertOrder, currentOrder, null, false);
     	LoginController.windowControl.setUserControl("/gui/usercontrols/CustomerOutroViewWindow.fxml");
+    	if(payDetails.newUser) 
+    		ClientApp.ProtocolHandler.Invoke(RequestType.ResetNewCustomer,null, null, false);
+
+    	clearAll();
+    	LoginController.windowControl.putPipe("OrderCompleted",true);
     }
     
     public boolean validateInput()
@@ -295,7 +298,6 @@ public class PaymentController implements UserControl {
 	}
 	private void clearAll() {
 		save = false;
-		
 	}
 
 }

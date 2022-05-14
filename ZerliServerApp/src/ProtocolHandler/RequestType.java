@@ -21,4 +21,6 @@ public enum RequestType {
 	DeleteItemFromCart,
 	GetNotification,
 	UpdateNotification,
+	CancelOrder,
+	ResetNewCustomer,
 }

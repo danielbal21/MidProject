@@ -1,5 +1,7 @@
 package controllers;
 
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -10,6 +12,8 @@ import Entities.Order;
 import Entities.OrderStatus;
 import Entities.PaymentMethods;
 import Entities.ShippingMethods;
+import ProtocolHandler.RequestType;
+import client.ClientApp;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -23,6 +27,8 @@ public class CustomerViewOrdersSpecificController implements UserControl{
 	
 	ObservableList<ItemInList> itemListView =
 			FXCollections.observableArrayList(new ArrayList<ItemInList>());
+	    
+	private Order order;
 	
     @FXML
     private TableView<ItemInList> ItemTable;
@@ -41,8 +47,7 @@ public class CustomerViewOrdersSpecificController implements UserControl{
     
     @FXML
     private TableColumn<ItemInList, ItemType> typeItem;
-    
-	private Order order;
+
 	
     @FXML
     private Label brachName;
@@ -87,7 +92,7 @@ public class CustomerViewOrdersSpecificController implements UserControl{
     void cancelOrderPressed(ActionEvent event) {
     	Alert confirmAlert = new Alert(AlertType.NONE);
 		confirmAlert.setTitle("Cancel Order!");
-		confirmAlert.setContentText("Aa=re you sure you want cancel the order?");
+		confirmAlert.setContentText("Are you sure you want cancel the order?");
 		ButtonType yes = new ButtonType("Yes", ButtonData.YES);
 		ButtonType no = new ButtonType("No",ButtonData.NO);
 		confirmAlert.getDialogPane().getButtonTypes().add(yes);
@@ -95,7 +100,24 @@ public class CustomerViewOrdersSpecificController implements UserControl{
 		Optional<ButtonType> result = confirmAlert.showAndWait();
 		result.ifPresent(response -> { 
 			if(response == yes) {
-				//invoke()
+				LocalDateTime cancelTime = LocalDateTime.now();
+				LocalDateTime orderTime = Utilities.GenericUtilties.
+						Convert_LocalDate_To_SQLDate(order.getShippingDate());
+				
+				long diff = Math.abs(ChronoUnit.MINUTES.between(cancelTime,orderTime));
+				int refundZerli=0;
+				int	orderPrice = order.getTotalPrice();
+				if(diff/60 >= 3 && diff%60 >0) {
+					refundZerli=orderPrice;
+				}
+				else if(diff/60 >= 1 && diff/60 <= 3 && diff%60 >0 ) {
+					refundZerli=(int)(0.5*orderPrice);
+				}
+				else {
+					refundZerli=0;
+				}
+				
+				ClientApp.ProtocolHandler.Invoke(RequestType.CancelOrder, refundZerli ,Integer.parseInt(order.getOrderID()), false);
 				statusOrder.setText("Pending cancel");
 				confirmAlert.close();
 				cancelOrder.setVisible(false);
@@ -134,7 +156,9 @@ public class CustomerViewOrdersSpecificController implements UserControl{
 		statusOrder.setText(order.getOrder_status());
 		price.setText(String.valueOf(order.getTotalPrice()));
 		
-		if(order.getStatus() == OrderStatus.completed || order.getStatus() == OrderStatus.canceled)
+		if(order.getStatus() == OrderStatus.completed || 
+				order.getStatus() == OrderStatus.canceled ||
+				order.getStatus() == OrderStatus.pending_cancel)
 			cancelOrder.setVisible(false);
 		else 
 			cancelOrder.setVisible(true);
