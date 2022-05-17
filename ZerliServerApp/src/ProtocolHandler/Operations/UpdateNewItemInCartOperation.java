@@ -3,22 +3,25 @@ package ProtocolHandler.Operations;
 import ProtocolHandler.IOperation;
 import ProtocolHandler.ResponseWrapper;
 import server.Server;
+import Entities.*;
 
-public class CancelOrderOperation implements IOperation{
+public class UpdateNewItemInCartOperation implements IOperation {
 
 	@Override
 	public boolean Perform(String requestee, Object data, Object params) {
-		if(data instanceof Integer && params instanceof Integer ) {
-			Server.SqlServerManager.cancelOrder((Integer)data,(Integer)params);
+		if(data instanceof NewItem)
+		{
+			NewItem newItem= (NewItem)data;
+			Server.SqlServerManager.UpdateNewItemInCart(requestee,newItem);
 			return true;
 		}
-		else return false;
+		return false;
 	}
 
 	@Override
 	public boolean Perform(String requestee, Object data, Object params, ResponseWrapper response) {
+		// TODO Auto-generated method stub
 		return false;
 	}
 
 }
-

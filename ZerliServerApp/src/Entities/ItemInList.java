@@ -130,6 +130,7 @@ public class ItemInList implements Serializable{
 		switch (catalogType) {
 			case custom:return "Custom";
 			case pre_define:return "Pre define";
+			case new_item: return "New item";
 		}
 		return "";
 	}
@@ -140,10 +141,9 @@ public class ItemInList implements Serializable{
 
 	@Override
 	public String toString() {
-		return "ItemInList [quantity=" + quantity + ", price=" + price + ", itemName=" + itemName + ", itemType="
-				+ itemType + ", catalogType=" + catalogType + "]";
+		return "ItemInList [item_id=" + item_id + ", quantity=" + quantity + ", price=" + price + ", itemName="
+				+ itemName + ", item_type=" + item_type + ", catalog_Type=" + catalog_Type + "]";
 	}
-
 
 	public Image getJXImage() {
 		return new Image(new ByteArrayInputStream(image));

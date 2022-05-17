@@ -22,7 +22,7 @@
       </Label>
       <ImageView fitHeight="52.0" fitWidth="52.0" layoutX="180.0" layoutY="98.0" onMousePressed="#MinusBtnPressed" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../png/minusBtn%20(2).png" />
+            <Image url="@../../png/minusBtn.png" />
          </image>
          <styleClass>
             <String fx:value="imageasbtn" />
@@ -36,7 +36,7 @@
       </Label>
       <ImageView fx:id="plusBtn" fitHeight="52.0" fitWidth="52.0" layoutX="291.0" layoutY="98.0" onMousePressed="#PlusBtnPressed" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../png/plusBtn%20(1).png" />
+            <Image url="@../../png/plusBtn.png" />
          </image>
          <styleClass>
             <String fx:value="pressbtn" />

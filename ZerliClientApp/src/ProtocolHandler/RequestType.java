@@ -24,4 +24,8 @@ public enum RequestType {
 	EndOrder,
 	CancelOrder,
 	ResetNewCustomer,
+	UpdateNewItemInCart, 
+	DeleteItemFromNewItemList, 
+	DeleteNewItemFromCart, 
+	DeleteAllnewItemFromCart,
 }

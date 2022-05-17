@@ -51,12 +51,12 @@
             <VBox fx:id="Vbox" prefHeight="389.0" prefWidth="909.0" spacing="5.0" />
          </content>
       </ScrollPane>
-      <Label layoutX="348.0" layoutY="552.0" prefHeight="50.0" prefWidth="150.0" styleClass="subLabel" text="Total Cost :">
+      <Label fx:id="TotalCostText" layoutX="348.0" layoutY="552.0" prefHeight="50.0" prefWidth="150.0" styleClass="subLabel" text="Total Cost :">
          <font>
             <Font name="Maiandra GD" size="28.0" />
          </font>
       </Label>
-      <Label fx:id="totalCostLabel" layoutX="487.0" layoutY="553.0" prefHeight="50.0" prefWidth="77.0" styleClass="subLabel" text="400 ₪">
+      <Label fx:id="totalCostLabel" layoutX="487.0" layoutY="553.0" prefHeight="50.0" prefWidth="77.0" styleClass="subLabel">
          <font>
             <Font name="Maiandra GD" size="28.0" />
          </font>
@@ -71,5 +71,10 @@
          </font>
       </Button>
       <ProgressBar layoutX="214.0" layoutY="600.0" prefHeight="50.0" prefWidth="517.0" progress="0.03" />
+      <Label fx:id="CartEmpyLabel" alignment="CENTER" layoutX="209.0" layoutY="187.0" prefHeight="101.0" prefWidth="554.0" styleClass="MainLabel" text="Cart is empty" textFill="RED">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

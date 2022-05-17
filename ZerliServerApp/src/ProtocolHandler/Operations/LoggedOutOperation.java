@@ -9,7 +9,6 @@ public class LoggedOutOperation implements IOperation{
 	@Override
 	public boolean Perform(String requestee, Object data, Object params) {
 		Server.SqlServerManager.LoggedOut(requestee);
-		System.out.println("logOut: " + requestee);
 		return true;
 	}
 

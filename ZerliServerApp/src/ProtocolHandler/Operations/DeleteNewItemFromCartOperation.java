@@ -2,17 +2,17 @@ package ProtocolHandler.Operations;
 
 import ProtocolHandler.IOperation;
 import ProtocolHandler.ResponseWrapper;
-import server.Server;
 
-public class CancelOrderOperation implements IOperation{
+public class DeleteNewItemFromCartOperation implements IOperation {
 
 	@Override
 	public boolean Perform(String requestee, Object data, Object params) {
-		if(data instanceof Integer && params instanceof Integer ) {
-			Server.SqlServerManager.cancelOrder((Integer)data,(Integer)params);
+		if (data instanceof Integer)
+		{
+			server.Server.SqlServerManager.DeleteNewItemFromCart(requestee,(int)data);
 			return true;
 		}
-		else return false;
+		return false;
 	}
 
 	@Override
@@ -21,4 +21,3 @@ public class CancelOrderOperation implements IOperation{
 	}
 
 }
-

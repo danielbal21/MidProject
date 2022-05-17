@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="250.0" prefWidth="217.0" style="-fx-background-color: E5E5E5;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.StartSQLPassswordConfigController">
+<AnchorPane fx:id="AncorePane" onKeyPressed="#EnterPressed" prefHeight="250.0" prefWidth="217.0" style="-fx-background-color: E5E5E5;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.StartSQLPassswordConfigController">
    <children>
       <ImageView fitHeight="277.0" fitWidth="374.0" pickOnBounds="true" preserveRatio="true">
          <image>

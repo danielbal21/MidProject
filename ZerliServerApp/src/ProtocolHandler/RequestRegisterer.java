@@ -29,6 +29,9 @@ public class RequestRegisterer {
 		Protocol.RegisterOperation(RequestType.EndOrder,new EndOrderOperation());
 		Protocol.RegisterOperation(RequestType.CancelOrder, new CancelOrderOperation());
 		Protocol.RegisterOperation(RequestType.ResetNewCustomer, new ResetNewCustomerOperation());
-		
+		Protocol.RegisterOperation(RequestType.UpdateNewItemInCart, new UpdateNewItemInCartOperation());
+		Protocol.RegisterOperation(RequestType.DeleteItemFromNewItemList, new DeleteItemFromNewItemListOperation());
+		Protocol.RegisterOperation(RequestType.DeleteNewItemFromCart, new DeleteNewItemFromCartOperation());
+		Protocol.RegisterOperation(RequestType.DeleteAllnewItemFromCart, new DeleteAllnewItemFromCartOperation());	
 	}
 }

@@ -22,7 +22,6 @@ public class AuthenticationOperation implements IOperation {
 			Object[] loginDetails = Server.SqlServerManager.Authenticate(creds[0],creds[1]);
 			
 			response.SetResponse(loginDetails);
-			System.out.println("sent: loginDetails " );
 			return true;
 		}
 		else

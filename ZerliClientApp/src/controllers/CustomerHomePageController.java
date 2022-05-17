@@ -30,6 +30,7 @@ public class CustomerHomePageController implements UserControl{
     	LoginController.windowControl.setUserControl("/gui/usercontrols/CustomerCatalogViewer.fxml");
     }
     
+    
 
     @FXML
     void privatePressed(ActionEvent event) {

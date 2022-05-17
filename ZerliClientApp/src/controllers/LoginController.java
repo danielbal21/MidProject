@@ -75,7 +75,7 @@ public class LoginController {
     			Roles role =(Roles)loginDetails[2];
     			FXMLLoader loader = new FXMLLoader();
     	    	Parent root = null;
-    	    	ClientApp.UserID = userNameText.getText();
+    	    	ClientApp.UserID =userNameText.getText();
     	    	if(role == Roles.customer)
     	    	{
         			windowControl.stage.close();

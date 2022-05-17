@@ -70,21 +70,21 @@
                   <String fx:value="pressbtn" />
                </styleClass>
             </ImageView>
-            <ImageView fitHeight="50.0" fitWidth="60.0" layoutX="917.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="bellRedCircleImage" fitHeight="50.0" fitWidth="60.0" layoutX="917.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../png/icons8-red-circle-48.png" />
+                  <Image url="@../../png/redCircle.png" />
                </image>
             </ImageView>
             <Label fx:id="bellRedCricleLable" alignment="CENTER" contentDisplay="CENTER" layoutX="928.0" layoutY="53.0" prefHeight="30.0" prefWidth="28.0" styleClass="NotificationLabel" text="2" textFill="WHITE">
                <font>
                   <Font size="19.0" />
                </font></Label>
-            <ImageView fitHeight="50.0" fitWidth="60.0" layoutX="161.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="cartRedCircleImage" fitHeight="50.0" fitWidth="60.0" layoutX="161.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
-                  <Image url="@../../png/icons8-red-circle-48.png" />
+                  <Image url="@../../png/redCircle.png" />
                </image>
             </ImageView>
-            <Label fx:id="cartRedCricleLable" alignment="CENTER" contentDisplay="CENTER" layoutX="172.0" layoutY="20.0" prefHeight="30.0" prefWidth="28.0" styleClass="NotificationLabel" text="2" textFill="WHITE">
+            <Label fx:id="cartRedCricleLable" alignment="CENTER" contentDisplay="CENTER" layoutX="172.0" layoutY="20.0" prefHeight="30.0" prefWidth="28.0" styleClass="NotificationLabel" text="0" textFill="WHITE" visible="false">
                <font>
                   <Font size="19.0" />
                </font>

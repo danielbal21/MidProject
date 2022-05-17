@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import Entities.ItemInList;
+import Entities.NewItem;
 import ProtocolHandler.RequestType;
 import client.ClientApp;
 import javafx.collections.ObservableList;
@@ -21,7 +22,13 @@ public class CustomerCartController implements UserControl {
 	private int totalCost=0;
     @FXML
     private VBox Vbox;
+    
+    @FXML
+    private Label TotalCostText;
 
+    @FXML
+    private Label CartEmpyLabel;
+    
     @FXML
     private Label totalCostLabel;
     
@@ -32,35 +39,59 @@ public class CustomerCartController implements UserControl {
     private Button nextBtn;
     @FXML
     void NextBtnPressed(ActionEvent event) {
-    	ClientApp.ProtocolHandler.Invoke(RequestType.GetCart, null, null, true);
-		itemList=(ObservableList<ItemInList>) ClientApp.ProtocolHandler.GetResponse(RequestType.GetCart);
-    	if(itemList.size() == 0) return;
-    	else {
-    		clearScreen();
-        	LoginController.windowControl.setUserControl("/gui/usercontrols/CustomerOrderInformation.fxml");
-    	}
-    	
+    	clearScreen();
+    	LoginController.windowControl.setUserControl("/gui/usercontrols/CustomerOrderInformation.fxml");
     }
 	@Override
 	public void onEnter() {
+		CartEmpyLabel.setVisible(false);
+		totalCostLabel.setVisible(true);
+		TotalCostText.setVisible(true);
 		ClientApp.ProtocolHandler.Invoke(RequestType.GetCart, null, null, true);
-		itemList=(ObservableList<ItemInList>) ClientApp.ProtocolHandler.GetResponse(RequestType.GetCart);
+		itemList=(ObservableList<ItemInList>)ClientApp.ProtocolHandler.GetResponse(RequestType.GetCart);
 		clearScreen();
+		if(itemList.size()==0)
+		{
+			clearScreen();
+			CartEmpyLabel.setVisible(true);
+			totalCostLabel.setVisible(false);
+			TotalCostText.setVisible(false);
+			return;
+		}
 		for (ItemInList itemInlist : itemList) {
-			totalCost+=itemInlist.getPrice()*itemInlist.getQuantity();
 			FXMLLoader loader=new FXMLLoader();
 			HBox root;
-			loader.setLocation(getClass().getResource("/gui/components/CartItemHbox.fxml"));
-			try {
-				root = loader.load();
-			} catch (IOException e) {
-				e.printStackTrace();
-				continue;
+			
+			if(itemInlist instanceof NewItem)
+			{	
+				NewItem newItem= (NewItem)itemInlist;
+				totalCost+=newItem.getPrice()*newItem.getQuantity();
+				loader.setLocation(getClass().getResource("/gui/components/CartNewItemHbox.fxml"));
+				try {
+					root = loader.load();
+				} catch (IOException e) {
+					e.printStackTrace();
+					continue;
+				}
+				CartNewItemController cartNewItemController =loader.getController();
+				cartNewItemController.init(totalCostLabel,Vbox,newItem.getJXImage(),
+						newItem.getItem_id(),newItem.getItemName(),newItem.getQuantity(),
+						newItem.getPrice(),newItem);
 			}
-			CartItemHboxController cartItemHboxController=loader.getController();
-			cartItemHboxController.init(totalCostLabel,Vbox,itemInlist.getJXImage(),itemInlist.getItem_id(),
-					itemInlist.getItemName(),itemInlist.getItem_type(),itemInlist.getCatalog_Type(),
-					itemInlist.getQuantity(),itemInlist.getPrice());
+			else {
+				totalCost+=itemInlist.getPrice()*itemInlist.getQuantity();
+				loader.setLocation(getClass().getResource("/gui/components/CartItemHbox.fxml"));
+				try {
+					root = loader.load();
+				} catch (IOException e) {
+					e.printStackTrace();
+					continue;
+				}
+				CartItemHboxController cartItemHboxController=loader.getController();
+				cartItemHboxController.init(totalCostLabel,Vbox,itemInlist.getJXImage(),itemInlist.getItem_id(),
+						itemInlist.getItemName(),itemInlist.getItemType(),itemInlist.getCatalogType(),itemInlist.getQuantity(),itemInlist.getPrice());
+			}
+			
 			Vbox.getChildren().add(root);
 		}
 		ArrayList<ItemInList> items = new ArrayList<ItemInList>();

@@ -70,5 +70,10 @@
             <String fx:value="pressbtn" />
          </styleClass>
       </Button>
+      <Label fx:id="noItemErrorLabel" layoutX="668.0" layoutY="614.0" text="**Add at least one item" textFill="RED">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

@@ -2,23 +2,23 @@ package ProtocolHandler.Operations;
 
 import ProtocolHandler.IOperation;
 import ProtocolHandler.ResponseWrapper;
-import server.Server;
 
-public class CancelOrderOperation implements IOperation{
+public class DeleteAllnewItemFromCartOperation implements IOperation{
 
 	@Override
 	public boolean Perform(String requestee, Object data, Object params) {
-		if(data instanceof Integer && params instanceof Integer ) {
-			Server.SqlServerManager.cancelOrder((Integer)data,(Integer)params);
-			return true;
-		}
-		else return false;
+		return false;
 	}
 
 	@Override
 	public boolean Perform(String requestee, Object data, Object params, ResponseWrapper response) {
+		if (data instanceof Integer)
+		{
+		server.Server.SqlServerManager.DeleteAllnewItemFromCart(requestee,(int)data);
+		response.SetResponse(true);
+		return true;
+		}
 		return false;
 	}
 
 }
-

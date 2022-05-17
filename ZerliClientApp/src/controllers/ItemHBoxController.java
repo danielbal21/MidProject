@@ -38,7 +38,6 @@ public class ItemHBoxController extends HBox {
     @FXML
     private Label quntityLabel;
     
-    
     public ItemHBoxController() {
     	super();
 	}
@@ -46,8 +45,8 @@ public class ItemHBoxController extends HBox {
     @FXML
     void AddToCart(ActionEvent event) {
     	if(Integer.parseInt(quntityLabel.getText()) == 0) return;
-    	
-    	if(LoginController.windowControl.peekPipe("catalog") == CatalogType.new_item) {
+    	if(LoginController.windowControl.peekPipe("catalog") == CatalogType.new_item) 
+    	{
     		NewItem myItem = (NewItem) LoginController.windowControl.peekPipe("newItem");
     		
     		if( myItem == null){
@@ -55,16 +54,32 @@ public class ItemHBoxController extends HBox {
     		}
     		
     		ItemInList item = new ItemInList(id, Integer.parseInt(quntityLabel.getText()));
+    		item.setPrice(Integer.parseInt(CostLabel.getText().substring(0,CostLabel.getText().indexOf(' '))));
 			myItem.addItem(item);
 			LoginController.windowControl.putPipe("newItem", myItem);
     	}
     	else {
-    		ItemInList newItem = new ItemInList(id, Integer.parseInt(quntityLabel.getText()));
-        	ClientApp.ProtocolHandler.Invoke(RequestType.AddToCart, newItem, null, false);
+    		RedNotificationCircle cartLabelAndImage=(RedNotificationCircle) LoginController.windowControl.getPipe("cartLabel");
+        	int cartNotificationsNumber=cartLabelAndImage.getCartNotificationsNumber();
+        	ItemInList newItem = new ItemInList(id, Integer.parseInt(quntityLabel.getText()));
+        	ClientApp.ProtocolHandler.Invoke(RequestType.AddToCart, newItem, null, true);
+        	cartNotificationsNumber=cartNotificationsNumber+(int)ClientApp.ProtocolHandler.GetResponse(RequestType.AddToCart);
+        	cartLabelAndImage.setCartNotificationsNumber(cartNotificationsNumber);
+        	
+          	Label label;
+        	ImageView image=new ImageView();
+        	label=cartLabelAndImage.getLabel();
+        	image=cartLabelAndImage.getImage();
+        	label.setVisible(true);
+        	image.setVisible(true);
+        	label.setText(String.valueOf(cartNotificationsNumber));
+        	LoginController.windowControl.putPipe("cartLabel", cartLabelAndImage);
+    		
     	}
-    	
-		counter = 0;
+        	
+    	counter = 0;
     	quntityLabel.setText("0");
+
     }
     
     public void init(int id,String name,String costLabel,Image image) 
@@ -72,7 +87,6 @@ public class ItemHBoxController extends HBox {
     	if(LoginController.windowControl.peekPipe("catalog") == CatalogType.new_item) {
     		addToCartBtn.setText("Add to"+"\n"+"private product");
     	}
-
     	this.id=id;
     	CostLabel.setText(costLabel+ " " + Utilities.Constants.SHEKEL);
 		nameLabel.setText(name);
@@ -93,7 +107,6 @@ public class ItemHBoxController extends HBox {
     void PlusBtnPressed(MouseEvent event) {
      	counter++;
     	quntityLabel.setText(String.valueOf(counter));
-    	
     }
 
 }

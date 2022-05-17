@@ -31,7 +31,10 @@ public class HandlersRegisterer {
 		Protocol.RegisterHandler(RequestType.UpdateNotification,null);
 		Protocol.RegisterHandler(RequestType.CancelOrder,null);
 		Protocol.RegisterHandler(RequestType.ResetNewCustomer,null);
-		
+		Protocol.RegisterHandler(RequestType.UpdateNewItemInCart,null);
+		Protocol.RegisterHandler(RequestType.DeleteItemFromNewItemList,null);
+		Protocol.RegisterHandler(RequestType.DeleteNewItemFromCart,null);
+		Protocol.RegisterHandler(RequestType.DeleteAllnewItemFromCart,null);
 		Protocol.RegisterHandler(RequestType.EndOrder,null);
 		
 	}

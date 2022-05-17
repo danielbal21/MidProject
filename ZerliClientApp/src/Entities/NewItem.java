@@ -3,7 +3,6 @@ package Entities;
 import java.util.ArrayList;
 
 public class NewItem extends ItemInList{
-	
 	/* assemble <item_id,quantity> */
 	private ArrayList<ItemInList> assemble;
 	
@@ -55,13 +54,7 @@ public class NewItem extends ItemInList{
 		else {
 			assemble.remove(i);
 		}
-		
 	}
-	
-	public ArrayList<ItemInList> getAssemble() {
-		return assemble;
-	}
-
 	@Override
 	public String toString() {
 		String str = "";
@@ -72,4 +65,12 @@ public class NewItem extends ItemInList{
 		return str;
 	}
 		
+	public ArrayList<ItemInList> getAssemble() {
+		return assemble;
+	}
+
+	public void setAssemble(ArrayList<ItemInList> assemble) {
+		this.assemble = assemble;
+	}
+
 }

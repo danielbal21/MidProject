@@ -35,6 +35,9 @@ public class CatalogViewerController implements UserControl {
     private Label catalogNameLbl;
     
     @FXML
+    private Label noItemErrorLabel;
+    
+    @FXML
     private Label currentPage;
 
     @FXML
@@ -44,13 +47,30 @@ public class CatalogViewerController implements UserControl {
     @FXML
     private Button nextBtn;
 
-   
+    
     @FXML
     void nextPressed(ActionEvent event) {
-    	System.out.println();
-    	System.out.println("New item\n"+LoginController.windowControl.peekPipe("newItem"));
+    	if(LoginController.windowControl.peekPipe("newItem") == null) 
+    	{
+    		noItemErrorLabel.setVisible(true);
+    		Thread thread =new Thread(new Runnable() {
+				
+				@Override
+				public void run() {
+					try {
+						Thread.sleep(2000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					noItemErrorLabel.setVisible(false);
+				}
+			});
+			thread.start();
+    	return;
+    	}
     	LoginController.windowControl.setUserControl("/gui/usercontrols/NewItemNameAndQuantity.fxml");
-    }
+    	
+    }													
    
     
     @FXML
@@ -81,6 +101,7 @@ public class CatalogViewerController implements UserControl {
     
 	@Override
 	public void onEnter() {	
+		noItemErrorLabel.setVisible(false);
 		catalogType = (CatalogType) LoginController.windowControl.peekPipe("catalog");
 		if(catalogType == CatalogType.new_item) {
 			ClientApp.ProtocolHandler.Invoke(RequestType.GetCatalog, null,CatalogType.pre_define, true);
