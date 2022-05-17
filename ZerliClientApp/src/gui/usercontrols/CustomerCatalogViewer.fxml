@@ -22,6 +22,7 @@
               </columnConstraints>
               <rowConstraints>
                   <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+                  <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
               </rowConstraints>
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -29,7 +30,7 @@
             </GridPane>
          </content>
       </ScrollPane>
-      <Label fx:id="catalogNameLbl" alignment="TOP_RIGHT" contentDisplay="RIGHT" layoutX="73.0" layoutY="14.0" prefHeight="78.0" prefWidth="388.0" styleClass="MainLabel" text="Custom" textAlignment="RIGHT">
+      <Label fx:id="catalogNameLbl" alignment="CENTER" layoutX="12.0" layoutY="14.0" prefHeight="73.0" prefWidth="928.0" styleClass="MainLabel" text="Zerli products" textAlignment="CENTER">
          <font>
             <Font name="Maiandra GD" size="50.0" />
          </font>
@@ -51,11 +52,6 @@
             <Font name="Maiandra GD" size="20.0" />
          </font>
       </Label>
-      <Label layoutX="479.0" layoutY="14.0" prefHeight="78.0" prefWidth="226.0" styleClass="MainLabel" text="Catalog">
-         <font>
-            <Font name="Maiandra GD" size="50.0" />
-         </font>
-      </Label>
       <Button layoutX="8.0" layoutY="597.0" mnemonicParsing="false" onAction="#backPressed" text="Back">
          <styleClass>
             <String fx:value="Left-btn" />
@@ -68,5 +64,11 @@
          </font>
       </Label>
       <Label layoutX="464.0" layoutY="612.0" styleClass="subLabel" text="/" />
+      <Button fx:id="nextBtn" layoutX="862.0" layoutY="597.0" mnemonicParsing="false" onAction="#nextPressed" text="Next">
+         <styleClass>
+            <String fx:value="Next-btn" />
+            <String fx:value="pressbtn" />
+         </styleClass>
+      </Button>
    </children>
 </AnchorPane>

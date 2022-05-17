@@ -48,7 +48,7 @@
       </Label>
       <ScrollPane layoutX="23.0" layoutY="124.0" prefHeight="426.0" prefWidth="912.0">
          <content>
-            <VBox fx:id="Vbox" prefHeight="389.0" prefWidth="909.0" />
+            <VBox fx:id="Vbox" prefHeight="389.0" prefWidth="909.0" spacing="5.0" />
          </content>
       </ScrollPane>
       <Label layoutX="348.0" layoutY="552.0" prefHeight="50.0" prefWidth="150.0" styleClass="subLabel" text="Total Cost :">

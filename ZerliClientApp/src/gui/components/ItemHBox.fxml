@@ -8,19 +8,19 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="260.0" prefWidth="350.0" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ItemHBoxController">
+<AnchorPane prefHeight="227.0" prefWidth="350.0" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ItemHBoxController">
    <children>
-      <Label fx:id="nameLabel" alignment="CENTER" layoutY="1.0" prefHeight="45.0" prefWidth="339.0" styleClass="subLabel" text="Pink Rose">
+      <Label fx:id="nameLabel" alignment="CENTER" layoutX="4.0" layoutY="2.0" prefHeight="45.0" prefWidth="339.0" styleClass="subLabel" text="Pink Rose">
          <font>
             <Font name="Maiandra GD" size="26.0" />
          </font>
       </Label>
-      <Label fx:id="CostLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="171.0" layoutY="69.0" prefHeight="30.0" prefWidth="162.0" styleClass="subLabel" text="Price :  " textAlignment="CENTER">
+      <Label fx:id="CostLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="173.0" layoutY="53.0" prefHeight="30.0" prefWidth="162.0" styleClass="subLabel" text="Price :  " textAlignment="CENTER">
          <font>
             <Font name="Maiandra GD" size="18.0" />
          </font>
       </Label>
-      <ImageView fitHeight="52.0" fitWidth="52.0" layoutX="178.0" layoutY="114.0" onMousePressed="#MinusBtnPressed" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="52.0" fitWidth="52.0" layoutX="180.0" layoutY="98.0" onMousePressed="#MinusBtnPressed" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../png/minusBtn%20(2).png" />
          </image>
@@ -29,12 +29,12 @@
             <String fx:value="pressbtn" />
          </styleClass>
       </ImageView>
-      <Label fx:id="quntityLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="223.0" layoutY="117.0" prefHeight="46.0" prefWidth="71.0" text="99" textAlignment="CENTER">
+      <Label fx:id="quntityLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="225.0" layoutY="101.0" prefHeight="46.0" prefWidth="71.0" text="99" textAlignment="CENTER">
          <font>
             <Font name="Maiandra GD" size="26.0" />
          </font>
       </Label>
-      <ImageView fx:id="plusBtn" fitHeight="52.0" fitWidth="52.0" layoutX="289.0" layoutY="114.0" onMousePressed="#PlusBtnPressed" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="plusBtn" fitHeight="52.0" fitWidth="52.0" layoutX="291.0" layoutY="98.0" onMousePressed="#PlusBtnPressed" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../png/plusBtn%20(1).png" />
          </image>
@@ -43,7 +43,7 @@
             <String fx:value="imageasbtn" />
          </styleClass>
       </ImageView>
-      <Button fx:id="addToCartBtn" alignment="CENTER" layoutX="199.0" layoutY="184.0" mnemonicParsing="false" onAction="#AddToCart" prefHeight="45.0" prefWidth="128.0" stylesheets="@application.css" text="Add to cart">
+      <Button fx:id="addToCartBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="205.0" layoutY="159.0" mnemonicParsing="false" onAction="#AddToCart" stylesheets="@application.css" text="Add to cart" textAlignment="CENTER">
          <font>
             <Font name="Maiandra GD" size="12.0" />
          </font>
@@ -52,6 +52,6 @@
             <String fx:value="pressbtn" />
          </styleClass>
       </Button>
-      <ImageView fx:id="itemImage" fitHeight="213.0" fitWidth="170.0" layoutX="6.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="itemImage" fitHeight="170.0" fitWidth="170.0" layoutX="7.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

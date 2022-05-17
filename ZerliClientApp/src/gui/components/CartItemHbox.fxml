@@ -10,7 +10,7 @@
 
 <HBox fx:id="hboxRoot" alignment="CENTER_LEFT" prefHeight="113.0" prefWidth="893.0" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CartItemHboxController">
    <children>
-      <ImageView fx:id="image" fitHeight="116.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="image" fitHeight="116.0" fitWidth="116.0" pickOnBounds="true" preserveRatio="true">
          <HBox.margin>
             <Insets />
          </HBox.margin></ImageView>
