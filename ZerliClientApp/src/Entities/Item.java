@@ -15,8 +15,9 @@ public class Item implements Serializable {
 	private ItemType itemType;
 	private Color color;
 	private byte[] image;
-	
-	public Item( int id, String name,int price, CatalogType catalogType, ItemType itemType, Color color, byte[] image) {
+	private boolean isOnSale = false;
+	private int salePrice = -1;
+	public Item( int id, String name,int price, CatalogType catalogType, ItemType itemType, Color color, byte[] image,boolean isOnSale, int salePrice) {
 		this.id = id;
 		this.name = name;
 		this.price = price;
@@ -24,6 +25,20 @@ public class Item implements Serializable {
 		this.itemType = itemType;
 		this.color = color;
 		this.image =image;
+		this.salePrice = salePrice;
+		this.isOnSale = isOnSale;
+	}
+	public boolean isOnSale() {
+		return isOnSale;
+	}
+	public void setOnSale(boolean isOnSale) {
+		this.isOnSale = isOnSale;
+	}
+	public int getSalePrice() {
+		return salePrice;
+	}
+	public void setSalePrice(int salePrice) {
+		this.salePrice = salePrice;
 	}
 	public String getName() {
 		return name;
@@ -39,6 +54,10 @@ public class Item implements Serializable {
 	}
 	public int getPrice() {
 		return price;
+	}
+	public int getCurrentPrice()
+	{
+		return isOnSale? salePrice : price;
 	}
 	public void setPrice(int price) {
 		this.price = price;

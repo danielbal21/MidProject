@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+import Entities.CatalogType;
+import Entities.Color;
+import Entities.ItemType;
 import javafx.event.EventHandler;
 import javafx.scene.Parent;
 import javafx.scene.input.MouseEvent;
@@ -61,5 +64,69 @@ public class GenericUtilties {
 	public static LocalDateTime Convert_LocalDate_To_SQLDate(java.sql.Timestamp datetime)
 	{
 		return datetime.toLocalDateTime();
+	}
+	
+	public static String ColorToString(Color color)
+	{
+		switch(color)
+		{	
+			case red:
+				return "Red";
+			case blue:
+				return "Blue";
+			case green:
+				return "Green";
+			case white:
+				return "White";
+			case black:
+				return "Black";
+			case pink:
+				return "Pink";
+			case purple:
+				return "Purple";
+			case orange:
+				return "Orange";
+			case yellow:
+				return "Yellow";
+			case brown:
+				return "Brown";
+			default:
+				return "No Color";
+		}
+	}
+	
+	public static String ItemTypeToString(ItemType itemType)
+	{
+		switch(itemType)
+		{	
+			case bouquet:
+				return "Bouquet";
+			case bridal_bouquet:
+				return "Bridal Bouquet";
+			case pot:
+				return "Pot";
+			case flower:
+				return "Flower";
+			case seed:
+				return "Seed";
+			case branch:
+				return "Branch";
+			case soil:
+				return "Soil";
+			default:
+				return "Undefined: Add To Converter";
+		}
+	}
+	public static String CatalogTypeToString(CatalogType itemType)
+	{
+		switch(itemType)
+		{	
+			case custom:
+				return "Item";
+			case pre_define:
+				return "Product";
+			default:
+				return "Undefined: Add To Converter";
+		}
 	}
 }

@@ -23,13 +23,15 @@ public class HandlersRegisterer {
 		Protocol.RegisterHandler(RequestType.GetManagerBranch, null);
 		Protocol.RegisterHandler(RequestType.GetOrdersByBranch, new ArrayListToObservableHandler());
 		Protocol.RegisterHandler(RequestType.GetItemsOfOrder, new ArrayListToObservableHandler());
-		Protocol.RegisterHandler(RequestType.ConfirmOrder, null);
-		
+		Protocol.RegisterHandler(RequestType.ConfirmOrder, null);	
 		Protocol.RegisterHandler(RequestType.AddToCart, null);
 		Protocol.RegisterHandler(RequestType.GetAllCustomerOrders, new ArrayListToObservableHandler());
 		Protocol.RegisterHandler(RequestType.DeleteItemFromCart, null);
 		Protocol.RegisterHandler(RequestType.GetNotification, new ArrayListToObservableHandler());
 		Protocol.RegisterHandler(RequestType.UpdateNotification,null);
-		
+		Protocol.RegisterHandler(RequestType.GetItemByID, null);
+		Protocol.RegisterHandler(RequestType.RemoveItemByID,null);
+		Protocol.RegisterHandler(RequestType.UpdateItem, null);
+		Protocol.RegisterHandler(RequestType.AddItem, null);
 	}
 }

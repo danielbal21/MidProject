@@ -16,7 +16,9 @@ import javafx.scene.layout.VBox;
 public class ItemHBoxController extends HBox {
 	private int counter=0;
 	private int id;
- 
+    @FXML
+    private Label saleLabel2;
+    
     @FXML
     private Label nameLabel;
     
@@ -52,13 +54,14 @@ public class ItemHBoxController extends HBox {
     	quntityLabel.setText("0");
     }
     
-    public void init(int id,String name,String costLabel,Image image) 
+    public void init(int id,String name,String costLabel,Image image,boolean onSale) 
     {
     	this.id=id;
     	CostLabel.setText(costLabel+ " " + Utilities.Constants.SHEKEL);
 		nameLabel.setText(name);
 		itemImage.setImage(image);
 		quntityLabel.setText("0");
+		saleLabel2.setVisible(onSale);
     }
 
     @FXML

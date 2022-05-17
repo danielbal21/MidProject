@@ -19,10 +19,14 @@ public class RequestRegisterer {
 		Protocol.RegisterOperation(RequestType.DeleteItemFromCart,new DeleteItemFromCartOperation());
 		Protocol.RegisterOperation(RequestType.GetNotification,new GetNotificationOperation());
 		Protocol.RegisterOperation(RequestType.UpdateNotification,new UpdateNotificationOperation());
-		
 		Protocol.RegisterOperation(RequestType.GetBranches, new GetBranchesOperation());
 		Protocol.RegisterOperation(RequestType.GetUserCurrency, new GetUserCurrencyOperation());
 		Protocol.RegisterOperation(RequestType.UpdateZerliCoins, new UpdateZerliCoinsOperation());
 		Protocol.RegisterOperation(RequestType.InsertOrder, new InsertOrderOperation());
+		Protocol.RegisterOperation(RequestType.RemoveItemByID, new RemoveItemOperation());
+		Protocol.RegisterOperation(RequestType.GetItemByID, new GetItemByIDOperation());
+		Protocol.RegisterOperation(RequestType.UpdateItem, new UpdateItemOperation());
+		Protocol.RegisterOperation(RequestType.AddItem, new AddItemOperation());
+		
 	}
 }

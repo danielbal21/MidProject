@@ -3,9 +3,15 @@ package controllers;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.ProgressIndicator;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.util.Duration;
 
 public class WindowControl {
 
@@ -60,5 +66,10 @@ public class WindowControl {
 		frameController.getControlContainer().getChildren().clear();
 		frameController.getControlContainer().getChildren().add(map.get(path));
 		currentControl.onEnter();
+	}
+
+	public void Refresh() {
+		currentControl.onEnter();
+		
 	}
 }

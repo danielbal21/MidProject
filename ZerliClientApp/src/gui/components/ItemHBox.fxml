@@ -15,7 +15,7 @@
             <Font name="Maiandra GD" size="26.0" />
          </font>
       </Label>
-      <Label fx:id="CostLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="171.0" layoutY="69.0" prefHeight="30.0" prefWidth="162.0" styleClass="subLabel" text="Price :  " textAlignment="CENTER">
+      <Label fx:id="CostLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="178.0" layoutY="75.0" prefHeight="30.0" prefWidth="162.0" styleClass="subLabel" text="Price :  " textAlignment="CENTER">
          <font>
             <Font name="Maiandra GD" size="18.0" />
          </font>
@@ -53,5 +53,10 @@
          </styleClass>
       </Button>
       <ImageView fx:id="itemImage" fitHeight="213.0" fitWidth="170.0" layoutX="6.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="saleLabel2" layoutX="3.0" layoutY="42.0" rotate="-48.0" text="SALE!!" textFill="RED">
+         <font>
+            <Font size="35.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
