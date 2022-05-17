@@ -1,7 +1,6 @@
 package server;
 
 import java.io.IOException;
-import controllers.ServerPanelController;
 import controllers.StartSQLPassswordConfigController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +15,39 @@ public class ServerApp extends Application{
 	public static Server server = new Server(DEFAULT_PORT) ;
 	
 	public static void main(String[] args) {
+		/*ReportsGenerator rg = new ReportsGenerator();
+		//rg.createOrderReportHistogram("C:\\Users\\Del0riuM\\Desktop","check","Haifa","03-2022","04-2022");
+		rg.createComplaintReportHistogram("C:\\Users\\Del0riuM\\Desktop","check","Haifa","03-2022","04-2022");
+		Desktop desktop = Desktop.getDesktop();
+		try {
+			desktop.open(new File("C:\\Users\\Del0riuM\\Desktop" + "\\check.pdf"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+//		new Thread(new Runnable() {
+
+//			@Override
+//			public void run() {
+//				try {
+//					rg.createPdf("C:\\Users\\Del0riuM\\Desktop","check");
+//					try {
+//						Thread.sleep(4000);
+//					} catch (InterruptedException e) {
+//						 TODO Auto-generated catch block
+//						e.printStackTrace();
+//					}
+//					Desktop desktop = Desktop.getDesktop();
+//					desktop.open(new File("C:\\Users\\Del0riuM\\Desktop" + "\\check.pdf"));
+//				} catch (IOException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//				
+//			}
+//
+//		}).run();
+ */
         try 
         {
         	server.listen();

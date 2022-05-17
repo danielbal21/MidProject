@@ -9,6 +9,7 @@ import java.sql.Types;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.sql.Blob;
 import Entities.*;
@@ -122,7 +123,7 @@ public class ServerConnSQL {
 	            System.err.println(e.getMessage());
 	        }
 		try {
-			stmt = conn.prepareStatement("SELECT * FROM items WHERE item_id IN  (SELECT item_id FROM Cart_item WHERE cart_id=(SELECT cart_id FROM carts WHERE user_id= ?))");
+			stmt = conn.prepareStatement("SELECT * FROM items WHERE item_id IN  (SELECT item_id FROM Cart_item WHERE cart_id=(SELECT cart_id FROM carts WHERE user_id= ?)) AND isAvailable=1");
 			stmt.setString(1, username);
 		} 
 		catch (SQLException e1) {
@@ -146,8 +147,14 @@ public class ServerConnSQL {
 	            	else {
 	            		stream = image.getBinaryStream();
 	            	}
+	            	/*** take sale price or regular price ***/
+	            	int price;
+	            	if(rs.getInt(8) == 1)
+	            		price = rs.getInt(9);
+	            	else
+	            		price = rs.getInt(3);
 	            	itemInListlist = new ItemInList(stream.readAllBytes(),rs.getInt(1),quantityList.get(i),
-	            			rs.getInt(3), rs.getString(2),ItemType.valueOf(rs.getString(5)),
+	            			price, rs.getString(2),ItemType.valueOf(rs.getString(5)),
 	            			CatalogType.valueOf(rs.getString(4)));
 	            	cartItems.add(itemInListlist);
 	            	i++;          
@@ -190,7 +197,13 @@ public class ServerConnSQL {
             			CatalogType.valueOf(rs2.getString(4)));
             	
             	rs3.next();
-            	price+=rs2.getInt(3)*rs3.getInt(1);
+            	/*** get sale price or regular price ***/
+            	int actual;
+            	if(rs2.getInt(8) == 1)
+            		actual = rs2.getInt(9);
+            	else
+            		actual = rs2.getInt(3);
+            	price+=actual*rs3.getInt(1);
             	itemInListlist.setQuantity(rs3.getInt(1));
             	newItem.addItem(itemInListlist);
 		 		}//while end
@@ -221,12 +234,75 @@ public class ServerConnSQL {
 		 System.out.println("Get Cart Items!");
 		
 	}
+	public void removeItemByID(int id)
+	{
+		Server.Log("Database", "Executing removeItemByID");
+		PreparedStatement stmt;
+		try 
+		{
+			stmt = conn.prepareStatement("UPDATE Items SET isAvailable=0 WHERE item_id=?");
+			stmt.setInt(1, id);
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+    		Server.Log("Database", "Executing RemoveItemByID: FAILED");
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+            System.err.println(e.getStackTrace());
+		}	
+		 System.out.println("Remove Item By ID!");
+	}
+	public Item getItemByID(int id) {
+		Server.Log("Database", "Executing getItemByID");
+		Item item=null;
+		PreparedStatement stmt = null;
+		try {
+			stmt = conn.prepareStatement("SELECT * FROM items where item_id=?");
+			stmt.setInt(1, id);
+			} 
+		catch (SQLException e1) {
+            System.err.println("Failed on createStatement()");
+			e1.printStackTrace();
+		}
+		Blob image;
+		ResultSet rs;
+		InputStream stream;
+		 try {
+	           	rs = stmt.executeQuery();
+	            while (rs.next()) {
+
+	            	//need to change blob to long blob 
+	            	Image bufferImage;
+	            	image=rs.getBlob(7);
+	            	if (image == null)
+	            	{
+	            		stream = getClass().getResourceAsStream("/png/no-image.png");
+	            		//stream =new FileInputStream("/png/no-image.png");
+	            	}
+	            	else {
+	            		stream = image.getBinaryStream();
+		            	//bufferImage = new Image(input);
+	            	}
+	            	
+	            	item = new Item(rs.getInt(1), rs.getString(2), rs.getInt(3),CatalogType.valueOf(rs.getString(4)), 
+	            			ItemType.valueOf(rs.getString(5)), 
+	            			Color.valueOf(rs.getString(6)==null?"non_color":rs.getString(6)),stream.readAllBytes(),rs.getInt(8) == 1? true : false,rs.getInt(9));
+	            	return item;
+	            }
+	        } catch (Exception e) {
+	    		Server.Log("Database", "Executing GetItemByID: FAILED");
+	            System.err.println("Got an exception! ");
+	            System.err.println(e.getMessage());
+	            System.err.println(e.getStackTrace());
+	        }
+		 System.out.println("Get Items By ID!");
+		 return item;
+	}
 
 	public void getCatalogItems(ArrayList<Item> catalogItems, CatalogType catalogType) {
 		Server.Log("Database", "Executing GetCatalogItems");
 		PreparedStatement stmt = null;
 		try {
-			stmt = conn.prepareStatement("SELECT * FROM items where catalog_type=?");
+			stmt = conn.prepareStatement("SELECT * FROM items where catalog_type=? AND isAvailable=1");
 			stmt.setString(1, catalogType.toString());
 		} catch (SQLException e1) {
 			System.err.println("Failed on createStatement()");
@@ -253,7 +329,7 @@ public class ServerConnSQL {
 
 				item = new Item(rs.getInt(1), rs.getString(2), rs.getInt(3), CatalogType.valueOf(rs.getString(4)),
 						ItemType.valueOf(rs.getString(5)),
-						Color.valueOf(rs.getString(6) == null ? "non_color" : rs.getString(6)), stream.readAllBytes());
+						Color.valueOf(rs.getString(6) == null ? "non_color" : rs.getString(6)), stream.readAllBytes(),rs.getInt(8) > 0 ? true : false , rs.getInt(9));
 				catalogItems.add(item);
 			}
 		} catch (Exception e) {
@@ -375,7 +451,7 @@ public class ServerConnSQL {
                		stmt.executeUpdate();
                		PreparedStatement stmt2 = null;
                     ResultSet rs2;
-                    stmt2 = conn.prepareStatement("select price from items where item_id in "
+                    stmt2 = conn.prepareStatement("select price,is_sale,salePrice from items where item_id in "
                     		+ "(select catalog_item_id from new_item_spec where new_item_id =?)");	
                     stmt2.setInt(1, newItem.getItem_id());
                     rs2=stmt2.executeQuery();
@@ -388,7 +464,13 @@ public class ServerConnSQL {
                 	int price=0;
                     while (rs2.next()) {
                     rs3.next();
-                	price+=rs2.getInt(1)*rs3.getInt(1);
+                	/*** get sale price or regular price ***/
+                	int actual;
+                	if(rs2.getInt(2) == 1)
+                		actual = rs2.getInt(3);
+                	else
+                		actual = rs2.getInt(1);
+                	price+=actual*rs3.getInt(1);
         	 		}
                     stmt3 = conn.prepareStatement("UPDATE new_items Set price  =? where new_item_id =? ");
                     stmt3.setInt(1,price);
@@ -903,7 +985,48 @@ public class ServerConnSQL {
 		System.out.println("Delete All new item from cart !");	
 		
 		
-		
 	}
 	
+
+	public void UpdateItem(Item data) {
+		Server.Log("Database", "Executing UpdateItem");
+		PreparedStatement stmt;
+		try 
+		{
+			stmt = conn.prepareStatement("UPDATE Items SET name=?,price=?, item_type=?,catalog_type=?,color=?,is_sale=?,salePrice=? WHERE item_id=?");
+			stmt.setString(1, data.getName());
+			stmt.setInt(2, data.getPrice());
+			stmt.setString(3, data.getItemType().toString());
+			stmt.setString(4, data.getCatalogType().toString());
+			stmt.setString(5, data.getColor().toString());
+			stmt.setInt(6, data.isOnSale() ? 1 : 0);
+			stmt.setInt(7, data.getSalePrice());
+			stmt.setInt(8, data.getId());
+			stmt.executeUpdate();
+		} catch (SQLException e) {e.printStackTrace(); 		Server.Log("Database", "Executing UpdateItem: FAILED");}		
+
+	}
+	
+	public void InsertItem(Item data)
+	{
+		Server.Log("Database", "Executing InsertItem");
+		PreparedStatement stmt;
+		try 
+		{
+			stmt = conn.prepareStatement("INSERT INTO Items (name,price,catalog_type,item_type,color,image,is_sale,salePrice) VALUES (?,?,?,?,?,?,?,?)");
+			stmt.setString(1, data.getName());
+			stmt.setInt(2, data.getPrice());
+			stmt.setString(3, data.getCatalogType().toString());
+			stmt.setString(4, data.getItemType().toString());
+			stmt.setString(5, data.getColor().toString());
+			if(data.getImage() != null)
+				stmt.setBlob(6, new ByteArrayInputStream(data.getImage()));
+			else
+				stmt.setNull(6,Types.BLOB);
+			stmt.setInt(7, data.isOnSale() ? 1 : 0);
+			stmt.setInt(8, data.getSalePrice());
+			stmt.executeUpdate();
+		} catch (SQLException e) {e.printStackTrace();}		
+		Server.Log("Database", "Executing InsertItem: FAILED");
+	}
 }

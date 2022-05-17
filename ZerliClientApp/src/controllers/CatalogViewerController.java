@@ -203,7 +203,7 @@ public class CatalogViewerController implements UserControl {
 			}
 			
 			ItemHBoxController itemHBoxController=loader.getController();
-			itemHBoxController.init(item.getId(),item.getName(),String.valueOf(item.getPrice()) ,item.getJXImage());
+			itemHBoxController.init(item.getId(),item.getName(),String.valueOf(item.getCurrentPrice()) ,item.getJXImage(),item.isOnSale());
 			
 			GridPane.add(root, columnIndex++, rowIndex);
 		}

@@ -13,6 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -30,7 +31,7 @@ public class LoginController {
     private Label loginLabel;
 
     @FXML
-    private TextField passwordText;
+    private PasswordField passwordText;
 
     @FXML
     private TextField userNameText;
@@ -122,7 +123,36 @@ public class LoginController {
 					mfc.init();
     				windowControl.setUserControl("/gui/usercontrols/DeliveryOrderManager.fxml");
         		}
+        		if(role == Roles.marketing)
+        		{
+        			windowControl.stage.close();
+    				loader.setLocation(getClass().getResource("/gui/mainframes/MarketingMainScreen.fxml"));
 
+    				try {
+    					root =  loader.load();
+    				} catch (IOException e) {
+    					e.printStackTrace();
+    				} 
+    				MarketingFrameController mfc= loader.getController();
+    				windowControl = new WindowControl(mfc);
+					mfc.init();
+    				windowControl.setUserControl("/gui/usercontrols/MarketingCatalogEditor.fxml");
+        		}
+        		if(role == Roles.service)
+        		{
+        			windowControl.stage.close();
+    				loader.setLocation(getClass().getResource("/gui/mainframes/CustomerServiceMainScreen.fxml"));
+
+    				try {
+    					root =  loader.load();
+    				} catch (IOException e) {
+    					e.printStackTrace();
+    				} 
+    				CustomerServiceFrameController mfc= loader.getController();
+    				windowControl = new WindowControl(mfc);
+					mfc.init();
+    				windowControl.setUserControl("/gui/usercontrols/SurveyManager.fxml");
+        		}
         		Stage newStage = new Stage();
         		Utilities.GenericUtilties.SetWindowMovable(root, newStage);
         		Scene scene = new Scene(root);

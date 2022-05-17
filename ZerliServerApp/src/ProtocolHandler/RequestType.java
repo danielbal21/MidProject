@@ -28,4 +28,8 @@ public enum RequestType {
 	DeleteItemFromNewItemList, 
 	DeleteNewItemFromCart, 
 	DeleteAllnewItemFromCart,
+	RemoveItemByID,
+	GetItemByID,
+	UpdateItem,
+	AddItem,
 }

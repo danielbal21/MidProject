@@ -54,8 +54,8 @@ public class CartItemHboxController extends HBox{
     	this.quntity=quntity;
     	image.setImage(image1);
     	itemNameLabel.setText(name);
-    	itemTypeLabel.setText(itemType.toString());
-    	catalogTypeLabel.setText(catalogType.toString());
+    	itemTypeLabel.setText(Utilities.GenericUtilties.ItemTypeToString(itemType));
+    	catalogTypeLabel.setText(Utilities.GenericUtilties.CatalogTypeToString(catalogType));
     	quntityLabel.setText(String.valueOf(quntity));
     }
     @FXML

@@ -53,5 +53,11 @@
          </styleClass>
       </Button>
       <ImageView fx:id="itemImage" fitHeight="170.0" fitWidth="170.0" layoutX="7.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="saleLabel2" layoutX="3.0" layoutY="42.0" rotate="-48.0" text="SALE!!" textFill="RED">
+         <font>
+            <Font size="35.0" />
+         </font>
+      </Label>
+
    </children>
 </AnchorPane>

@@ -10,11 +10,6 @@
 
 <AnchorPane fx:id="activePanelContainer" prefHeight="663.0" prefWidth="957.0" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.NewItemNameAndQuantityController">
    <children>
-      <ImageView fitHeight="691.0" fitWidth="997.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../png/W2.jpg" />
-         </image>
-      </ImageView>
       <Label layoutX="210.0" layoutY="366.0" styleClass="subLabel" text="Quantity" />
       <Label layoutX="218.0" layoutY="237.0" styleClass="subLabel" text="Name" />
       <TextField fx:id="NameText" layoutX="380.0" layoutY="229.0" promptText="Enter Name here" styleClass="subLabel" />

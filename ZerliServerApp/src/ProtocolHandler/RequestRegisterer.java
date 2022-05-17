@@ -7,13 +7,11 @@ public class RequestRegisterer {
 	{
 		/*** Add the mapping between your requests and operations ***/
 		Protocol.RegisterOperation(RequestType.Ping, new PingOperation());
-		//Protocol.RegisterOperation(RequestType.GetAllOrders, new GetAllOrdersOperation());
 		Protocol.RegisterOperation(RequestType.UpdateOrder, new UpdateOrderOperation());
 		Protocol.RegisterOperation(RequestType.AuthenticateUser, new AuthenticationOperation());
 		Protocol.RegisterOperation(RequestType.SetLogOut, new LoggedOutOperation());
 		Protocol.RegisterOperation(RequestType.GetCatalog,new GetCatalogOperation());
 		Protocol.RegisterOperation(RequestType.GetCart,new GetCartOperation());
-		Protocol.RegisterOperation(RequestType.GetBranch,new GetBranchOperation());
 		Protocol.RegisterOperation(RequestType.AddToCart,new AddToCartOperation());
 		Protocol.RegisterOperation(RequestType.GetAllCustomerOrders,new GetAllCustomerOrdersOperation());
 		Protocol.RegisterOperation(RequestType.DeleteItemFromCart,new DeleteItemFromCartOperation());
@@ -23,6 +21,7 @@ public class RequestRegisterer {
 		Protocol.RegisterOperation(RequestType.GetItemsOfOrder,new GetItemsOfOrderOperation());
 		Protocol.RegisterOperation(RequestType.ConfirmOrder,new ConfirmOrderOperation());
 		Protocol.RegisterOperation(RequestType.GetBranches, new GetBranchesOperation());
+		Protocol.RegisterOperation(RequestType.GetBranch, new GetBranchOperation());
 		Protocol.RegisterOperation(RequestType.GetUserCurrency, new GetUserCurrencyOperation());
 		Protocol.RegisterOperation(RequestType.UpdateZerliCoins, new UpdateZerliCoinsOperation());
 		Protocol.RegisterOperation(RequestType.InsertOrder, new InsertOrderOperation());
@@ -33,5 +32,10 @@ public class RequestRegisterer {
 		Protocol.RegisterOperation(RequestType.DeleteItemFromNewItemList, new DeleteItemFromNewItemListOperation());
 		Protocol.RegisterOperation(RequestType.DeleteNewItemFromCart, new DeleteNewItemFromCartOperation());
 		Protocol.RegisterOperation(RequestType.DeleteAllnewItemFromCart, new DeleteAllnewItemFromCartOperation());	
+		Protocol.RegisterOperation(RequestType.RemoveItemByID, new RemoveItemOperation());
+		Protocol.RegisterOperation(RequestType.GetItemByID, new GetItemByIDOperation());
+		Protocol.RegisterOperation(RequestType.UpdateItem, new UpdateItemOperation());
+		Protocol.RegisterOperation(RequestType.AddItem, new AddItemOperation());
+		
 	}
 }

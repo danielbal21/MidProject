@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="260.0" prefWidth="350.0" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EditableItemController">
+   <children>
+      <Label fx:id="nameLabel" alignment="CENTER" layoutY="1.0" prefHeight="45.0" prefWidth="339.0" styleClass="subLabel" text="Pink Rose">
+         <font>
+            <Font name="Maiandra GD" size="26.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="itemImage" fitHeight="213.0" fitWidth="170.0" layoutX="6.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="Remove" fitHeight="81.0" fitWidth="81.0" layoutX="232.0" layoutY="55.0" onMousePressed="#RemovePressed" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../png/trash.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <styleClass>
+            <String fx:value="pressbtn" />
+            <String fx:value="imageasbtn" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="Edit" fitHeight="81.0" fitWidth="70.0" layoutX="238.0" layoutY="160.0" onMousePressed="#EditPressed" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../png/edit.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <styleClass>
+            <String fx:value="pressbtn" />
+            <String fx:value="imageasbtn" />
+         </styleClass>
+      </ImageView>
+   </children>
+</AnchorPane>

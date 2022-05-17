@@ -36,6 +36,9 @@ public class HandlersRegisterer {
 		Protocol.RegisterHandler(RequestType.DeleteNewItemFromCart,null);
 		Protocol.RegisterHandler(RequestType.DeleteAllnewItemFromCart,null);
 		Protocol.RegisterHandler(RequestType.EndOrder,null);
-		
+		Protocol.RegisterHandler(RequestType.GetItemByID, null);
+		Protocol.RegisterHandler(RequestType.RemoveItemByID,null);
+		Protocol.RegisterHandler(RequestType.UpdateItem, null);
+		Protocol.RegisterHandler(RequestType.AddItem, null);
 	}
 }
