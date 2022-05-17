@@ -16,13 +16,13 @@
             <Image url="@../png/W2.jpg" />
          </image>
       </ImageView>
-      <Label fx:id="enterSQLLabel" layoutX="90.0" layoutY="56.0" prefHeight="43.0" prefWidth="206.0" text="Enter mySQL password">
+      <Label fx:id="enterSQLLabel" layoutX="62.0" layoutY="54.0" prefHeight="43.0" prefWidth="262.0" styleClass="subLabel" text="Enter mySQL password">
          <font>
-            <Font size="20.0" />
+            <Font name="Maiandra GD" size="28.0" />
          </font>
       </Label>
-      <TextField fx:id="SqlTextField" alignment="CENTER" layoutX="108.0" layoutY="103.0" prefHeight="43.0" prefWidth="170.0" promptText="SQL password" styleClass="label" />
-      <Button fx:id="connectBtn" layoutX="144.0" layoutY="158.0" mnemonicParsing="false" onAction="#connectPressed" text="Connect">
+      <TextField fx:id="SqlTextField" alignment="CENTER" layoutX="99.0" layoutY="103.0" prefHeight="43.0" prefWidth="188.0" promptText="SQL password" styleClass="label" />
+      <Button fx:id="connectBtn" layoutX="144.0" layoutY="170.0" mnemonicParsing="false" onAction="#connectPressed" text="Connect">
          <styleClass>
             <String fx:value="Reg-btn" />
             <String fx:value="pressbtn" />

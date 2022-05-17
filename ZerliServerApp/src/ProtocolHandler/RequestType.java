@@ -22,4 +22,6 @@ public enum RequestType {
 	GetNotification,
 	UpdateNotification,
 	EndOrder,
+	CancelOrder,
+	ResetNewCustomer,
 }

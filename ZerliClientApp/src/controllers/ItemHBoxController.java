@@ -38,6 +38,7 @@ public class ItemHBoxController extends HBox {
     @FXML
     private Label quntityLabel;
     
+    
     public ItemHBoxController() {
     	super();
 	}
@@ -46,14 +47,32 @@ public class ItemHBoxController extends HBox {
     void AddToCart(ActionEvent event) {
     	if(Integer.parseInt(quntityLabel.getText()) == 0) return;
     	
-    	ItemInList newItem = new ItemInList(id, Integer.parseInt(quntityLabel.getText()));
-    	ClientApp.ProtocolHandler.Invoke(RequestType.AddToCart, newItem, null, false);
-    	counter = 0;
+    	if(LoginController.windowControl.peekPipe("catalog") == CatalogType.new_item) {
+    		NewItem myItem = (NewItem) LoginController.windowControl.peekPipe("newItem");
+    		
+    		if( myItem == null){
+    			myItem = new NewItem();
+    		}
+    		
+    		ItemInList item = new ItemInList(id, Integer.parseInt(quntityLabel.getText()));
+			myItem.addItem(item);
+			LoginController.windowControl.putPipe("newItem", myItem);
+    	}
+    	else {
+    		ItemInList newItem = new ItemInList(id, Integer.parseInt(quntityLabel.getText()));
+        	ClientApp.ProtocolHandler.Invoke(RequestType.AddToCart, newItem, null, false);
+    	}
+    	
+		counter = 0;
     	quntityLabel.setText("0");
     }
     
     public void init(int id,String name,String costLabel,Image image) 
     {
+    	if(LoginController.windowControl.peekPipe("catalog") == CatalogType.new_item) {
+    		addToCartBtn.setText("Add to"+"\n"+"private product");
+    	}
+
     	this.id=id;
     	CostLabel.setText(costLabel+ " " + Utilities.Constants.SHEKEL);
 		nameLabel.setText(name);
@@ -74,6 +93,7 @@ public class ItemHBoxController extends HBox {
     void PlusBtnPressed(MouseEvent event) {
      	counter++;
     	quntityLabel.setText(String.valueOf(counter));
+    	
     }
 
 }

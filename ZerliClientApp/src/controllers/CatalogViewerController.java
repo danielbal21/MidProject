@@ -1,4 +1,4 @@
-package controllers;
+ package controllers;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -39,6 +40,18 @@ public class CatalogViewerController implements UserControl {
     @FXML
     private Label maxPages;
     
+    
+    @FXML
+    private Button nextBtn;
+
+   
+    @FXML
+    void nextPressed(ActionEvent event) {
+    	System.out.println();
+    	System.out.println("New item\n"+LoginController.windowControl.peekPipe("newItem"));
+    	LoginController.windowControl.setUserControl("/gui/usercontrols/NewItemNameAndQuantity.fxml");
+    }
+   
     
     @FXML
     void backPressed(ActionEvent event) {
@@ -69,14 +82,29 @@ public class CatalogViewerController implements UserControl {
 	@Override
 	public void onEnter() {	
 		catalogType = (CatalogType) LoginController.windowControl.peekPipe("catalog");
-		ClientApp.ProtocolHandler.Invoke(RequestType.GetCatalog, null,LoginController.windowControl.peekPipe("catalog"), true);
-		itemList=(ObservableList<Item>) ClientApp.ProtocolHandler.GetResponse(RequestType.GetCatalog);
-	
-		if(catalogType== CatalogType.custom) {
-			catalogNameLbl.setText("Custom");
+		if(catalogType == CatalogType.new_item) {
+			ClientApp.ProtocolHandler.Invoke(RequestType.GetCatalog, null,CatalogType.pre_define, true);
+			itemList=(ObservableList<Item>) ClientApp.ProtocolHandler.GetResponse(RequestType.GetCatalog);
+			ClientApp.ProtocolHandler.Invoke(RequestType.GetCatalog, null,CatalogType.custom, true);
+			itemList.addAll((ObservableList<Item>) ClientApp.ProtocolHandler.GetResponse(RequestType.GetCatalog));		
 		}
 		else {
-			catalogNameLbl.setText("Pre-defined");
+			ClientApp.ProtocolHandler.Invoke(RequestType.GetCatalog, null,catalogType, true);
+			itemList=(ObservableList<Item>) ClientApp.ProtocolHandler.GetResponse(RequestType.GetCatalog);
+		}
+	
+		if(catalogType== CatalogType.custom) {
+			catalogNameLbl.setText("Zerli items");
+			nextBtn.setVisible(false);
+		}
+		else if(catalogType== CatalogType.pre_define){
+			catalogNameLbl.setText("Zerli products");
+			nextBtn.setVisible(false);
+
+		}
+		else {
+			catalogNameLbl.setText("Full Zerli catalog");
+			nextBtn.setVisible(true);
 		}
 		
 		int maxpages = ((itemList.size())/(GridPane.getColumnCount()*GridPane.getRowCount()));

@@ -32,8 +32,14 @@ public class CustomerCartController implements UserControl {
     private Button nextBtn;
     @FXML
     void NextBtnPressed(ActionEvent event) {
-    	clearScreen();
-    	LoginController.windowControl.setUserControl("/gui/usercontrols/CustomerOrderInformation.fxml");
+    	ClientApp.ProtocolHandler.Invoke(RequestType.GetCart, null, null, true);
+		itemList=(ObservableList<ItemInList>) ClientApp.ProtocolHandler.GetResponse(RequestType.GetCart);
+    	if(itemList.size() == 0) return;
+    	else {
+    		clearScreen();
+        	LoginController.windowControl.setUserControl("/gui/usercontrols/CustomerOrderInformation.fxml");
+    	}
+    	
     }
 	@Override
 	public void onEnter() {
@@ -52,7 +58,9 @@ public class CustomerCartController implements UserControl {
 				continue;
 			}
 			CartItemHboxController cartItemHboxController=loader.getController();
-			cartItemHboxController.init(totalCostLabel,Vbox,itemInlist.getJXImage(),itemInlist.getItem_id(),itemInlist.getItem_name(),itemInlist.getItem_type(),itemInlist.getCatalog_type(),itemInlist.getQuantity(),itemInlist.getPrice());
+			cartItemHboxController.init(totalCostLabel,Vbox,itemInlist.getJXImage(),itemInlist.getItem_id(),
+					itemInlist.getItemName(),itemInlist.getItem_type(),itemInlist.getCatalog_Type(),
+					itemInlist.getQuantity(),itemInlist.getPrice());
 			Vbox.getChildren().add(root);
 		}
 		ArrayList<ItemInList> items = new ArrayList<ItemInList>();

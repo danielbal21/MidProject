@@ -24,8 +24,10 @@
     -fx-border-color: transparent;
     -fx-padding: 2 0 2 10px;
 }
+
+
 .table-row-cell:hover {
-    -fx-background-color: #93f9b911;
+    -fx-background-color: black;
     -fx-text-background-color: red;
 }
 .table-row-cell:odd{
@@ -37,6 +39,11 @@
     -fx-background-color: #1dbbdd11;
     -fx-background-insets: 0, 0 0 1 0;
     -fx-padding: 0.0em;
+}
+
+.table-row-cell:selected {
+   -fx-background-color: steelblue; 
+   -fx-text-background-color: red;
 }
 
 .table-view.column-header-background{

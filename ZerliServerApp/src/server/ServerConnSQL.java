@@ -5,16 +5,12 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.sql.Types;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-
 import javax.imageio.ImageIO;
-
 import com.mysql.cj.util.Util;
-
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.security.Timestamp;
@@ -145,9 +141,7 @@ public class ServerConnSQL {
 			rs = stmt.executeQuery();
 			while (rs.next()) {
 				Image bufferImage;
-				System.out.println("ENTERING LOOP");
 				image = rs.getBlob(7);
-				System.out.println("GOT BLOB");
 				if (image == null) {
 					stream = getClass().getResourceAsStream("/png/no-image.png");
 					// stream =new FileInputStream("/png/no-image.png");
@@ -322,6 +316,12 @@ public class ServerConnSQL {
 			Server.Log("Database", "Executing InsertOrder: FAILED");
 			e1.printStackTrace();
 		}
+		
+		
+		
+		
+		
+		
 	}
 
 	public String GetBranch(String user_id, String type) {
@@ -469,59 +469,61 @@ public class ServerConnSQL {
 
 	public void GetAllCustomerOrders(String username, ArrayList<Order> customerOrders) {
 		PreparedStatement stmt = null;
-		ResultSet rs1, rs2;
+		ResultSet rs1,rs2;
 		Order order;
 		ItemInList itemInList;
-		ArrayList<ItemInList> itemList;
+		ArrayList<ItemInList> itemList ;
 		try {
 			stmt = conn.prepareStatement("SELECT * FROM orders WHERE user_id=?");
-			stmt.setString(1, username);
-			rs1 = stmt.executeQuery();
-			while (rs1.next()) {
-				order = new Order();
-				order.setOrderID(String.valueOf(rs1.getInt(2)));
-				order.setPaymentMethod(PaymentMethods.valueOf(rs1.getString(3)));
-				order.setShippingMethod(ShippingMethods.valueOf(rs1.getString(4)));
-				order.setOrderDate(rs1.getTimestamp(5));
-				order.setShippingDate(rs1.getTimestamp(6));
-				order.setBranchName(rs1.getString(7));
-				order.setGreetingCard(rs1.getString(8));
-				order.setTotalPrice(rs1.getInt(9));
-				order.setStatus(OrderStatus.valueOf(rs1.getString(10)));
-				order.setAddress(rs1.getString(11));
-				order.setCity(rs1.getString(12));
+			stmt.setString(1,username);
+           	rs1 = stmt.executeQuery();
+           	while(rs1.next()) {
+           		order = new Order();
+           		order.setOrderID(String.valueOf(rs1.getInt(2)));
+           		order.setPaymentMethod(PaymentMethods.valueOf(rs1.getString(3)));
+           		order.setShippingMethod(ShippingMethods.valueOf(rs1.getString(4)));
+           		order.setOrderDate(rs1.getTimestamp(5));
+           		order.setShippingDate(rs1.getTimestamp(6));
+           		order.setBranchName(rs1.getString(7));
+           		order.setGreetingCard(rs1.getString(8));
+           		order.setTotalPrice(rs1.getInt(9));
+           		order.setStatus(OrderStatus.valueOf(rs1.getString(10)));
+           		order.setAddress(rs1.getString(11));
+           		order.setCity(rs1.getString(12));
+         
+   	       		stmt = conn.prepareStatement("SELECT i.name ,i.catalog_type,"
+                   		+"i.item_type,i.price, oi.quantity " 
+                   		+"FROM items i, order_item oi "
+                   		+"WHERE i.item_id = oi.item_id" 
+                   		+" AND oi.order_id=? " 
+                   		+"AND i.item_id IN (SELECT item_id "
+                   		+"from order_item"
+                   		+" where order_id=?)");
+           		stmt.setInt(1,rs1.getInt(2));
+           		stmt.setInt(2,rs1.getInt(2));
+           		rs2 = stmt.executeQuery();
+           		itemList = new ArrayList<>();
+           		while(rs2.next()) {
+           			itemInList = new ItemInList();
+           			itemInList.setItemName(rs2.getString(1));
+           			itemInList.setCatalogType(CatalogType.valueOf((rs2.getString(2))));
+           			itemInList.setItemType(ItemType.valueOf(rs2.getString(3)));
+           			itemInList.setPrice(rs2.getInt(4));
+           			itemInList.setQuantity(rs2.getInt(5));
+           			itemList.add(itemInList);
+           		}
+           		order.setItems(itemList);
+           		customerOrders.add(order);
+           	}
 
-				stmt = conn.prepareStatement("SELECT i.name ,i.catalog_type," + "i.item_type,i.price, oi.quantity "
-						+ "FROM items i, order_item oi " + "WHERE i.item_id = oi.item_id" + " AND oi.order_id=? "
-						+ "AND i.item_id IN (SELECT item_id " + "from order_item" + " where order_id=?)");
-				stmt.setInt(1, rs1.getInt(2));
-				stmt.setInt(2, rs1.getInt(2));
-				rs2 = stmt.executeQuery();
-				itemList = new ArrayList<>();
-				while (rs2.next()) {
-					itemInList = new ItemInList();
-					itemInList.setItem_name(rs2.getString(1));
-					itemInList.setCatalog_type(CatalogType.valueOf((rs2.getString(2))));
-					itemInList.setItem_type(ItemType.valueOf(rs2.getString(3)));
-					itemInList.setPrice(rs2.getInt(4));
-					itemInList.setQuantity(rs2.getInt(5));
-					itemList.add(itemInList);
-				}
-				order.setItems(itemList);
-				customerOrders.add(order);
-			}
-
-		} catch (SQLException e1) {
+		
+		} 
+		catch (SQLException e1) {
 			System.err.println("Failed on GetAllCustomerOrders()");
 			e1.printStackTrace();
 		}
-		System.out.println("Got All order to user id= " + username);
-
-	}
-
-	public void getCartItems(ArrayList<Item> cartItems) {
-		// TODO Auto-generated method stub
-
+		 System.out.println("Got All order to user id= "+username);
+	
 	}
 
 	public void DeleteItemFromCart(String usernmae, int data) {
@@ -644,4 +646,38 @@ public class ServerConnSQL {
 		System.out.println("order end!");
 
 	}
+
+	public void cancelOrder(Integer refundZerli, Integer orderID) {
+		PreparedStatement stmt = null;
+		try {
+			stmt = conn.prepareStatement("UPDATE orders SET status = ?,"
+					+ "refund_zerli = ? WHERE order_id = ? " );
+			stmt.setString(1,OrderStatus.pending_cancel.toString());
+			stmt.setInt(2,refundZerli);
+			stmt.setInt(3,orderID);
+           	stmt.executeUpdate(); 
+			}
+		catch (SQLException e1) {
+            System.err.println("Failed on cancelOrder()");
+			e1.printStackTrace();
+		}
+	}
+
+	public void resetNewCustomer(String user_id) {
+		PreparedStatement stmt = null;
+		try {
+			stmt = conn.prepareStatement
+					("UPDATE customer_details "
+					+ "SET new_customer = 0 "
+					+ "WHERE user_id = ?");
+			stmt.setString(1,user_id);
+           	stmt.executeUpdate(); 
+			}
+		catch (SQLException e1) {
+            System.err.println("Failed on resetNewCustomer()");
+			e1.printStackTrace();
+		}
+		System.out.println("RESET new customer for "+user_id);
+	} 
+		
 }

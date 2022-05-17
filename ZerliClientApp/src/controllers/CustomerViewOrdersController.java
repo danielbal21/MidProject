@@ -63,8 +63,6 @@ public class CustomerViewOrdersController implements UserControl{
 	}
 
 	@Override
-	public void onExit() {
-		//orderList.clear();
-	}
+	public void onExit() {}
 
 }

@@ -84,7 +84,7 @@
                   <Image url="@../../png/icons8-red-circle-48.png" />
                </image>
             </ImageView>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="172.0" layoutY="20.0" prefHeight="30.0" prefWidth="28.0" styleClass="NotificationLabel" text="2" textFill="WHITE">
+            <Label fx:id="cartRedCricleLable" alignment="CENTER" contentDisplay="CENTER" layoutX="172.0" layoutY="20.0" prefHeight="30.0" prefWidth="28.0" styleClass="NotificationLabel" text="2" textFill="WHITE">
                <font>
                   <Font size="19.0" />
                </font>

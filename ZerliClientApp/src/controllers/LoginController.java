@@ -88,8 +88,8 @@ public class LoginController {
     				} 
     				CustomerFrameController cfc= loader.getController();
     				windowControl = new WindowControl(cfc);
-					cfc.init();
     				windowControl.setUserControl("/gui/usercontrols/CustomerHomePage.fxml");
+    				cfc.init();
     					
     	    	}
         		if(role == Roles.manager)
