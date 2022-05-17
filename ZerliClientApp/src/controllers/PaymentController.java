@@ -7,6 +7,7 @@ import java.util.Optional;
 import Entities.Order;
 import Entities.OrderStatus;
 import Entities.PaymentMethods;
+import Entities.RedNotificationCircle;
 import Entities.paymentInfo;
 import ProtocolHandler.RequestType;
 import client.ClientApp;
@@ -27,6 +28,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
@@ -134,6 +136,20 @@ public class PaymentController implements UserControl {
     	}
     	currentOrder.setStatus(OrderStatus.pending_confirm);
     	ClientApp.ProtocolHandler.Invoke(RequestType.InsertOrder, currentOrder, null, false);
+    	////
+    	RedNotificationCircle cartLabelAndImage=(RedNotificationCircle) LoginController.windowControl.getPipe("cartLabel");
+    	int cartNotificationsNumber=cartLabelAndImage.getCartNotificationsNumber();
+    	cartNotificationsNumber=0;
+    	cartLabelAndImage.setCartNotificationsNumber(cartNotificationsNumber);
+    	Label label;
+    	ImageView image=new ImageView();
+    	label=cartLabelAndImage.getLabel();
+    	image=cartLabelAndImage.getImage();
+		label.setVisible(false);
+    	image.setVisible(false);
+    	label.setText(String.valueOf(cartNotificationsNumber));
+    	LoginController.windowControl.putPipe("cartLabel", cartLabelAndImage);
+    	////
     	LoginController.windowControl.setUserControl("/gui/usercontrols/CustomerOutroViewWindow.fxml");
     }
     

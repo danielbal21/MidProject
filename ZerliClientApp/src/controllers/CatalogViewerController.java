@@ -13,17 +13,21 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
 public class CatalogViewerController implements UserControl {
-
+	
 	private ObservableList<Item> itemList;
 	private Map< Integer ,ArrayList<Item>> catalogPages;
 	
     private CatalogType catalogType;
-	
+    
+    @FXML
+    private Label noItemErrorLabel;
+    
     @FXML
     private GridPane GridPane;
     
@@ -39,6 +43,35 @@ public class CatalogViewerController implements UserControl {
     @FXML
     private Label maxPages;
     
+    
+    @FXML
+    private Button nextBtn;
+
+   
+    @FXML
+    void nextPressed(ActionEvent event) {
+    	if(LoginController.windowControl.peekPipe("newItem") == null) 
+    	{
+    		noItemErrorLabel.setVisible(true);
+    		Thread thread =new Thread(new Runnable() {
+				
+				@Override
+				public void run() {
+					try {
+						Thread.sleep(2000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					noItemErrorLabel.setVisible(false);
+				}
+			});
+			thread.start();
+    	return;
+    	}
+    	LoginController.windowControl.setUserControl("/gui/usercontrols/NewItemNameAndQuantity.fxml");
+    	
+    }													
+   
     
     @FXML
     void backPressed(ActionEvent event) {
@@ -68,15 +101,31 @@ public class CatalogViewerController implements UserControl {
     
 	@Override
 	public void onEnter() {	
+		noItemErrorLabel.setVisible(false);
 		catalogType = (CatalogType) LoginController.windowControl.peekPipe("catalog");
-		ClientApp.ProtocolHandler.Invoke(RequestType.GetCatalog, null,LoginController.windowControl.peekPipe("catalog"), true);
-		itemList=(ObservableList<Item>) ClientApp.ProtocolHandler.GetResponse(RequestType.GetCatalog);
-	
-		if(catalogType== CatalogType.custom) {
-			catalogNameLbl.setText("Custom");
+		if(catalogType == CatalogType.new_item) {
+			ClientApp.ProtocolHandler.Invoke(RequestType.GetCatalog, null,CatalogType.pre_define, true);
+			itemList=(ObservableList<Item>) ClientApp.ProtocolHandler.GetResponse(RequestType.GetCatalog);
+			ClientApp.ProtocolHandler.Invoke(RequestType.GetCatalog, null,CatalogType.custom, true);
+			itemList.addAll((ObservableList<Item>) ClientApp.ProtocolHandler.GetResponse(RequestType.GetCatalog));		
 		}
 		else {
-			catalogNameLbl.setText("Pre-defined");
+			ClientApp.ProtocolHandler.Invoke(RequestType.GetCatalog, null,catalogType, true);
+			itemList=(ObservableList<Item>) ClientApp.ProtocolHandler.GetResponse(RequestType.GetCatalog);
+		}
+	
+		if(catalogType== CatalogType.custom) {
+			catalogNameLbl.setText("Zerli items");
+			nextBtn.setVisible(false);
+		}
+		else if(catalogType== CatalogType.pre_define){
+			catalogNameLbl.setText("Zerli products");
+			nextBtn.setVisible(false);
+
+		}
+		else {
+			catalogNameLbl.setText("Full Zerli catalog");
+			nextBtn.setVisible(true);
 		}
 		
 		int maxpages = ((itemList.size())/(GridPane.getColumnCount()*GridPane.getRowCount()));
@@ -163,4 +212,3 @@ public class CatalogViewerController implements UserControl {
 	}
 	
 }
-

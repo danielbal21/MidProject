@@ -1,5 +1,6 @@
 package controllers;
 
+import java.awt.desktop.ScreenSleepEvent;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -9,7 +10,6 @@ import ProtocolHandler.RequestType;
 import client.ClientApp;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -24,7 +24,7 @@ import javafx.scene.layout.AnchorPane;
 public class NotificationWindowController implements UserControl,Initializable {
 	
 	private ObservableList<NotificationInTable> notificationTableList;
-    private boolean readNotification=true;
+    private boolean unreadNotification=true;
 	@FXML
     private AnchorPane activePanelContainer;
 
@@ -33,6 +33,9 @@ public class NotificationWindowController implements UserControl,Initializable {
     @FXML
     private Label noNotifiLabel;
     
+
+    @FXML
+    private Label allreadyReadLabel;
     
     @FXML
     private TableView<NotificationInTable> notificationsCenterTable;
@@ -52,17 +55,17 @@ public class NotificationWindowController implements UserControl,Initializable {
     @FXML
     void Unreadonly(MouseEvent event) {
     	
-    	if (readNotification)
+    	if (unreadNotification)
     	{
-    		readNotification=false;
+    		unreadNotification=false;
     		ureadOnlyBtn.setText("All notification");
-    		ObservableList<NotificationInTable> list=unreadNotification();
+    		ObservableList<NotificationInTable> list=createUnreadNotificationList();
     		if(list.size()>0)
     		setTable(list);
     	}
     	else
     	{
-    		readNotification=true;
+    		unreadNotification=true;
     		ureadOnlyBtn.setText("Unread only");
 		 	setTable(notificationTableList); 
     	}
@@ -71,6 +74,7 @@ public class NotificationWindowController implements UserControl,Initializable {
 	@Override
 	public void onEnter()
 	{
+		allreadyReadLabel.setVisible(false);
 		ClientApp.ProtocolHandler.Invoke(RequestType.GetNotification, null, null, true);
 		notificationTableList= (ObservableList<NotificationInTable>) ClientApp.ProtocolHandler.GetResponse(RequestType.GetNotification);
 		setTable(notificationTableList);
@@ -84,7 +88,6 @@ public class NotificationWindowController implements UserControl,Initializable {
 		status.setCellValueFactory(new PropertyValueFactory<NotificationInTable, String>("status"));
 		if(list.size()<1)
 	    	   noNotifiLabel.setVisible(true);
-		System.out.println(notificationTableList);
 		notificationsCenterTable.setItems(list);
 	}
 	
@@ -103,17 +106,35 @@ public class NotificationWindowController implements UserControl,Initializable {
     void setStatus(MouseEvent event) {
     	
     	if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 2) {
-    		//System.out.println(notificationTableList);
     		NotificationInTable temp=notificationsCenterTable.getSelectionModel().getSelectedItem();
     		if(temp.getStatus().equals("unread"))
     		{
+    			allreadyReadLabel.setVisible(false);
     			temp.setStatus("read");
     		}
+    		else {
+    			allreadyReadLabel.setVisible(true);
+    		
+    			Thread thread =new Thread(new Runnable() {
+					
+					@Override
+					public void run() {
+						try {
+							Thread.sleep(2000);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+						allreadyReadLabel.setVisible(false);
+					}
+				});
+    			thread.start();
+			}
+    		
 			setTable(notificationTableList);
 			notificationsCenterTable.refresh();
 		}
     }
-    private ObservableList<NotificationInTable> unreadNotification()
+    private ObservableList<NotificationInTable> createUnreadNotificationList()
     {
     	ObservableList<NotificationInTable> unreadNotificationTableList= FXCollections.observableArrayList();
 		    	for (NotificationInTable notificationInTable : notificationTableList) {

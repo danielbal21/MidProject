@@ -4,8 +4,11 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import Entities.ItemInList;
+import Entities.RedNotificationCircle;
 import ProtocolHandler.RequestType;
 import client.ClientApp;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -51,14 +54,29 @@ public class CustomerFrameController implements IContainable{
     @FXML
     private ImageView cartRedCircleImage;
     @FXML
+    private Label cartRedCricleLable;
+    
+    @FXML
     private ImageView bellRedCircleImage;
     @FXML
-    private Label cartRedCricleLable;
-    @FXML
     private Label bellRedCricleLable;
-    
+    private int cartNotificationsNumber;
     void init(){
+    	ClientApp.ProtocolHandler.Invoke(RequestType.GetCart, null, null, true);
+    	ObservableList<ItemInList> list=(ObservableList<ItemInList>)ClientApp.ProtocolHandler.GetResponse(RequestType.GetCart);
+    	for (ItemInList itemInList : list) {
+    		cartNotificationsNumber+=itemInList.getQuantity();
+		}
+    	if (cartNotificationsNumber>0)
+    	{
+    		cartRedCircleImage.setVisible(true);
+    		cartRedCricleLable.setText(String.valueOf(cartNotificationsNumber));
+    		cartRedCricleLable.setVisible(true);
+    	}
     	nameLabel.setText(ClientApp.UserID.toString());
+    	RedNotificationCircle cartNotification=new RedNotificationCircle(cartRedCircleImage, cartRedCricleLable, cartNotificationsNumber);
+    	LoginController.windowControl.putPipe("cartLabel", cartNotification);
+    	
     }
 
     @FXML

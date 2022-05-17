@@ -15,7 +15,7 @@
             <Font name="Maiandra GD" size="53.0" />
          </font>
       </Label>
-      <AnchorPane layoutX="211.0" layoutY="462.0" prefHeight="141.0" prefWidth="538.0">
+      <AnchorPane layoutX="24.0" layoutY="432.0" prefHeight="141.0" prefWidth="538.0">
          <children>
             <ImageView fitHeight="76.0" fitWidth="92.0" layoutX="26.0" layoutY="57.0">
                <image>
@@ -59,7 +59,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="236.0" layoutY="187.0" prefHeight="192.0" prefWidth="489.0">
+      <AnchorPane layoutX="49.0" layoutY="188.0" prefHeight="192.0" prefWidth="489.0">
          <children>
             <ImageView fitHeight="76.0" fitWidth="92.0" layoutX="35.0" layoutY="76.0">
                <image>
@@ -98,7 +98,7 @@
             <Font name="Maiandra GD" size="44.0" />
          </font>
       </Label>
-      <Button fx:id="prePefineBtn" layoutX="374.0" layoutY="127.0" mnemonicParsing="false" onAction="#preDefinePressed" prefHeight="60.0" prefWidth="212.0" text="Pre-defined Catalog">
+      <Button fx:id="prePefineBtn" layoutX="187.0" layoutY="128.0" mnemonicParsing="false" onAction="#preDefinePressed" prefHeight="60.0" prefWidth="212.0" text="Zerli products">
          <font>
             <Font size="18.0" />
          </font>
@@ -107,7 +107,7 @@
             <String fx:value="pressbtn" />
          </styleClass>
       </Button>
-      <Button fx:id="castumBtn" layoutX="379.0" layoutY="416.0" mnemonicParsing="false" onAction="#customPressed" prefHeight="60.0" prefWidth="203.0" text="Custom Catalog">
+      <Button fx:id="castumBtn" layoutX="192.0" layoutY="386.0" mnemonicParsing="false" onAction="#customPressed" prefHeight="60.0" prefWidth="203.0" text="Zerli items">
          <font>
             <Font size="18.0" />
          </font>
@@ -116,5 +116,24 @@
             <String fx:value="pressbtn" />
          </styleClass>
       </Button>
+      <Button fx:id="privateBtn" layoutX="641.0" layoutY="309.0" mnemonicParsing="false" onAction="#privatePressed" prefHeight="60.0" prefWidth="203.0" text="My private product">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <styleClass>
+            <String fx:value="Reg-btn" />
+            <String fx:value="pressbtn" />
+         </styleClass>
+      </Button>
+      <Label layoutX="581.0" layoutY="233.0" prefHeight="76.0" prefWidth="323.0" styleClass="subLabel" text="Build our own Zerli product &#10;from all the Zerli Catalog" textAlignment="CENTER">
+         <font>
+            <Font name="Maiandra GD" size="25.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="109.0" fitWidth="117.0" layoutX="684.0" layoutY="377.0">
+         <image>
+            <Image url="@../../png/Imagination.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

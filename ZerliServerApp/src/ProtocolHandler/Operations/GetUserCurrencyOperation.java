@@ -15,7 +15,6 @@ public class GetUserCurrencyOperation implements IOperation {
 	@Override
 	public boolean Perform(String requestee, Object data, Object params, ResponseWrapper response) {
 		response.SetResponse(Server.SqlServerManager.GetCurrency(requestee));
-		System.out.println("Request currency of " + requestee);
 		return true;
 	}
 

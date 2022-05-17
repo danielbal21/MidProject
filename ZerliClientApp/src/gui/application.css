@@ -74,7 +74,7 @@
 }
 
 .Next-btn:active {
-  -fx-background-color: #FFF0000;
+  -fx-background-color: #FF0000;
 }
 
 .Reg-btn {
@@ -136,6 +136,12 @@
     -fx-border-color: transparent;
     -fx-padding: 2 0 2 10px;
 }
+
+.table-row-cell:selected {
+   -fx-background-color: steelblue; 
+   -fx-text-background-color: red;
+}
+
 .table-row-cell:hover {
     -fx-background-color: black;
     -fx-text-background-color: red;

@@ -2,14 +2,17 @@ package ProtocolHandler.Operations;
 
 import ProtocolHandler.IOperation;
 import ProtocolHandler.ResponseWrapper;
-import server.Server;
 
-public class LoggedOutOperation implements IOperation{
+public class DeleteNewItemFromCartOperation implements IOperation {
 
 	@Override
 	public boolean Perform(String requestee, Object data, Object params) {
-		Server.SqlServerManager.LoggedOut(requestee);
-		return true;
+		if (data instanceof Integer)
+		{
+			server.Server.SqlServerManager.DeleteNewItemFromCart(requestee,(int)data);
+			return true;
+		}
+		return false;
 	}
 
 	@Override

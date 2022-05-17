@@ -59,7 +59,7 @@ public class ServerPanelController implements Initializable{
 	 try {
     		ServerApp.server.close();
 		} catch (IOException e) {
-			System.out.println("Falied close Server");
+			Server.Log("Server","Falied close Server");
 			e.printStackTrace();
 		}
     	System.exit(0);

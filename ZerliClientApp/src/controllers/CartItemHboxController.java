@@ -13,7 +13,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 public class CartItemHboxController extends HBox{
 	private Label totalCost;
@@ -45,9 +44,9 @@ public class CartItemHboxController extends HBox{
     public CartItemHboxController() {
 	super();	
     }
-    public void init (Label totalCost, VBox Vbox ,Image image1 ,int id,String name,ItemType itemType,CatalogType catalogType,int quntity,int price)
+    public void init (Label totalCost, VBox Vbox ,Image image1 ,int id,String name,
+    		ItemType itemType,CatalogType catalogType,int quntity,int price)
     {
-    	
     	this.totalCost=totalCost;
     	this.Vbox=Vbox;
     	this.id=id;
@@ -62,9 +61,28 @@ public class CartItemHboxController extends HBox{
     @FXML
     void DeleteBtnPressed(ActionEvent event) {
     	Vbox.getChildren().remove(hboxRoot);
-    	ClientApp.ProtocolHandler.Invoke(RequestType.DeleteItemFromCart, id, null, false);
+    	ClientApp.ProtocolHandler.Invoke(RequestType.DeleteItemFromCart, id, null, true);
     	totalCost.setText(String.valueOf((int)LoginController.windowControl.getPipe("totalCost")-(price*quntity)));
+    	if((boolean)ClientApp.ProtocolHandler.GetResponse(RequestType.DeleteItemFromCart))
+    	{
+    		RedNotificationCircle cartLabelAndImage=(RedNotificationCircle) LoginController.windowControl.getPipe("cartLabel");
+        	int cartNotificationsNumber=cartLabelAndImage.getCartNotificationsNumber();
+        	cartNotificationsNumber=cartNotificationsNumber-quntity;
+        	cartLabelAndImage.setCartNotificationsNumber(cartNotificationsNumber);
+        	Label label;
+        	ImageView image=new ImageView();
+        	label=cartLabelAndImage.getLabel();
+        	image=cartLabelAndImage.getImage();
+        	if(cartNotificationsNumber==0) 
+        	{
+        		label.setVisible(false);
+            	image.setVisible(false);
+        	}
+        	label.setText(String.valueOf(cartNotificationsNumber));
+        	LoginController.windowControl.putPipe("cartLabel", cartLabelAndImage);
+    	}
     	LoginController.windowControl.putPipe("totalCost", Integer.parseInt(totalCost.getText()));
+    	
     }
 
 }

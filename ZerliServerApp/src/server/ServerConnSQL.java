@@ -5,19 +5,14 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.sql.Types;
 import java.util.ArrayList;
-
-
-import javax.imageio.ImageIO;
-
-
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.sql.Blob;
 import Entities.*;
+
 import javafx.scene.image.Image;
+
 
 public class ServerConnSQL{
 		
@@ -191,25 +186,82 @@ public class ServerConnSQL{
 			 	rs=stmt.executeQuery();
 	            while (rs.next()) {
 	            	Image bufferImage;
-	            	System.out.println("ENTERING LOOP");
 	            	image=rs.getBlob(7);
-	            	System.out.println("GOT BLOB");
 	            	if (image == null)
 	            	{
 	            		stream = getClass().getResourceAsStream("/png/no-image.png");
-	            		//stream =new FileInputStream("/png/no-image.png");
 	            	}
 	            	else {
 	            		stream = image.getBinaryStream();
-		            	//bufferImage = new Image(input);
 	            	}
 	            	itemInListlist = new ItemInList(stream.readAllBytes(),rs.getInt(1),quantityList.get(i),
 	            			rs.getInt(3), rs.getString(2),ItemType.valueOf(rs.getString(5)),
 	            			CatalogType.valueOf(rs.getString(4)));
 	            	cartItems.add(itemInListlist);
-	            	i++;
-	            	//System.out.println(""+itemInListlist.getItem_id()+itemInListlist.getQuantity());
+	            	i++;          
 	            	}
+/////////////////////////////////////////////////////////////////////////////////////////////
+	            stmt = conn.prepareStatement("select new_item_id from cart_new_item where cart_id in "
+            			+ "(select cart_id from carts where user_id=?)");
+	            stmt.setString(1, username);
+            	rs=stmt.executeQuery();
+            	while(rs.next())
+            	{
+	            NewItem newItem = new NewItem();
+	            newItem.setImage(getClass().getResourceAsStream("/png/New.png").readAllBytes());
+	            newItem.setItem_id(rs.getInt(1));
+	            PreparedStatement stmt2 = null;
+	            ResultSet rs2;
+	            stmt2 = conn.prepareStatement("select * from items where item_id in "
+	            		+ "(select catalog_item_id from new_item_spec where new_item_id =?)");	
+	            stmt2.setInt(1, newItem.getItem_id());
+	            rs2=stmt2.executeQuery();
+	            ///////
+	            PreparedStatement stmt3 = null;
+	            ResultSet rs3;
+            	stmt3 = conn.prepareStatement("select quantity from new_item_spec where new_item_id =? ");
+            	stmt3.setInt(1, newItem.getItem_id());
+            	rs3=stmt3.executeQuery();
+            	int price=0;
+	            while (rs2.next()) {
+            	image=rs2.getBlob(7);
+            	if (image == null)
+            	{
+            		stream = getClass().getResourceAsStream("/png/no-image.png");
+            	}
+            	else {
+            		stream = image.getBinaryStream();
+            	}
+            	
+            	itemInListlist = new ItemInList(stream.readAllBytes(),rs2.getInt(1),0,
+            			rs2.getInt(3), rs2.getString(2),ItemType.valueOf(rs2.getString(5)),
+            			CatalogType.valueOf(rs2.getString(4)));
+            	
+            	rs3.next();
+            	price+=rs2.getInt(3)*rs3.getInt(1);
+            	itemInListlist.setQuantity(rs3.getInt(1));
+            	newItem.addItem(itemInListlist);
+		 		}//while end
+	            ///////
+	            newItem.setPrice(price);
+            	stmt2 = conn.prepareStatement("SELECT quantity FROM cart_new_item WHERE cart_id="
+            			+ " (SELECT cart_id FROM carts WHERE user_id= ?) and new_item_id =?");
+            	stmt2.setString(1, username);
+            	stmt2.setInt(2, newItem.getItem_id());
+            	rs2=stmt2.executeQuery();
+            	rs2.next();
+            	newItem.setQuantity(rs2.getInt(1));
+            	////
+            	stmt3 = conn.prepareStatement("SELECT new_item_name FROM new_items WHERE"
+            			+ " new_item_id=?");
+            	stmt3.setInt(1, newItem.getItem_id());
+            	rs3=stmt3.executeQuery();
+            	rs3.next();
+            	newItem.setItemName(rs3.getString(1));
+            	///
+            	cartItems.add(newItem);
+            	}
+     
 	        } catch (Exception e) {
 	            System.err.println("Got an exception! ");
 	            System.err.println(e.getMessage());
@@ -236,18 +288,13 @@ public class ServerConnSQL{
 		 try {
 	           	rs = stmt.executeQuery();
 	            while (rs.next()) {
-
-	            	//need to change blob to long blob 
-	            	Image bufferImage;
 	            	image=rs.getBlob(7);
 	            	if (image == null)
 	            	{
 	            		stream = getClass().getResourceAsStream("/png/no-image.png");
-	            		//stream =new FileInputStream("/png/no-image.png");
 	            	}
 	            	else {
 	            		stream = image.getBinaryStream();
-		            	//bufferImage = new Image(input);
 	            	}
 	            	
 	            	item = new Item(rs.getInt(1), rs.getString(2), rs.getInt(3),CatalogType.valueOf(rs.getString(4)), 
@@ -359,14 +406,61 @@ public class ServerConnSQL{
         		Server.Log("Database", "Executing InsertOrder: FAILED could not track OrderID");
            		throw new RuntimeException("ERROR");
            	}
+           	/////
+           	/////
            	for(ItemInList item : order.getItems())
            	{
-               	stmt = conn.prepareStatement("INSERT INTO order_item VALUES (?,?,?)");
-           		stmt.setInt(1, orderID);
-           		stmt.setInt(2, item.getItem_id());
-           		stmt.setInt(3, item.getQuantity());
-           		stmt.executeUpdate();
+           		if (item instanceof NewItem) 
+           		{
+           			NewItem newItem =(NewItem)item;
+           			stmt = conn.prepareStatement("INSERT INTO order_new_item VALUES (?,?,?)");
+               		stmt.setInt(1, orderID);
+               		stmt.setInt(2, newItem.getItem_id());
+               		stmt.setInt(3, newItem.getQuantity());
+               		stmt.executeUpdate();
+               		PreparedStatement stmt2 = null;
+                    ResultSet rs2;
+                    stmt2 = conn.prepareStatement("select price from items where item_id in "
+                    		+ "(select catalog_item_id from new_item_spec where new_item_id =?)");	
+                    stmt2.setInt(1, newItem.getItem_id());
+                    rs2=stmt2.executeQuery();
+                    ///////
+                    PreparedStatement stmt3 = null;
+                    ResultSet rs3;
+                	stmt3 = conn.prepareStatement("select quantity from new_item_spec where new_item_id =? ");
+                	stmt3.setInt(1, newItem.getItem_id());
+                	rs3=stmt3.executeQuery();
+                	int price=0;
+                    while (rs2.next()) {
+                    rs3.next();
+                	price+=rs2.getInt(1)*rs3.getInt(1);
+        	 		}
+                    stmt3 = conn.prepareStatement("UPDATE new_items Set price  =? where new_item_id =? ");
+                    stmt3.setInt(1,price);
+                	stmt3.setInt(2, newItem.getItem_id());
+                	stmt3.executeUpdate();
+				}
+           		else
+           		{
+           			stmt = conn.prepareStatement("INSERT INTO order_item VALUES (?,?,?)");
+               		stmt.setInt(1, orderID);
+               		stmt.setInt(2, item.getItem_id());
+               		stmt.setInt(3, item.getQuantity());
+               		stmt.executeUpdate();
+				}
+               
            	}
+           	
+           	stmt = conn.prepareStatement("DELETE FROM cart_item WHERE "
+           			+ "cart_id = (SELECT cart_id FROM carts Where user_id=?)" );
+			stmt.setString(1, requestee);
+           	stmt.executeUpdate();
+           	
+           	stmt = conn.prepareStatement("DELETE FROM cart_new_item WHERE "
+           			+ "cart_id = (SELECT cart_id FROM carts Where user_id=?)" );
+			stmt.setString(1, requestee);
+           	stmt.executeUpdate();
+           	
 
 		} 
 		catch (SQLException e1) {
@@ -410,7 +504,7 @@ public class ServerConnSQL{
 	}
 	
 
-	public void AddToCart(String username, int item_id, int quantity) {
+	public int AddToCart(String username, int item_id, int quantity) {
 		PreparedStatement stmt = null;
 		ResultSet rs;
 		try {
@@ -428,6 +522,7 @@ public class ServerConnSQL{
            		stmt.setInt(2,item_id);
            		stmt.setInt(3,quantity);
            		stmt.executeUpdate();
+            	
            	}
            	else {
            	//update
@@ -437,6 +532,7 @@ public class ServerConnSQL{
            		stmt.setInt(2,item_id);
            		stmt.setString(3,username);
            		stmt.executeUpdate();
+           		
            	}
            		
 		} 
@@ -445,7 +541,7 @@ public class ServerConnSQL{
 			e1.printStackTrace();
 		}
 		 System.out.println("Add to cart I"+ item_id + " Q="+ quantity);
-		 
+		 return quantity;
 		
 	}
 
@@ -487,13 +583,34 @@ public class ServerConnSQL{
            		itemList = new ArrayList<>();
            		while(rs2.next()) {
            			itemInList = new ItemInList();
-           			itemInList.setItem_name(rs2.getString(1));
-           			itemInList.setCatalog_type(CatalogType.valueOf((rs2.getString(2))));
-           			itemInList.setItem_type(ItemType.valueOf(rs2.getString(3)));
+           			itemInList.setItemName(rs2.getString(1));
+           			itemInList.setCatalogType(CatalogType.valueOf((rs2.getString(2))));
+           			itemInList.setItemType(ItemType.valueOf(rs2.getString(3)));
            			itemInList.setPrice(rs2.getInt(4));
            			itemInList.setQuantity(rs2.getInt(5));
            			itemList.add(itemInList);
            		}
+           		//////
+           		
+           		stmt = conn.prepareStatement("SELECT new_item_id from order_new_item where order_id=?");
+           		stmt.setInt(1,rs1.getInt(2));
+           		rs2 = stmt.executeQuery();
+           		ResultSet rs3;
+           		while(rs2.next()) {
+           			NewItem newItem=new NewItem() ;
+           			newItem.setItem_id(rs2.getInt(1));
+           			stmt = conn.prepareStatement("SELECT ni.new_item_name,oni.quantity,ni.price from order_new_item oni,new_items ni "
+           					+ "where ni.new_item_id=oni.new_item_id and ni.new_item_id=?");
+               		stmt.setInt(1,rs2.getInt(1));
+               		rs3 = stmt.executeQuery();
+               		rs3.next();
+               		newItem.setItemName(rs3.getString(1));
+               		newItem.setQuantity(rs3.getInt(2));
+               		newItem.setPrice(rs3.getInt(3));
+               		newItem.setCatalogType(CatalogType.new_item);
+               		itemList.add(newItem);
+           		}
+           		/////
            		order.setItems(itemList);
            		customerOrders.add(order);
            	}
@@ -539,7 +656,6 @@ public class ServerConnSQL{
 			e1.printStackTrace();
 		}
 		System.out.println("Delete Item From Cart!");
-		
 	}
 
 	public void getNotification(String username, ArrayList<NotificationInTable> notificationList) {
@@ -570,7 +686,6 @@ public class ServerConnSQL{
 		PreparedStatement stmt = null;
 		try {
 			for (NotificationInTable notificationInTable : data) {
-				System.out.println(notificationInTable+"999");
 				stmt = conn.prepareStatement("UPDATE notifications SET status = ? WHERE notification_id = ? " );
 				stmt.setString(1,notificationInTable.getStatus());
 				stmt.setInt(2,notificationInTable.getNotificationnumber());
@@ -583,5 +698,124 @@ public class ServerConnSQL{
 			e1.printStackTrace();
 		}
 		
+	}
+
+	public void UpdateNewItemInCart(String username,NewItem newItem) {
+		int newItemId;
+		PreparedStatement stmt;
+		ResultSet rs;
+		//1
+		
+		
+		 try {
+			 
+			 	stmt = conn.prepareStatement("INSERT INTO new_items (new_item_name) VALUES (?)");
+			 	stmt.setString(1, newItem.getItemName());
+			 	stmt.executeUpdate();
+			 	///
+			 	stmt = conn.prepareStatement("SELECT LAST_INSERT_ID();");
+			 	rs=stmt.executeQuery();
+			 	rs.next();		
+			 	newItemId=rs.getInt(1);
+			 	///
+			 	
+			 	///
+			 	for (ItemInList item : newItem.getAssemble()) {
+			 		stmt = conn.prepareStatement("INSERT INTO new_item_spec values(? , ? ,?) ");
+			 		stmt.setInt(1, newItemId);
+			 		stmt.setInt(2,item.getItem_id());
+			 		stmt.setInt(3,item.getQuantity());
+			 		stmt.executeUpdate();
+				}
+			 	///
+			 	stmt = conn.prepareStatement("INSERT INTO cart_new_item values((select cart_id from carts where user_id=?), ?, ?)");
+			 	stmt.setString(1, username);
+			 	stmt.setInt(2, newItemId);
+			 	stmt.setInt(3, newItem.getQuantity());
+		 		stmt.executeUpdate();
+
+		 
+		 }
+		 catch (Exception e) {
+	            System.err.println("Got an exception! ");
+	            System.err.println(e.getMessage());
+	        }		
+	}
+
+	public void DeleteItemFromNewItemList(int new_item,int catalog_item) {
+		PreparedStatement stmt = null;
+		try {
+			stmt = conn.prepareStatement("DELETE FROM new_item_spec WHERE new_item_id = ? AND catalog_item_id =? " );
+			stmt.setInt(1, new_item);
+			stmt.setInt(2, catalog_item);
+           	stmt.executeUpdate(); 	
+           
+		} 
+		catch (SQLException e1) {
+            System.err.println("Failed on DeleteItemFromCart()");
+			e1.printStackTrace();
+		}
+		System.out.println("Delete item from newItemList !");	
+	}
+
+	public void DeleteNewItemFromCart(String requestee, int data) {
+		PreparedStatement stmt = null;
+		try {
+			stmt = conn.prepareStatement("DELETE FROM cart_new_item WHERE new_item_id=? AND cart_id = (SELECT cart_id FROM carts Where user_id=?)" );
+			stmt.setInt(1, data);
+			stmt.setString(2, requestee);
+           	stmt.executeUpdate(); 
+           	/////
+           	stmt = conn.prepareStatement("DELETE FROM new_items WHERE new_item_id = ?" );
+			stmt.setInt(1, data);
+           	stmt.executeUpdate(); 
+		} 
+		catch (SQLException e1) {
+            System.err.println("Failed on DeleteItemFromCart()");
+			e1.printStackTrace();
+		}
+		System.out.println("Delete item from newItemList !");	
+		
+	}
+
+	public void DeleteAllnewItemFromCart(String requestee, int data) {
+		PreparedStatement stmt = null;
+		try {
+			stmt = conn.prepareStatement("DELETE FROM cart_new_item WHERE cart_id = (SELECT cart_id FROM carts Where user_id=?)" );
+			stmt.setString(1, requestee);
+           	stmt.executeUpdate();
+           	////
+           	stmt = conn.prepareStatement("DELETE FROM new_item_spec WHERE new_item_id = ?" );
+			stmt.setInt(1, data);
+           	stmt.executeUpdate(); 	
+           	/////
+           	stmt = conn.prepareStatement("DELETE FROM new_items WHERE new_item_id = ?" );
+			stmt.setInt(1, data);
+           	stmt.executeUpdate(); 
+		} 
+		catch (SQLException e1) {
+            System.err.println("Failed on DeleteAllnewItemFromCart()");
+			e1.printStackTrace();
+		}
+		System.out.println("Delete All new item from cart !");	
+		
+		
+		
+	}
+
+	public void cancelOrder(Integer refundZerli, Integer orderID) {
+		PreparedStatement stmt = null;
+		try {
+			stmt = conn.prepareStatement("UPDATE orders SET status = ?,"
+					+ "refund_zerli = ? WHERE order_id = ? " );
+			stmt.setString(1,OrderStatus.pending_cancel.toString());
+			stmt.setInt(2,refundZerli);
+			stmt.setInt(3,orderID);
+           	stmt.executeUpdate(); 
+			}
+		catch (SQLException e1) {
+            System.err.println("Failed on cancelOrder()");
+			e1.printStackTrace();
+		}
 	}
 }

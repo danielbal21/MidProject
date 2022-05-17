@@ -10,55 +10,57 @@ public class ItemInList implements Serializable{
 	private int item_id;
 	private int quantity;
 	private int price;
-	private String item_name;
-	private ItemType item_type;
-	private CatalogType catalog_type;
+	private String itemName;
+	private ItemType itemType;
+	private CatalogType catalogType;
+	private String item_type;
+	private String catalog_Type;
 	private byte[] image;
-	public ItemInList() {
-		
-	}
-	public ItemInList(byte[] image,int item_id, int quantity, int price,String item_name, ItemType item_type, CatalogType catalog_type) {
+	
+	public ItemInList() {}
+	
+	public ItemInList(byte[] image,int item_id, int quantity, int price,String itemName, ItemType itemType, CatalogType catalogType) {
 		super();
 		this.image=image;
 		this.item_id = item_id;
 		this.quantity = quantity;
 		this.price=price;
-		this.item_name = item_name;
-		this.item_type = item_type;
-		this.catalog_type = catalog_type;
+		this.itemName = itemName;
+		this.itemType = itemType;
+		this.catalogType = catalogType;
 		
 	}	
-	public ItemInList(String item_name,CatalogType catalog_type, 
-			ItemType item_type, int price, int quantity) {
+	public ItemInList(String itemName,CatalogType catalogType, 
+			ItemType itemType, int price, int quantity) {
 		this.quantity = quantity;
 		this.price = price;
-		this.item_name = item_name;
-		this.item_type = item_type;
-		this.catalog_type = catalog_type;
+		this.itemName = itemName;
+		this.itemType = itemType;
+		this.catalogType = catalogType;
 	}
-
 	public ItemInList(int item_id, int quantity) {
 		this.item_id = item_id;
 		this.quantity = quantity;
 	}
 	
-	public ItemInList(int item_id, int quantity, String item_name, ItemType item_type, CatalogType catalog_type) {
+	public ItemInList(int item_id, int quantity, String itemName, ItemType itemType, CatalogType catalogType) {
 		this.item_id = item_id;
 		this.quantity = quantity;
-		this.item_name = item_name;
-		this.item_type = item_type;
-		this.catalog_type = catalog_type;
+		this.itemName = itemName;
+		this.itemType = itemType;
+		this.catalogType = catalogType;
 	}
 	
-	public ItemInList(int item_id, int quantity, int price, String item_name, ItemType item_type,
-			CatalogType catalog_type) {
+	public ItemInList(int item_id, int quantity, int price, String itemName, ItemType itemType,
+			CatalogType catalogType) {
 		this.item_id = item_id;
 		this.quantity = quantity;
 		this.price = price;
-		this.item_name = item_name;
-		this.item_type = item_type;
-		this.catalog_type = catalog_type;
+		this.itemName = itemName;
+		this.itemType = itemType;
+		this.catalogType = catalogType;
 	}
+	
 	public byte[] getImage() {
 		return image;
 	}
@@ -89,38 +91,61 @@ public class ItemInList implements Serializable{
 		this.quantity = quantity;
 	}
 
-	public String getItem_name() {
-		return item_name;
+	public ItemType getItemType() {
+		return itemType;
 	}
-
-	public void setItem_name(String item_name) {
-		this.item_name = item_name;
+	public void setItemType(ItemType itemType) {
+		this.itemType = itemType;
 	}
-
-	public ItemType getItem_type() {
-		return item_type;
+	public CatalogType getCatalogType() {
+		return catalogType;
 	}
-
-	public void setItem_type(ItemType item_type) {
+	public void setCatalogType(CatalogType catalogType) {
+		this.catalogType = catalogType;
+	}
+	public String getItem_type() {
+		if(itemType==null) return"";
+		switch (itemType) {
+		case bridal_bouquet: return "Bridal bouquet";
+		default:
+			String type= itemType.toString();
+			String s1 = type.substring(0, 1).toUpperCase();
+			String nameCapitalized = s1 + type.substring(1);
+			return nameCapitalized;
+		}
+	}
+	public void setItem_type(String item_type) {
 		this.item_type = item_type;
 	}
-
-	public CatalogType getCatalog_type() {
-		return catalog_type;
+	
+	public String getItemName() {
+		return itemName;
 	}
 
-	public void setCatalog_type(CatalogType catalog_type) {
-		this.catalog_type = catalog_type;
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
+	}
+
+	public String getCatalog_Type() {
+		switch (catalogType) {
+			case custom:return "Custom";
+			case pre_define:return "Pre define";
+			case new_item: return "New item";
+		}
+		return "";
+	}
+
+	public void setCatalog_Type(String catalog_Type) {
+		this.catalog_Type = catalog_Type;
 	}
 
 	@Override
 	public String toString() {
-		return "ItemInList [quantity=" + quantity + ", price=" + price + ", item_name=" + item_name + ", item_type="
-				+ item_type + ", catalog_type=" + catalog_type + "]";
+		return "ItemInList [item_id=" + item_id + ", quantity=" + quantity + ", price=" + price + ", itemName="
+				+ itemName + ", item_type=" + item_type + ", catalog_Type=" + catalog_Type + "]";
 	}
-	
+
 	public Image getJXImage() {
-		// TODO Auto-generated method stub
 		return new Image(new ByteArrayInputStream(image));
 	}
 }

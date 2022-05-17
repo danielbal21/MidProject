@@ -14,6 +14,9 @@ public class CustomerHomePageController implements UserControl{
 
     @FXML
     private Button prePefineBtn;
+    
+    @FXML
+    private Button privateBtn;
 
     @FXML
     void customPressed(ActionEvent event) {
@@ -24,6 +27,13 @@ public class CustomerHomePageController implements UserControl{
     @FXML
     void preDefinePressed(ActionEvent event) {
     	LoginController.windowControl.putPipe("catalog", CatalogType.pre_define);
+    	LoginController.windowControl.setUserControl("/gui/usercontrols/CustomerCatalogViewer.fxml");
+    }
+    
+
+    @FXML
+    void privatePressed(ActionEvent event) {
+    	LoginController.windowControl.putPipe("catalog", CatalogType.new_item);
     	LoginController.windowControl.setUserControl("/gui/usercontrols/CustomerCatalogViewer.fxml");
     }
 

@@ -1,4 +1,4 @@
-package ProtocolHandler;
+ package ProtocolHandler;
 /** Command Name **/
 public enum RequestType {
 	UpdateOrder,
@@ -21,4 +21,9 @@ public enum RequestType {
 	DeleteItemFromCart,
 	GetNotification,
 	UpdateNotification,
+	UpdateNewItemInCart,
+	DeleteItemFromNewItemList,
+	DeleteNewItemFromCart,
+	DeleteAllnewItemFromCart,
+	CancelOrder,
 }

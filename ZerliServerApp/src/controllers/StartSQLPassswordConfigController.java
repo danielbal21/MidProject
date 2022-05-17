@@ -9,7 +9,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import server.*;
@@ -32,6 +35,9 @@ public class StartSQLPassswordConfigController {
 
     @FXML
     private Label enterSQLLabel;
+    
+    @FXML
+    private AnchorPane AncorePane;
 
 	private Stage stage;
 
@@ -42,7 +48,8 @@ public class StartSQLPassswordConfigController {
     		errrorLabel.setVisible(true);
     	}
     	else {
-    		if(ServerConnSQL.startConn(SqlTextField.getText())){
+    		if(ServerConnSQL.startConn(SqlTextField.getText()))
+    		{
 				stage.close();
 				Stage newStage = new Stage();
     			Parent root = null;
@@ -59,7 +66,7 @@ public class StartSQLPassswordConfigController {
     			} 
     			catch (IOException e) 
     			{
-    				System.out.println("Failed load root");
+    				Server.Log("Server", "Failed load root");
     				e.printStackTrace();
     			}
     		}
@@ -81,5 +88,9 @@ public class StartSQLPassswordConfigController {
 		this.stage= stage;
 		
 	}
-
+    @FXML
+    void EnterPressed(KeyEvent event) {
+    	if(event.getCode() == KeyCode.ENTER)
+    		connectPressed(null);
+    }
 }
