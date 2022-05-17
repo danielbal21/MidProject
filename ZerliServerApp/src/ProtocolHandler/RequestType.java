@@ -11,7 +11,7 @@ public enum RequestType {
 	GetUserCurrency, 
 	UpdateZerliCoins,
 	InsertOrder,
-	GetManagerBranch,
+	GetBranch,
 	GetOrdersByBranch,
 	GetOrdersByUsername,
 	GetItemsOfOrder,
@@ -21,4 +21,5 @@ public enum RequestType {
 	DeleteItemFromCart,
 	GetNotification,
 	UpdateNotification,
+	EndOrder,
 }

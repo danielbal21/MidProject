@@ -81,8 +81,8 @@ public class ManagerFrameController implements IContainable {
 
 	public void init() {
 		userLabel.setText(ClientApp.UserID.toString());
-		ClientApp.ProtocolHandler.Invoke(RequestType.GetManagerBranch, null, null, true);
-		LoginController.windowControl.putPipe("Manager Branch", (String)ClientApp.ProtocolHandler.GetResponse(RequestType.GetManagerBranch));
+		ClientApp.ProtocolHandler.Invoke(RequestType.GetBranch, "Manager", null, true);
+		LoginController.windowControl.putPipe("Branch", (String)ClientApp.ProtocolHandler.GetResponse(RequestType.GetBranch));
 	}
 
 }

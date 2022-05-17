@@ -92,7 +92,7 @@ public class ManagerOrderManagerController implements UserControl {
 	@Override
 	public void onEnter() {
 	
-		branchName.setText((String) LoginController.windowControl.peekPipe("Manager Branch"));
+		branchName.setText((String) LoginController.windowControl.peekPipe("Branch"));
 		orderDateColumn.setCellValueFactory(new PropertyValueFactory<>("orderDate"));
 		orderIDcolumn.setCellValueFactory(new PropertyValueFactory<>("orderID"));
 		paymentMethodColumn.setCellValueFactory(new PropertyValueFactory<>("paymentMethod"));
@@ -102,7 +102,7 @@ public class ManagerOrderManagerController implements UserControl {
 		statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
 		userIDColumn.setCellValueFactory(new PropertyValueFactory<>("userID"));
 		
-		ClientApp.ProtocolHandler.Invoke(RequestType.GetOrdersByBranch,  LoginController.windowControl.peekPipe("Manager Branch"), null, true);
+		ClientApp.ProtocolHandler.Invoke(RequestType.GetOrdersByBranch,  LoginController.windowControl.peekPipe("Branch"), "pending", true);
 		
 		observableList = (ObservableList<Order>)ClientApp.ProtocolHandler.GetResponse(RequestType.GetOrdersByBranch);
 		

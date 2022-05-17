@@ -52,6 +52,7 @@ public class GenericUtilties {
 		parent.setOnMousePressed(DoubledEvents.GetPressedEvent()); 
         parent.setOnMouseDragged(DoubledEvents.GetDraggedEvent());
 	}
+	
 	public static java.sql.Timestamp Convert_LocalDate_To_SQLDate(LocalDate date,LocalTime time)
 	{
 		return java.sql.Timestamp.valueOf(date.atTime(time));

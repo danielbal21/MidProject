@@ -1,23 +1,24 @@
 package ProtocolHandler.Operations;
 
+import java.util.ArrayList;
+
+import Entities.Order;
 import ProtocolHandler.IOperation;
 import ProtocolHandler.ResponseWrapper;
 import server.Server;
 
-public class GetManagerBranchOperation implements IOperation {
+public class EndOrderOperation implements IOperation {
 
 	@Override
 	public boolean Perform(String requestee, Object data, Object params) {
-		// TODO Auto-generated method stub
-		return false;
+		Order order = (Order)data;
+		  Server.SqlServerManager.EndOrder(Integer.valueOf(order.getOrderID()),(String)params);
+			return true;
 	}
 
 	@Override
 	public boolean Perform(String requestee, Object data, Object params, ResponseWrapper response) {
-		// TODO Auto-generated method stub
-		String branch = Server.SqlServerManager.GetManagerBranch(requestee);
-		response.SetResponse(branch);
-		return true;
+	  return false;
 	}
 
 }

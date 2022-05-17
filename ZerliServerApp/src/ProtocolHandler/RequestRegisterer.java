@@ -13,7 +13,7 @@ public class RequestRegisterer {
 		Protocol.RegisterOperation(RequestType.SetLogOut, new LoggedOutOperation());
 		Protocol.RegisterOperation(RequestType.GetCatalog,new GetCatalogOperation());
 		Protocol.RegisterOperation(RequestType.GetCart,new GetCartOperation());
-		Protocol.RegisterOperation(RequestType.GetManagerBranch,new GetManagerBranchOperation());
+		Protocol.RegisterOperation(RequestType.GetBranch,new GetBranchOperation());
 		Protocol.RegisterOperation(RequestType.AddToCart,new AddToCartOperation());
 		Protocol.RegisterOperation(RequestType.GetAllCustomerOrders,new GetAllCustomerOrdersOperation());
 		Protocol.RegisterOperation(RequestType.DeleteItemFromCart,new DeleteItemFromCartOperation());
@@ -30,5 +30,7 @@ public class RequestRegisterer {
 		Protocol.RegisterOperation(RequestType.GetUserCurrency, new GetUserCurrencyOperation());
 		Protocol.RegisterOperation(RequestType.UpdateZerliCoins, new UpdateZerliCoinsOperation());
 		Protocol.RegisterOperation(RequestType.InsertOrder, new InsertOrderOperation());
+		
+		Protocol.RegisterOperation(RequestType.EndOrder,new EndOrderOperation());
 	}
 }

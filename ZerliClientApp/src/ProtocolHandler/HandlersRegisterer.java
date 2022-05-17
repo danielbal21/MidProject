@@ -20,7 +20,7 @@ public class HandlersRegisterer {
 		Protocol.RegisterHandler(RequestType.GetUserCurrency, new CreditParserHandler());
 		Protocol.RegisterHandler(RequestType.UpdateZerliCoins, null);
 		Protocol.RegisterHandler(RequestType.InsertOrder, null);
-		Protocol.RegisterHandler(RequestType.GetManagerBranch, null);
+		Protocol.RegisterHandler(RequestType.GetBranch, null);
 		Protocol.RegisterHandler(RequestType.GetOrdersByBranch, new ArrayListToObservableHandler());
 		Protocol.RegisterHandler(RequestType.GetItemsOfOrder, new ArrayListToObservableHandler());
 		Protocol.RegisterHandler(RequestType.ConfirmOrder, null);
@@ -30,6 +30,8 @@ public class HandlersRegisterer {
 		Protocol.RegisterHandler(RequestType.DeleteItemFromCart, null);
 		Protocol.RegisterHandler(RequestType.GetNotification, new ArrayListToObservableHandler());
 		Protocol.RegisterHandler(RequestType.UpdateNotification,null);
+		
+		Protocol.RegisterHandler(RequestType.EndOrder,null);
 		
 	}
 }

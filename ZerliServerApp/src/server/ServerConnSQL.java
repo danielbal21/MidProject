@@ -7,12 +7,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
+import com.mysql.cj.util.Util;
+
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.security.Timestamp;
 import java.sql.Blob;
 import Entities.*;
 import javafx.scene.image.Image;
@@ -32,8 +37,7 @@ public class ServerConnSQL {
 		}
 
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://localhost/midproject?serverTimezone=IST", "root",
-					mySQLpassword);
+			conn = DriverManager.getConnection("jdbc:mysql://localhost/midproject?useLegacyDatetimeCode=false&serverTimezone=Israel","root",mySQLpassword);
 			System.out.println("SQL connection succeed");
 			return true;
 		} catch (SQLException ex) {/* handle any errors */
@@ -44,39 +48,7 @@ public class ServerConnSQL {
 		}
 	}
 
-	public void getOrders(ArrayList<Order> orders, String[] params) {
-		Server.Log("Database", "Executing GetOrders");
-		PreparedStatement stmt = null;
-		Order newOrder = null;
-		ResultSet rs;
-		try {
-			if (params == null) {
-				stmt = conn.prepareStatement("SELECT * FROM Orders");
-			} else {
-				if (params[0].equals("")) {
-					stmt = conn.prepareStatement("SELECT * FROM Orders WHERE branch = ? AND status = 'pending'");
-					stmt.setString(1, params[1]);
-				} else {
-					stmt = conn.prepareStatement("SELECT * FROM Orders WHERE username = ? ");
-					stmt.setString(1, params[0]);
-				}
-			}
-			rs = stmt.executeQuery();
-			while (rs.next()) {
-				/*
-				 * newOrder = new Order(rs.getInt(1), rs.getInt(2),
-				 * rs.getString(3).equals("null") ? "" : rs.getString(3), rs.getString(4),
-				 * rs.getString(5).equals("null") ? "" : rs.getString(5), rs.getString(6),
-				 * rs.getString(7), rs.getString(8),rs.getString(9)); orders.add(newOrder);
-				 */
-			}
-		} catch (Exception e) {
-			Server.Log("Database", "Executing GetOrders: FAILED");
-			System.err.println("Got an exception! ");
-			System.err.println(e.getMessage());
-		}
-		System.out.println("Get Orders!");
-	}
+
 
 	public void UpdateOrder_ColorAndDate_ByNumber(String orderNumber, String newColor, String newDate) {
 		PreparedStatement stmt;
@@ -352,13 +324,18 @@ public class ServerConnSQL {
 		}
 	}
 
-	public String GetManagerBranch(String managerID) {
+	public String GetBranch(String user_id, String type) {
 		// TODO Auto-generated method stub
 		PreparedStatement stmt = null;
 		ResultSet rs;
 		try {
-			stmt = conn.prepareStatement("SELECT branch_name FROM manager_details WHERE user_id = ?");
-			stmt.setString(1, managerID);
+			if(type.equals("Manager")) {
+				stmt = conn.prepareStatement("SELECT branch_name FROM manager_details WHERE user_id = ?");
+			}
+			if(type.equals("Delivery")) {
+				stmt = conn.prepareStatement("SELECT branch_name FROM delivery_details WHERE user_id = ?");
+			}
+			stmt.setString(1, user_id);
 			rs = stmt.executeQuery();
 			if (rs.next() == false) {
 
@@ -373,13 +350,22 @@ public class ServerConnSQL {
 		}
 	}
 
-	public void GetOrdersByBranch(ArrayList<Order> orders, String branch_name) {
+	public void GetOrdersByBranch(ArrayList<Order> orders, String branch_name, String status) {
 		PreparedStatement stmt = null;
 		ResultSet rs;
 		Order newOrder;
 		try {
-			stmt = conn.prepareStatement("SELECT * FROM orders WHERE branch_name = ? AND Status = 'pending_confirm'");
+			stmt = conn.prepareStatement("SELECT * FROM orders WHERE branch_name = ? AND status = ?");
 			stmt.setString(1, branch_name);
+			if(status.equals("pending"))
+			{
+				stmt.setString(2, "pending_confirm");
+			}
+			if(status.equals("confirmed"))
+			{
+				stmt.setString(2, "confirmed");
+			}
+		
 			rs = stmt.executeQuery();
 			while (rs.next()) {
 				newOrder = new Order();
@@ -593,6 +579,69 @@ public class ServerConnSQL {
 			System.err.println("Failed on UpdateNotification()");
 			e1.printStackTrace();
 		}
+
+	}
+
+	public void EndOrder(int order_id, String action) {
+		// TODO Auto-generated method stub
+		PreparedStatement OrderDetailsStmt = null;
+		PreparedStatement SetStatusStmt = null;
+		ResultSet rs;
+		try {
+			OrderDetailsStmt = conn.prepareStatement("SELECT user_id, shipping_date,total_price FROM orders WHERE order_id =?");
+			SetStatusStmt = conn.prepareStatement("UPDATE orders SET status = ? WHERE order_id = ?");
+			OrderDetailsStmt.setInt(1, order_id);
+			SetStatusStmt.setInt(2, order_id);
+			if(action.equals("cancel"))
+				SetStatusStmt.setString(1, "canceled");
+			if(action.equals("done"))
+				SetStatusStmt.setString(1, "completed");
+			rs = OrderDetailsStmt.executeQuery();
+			if(rs.next())
+			{
+				String user_id = rs.getString(1);
+				String currency[]=GetCurrency(user_id);
+				int zCoin = Integer.valueOf(currency[4]);
+				int orderCost = rs.getInt(3);
+				java.sql.Timestamp  ts=  rs.getTimestamp(2);
+				LocalDateTime requested = Utilities.GenericUtilties.Convert_LocalDate_To_SQLDate(ts);
+				Duration difference = Duration.between(requested, LocalDateTime.now()); //requested - now
+				if(difference.getSeconds() > 0 && action.equals("done"))
+				{
+					//Full refund
+					zCoin +=  orderCost;
+				}
+				else if(difference.getSeconds() < 0 && action.equals("done"))
+				{
+					//full price
+				}
+				else if (difference.getSeconds() > -3600 && action.equals("cancel"))
+				{
+					//no refund
+				}
+				else if (difference.getSeconds() > -10800 && action.equals("cancel"))
+				{
+					//half refund
+					zCoin +=(orderCost/2);
+				}
+				else
+				{
+					//Full refund
+					zCoin +=  orderCost;
+				}
+				UpdateZerliCoins(user_id, zCoin);
+				SetStatusStmt.executeUpdate();
+				
+			}
+			
+			
+			
+		} catch (SQLException e1) {
+			System.err.println("Failed on EndOrder()");
+			e1.printStackTrace();
+		}
+		
+		System.out.println("order end!");
 
 	}
 }

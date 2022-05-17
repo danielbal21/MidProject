@@ -106,7 +106,22 @@ public class LoginController {
     				windowControl = new WindowControl(mfc);
 					mfc.init();
     				windowControl.setUserControl("/gui/usercontrols/ManagerHomePage.fxml");
-        			}
+        		}
+        		if(role == Roles.delivery)
+        		{
+        			windowControl.stage.close();
+    				loader.setLocation(getClass().getResource("/gui/mainframes/DeliveryMainScreen.fxml"));
+
+    				try {
+    					root =  loader.load();
+    				} catch (IOException e) {
+    					e.printStackTrace();
+    				} 
+    				DeliveryFrameController mfc= loader.getController();
+    				windowControl = new WindowControl(mfc);
+					mfc.init();
+    				windowControl.setUserControl("/gui/usercontrols/DeliveryOrderManager.fxml");
+        		}
 
         		Stage newStage = new Stage();
         		Utilities.GenericUtilties.SetWindowMovable(root, newStage);
