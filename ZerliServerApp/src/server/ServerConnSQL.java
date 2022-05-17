@@ -9,11 +9,7 @@ import java.sql.Types;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import javax.imageio.ImageIO;
-import com.mysql.cj.util.Util;
-import java.io.FileInputStream;
 import java.io.InputStream;
-import java.security.Timestamp;
 import java.sql.Blob;
 import Entities.*;
 import javafx.scene.image.Image;
@@ -325,7 +321,6 @@ public class ServerConnSQL {
 	}
 
 	public String GetBranch(String user_id, String type) {
-		// TODO Auto-generated method stub
 		PreparedStatement stmt = null;
 		ResultSet rs;
 		try {
@@ -406,10 +401,10 @@ public class ServerConnSQL {
 				rs2.next();
 				newItemInList.setQuantity(rs2.getInt(1));
 				newItemInList.setItem_id(rs.getInt(1));
-				newItemInList.setItem_name(rs.getString(2));
+				newItemInList.setItemName(rs.getString(2));
 				newItemInList.setPrice(rs.getInt(3));
-				newItemInList.setCatalog_type(CatalogType.valueOf(rs.getString(4)));
-				newItemInList.setItem_type(ItemType.valueOf(rs.getString(5)));
+				newItemInList.setCatalogType(CatalogType.valueOf(rs.getString(4)));
+				newItemInList.setItemType(ItemType.valueOf(rs.getString(5)));
 				itemsOfOrder.add(newItemInList);
 			}
 		} catch (SQLException e1) {
@@ -581,11 +576,9 @@ public class ServerConnSQL {
 			System.err.println("Failed on UpdateNotification()");
 			e1.printStackTrace();
 		}
-
 	}
 
 	public void EndOrder(int order_id, String action) {
-		// TODO Auto-generated method stub
 		PreparedStatement OrderDetailsStmt = null;
 		PreparedStatement SetStatusStmt = null;
 		ResultSet rs;
