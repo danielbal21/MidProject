@@ -1029,4 +1029,55 @@ public class ServerConnSQL {
 		} catch (SQLException e) {e.printStackTrace();}		
 		Server.Log("Database", "Executing InsertItem: FAILED");
 	}
+	
+	public void GetComplaints(ArrayList<Complaint> complaints)
+	{
+		PreparedStatement stmt;
+		PreparedStatement stmt2;
+		ResultSet rs;
+		ResultSet rs2;
+		try
+		{
+			stmt = conn.prepareStatement("SELECT * FROM complaints WHERE response = 'pending'");
+			rs=stmt.executeQuery();
+			while(rs.next())
+			{
+				Complaint newComplaint = new Complaint();
+				newComplaint.setUser_id(rs.getString(1));
+				newComplaint.setOrder_id(rs.getInt(2));
+				newComplaint.setComplain_text(rs.getString(3));
+				newComplaint.setComplain_time(rs.getTimestamp(5));
+				newComplaint.setBranch(rs.getString(7));
+				stmt2 = conn.prepareStatement("SELECT total_price FROM orders WHERE order_id = ?");
+				stmt2.setInt(1, rs.getInt(2));
+				rs2=stmt2.executeQuery();
+				if(rs2.next())
+				{
+					newComplaint.setCost(rs2.getInt(1));
+				}
+				complaints.add(newComplaint);
+				
+			}
+			
+		}catch (SQLException e) {e.printStackTrace();}		
+		Server.Log("Database", "Executing GetComplaints: FAILED");
+		
+	}
+	
+	public void MakeComplaint(Complaint complaint)
+	{
+		PreparedStatement stmt;
+		try
+		{
+			stmt = conn.prepareStatement("INSERT INTO complaints (user_id,order_id,complain_text,answer_text,complain_time,response,refund) VALUES (?,?,?,?,?,?,?)");
+		
+		} catch (SQLException e) {e.printStackTrace();}		
+		Server.Log("Database", "Executing MakeComplaint: FAILED");
+		
+	}
+	
+	public void ComplaintResponse(Complaint complaint)
+	{
+		PreparedStatement stmt;
+	}
 }

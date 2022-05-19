@@ -2,10 +2,12 @@ package controllers;
 
 import java.io.IOException;
 
+import Entities.Complaint;
 import ProtocolHandler.RequestType;
 import client.ClientApp;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -53,11 +55,8 @@ public class CustomerServiceFrameController implements IContainable {
 	boolean x = true;
     @FXML
 	void complaintsPressed(ActionEvent event) {
-    	x = !x;
-    	if(x)
-    		bellRedCricleLabl.setText("0");
-    	else
-    		bellRedCricleLabl.setText("1");
+    	bellRedCricleLabl.setText("0");
+    	LoginController.windowControl.setUserControl("/gui/usercontrols/CustomerServiceViewComplaints.fxml");
     }
 
     @FXML
@@ -124,7 +123,11 @@ public class CustomerServiceFrameController implements IContainable {
 				}
 			}
 		});
-		bellRedCricleLabl.setText("11");
+		ClientApp.ProtocolHandler.Invoke(RequestType.GetComplaints,  null, null, true);
+		LoginController.windowControl.putPipe("Complaints", ClientApp.ProtocolHandler.GetResponse(RequestType.GetComplaints));
+		ObservableList<Complaint> ObservableList = (ObservableList<Complaint>)LoginController.windowControl.peekPipe("Complaints");
+		int numberOfComplaints = ObservableList.size();
+		bellRedCricleLabl.setText(String.valueOf(numberOfComplaints));
 	}
 
 }
