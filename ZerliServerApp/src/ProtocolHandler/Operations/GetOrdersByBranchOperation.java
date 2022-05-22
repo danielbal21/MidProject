@@ -14,10 +14,12 @@ public class GetOrdersByBranchOperation implements IOperation {
 		return false;
 	}
 
+	// data - bracnh
+	// params "pending"
 	@Override
 	public boolean Perform(String requestee, Object data, Object params, ResponseWrapper response) {
 		ArrayList<Order> Orders = new ArrayList<Order>();
-	    Server.SqlServerManager.GetOrdersByBranch(Orders, (String) data, (String)params);
+	    Server.SqlServerManager.GetOrdersByBranch(Orders, (String) data);
 	    response.SetResponse(Orders);
 		return true;
 	}

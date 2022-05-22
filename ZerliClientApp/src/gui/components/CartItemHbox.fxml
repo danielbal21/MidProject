@@ -10,9 +10,9 @@
 
 <HBox fx:id="hboxRoot" alignment="CENTER_LEFT" prefHeight="113.0" prefWidth="893.0" style="-fx-border-color: black; -fx-border-radius: 10;" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CartItemHboxController">
    <children>
-      <ImageView fx:id="image" fitHeight="125.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="image" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
          <HBox.margin>
-            <Insets />
+            <Insets left="10.0" />
          </HBox.margin></ImageView>
       <Label fx:id="itemNameLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="70.0" prefWidth="241.0" text="Pink Rose" textAlignment="CENTER">
          <font>

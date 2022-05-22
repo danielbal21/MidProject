@@ -52,19 +52,11 @@ public class ManagerOrderManagerController implements UserControl {
 	    private TableView<Order> ordersTable;
 
 	    @FXML
-	    private TableColumn<Order, String> paymentMethodColumn;
-
-	    @FXML
-	    private TableColumn<Order, Integer> priceColumn;
-
-	    @FXML
 	    private TableColumn<Order, String> shippingMethodColumn;
 
 	    @FXML
 	    private TableColumn<Order, String> statusColumn;
 
-	    @FXML
-	    private TableColumn<Order, String> userIDColumn;
 
 	    @FXML
 	    void backPressed(ActionEvent event) 
@@ -72,18 +64,12 @@ public class ManagerOrderManagerController implements UserControl {
 	    	LoginController.windowControl.setUserControl("/gui/usercontrols/ManagerHomePage.fxml");
 	    }
 
-   
-	
-
-	
-
 	    @FXML
 	    void getOrderInfo(MouseEvent event) {
 		if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 2) {
 			Order OrderChoose = ordersTable.getSelectionModel().getSelectedItem();
 			LoginController.windowControl.putPipe("Order select", OrderChoose );
 			LoginController.windowControl.setUserControl("/gui/usercontrols/ManagerViewOrderDetails.fxml");
-
 		}
 
 	}
@@ -91,18 +77,14 @@ public class ManagerOrderManagerController implements UserControl {
 
 	@Override
 	public void onEnter() {
-	
 		branchName.setText((String) LoginController.windowControl.peekPipe("Branch"));
-		orderDateColumn.setCellValueFactory(new PropertyValueFactory<>("orderDate"));
+		orderDateColumn.setCellValueFactory(new PropertyValueFactory<>("order_date"));
 		orderIDcolumn.setCellValueFactory(new PropertyValueFactory<>("orderID"));
-		paymentMethodColumn.setCellValueFactory(new PropertyValueFactory<>("paymentMethod"));
-		priceColumn.setCellValueFactory(new PropertyValueFactory<>("totalPrice"));
-		expectedDateColumn.setCellValueFactory(new PropertyValueFactory<>("shippingDate"));
-		shippingMethodColumn.setCellValueFactory(new PropertyValueFactory<>("shippingMethod"));
-		statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
-		userIDColumn.setCellValueFactory(new PropertyValueFactory<>("userID"));
+		expectedDateColumn.setCellValueFactory(new PropertyValueFactory<>("shipping_date"));
+		shippingMethodColumn.setCellValueFactory(new PropertyValueFactory<>("shipping_method"));
+		statusColumn.setCellValueFactory(new PropertyValueFactory<>("Order_status"));
 		
-		ClientApp.ProtocolHandler.Invoke(RequestType.GetOrdersByBranch,  LoginController.windowControl.peekPipe("Branch"), "pending", true);
+		ClientApp.ProtocolHandler.Invoke(RequestType.GetOrdersByBranch,  LoginController.windowControl.peekPipe("Branch"), null, true);
 		
 		observableList = (ObservableList<Order>)ClientApp.ProtocolHandler.GetResponse(RequestType.GetOrdersByBranch);
 		
@@ -113,7 +95,6 @@ public class ManagerOrderManagerController implements UserControl {
 	@Override
 	public void onExit() {
 		// TODO Auto-generated method stub
-		
 	}
 
 

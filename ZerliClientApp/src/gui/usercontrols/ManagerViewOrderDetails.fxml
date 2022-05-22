@@ -8,16 +8,16 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="activePanelContainer" prefHeight="663.0" prefWidth="957.0" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ManagerViewOrderDetailsController">
+<AnchorPane fx:id="activePanelContainer" prefHeight="663.0" prefWidth="957.0" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ManagerViewOrderDetailsController">
    <children>
-      <TableView fx:id="itemTable" layoutX="156.0" layoutY="204.0" prefHeight="283.0" prefWidth="632.0">
+      <TableView fx:id="itemTable" layoutX="140.0" layoutY="201.0" onMouseClicked="#newItemClick" prefHeight="283.0" prefWidth="803.0">
          <columns>
-            <TableColumn fx:id="itemIDColumn" prefWidth="82.0" text="Item ID" />
-            <TableColumn fx:id="itemNameColumn" prefWidth="122.0" text="Item name" />
-            <TableColumn fx:id="catalogColumn" prefWidth="97.0" text="Catalog" />
-            <TableColumn fx:id="typeColumn" prefWidth="113.0" text="Type" />
-            <TableColumn fx:id="priceColumn" prefWidth="83.0" text="Price" />
-            <TableColumn fx:id="quantityColumn" prefWidth="134.0" text="quantity" />
+            <TableColumn fx:id="itemIDColumn" prefWidth="76.0" resizable="false" text="Item ID" />
+            <TableColumn fx:id="itemNameColumn" prefWidth="176.0" resizable="false" text="Item name" />
+            <TableColumn fx:id="catalogColumn" prefWidth="184.0" resizable="false" text="Catalog" />
+            <TableColumn fx:id="typeColumn" prefWidth="184.0" resizable="false" text="Type" />
+            <TableColumn fx:id="priceColumn" prefWidth="85.0" resizable="false" text="Price" />
+            <TableColumn fx:id="quantityColumn" prefWidth="91.0" resizable="false" text="quantity" />
          </columns>
       </TableView>
       <Button layoutX="14.0" layoutY="589.0" mnemonicParsing="false" onAction="#backPressed" text="Back">
@@ -39,17 +39,17 @@
       </Label>
       <AnchorPane layoutX="24.0" layoutY="87.0" prefHeight="117.0" prefWidth="370.0">
          <children>
-            <Label layoutX="14.0" layoutY="14.0" prefHeight="30.0" prefWidth="173.0" styleClass="subLabel" text="Order number:" />
-            <Label layoutX="14.0" layoutY="44.0" prefHeight="30.0" prefWidth="206.0" styleClass="subLabel" text="Payment method:" />
-            <Label layoutX="14.0" layoutY="74.0" prefHeight="30.0" prefWidth="206.0" styleClass="subLabel" text="Shipping method:" />
-            <Label fx:id="orderNumberLabel" layoutX="215.0" layoutY="14.0" styleClass="subLabel" text="#" />
-            <Label fx:id="paymentMethodLabel" layoutX="215.0" layoutY="44.0" styleClass="subLabel" text="pickup" />
-            <Label fx:id="shippingMethodLabel" layoutX="215.0" layoutY="74.0" styleClass="subLabel" text="zerli's coins" />
+            <Label layoutX="14.0" layoutY="5.0" prefHeight="30.0" prefWidth="173.0" styleClass="subLabel" text="Order number:" />
+            <Label layoutX="13.0" layoutY="40.0" prefHeight="30.0" prefWidth="206.0" styleClass="subLabel" text="Payment method:" />
+            <Label layoutX="13.0" layoutY="76.0" prefHeight="30.0" prefWidth="206.0" styleClass="subLabel" text="Shipping method:" />
+            <Label fx:id="orderNumberLabel" layoutX="209.0" layoutY="6.0" styleClass="subLabel" text="#" />
+            <Label fx:id="paymentMethodLabel" layoutX="215.0" layoutY="40.0" styleClass="subLabel" text="pickup" />
+            <Label fx:id="shippingMethodLabel" layoutX="215.0" layoutY="77.0" styleClass="subLabel" text="zerli's coins" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="405.0" layoutY="99.0" prefHeight="93.0" prefWidth="480.0">
+      <AnchorPane layoutX="433.0" layoutY="99.0" prefHeight="93.0" prefWidth="445.0">
          <children>
-            <Label layoutX="12.0" layoutY="13.0" prefHeight="30.0" prefWidth="173.0" styleClass="subLabel" text="Order date:" />
+            <Label layoutX="12.0" layoutY="9.0" prefHeight="30.0" prefWidth="173.0" styleClass="subLabel" text="Order date:" />
             <Label layoutX="12.0" layoutY="43.0" prefHeight="30.0" prefWidth="173.0" styleClass="subLabel" text="Shipping date:" />
             <Label fx:id="orderDateLabel" layoutX="174.0" layoutY="10.0" styleClass="subLabel" text="2022-05-09 19:22:00" />
             <Label fx:id="shippingDateLabel" layoutX="174.0" layoutY="44.0" styleClass="subLabel" text="2022-05-09 19:22:00" />
@@ -63,5 +63,12 @@
             <Label fx:id="statusLabel" layoutX="156.0" layoutY="44.0" styleClass="subLabel" text="pending confirm" />
          </children>
       </AnchorPane>
+      <Label fx:id="itemListLbl" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="204.0" prefHeight="60.0" prefWidth="118.0" styleClass="subLabel" text="New item&#10;List:" textAlignment="CENTER" />
+      <Button fx:id="fullListBtn" layoutX="19.0" layoutY="307.0" mnemonicParsing="false" onAction="#showFullSpecs" text="Return to &#10;full list" textAlignment="CENTER">
+         <styleClass>
+            <String fx:value="Reg-btn" />
+            <String fx:value="pressbtn" />
+         </styleClass>
+      </Button>
    </children>
 </AnchorPane>

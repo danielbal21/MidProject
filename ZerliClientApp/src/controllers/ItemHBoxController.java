@@ -40,6 +40,9 @@ public class ItemHBoxController extends HBox {
     @FXML
     private Label quntityLabel;
     
+    @FXML
+    private Label addLbl;
+    
     public ItemHBoxController() {
     	super();
 	}
@@ -76,11 +79,31 @@ public class ItemHBoxController extends HBox {
         	image.setVisible(true);
         	label.setText(String.valueOf(cartNotificationsNumber));
         	LoginController.windowControl.putPipe("cartLabel", cartLabelAndImage);
-    		
+    
     	}
-        	
+    	
+		
     	counter = 0;
     	quntityLabel.setText("0");
+    	
+    	Thread thread =new Thread(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					
+		        	addToCartBtn.setVisible(false);
+		        	addLbl.setVisible(true);
+		        	Thread.sleep(1000);
+		        	addLbl.setVisible(false);
+		        	addToCartBtn.setVisible(true);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		thread.start();
+        	
+    	
 
     }
     
@@ -90,6 +113,8 @@ public class ItemHBoxController extends HBox {
     		addToCartBtn.setText("Add to"+"\n"+"private product");
     	}
     	this.id=id;
+    	addLbl.setVisible(false);
+
     	CostLabel.setText(costLabel+ " " + Utilities.Constants.SHEKEL);
 		nameLabel.setText(name);
 		itemImage.setImage(image);

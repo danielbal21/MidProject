@@ -531,21 +531,14 @@ public class ServerConnSQL {
 		}
 	}
 
-	public void GetOrdersByBranch(ArrayList<Order> orders, String branch_name, String status) {
+	public void GetOrdersByBranch(ArrayList<Order> orders, String branch_name) {
 		PreparedStatement stmt = null;
 		ResultSet rs;
 		Order newOrder;
 		try {
-			stmt = conn.prepareStatement("SELECT * FROM orders WHERE branch_name = ? AND status = ?");
+			stmt = conn.prepareStatement("SELECT * FROM orders WHERE branch_name = ? AND "
+					+ "status = 'pending_confirm' OR status = 'pending_cancel' ");
 			stmt.setString(1, branch_name);
-			if(status.equals("pending"))
-			{
-				stmt.setString(2, "pending_confirm");
-			}
-			if(status.equals("confirmed"))
-			{
-				stmt.setString(2, "confirmed");
-			}
 		
 			rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -554,8 +547,8 @@ public class ServerConnSQL {
 				newOrder.setOrderID(rs.getString(2));
 				newOrder.setPaymentMethod(PaymentMethods.valueOf(rs.getString(3)));
 				newOrder.setShippingMethod(ShippingMethods.valueOf(rs.getString(4)));
-				newOrder.setShippingDate(rs.getTimestamp(5));
-				newOrder.setOrderDate(rs.getTimestamp(6));
+				newOrder.setOrderDate(rs.getTimestamp(5));
+				newOrder.setShippingDate(rs.getTimestamp(6));
 				newOrder.setTotalPrice(rs.getInt(9));
 				newOrder.setStatus(OrderStatus.valueOf(rs.getString(10)));
 				orders.add(newOrder);
@@ -564,6 +557,7 @@ public class ServerConnSQL {
 			Server.Log("Database", "Executing GetOrdersByBranch: FAILED");
 			e1.printStackTrace();
 		}
+		Server.Log("Database", "Executing GetOrdersByBranch to branch" + branch_name + ": Success");
 
 	}
 
@@ -593,6 +587,51 @@ public class ServerConnSQL {
 				newItemInList.setItemType(ItemType.valueOf(rs.getString(5)));
 				itemsOfOrder.add(newItemInList);
 			}
+			
+			stmt = conn.prepareStatement("SELECT new_item_id from order_new_item where order_id=?");
+       		stmt.setInt(1,order_id);
+       		rs2 = stmt.executeQuery();
+       		ResultSet rs3;
+       		while(rs2.next()) {
+       			NewItem newItem=new NewItem() ;
+       			newItem.setItem_id(rs2.getInt(1));
+       			stmt = conn.prepareStatement("SELECT ni.new_item_name,oni.quantity,ni.price from order_new_item oni,new_items ni "
+       					+ "where ni.new_item_id=oni.new_item_id and ni.new_item_id=?");
+           		stmt.setInt(1,rs2.getInt(1));
+           		rs3 = stmt.executeQuery();
+           		rs3.next();
+           		newItem.setItemName(rs3.getString(1));
+           		newItem.setQuantity(rs3.getInt(2));
+           		newItem.setPrice(rs3.getInt(3));
+           		newItem.setCatalogType(CatalogType.new_item);
+           		/// get all items of new item
+           		
+           		
+           	  stmt = conn.prepareStatement("select * from items where item_id in "
+	            		+ "(select catalog_item_id from new_item_spec where new_item_id =?)");	
+           	  stmt.setInt(1, rs2.getInt(1));
+           	  ResultSet rs5;
+           	  rs5 = stmt.executeQuery();
+           	  while(rs5.next()) {
+           		ItemInList assemble=new ItemInList(); 
+           		assemble.setItem_id(rs5.getInt(1));
+           		assemble.setItemName(rs5.getString(2));
+           		assemble.setCatalogType(CatalogType.valueOf(rs5.getString(4)));
+           		assemble.setItemType(ItemType.valueOf(rs5.getString(5)));
+           		assemble.setPrice(rs5.getInt(3));
+           		  
+           		stmt = conn.prepareStatement("select quantity from new_item_spec where new_item_id= ? "
+  	            		+ " AND catalog_item_id = ?");	
+           		stmt.setInt(1,rs2.getInt(1));
+           		stmt.setInt(2,rs5.getInt(1));
+           		ResultSet rs4;
+           		rs4 = stmt.executeQuery();
+           		rs4.next();
+           		assemble.setQuantity(rs4.getInt(1));
+           		newItem.addItem(assemble);
+           	  }
+           	  itemsOfOrder.add(newItem);
+       		}
 		} catch (SQLException e1) {
 			Server.Log("Database", "Executing GetItemsOfOrder: FAILED");
 			e1.printStackTrace();
@@ -717,6 +756,33 @@ public class ServerConnSQL {
                		newItem.setQuantity(rs3.getInt(2));
                		newItem.setPrice(rs3.getInt(3));
                		newItem.setCatalogType(CatalogType.new_item);
+               		/// get all items of new item
+               		
+               		
+               	  stmt = conn.prepareStatement("select * from items where item_id in "
+  	            		+ "(select catalog_item_id from new_item_spec where new_item_id =?)");	
+               	  stmt.setInt(1, rs2.getInt(1));
+               	  ResultSet rs5;
+               	  rs5 = stmt.executeQuery();
+               	  while(rs5.next()) {
+               		ItemInList assemble=new ItemInList(); 
+               		assemble.setItem_id(rs5.getInt(1));
+               		assemble.setItemName(rs5.getString(2));
+               		assemble.setCatalogType(CatalogType.valueOf(rs5.getString(4)));
+               		assemble.setItemType(ItemType.valueOf(rs5.getString(5)));
+               		assemble.setPrice(rs5.getInt(3));
+               		  
+               		stmt = conn.prepareStatement("select quantity from new_item_spec where new_item_id= ? "
+      	            		+ " AND catalog_item_id = ?");	
+               		stmt.setInt(1,rs2.getInt(1));
+               		stmt.setInt(2,rs5.getInt(1));
+               		ResultSet rs4;
+               		rs4 = stmt.executeQuery();
+               		rs4.next();
+               		assemble.setQuantity(rs4.getInt(1));
+               		newItem.addItem(assemble);
+               	  }
+               		///
                		itemList.add(newItem);
            		}
            		/////           	
@@ -730,7 +796,8 @@ public class ServerConnSQL {
 			System.err.println("Failed on GetAllCustomerOrders()");
 			e1.printStackTrace();
 		}
-		 System.out.println("Got All order to user id= "+username);
+		
+		
 	
 	}
 

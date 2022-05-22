@@ -15,14 +15,14 @@
    <children>
       <ScrollPane layoutX="15.0" layoutY="94.0" prefHeight="497.0" prefWidth="928.0" style="-fx-border-color: black;">
          <content>
-            <GridPane fx:id="GridPane" alignment="CENTER" prefHeight="193.0" prefWidth="901.0">
+            <GridPane fx:id="GridPane" alignment="CENTER" hgap="50.0" prefHeight="131.0" prefWidth="901.0" vgap="10.0">
               <columnConstraints>
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="350.0" minWidth="350.0" prefWidth="350.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="350.0" minWidth="350.0" prefWidth="350.0" />
               </columnConstraints>
               <rowConstraints>
-                  <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
-                  <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="227.0" minHeight="227.0" prefHeight="227.0" valignment="CENTER" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="227.0" minHeight="227.0" prefHeight="227.0" valignment="CENTER" vgrow="SOMETIMES" />
               </rowConstraints>
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
