@@ -17,7 +17,7 @@
             <String fx:value="pressbtn" />
          </styleClass>
       </Button>
-      <Button layoutX="544.0" layoutY="589.0" mnemonicParsing="false" onAction="#approvePressed" prefHeight="42.0" prefWidth="221.0" text="Close complaint">
+      <Button layoutX="608.0" layoutY="590.0" mnemonicParsing="false" onAction="#EndPressed" prefHeight="42.0" prefWidth="221.0" text="Close complaint">
          <styleClass>
             <String fx:value="Reg-btn" />
             <String fx:value="pressbtn" />
@@ -29,28 +29,31 @@
          </font>
       </Label>
       <TextArea fx:id="AnswerText" layoutX="200.0" layoutY="382.0" prefHeight="155.0" prefWidth="558.0" />
-      <Label layoutX="35.0" layoutY="227.0" prefHeight="82.0" prefWidth="137.0" styleClass="Reg-btn" text="feedback">
+      <Label layoutX="9.0" layoutY="227.0" prefHeight="82.0" prefWidth="163.0" text="feedback:">
          <font>
             <Font size="32.0" />
          </font>
       </Label>
       <Text layoutX="131.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="221.0" />
-      <Label layoutX="56.0" layoutY="377.0" prefHeight="82.0" prefWidth="95.0" styleClass="Reg-btn" text="Answer">
+      <Label layoutX="14.0" layoutY="411.0" prefHeight="82.0" prefWidth="163.0" text="Answer:">
          <font>
             <Font size="32.0" />
          </font>
       </Label>
       <Label fx:id="complaintText" layoutX="207.0" layoutY="208.0" prefHeight="120.0" prefWidth="558.0" text="Label" />
-      <Label layoutX="160.0" layoutY="557.0" prefHeight="82.0" prefWidth="153.0" styleClass="Reg-btn" text="Offer Refund">
+      <Label layoutX="126.0" layoutY="557.0" prefHeight="82.0" prefWidth="187.0" text="Offer Refund">
          <font>
             <Font size="32.0" />
          </font>
       </Label>
-      <TextField fx:id="refundField" layoutX="337.0" layoutY="586.0" />
-      <Label fx:id="costLabel" layoutX="177.0" layoutY="121.0" prefHeight="36.0" prefWidth="81.0" text="cost" />
-      <Label fx:id="dateLabel" layoutX="331.0" layoutY="121.0" prefHeight="36.0" prefWidth="81.0" text="date" />
-      <Label fx:id="branchLabel" layoutX="479.0" layoutY="121.0" prefHeight="36.0" prefWidth="81.0" text="branch" />
-      <Label fx:id="orderIDLabel" layoutX="600.0" layoutY="121.0" prefHeight="36.0" prefWidth="81.0" text="order_id" />
-      <Label fx:id="userIDlLabel" layoutX="718.0" layoutY="121.0" prefHeight="36.0" prefWidth="81.0" text="user_id" />
+      <TextField fx:id="refundField" layoutX="350.0" layoutY="586.0" />
+      <Label fx:id="dateLabel" layoutX="618.0" layoutY="121.0" prefHeight="36.0" prefWidth="81.0" text="xxx" />
+      <Label fx:id="branchLabel" layoutX="405.0" layoutY="121.0" prefHeight="36.0" prefWidth="81.0" text="xxxx" />
+      <Label fx:id="userIDlLabel" layoutX="196.0" layoutY="121.0" prefHeight="36.0" prefWidth="81.0" text="xxxx" />
+      <Label text="Label" />
+      <Label fx:id="errorLabel" layoutX="779.0" layoutY="418.0" prefHeight="42.0" prefWidth="95.0" text="error" visible="false" />
+      <Label layoutX="104.0" layoutY="131.0" prefHeight="17.0" prefWidth="45.0" text="user_id:" />
+      <Label layoutX="307.0" layoutY="131.0" prefHeight="17.0" prefWidth="45.0" text="branch:" />
+      <Label layoutX="545.0" layoutY="131.0" prefHeight="17.0" prefWidth="45.0" text="date:" />
    </children>
 </AnchorPane>

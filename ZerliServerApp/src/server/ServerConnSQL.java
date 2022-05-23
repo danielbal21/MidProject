@@ -1033,9 +1033,7 @@ public class ServerConnSQL {
 	public void GetComplaints(ArrayList<Complaint> complaints)
 	{
 		PreparedStatement stmt;
-		PreparedStatement stmt2;
 		ResultSet rs;
-		ResultSet rs2;
 		try
 		{
 			stmt = conn.prepareStatement("SELECT * FROM complaints WHERE response = 'pending'");
@@ -1044,40 +1042,63 @@ public class ServerConnSQL {
 			{
 				Complaint newComplaint = new Complaint();
 				newComplaint.setUser_id(rs.getString(1));
-				newComplaint.setOrder_id(rs.getInt(2));
+				newComplaint.setComplaint_id(rs.getInt(2));
 				newComplaint.setComplain_text(rs.getString(3));
 				newComplaint.setComplain_time(rs.getTimestamp(5));
 				newComplaint.setBranch(rs.getString(7));
-				stmt2 = conn.prepareStatement("SELECT total_price FROM orders WHERE order_id = ?");
-				stmt2.setInt(1, rs.getInt(2));
-				rs2=stmt2.executeQuery();
-				if(rs2.next())
-				{
-					newComplaint.setCost(rs2.getInt(1));
-				}
 				complaints.add(newComplaint);
-				
 			}
-			
 		}catch (SQLException e) {e.printStackTrace();}		
 		Server.Log("Database", "Executing GetComplaints: FAILED");
 		
 	}
 	
-	public void MakeComplaint(Complaint complaint)
+	public boolean MakeComplaint(Complaint complaint)
 	{
 		PreparedStatement stmt;
+		PreparedStatement stmt2;
+		ResultSet rs;
 		try
 		{
-			stmt = conn.prepareStatement("INSERT INTO complaints (user_id,order_id,complain_text,answer_text,complain_time,response,refund) VALUES (?,?,?,?,?,?,?)");
-		
+			stmt2 = conn.prepareStatement("SELECT user_id FROM customer_details WHERE user_id =?");
+			stmt2.setString(1, complaint.getUser_id());
+			rs=stmt2.executeQuery();
+			if(rs.next())
+			{
+				stmt = conn.prepareStatement("INSERT INTO complaints (user_id,complain_text,complain_time,response,branch) VALUES (?,?,?,?,?)");
+				stmt.setString(1, complaint.getUser_id());
+				stmt.setString(2, complaint.getComplain_text());
+				stmt.setTimestamp(3, complaint.getComplain_time() );
+				stmt.setString(4, "pending");
+				stmt.setString(5, complaint.getBranch());
+				stmt.executeUpdate();
+				return true;
+			}
+			return false;
 		} catch (SQLException e) {e.printStackTrace();}		
 		Server.Log("Database", "Executing MakeComplaint: FAILED");
+		return false;
 		
 	}
 	
 	public void ComplaintResponse(Complaint complaint)
 	{
 		PreparedStatement stmt;
+		try
+		{
+			stmt = conn.prepareStatement("UPDATE complaints SET response = 'done', answer_text = ?, refund = ? WHERE complaint_id =?");
+			stmt.setString(1, complaint.getAnswer_text());
+			stmt.setInt(2, complaint.getRefund());
+			stmt.setInt(3, complaint.getComplaint_id());
+			if(complaint.getRefund() != 0)
+			{
+				String currency[]=GetCurrency(complaint.getUser_id());
+				int zCoin = Integer.valueOf(currency[4]);
+				UpdateZerliCoins(complaint.getUser_id(), zCoin+complaint.getRefund());
+			}
+			stmt.executeUpdate();
+		
+		} catch (SQLException e) {e.printStackTrace();}		
+		Server.Log("Database", "Executing MakeComplaint: FAILED");
 	}
 }

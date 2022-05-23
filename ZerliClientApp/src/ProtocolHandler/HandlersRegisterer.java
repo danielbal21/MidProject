@@ -42,6 +42,7 @@ public class HandlersRegisterer {
 		Protocol.RegisterHandler(RequestType.AddItem, null);
 		Protocol.RegisterHandler(RequestType.ComplaintResponse, null);
 		Protocol.RegisterHandler(RequestType.GetComplaints, new ArrayListToObservableHandler());
+		Protocol.RegisterHandler(RequestType.MakeComplaint, null);
 		
 	}
 }

@@ -10,7 +10,7 @@ import java.util.Formatter;
 
 public class Complaint implements Serializable{
 	private String user_id;
-	private int order_id;
+	private int complaint_id;
 	private String complain_text;
 	private String answer_text;
 	private Timestamp complain_time;
@@ -29,12 +29,8 @@ public class Complaint implements Serializable{
 	public void setUser_id(String user_id) {
 		this.user_id = user_id;
 	}
-	public int getOrder_id() {
-		return order_id;
-	}
-	public void setOrder_id(int order_id) {
-		this.order_id = order_id;
-	}
+	
+	
 	public String getComplain_text() {
 		return complain_text;
 	}
@@ -64,6 +60,12 @@ public class Complaint implements Serializable{
 	}
 	public void setRefund(int refund) {
 		this.refund = refund;
+	}
+	public int getComplaint_id() {
+		return complaint_id;
+	}
+	public void setComplaint_id(int complaint_id) {
+		this.complaint_id = complaint_id;
 	}
 	
 	

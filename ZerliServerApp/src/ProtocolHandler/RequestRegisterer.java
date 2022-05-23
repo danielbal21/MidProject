@@ -38,6 +38,7 @@ public class RequestRegisterer {
 		Protocol.RegisterOperation(RequestType.AddItem, new AddItemOperation());
 		Protocol.RegisterOperation(RequestType.GetComplaints, new GetComplaintsOperation());
 		Protocol.RegisterOperation(RequestType.ComplaintResponse, new ComplaintResponseOperation());
+		Protocol.RegisterOperation(RequestType.MakeComplaint, new MakeComplaintOperation());
 		
 	}
 }

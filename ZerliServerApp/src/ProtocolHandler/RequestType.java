@@ -34,4 +34,5 @@ public enum RequestType {
 	AddItem,
 	GetComplaints,
 	ComplaintResponse,
+	MakeComplaint,
 }

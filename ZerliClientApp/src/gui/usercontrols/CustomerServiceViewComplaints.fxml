@@ -13,7 +13,6 @@
       <TableView fx:id="complaintsTable" layoutX="43.0" layoutY="169.0" onMouseClicked="#getComplainInfo" prefHeight="374.0" prefWidth="873.0">
         <columns>
           <TableColumn fx:id="userIDColumn" prefWidth="91.0" text="User ID" />
-          <TableColumn fx:id="orderIDcolumn" prefWidth="88.0" text="Order ID" />
             <TableColumn fx:id="postTimeColumn" prefWidth="130.0" text="Post Time" />
             <TableColumn fx:id="branchColumn" prefWidth="130.0" text="Branch" />
         </columns>
