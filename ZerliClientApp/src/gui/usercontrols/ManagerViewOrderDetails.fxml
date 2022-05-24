@@ -26,7 +26,7 @@
             <String fx:value="pressbtn" />
          </styleClass>
       </Button>
-      <Button layoutX="410.0" layoutY="598.0" mnemonicParsing="false" onAction="#approvePressed" text="Approve">
+      <Button fx:id="approveBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="428.0" layoutY="580.0" mnemonicParsing="false" onAction="#approvePressed" text="Approve" textAlignment="CENTER">
          <styleClass>
             <String fx:value="Reg-btn" />
             <String fx:value="pressbtn" />
@@ -43,7 +43,7 @@
             <Label layoutX="13.0" layoutY="40.0" prefHeight="30.0" prefWidth="206.0" styleClass="subLabel" text="Payment method:" />
             <Label layoutX="13.0" layoutY="76.0" prefHeight="30.0" prefWidth="206.0" styleClass="subLabel" text="Shipping method:" />
             <Label fx:id="orderNumberLabel" layoutX="209.0" layoutY="6.0" styleClass="subLabel" text="#" />
-            <Label fx:id="paymentMethodLabel" layoutX="215.0" layoutY="40.0" styleClass="subLabel" text="pickup" />
+            <Label fx:id="paymentMethodLabel" layoutX="215.0" layoutY="39.0" styleClass="subLabel" text="pickup" />
             <Label fx:id="shippingMethodLabel" layoutX="215.0" layoutY="77.0" styleClass="subLabel" text="zerli's coins" />
          </children>
       </AnchorPane>

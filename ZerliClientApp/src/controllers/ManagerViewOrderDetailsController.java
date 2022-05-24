@@ -9,6 +9,7 @@ import Entities.ItemInList;
 import Entities.ItemType;
 import Entities.NewItem;
 import Entities.Order;
+import Entities.OrderStatus;
 import ProtocolHandler.RequestType;
 import client.ClientApp;
 import javafx.collections.FXCollections;
@@ -27,6 +28,8 @@ import javafx.scene.layout.AnchorPane;
 public class ManagerViewOrderDetailsController implements UserControl{
 
 	private Order order;
+	private String futureStatus;
+	private ObservableList<ItemInList> orderItems;
 	
 	private ObservableList<ItemInList> observableList;
 	
@@ -83,8 +86,9 @@ public class ManagerViewOrderDetailsController implements UserControl{
     
     @FXML
     private Label itemListLbl;
-
-	private ObservableList<ItemInList> orderItems;
+	
+   @FXML
+    private Button approveBtn;
     
     
     @FXML
@@ -117,7 +121,8 @@ public class ManagerViewOrderDetailsController implements UserControl{
 
     @FXML
     void approvePressed(ActionEvent event) {
-    	ClientApp.ProtocolHandler.Invoke(RequestType.ConfirmOrder,  LoginController.windowControl.peekPipe("Order select"), null, false);
+    	ClientApp.ProtocolHandler.Invoke(RequestType.ConfirmOrder,  
+    			LoginController.windowControl.peekPipe("Order select"), futureStatus, false);
     	LoginController.windowControl.setUserControl("/gui/usercontrols/ManagerOrderManager.fxml");
     }
 
@@ -138,7 +143,6 @@ public class ManagerViewOrderDetailsController implements UserControl{
 		itemIDColumn.setCellValueFactory(new PropertyValueFactory<>("item_id"));
 		typeColumn.setCellValueFactory(new PropertyValueFactory<>("item_type"));
 		priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
-		
 		orderDateLabel.setText(order.getOrder_date());
 		shippingDateLabel.setText(order.getShipping_date());
 		paymentMethodLabel.setText(order.getPayment_method());
@@ -146,6 +150,16 @@ public class ManagerViewOrderDetailsController implements UserControl{
 		costLabel.setText(String.valueOf(order.getTotalPrice()));
 		statusLabel.setText(order.getOrder_status());
 		shippingMethodLabel.setText(order.getShipping_method());
+		
+		if(order.getStatus() == OrderStatus.pending_cancel ) {
+			futureStatus = "canceled";
+			approveBtn.setText("Cancel order");
+		}
+		else if(order.getStatus() == OrderStatus.pending_confirm ) {
+			futureStatus = "confirmed";
+			approveBtn.setText("Approve order");
+
+		}
 		
 		ClientApp.ProtocolHandler.Invoke(RequestType.GetItemsOfOrder, LoginController.windowControl.peekPipe("Order select"), null, true);
 		orderItems = (ObservableList<ItemInList>)ClientApp.ProtocolHandler.GetResponse(RequestType.GetItemsOfOrder);

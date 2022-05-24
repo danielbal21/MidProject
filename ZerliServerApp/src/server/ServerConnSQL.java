@@ -8,11 +8,14 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.security.Timestamp;
 import java.sql.Blob;
 import Entities.*;
+import Utilities.GenericUtilties;
 import javafx.scene.image.Image;
 
 public class ServerConnSQL {
@@ -639,12 +642,49 @@ public class ServerConnSQL {
 
 	}
 
-	public void ConfirmOrder(int order_id) {
+	// confirm + cancel
+	public void ConfirmOrder(int order_id, String status) {
 		PreparedStatement stmt = null;
 		try {
-			stmt = conn.prepareStatement("UPDATE orders SET status = 'confirmed' WHERE order_id = ?");
-			stmt.setInt(1, order_id);
+			stmt = conn.prepareStatement("UPDATE orders SET status = ? WHERE order_id = ?");
+			stmt.setString(1, status);
+			stmt.setInt(2, order_id);
 			stmt.executeUpdate();
+			
+			if(status.equals("confirmed")) {
+				stmt = conn.prepareStatement("SELECT shipping_date FROM orders WHERE order_id=?");
+				stmt.setInt(1, order_id);
+				ResultSet rs = stmt.executeQuery();
+				rs.next();
+				LocalDateTime currentTime = LocalDateTime.now();
+				LocalDateTime shippingTime = Utilities.GenericUtilties.
+						Convert_LocalDate_To_SQLDate(rs.getTimestamp(1));
+				
+				long diff = ChronoUnit.MINUTES.between(currentTime,shippingTime);
+				if(diff < 3*60) {
+					currentTime = currentTime.plusHours(3);
+					stmt = conn.prepareStatement("UPDATE orders SET shipping_date=? WHERE order_id=?");
+					stmt.setTimestamp(1, GenericUtilties.Convert_LocalDate_To_SQLDate(currentTime));
+					stmt.setInt(2, order_id);
+					stmt.executeUpdate();
+				}
+			}
+			else if(status.equals("canceled")) {
+				stmt = conn.prepareStatement("SELECT user_id,refund_zerli FROM orders WHERE order_id=?");
+				stmt.setInt(1, order_id);
+				ResultSet rs = stmt.executeQuery();
+				rs.next();
+				String user = rs.getString(1);
+				int refund = rs.getInt(2);
+				
+				stmt = conn.prepareStatement("UPDATE customer_details SET "
+						+ "zerli_coin = zerli_coin + ? WHERE user_id = ?");
+				stmt.setInt(1, refund);
+				stmt.setString(2, user);
+				stmt.executeUpdate();
+			}
+			
+			
 		} catch (SQLException e1) {
 			Server.Log("Database", "Executing ConfirmOrder: FAILED");
 			e1.printStackTrace();

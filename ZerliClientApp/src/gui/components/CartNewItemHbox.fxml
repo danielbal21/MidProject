@@ -8,13 +8,13 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="hboxRoot" alignment="CENTER_LEFT" prefHeight="113.0" prefWidth="893.0" spacing="25.0" style="-fx-border-color: black; -fx-border-radius: 10;" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CartNewItemController">
+<HBox fx:id="hboxRoot" alignment="CENTER_LEFT" prefHeight="113.0" prefWidth="893.0" spacing="5.0" style="-fx-border-color: black; -fx-border-radius: 10;" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CartNewItemController">
    <children>
       <ImageView fx:id="image" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
          <HBox.margin>
             <Insets left="10.0" />
          </HBox.margin></ImageView>
-      <Label fx:id="itemNameLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="70.0" prefWidth="181.0" text="Pink Rose" textAlignment="CENTER">
+      <Label fx:id="itemNameLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="70.0" prefWidth="240.0" text="Pink Rose" textAlignment="CENTER">
          <font>
             <Font name="Maiandra GD" size="24.0" />
          </font>
@@ -22,12 +22,12 @@
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </padding>
       </Label>
-      <Label fx:id="quntityLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="52.0" prefWidth="101.0" text="x 4" textAlignment="CENTER">
+      <Label fx:id="quntityLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="52.0" prefWidth="75.0" text="x 4" textAlignment="CENTER">
          <font>
             <Font name="Maiandra GD" size="24.0" />
          </font>
       </Label>
-      <Button mnemonicParsing="false" onAction="#ViewNewItemComponents" prefHeight="69.0" prefWidth="270.0" text="View item components ">
+      <Button mnemonicParsing="false" onAction="#ViewNewItemComponents" prefHeight="69.0" prefWidth="365.0" text="View item components ">
          <styleClass>
             <String fx:value="pressbtn" />
             <String fx:value="Reg-btn" />

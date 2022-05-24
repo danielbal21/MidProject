@@ -11,11 +11,6 @@
 
 <AnchorPane fx:id="activePanelContainer" prefHeight="663.0" prefWidth="957.0" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.NewItemListController">
    <children>
-      <Label contentDisplay="CENTER" layoutX="256.0" layoutY="14.0" prefHeight="79.0" prefWidth="477.0" styleClass="MainLabel" text="Item components" textAlignment="CENTER">
-         <font>
-            <Font name="Maiandra GD" size="47.0" />
-         </font>
-      </Label>
       <ScrollPane layoutX="23.0" layoutY="124.0" prefHeight="426.0" prefWidth="912.0">
          <content>
             <VBox fx:id="Vbox" prefHeight="390.0" prefWidth="898.0" />
@@ -30,34 +25,39 @@
             <Font name="Maiandra GD" size="8.0" />
          </font>
       </Button>
-      <HBox alignment="CENTER_LEFT" layoutX="36.0" layoutY="64.0" prefHeight="86.0" prefWidth="912.0" stylesheets="@../application.css">
+      <HBox alignment="CENTER_LEFT" layoutX="36.0" layoutY="64.0" prefHeight="86.0" prefWidth="912.0" spacing="5.0" stylesheets="@../application.css">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="52.0" prefWidth="142.0" styleClass="subLabel" text="Image" textAlignment="CENTER">
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="52.0" prefWidth="100.0" styleClass="subLabel" text="Image" textAlignment="CENTER">
                <font>
                   <Font name="Maiandra GD" size="26.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="52.0" prefWidth="202.0" styleClass="subLabel" text="Name" textAlignment="CENTER">
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="52.0" prefWidth="225.0" styleClass="subLabel" text="Name" textAlignment="CENTER">
                <font>
                   <Font name="Maiandra GD" size="26.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="52.0" prefWidth="127.0" styleClass="subLabel" text="Quantity" textAlignment="CENTER">
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="52.0" prefWidth="100.0" styleClass="subLabel" text="Quantity" textAlignment="CENTER">
                <font>
                   <Font name="Maiandra GD" size="26.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="52.0" prefWidth="166.0" styleClass="subLabel" text="Catalog" textAlignment="CENTER">
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="52.0" prefWidth="125.0" styleClass="subLabel" text="Catalog" textAlignment="CENTER">
                <font>
                   <Font name="Maiandra GD" size="26.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="52.0" prefWidth="135.0" styleClass="subLabel" text="Type" textAlignment="CENTER">
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="52.0" prefWidth="235.0" styleClass="subLabel" text="Type" textAlignment="CENTER">
                <font>
                   <Font name="Maiandra GD" size="26.0" />
                </font>
             </Label>
          </children>
       </HBox>
+      <Label contentDisplay="CENTER" layoutX="257.0" layoutY="14.0" prefHeight="79.0" prefWidth="470.0" styleClass="MainLabel" text="Item components" textAlignment="CENTER">
+         <font>
+            <Font name="Maiandra GD" size="47.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
