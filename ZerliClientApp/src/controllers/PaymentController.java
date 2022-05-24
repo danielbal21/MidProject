@@ -2,6 +2,7 @@ package controllers;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Optional;
 import Entities.Order;
 import Entities.OrderStatus;
@@ -203,6 +204,16 @@ public class PaymentController implements UserControl {
 	    		error.append("Please enter a valid expiration date\n");
 	    		valid = false;
 	    	}
+	    	else {
+	    		int year= Integer.parseInt(yearCB.getValue());
+	    		int month = Integer.parseInt(expMonthCB.getValue());
+	    		if(LocalDateTime.now().getYear() == year) {
+	    			if(LocalDateTime.now().getMonthValue() > month) {
+	    				error.append("Please enter a valid expiration date\n");
+	    			}
+	    		}
+	    	}
+	    	
 	    	errorLabel.setText(error.toString());
 	    	return valid;
     	}
@@ -220,7 +231,7 @@ public class PaymentController implements UserControl {
 		isShipping = (boolean)LoginController.windowControl.getPipe("isShipping");
 		currentOrder = (Order)LoginController.windowControl.getPipe("orderInfo");
     	int netPrice = (int) LoginController.windowControl.getPipe("totalCost");
-    	int discount = payDetails.newUser ? (int)(0.1f * netPrice) : 0;
+    	int discount = payDetails.newUser ? (int)(0.2f * netPrice) : 0;
     	int shipping = isShipping ? 15 : 0;
     	currentOrder.setTotalPrice(netPrice - discount + shipping);
     	
@@ -232,7 +243,7 @@ public class PaymentController implements UserControl {
 			var months = new ArrayList<String>();
 			for(var i = currentYear;i < currentYear + 12;i++)
 				years.add(i + "");
-			for(var i = 0;i<12;i++)
+			for(var i = 1;i<12;i++)
 				months.add((i+"").length() == 1 ? ("0"+ i) : i + "");
 			yearCB.setItems(FXCollections.observableArrayList(years));
 			expMonthCB.setItems(FXCollections.observableArrayList(months));

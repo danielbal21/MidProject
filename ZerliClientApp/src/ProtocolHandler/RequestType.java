@@ -32,4 +32,6 @@ public enum RequestType {
 	GetItemByID,
 	UpdateItem,
 	AddItem,
+	GetPendingClient,
+	RegisterClient,
 }

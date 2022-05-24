@@ -1136,4 +1136,77 @@ public class ServerConnSQL {
 		} catch (SQLException e) {e.printStackTrace();}		
 		Server.Log("Database", "Executing InsertItem: FAILED");
 	}
+
+	public PendingClientInfo GetPendingClient( String ID) {
+		Server.Log("Database", "Executing GetPendingClient");
+		
+		PreparedStatement stmt;
+		ResultSet rs;
+		PendingClientInfo clientInfo = new PendingClientInfo();
+		try 
+		{
+			stmt = conn.prepareStatement("SELECT * FROM user_details WHERE id =? AND role = 'customer' "
+					+ "AND NOT EXISTS (SELECT * FROM customer_details WHERE user_id = "
+					+ "(SELECT user_id FROM user_details WHERE id =? AND role = 'customer'))");
+			stmt.setString(1, ID);
+			stmt.setString(2, ID);
+			rs = stmt.executeQuery();
+			
+			if(rs.next() == false) {
+				return null;
+			}
+			else {
+				clientInfo.setUserID(rs.getString(1));
+				clientInfo.setFirstName(rs.getString(2));
+				clientInfo.setLastName(rs.getString(3));
+				clientInfo.setID(rs.getString(4));
+				clientInfo.setEmail(rs.getString(5));
+				clientInfo.setPhone(rs.getString(6));
+				
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+			Server.Log("Database", "Executing GetPendingClient: FAILED");
+		}
+		
+		Server.Log("Database", "Executing GetPendingClient: SUCCESS");
+		return clientInfo;
+		
+	}
+
+	public void ActivateClient(PendingClientInfo clientInfo, String userID) {
+		Server.Log("Database", "Executing ActivateClient");
+		System.out.println("Start");
+		PreparedStatement stmt;
+		try 
+		{
+			stmt = conn.prepareStatement("INSERT INTO customer_details "
+					+ "VALUES (?,?,?,?,?,0,1)");
+			stmt.setString(1, userID);
+			stmt.setString(2, clientInfo.getStringCreditPhrases());
+			stmt.setString(3, clientInfo.getCVV());
+			stmt.setString(4, clientInfo.getExpirationMonth());
+			stmt.setString(5, clientInfo.getExpirationYear());
+			stmt.executeUpdate();
+			
+			stmt = conn.prepareStatement("INSERT INTO login_details VALUES (?,?, 'active', 0)");
+			stmt.setString(1, userID);
+			stmt.setString(2, clientInfo.getPassword());
+			stmt.executeUpdate();
+			
+			stmt = conn.prepareStatement("INSERT INTO carts (user_id) VALUES (?)");
+			stmt.setString(1, userID);
+			stmt.executeUpdate();
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+			Server.Log("Database", "Executing ActivateClient: FAILED");
+		}
+		System.out.println("Done");
+		Server.Log("Database", "Executing ActivateClient: SUCCESS");
+		
+	}
 }
