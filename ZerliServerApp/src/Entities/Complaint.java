@@ -67,6 +67,14 @@ public class Complaint implements Serializable{
 	public void setComplaint_id(int complaint_id) {
 		this.complaint_id = complaint_id;
 	}
+	@Override
+	public String toString() {
+		return "Complaint [user_id=" + user_id + ", complaint_id=" + complaint_id + ", complain_text=" + complain_text
+				+ ", answer_text=" + answer_text + ", complain_time=" + complain_time + ", cost=" + cost + ", branch="
+				+ branch + ", refund=" + refund + "]";
+	}
+	
+	
 	
 	
 }

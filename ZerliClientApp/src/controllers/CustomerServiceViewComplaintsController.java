@@ -48,7 +48,7 @@ public class CustomerServiceViewComplaintsController implements UserControl{
     @FXML
     void getComplainInfo(MouseEvent event) {
     	if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 2) {
-    		Complaint chosenComplaint = observableList.get(complaintsTable.getSelectionModel().getSelectedIndex());
+    		Complaint chosenComplaint = complaintsTable.getSelectionModel().getSelectedItem();
     		LoginController.windowControl.putPipe("Complaint select", chosenComplaint);
     		LoginController.windowControl.setUserControl("/gui/usercontrols/CustomerServiceViewOrderComplaintInfo.fxml");
     	}

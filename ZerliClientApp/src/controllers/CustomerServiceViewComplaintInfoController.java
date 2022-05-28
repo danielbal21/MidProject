@@ -1,8 +1,11 @@
 package controllers;
 
+import java.time.format.DateTimeFormatter;
+
 import Entities.Complaint;
 import Entities.Order;
 import ProtocolHandler.RequestType;
+import Utilities.GenericUtilties;
 import client.ClientApp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -78,10 +81,8 @@ public class CustomerServiceViewComplaintInfoController implements UserControl{
 		complaint = (Complaint)LoginController.windowControl.peekPipe("Complaint select");
 		complaintText.setText(complaint.getComplain_text());
 		userIDlLabel.setText(complaint.getUser_id());
-		dateLabel.setText(complaint.getComplain_time().toString());
+		dateLabel.setText(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss").format(GenericUtilties.Convert_LocalDate_To_SQLDate(complaint.getComplain_time())));
 		branchLabel.setText(complaint.getBranch());
-		
-		
 		
 	}
 
