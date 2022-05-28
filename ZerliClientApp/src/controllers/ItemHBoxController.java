@@ -5,8 +5,12 @@ import ProtocolHandler.RequestType;
 import client.ClientApp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -49,6 +53,16 @@ public class ItemHBoxController extends HBox {
     
     @FXML
     void AddToCart(ActionEvent event) {
+    	if(ClientApp.UserStatus == Access.inactive)  {
+    		Alert confirmAlert = new Alert(AlertType.ERROR);
+			confirmAlert.setTitle("Not registered customer");
+			confirmAlert.setContentText("Your account is inactive\nContact Zerli's administration");
+			ButtonType ok = new ButtonType("OK", ButtonData.OK_DONE);
+			confirmAlert.getDialogPane().getButtonTypes().add(ok);
+			confirmAlert.showAndWait();
+			return;
+    	}
+    	
     	if(Integer.parseInt(quntityLabel.getText()) == 0) return;
     	if(LoginController.windowControl.peekPipe("catalog") == CatalogType.new_item) 
     	{

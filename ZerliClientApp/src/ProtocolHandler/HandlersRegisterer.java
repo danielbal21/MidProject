@@ -42,6 +42,12 @@ public class HandlersRegisterer {
 		Protocol.RegisterHandler(RequestType.AddItem, null);
 		Protocol.RegisterHandler(RequestType.GetPendingClient, null);
 		Protocol.RegisterHandler(RequestType.RegisterClient, null);
+		Protocol.RegisterHandler(RequestType.GetAllCustomersInfo, new ArrayListToObservableHandler());
+		Protocol.RegisterHandler(RequestType.GetAllEmployeesInfo, new ArrayListToObservableHandler());
+		Protocol.RegisterHandler(RequestType.UpdateAccountAccess, null);
+		Protocol.RegisterHandler(RequestType.UpdateEmployeeRole, null);
+
 		
+	
 	}
 }

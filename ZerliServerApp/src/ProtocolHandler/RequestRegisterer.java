@@ -38,6 +38,12 @@ public class RequestRegisterer {
 		Protocol.RegisterOperation(RequestType.AddItem, new AddItemOperation());
 		Protocol.RegisterOperation(RequestType.GetPendingClient, new GetPendingClientOperation());
 		Protocol.RegisterOperation(RequestType.RegisterClient, new RegisterClientOperation());
+		Protocol.RegisterOperation(RequestType.GetAllCustomersInfo, new GetAllCustomersInfoOperation());
+		Protocol.RegisterOperation(RequestType.GetAllEmployeesInfo, new GetAllEmployeesInfoOperation());
+		Protocol.RegisterOperation(RequestType.UpdateAccountAccess, new UpdateAccountAccessOperation());
+		Protocol.RegisterOperation(RequestType.UpdateEmployeeRole, new UpdateEmployeeRoleOperation());
 
+		
+	
 	}
 }

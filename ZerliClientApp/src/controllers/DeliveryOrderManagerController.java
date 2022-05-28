@@ -17,8 +17,14 @@ public class DeliveryOrderManagerController implements UserControl{
 
 	private ObservableList<Order> observableList;
 	
-	   @FXML
+	    @FXML
+	    private TableColumn<Order, String> adressCol;
+	
+	    @FXML
 	    private Label branchName;
+	
+	    @FXML
+	    private TableColumn<Order, String> cityCol;
 
 	    @FXML
 	    private TableColumn<Order, String> expectedDateColumn;
@@ -32,56 +38,39 @@ public class DeliveryOrderManagerController implements UserControl{
 	    @FXML
 	    private TableView<Order> ordersTable;
 
-	    @FXML
-	    private TableColumn<Order, String> paymentMethodColumn;
 
 	    @FXML
 	    private TableColumn<Order, Integer> priceColumn;
 
 	    @FXML
-	    private TableColumn<Order, String> shippingMethodColumn;
-
-	    @FXML
-	    private TableColumn<Order, String> statusColumn;
-
-	    @FXML
-	    private TableColumn<Order, String> userIDColumn;
-
-	    @FXML
 	    void getOrderInfo(MouseEvent event) {
-		if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 2) {
-			Order OrderChoose = ordersTable.getSelectionModel().getSelectedItem();
-			LoginController.windowControl.putPipe("Order select", OrderChoose );
-			LoginController.windowControl.setUserControl("/gui/usercontrols/DeliveryViewOrderDetails.fxml");
-
-		}
-}
+			if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 2) {
+				Order OrderChoose = ordersTable.getSelectionModel().getSelectedItem();
+				LoginController.windowControl.putPipe("Order select", OrderChoose );
+				LoginController.windowControl.setUserControl("/gui/usercontrols/DeliveryViewOrderDetails.fxml");
+			}
+	    }
+	    @FXML
+	    void refreshPressed(ActionEvent event) {
+	    	onEnter();
+	    }
 		
 		@Override
 		public void onEnter() {
-		
 			branchName.setText((String) LoginController.windowControl.peekPipe("Branch"));
-			orderDateColumn.setCellValueFactory(new PropertyValueFactory<>("orderDate"));
 			orderIDcolumn.setCellValueFactory(new PropertyValueFactory<>("orderID"));
-			paymentMethodColumn.setCellValueFactory(new PropertyValueFactory<>("paymentMethod"));
-			priceColumn.setCellValueFactory(new PropertyValueFactory<>("totalPrice"));
-			expectedDateColumn.setCellValueFactory(new PropertyValueFactory<>("shippingDate"));
-			shippingMethodColumn.setCellValueFactory(new PropertyValueFactory<>("shippingMethod"));
-			statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
-			userIDColumn.setCellValueFactory(new PropertyValueFactory<>("userID"));
+			orderDateColumn.setCellValueFactory(new PropertyValueFactory<>("order_date"));
+			expectedDateColumn.setCellValueFactory(new PropertyValueFactory<>("shipping_date"));
+			adressCol.setCellValueFactory(new PropertyValueFactory<>("address"));
+			cityCol.setCellValueFactory(new PropertyValueFactory<>("city"));
 			
-			ClientApp.ProtocolHandler.Invoke(RequestType.GetOrdersByBranch,  LoginController.windowControl.peekPipe("Branch"), "confirmed", true);
-			
+			ClientApp.ProtocolHandler.Invoke(RequestType.GetOrdersByBranch,  LoginController.windowControl.peekPipe("Branch"), "delivery", true);
 			observableList = (ObservableList<Order>)ClientApp.ProtocolHandler.GetResponse(RequestType.GetOrdersByBranch);
-			
 			ordersTable.setItems(observableList);
-		
 		}
 
 		@Override
 		public void onExit() {
-			// TODO Auto-generated method stub
-			
 		}
 
 }

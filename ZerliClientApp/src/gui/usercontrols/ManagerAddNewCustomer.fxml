@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
@@ -34,7 +35,7 @@
       </AnchorPane>
       <AnchorPane fx:id="ClientInfoWindow" layoutX="23.0" layoutY="184.0" prefHeight="476.0" prefWidth="912.0">
          <children>
-            <AnchorPane fx:id="creditCardDialog" layoutX="410.0" layoutY="14.0" prefHeight="289.0" prefWidth="411.0">
+            <AnchorPane fx:id="creditCardDialog" layoutX="444.0" layoutY="14.0" prefHeight="289.0" prefWidth="411.0">
                <children>
                   <ImageView fitHeight="245.0" fitWidth="385.0" layoutX="13.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -90,7 +91,7 @@
                   </Label>
                </children>
             </AnchorPane>
-            <ImageView fitHeight="98.0" fitWidth="122.0" layoutX="407.0" layoutY="377.0" onMouseClicked="#addCustomerPressed" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="98.0" fitWidth="122.0" layoutX="395.0" layoutY="380.0" onMouseClicked="#addCustomerPressed" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../png/newAccount.png" />
                </image>
@@ -99,22 +100,28 @@
                   <String fx:value="pressbtn" />
                </styleClass>
             </ImageView>
-            <TextField fx:id="IDTxt" alignment="CENTER" editable="false" layoutX="69.0" layoutY="14.0" prefHeight="46.0" prefWidth="212.0" promptText="ID" styleClass="subLabel" />
-            <TextField fx:id="firstNameTxt" alignment="CENTER" editable="false" layoutX="14.0" layoutY="68.0" prefHeight="46.0" prefWidth="150.0" promptText="First name" styleClass="subLabel" />
-            <TextField fx:id="lastNameTxt" alignment="CENTER" editable="false" layoutX="175.0" layoutY="68.0" prefHeight="46.0" prefWidth="150.0" promptText="Last name" styleClass="subLabel" />
-            <TextField fx:id="emailTxt" alignment="CENTER" editable="false" layoutX="15.0" layoutY="177.0" prefHeight="46.0" prefWidth="312.0" promptText="Email" styleClass="subLabel" />
-            <TextField fx:id="phoneTxt" alignment="CENTER" editable="false" layoutX="14.0" layoutY="122.0" prefHeight="46.0" prefWidth="312.0" promptText="Phone" styleClass="subLabel" />
-            <TextField fx:id="userNameTxt" alignment="CENTER" editable="false" layoutX="134.0" layoutY="290.0" prefHeight="46.0" prefWidth="197.0" promptText="User name" styleClass="subLabel" />
-            <TextField fx:id="passwordTxt" alignment="CENTER" layoutX="134.0" layoutY="343.0" prefHeight="46.0" prefWidth="197.0" promptText="Password" styleClass="subLabel" />
-            <Label layoutX="107.0" layoutY="250.0" styleClass="subLabel" text="Login details" />
+            <TextField fx:id="IDTxt" alignment="CENTER" editable="false" layoutX="121.0" layoutY="14.0" prefHeight="46.0" prefWidth="212.0" promptText="ID" styleClass="subLabel" />
+            <TextField fx:id="firstNameTxt" alignment="CENTER" editable="false" layoutX="66.0" layoutY="68.0" prefHeight="46.0" prefWidth="150.0" promptText="First name" styleClass="subLabel" />
+            <TextField fx:id="lastNameTxt" alignment="CENTER" editable="false" layoutX="227.0" layoutY="68.0" prefHeight="46.0" prefWidth="150.0" promptText="Last name" styleClass="subLabel" />
+            <TextField fx:id="emailTxt" alignment="CENTER" editable="false" layoutX="67.0" layoutY="177.0" prefHeight="46.0" prefWidth="312.0" promptText="Email" styleClass="subLabel" />
+            <TextField fx:id="phoneTxt" alignment="CENTER" editable="false" layoutX="66.0" layoutY="122.0" prefHeight="46.0" prefWidth="312.0" promptText="Phone" styleClass="subLabel" />
+            <TextField fx:id="userNameTxt" alignment="CENTER" editable="false" layoutX="186.0" layoutY="290.0" prefHeight="46.0" prefWidth="197.0" promptText="User name" styleClass="subLabel" />
+            <TextField fx:id="passwordTxt" alignment="CENTER" layoutX="186.0" layoutY="343.0" prefHeight="46.0" prefWidth="197.0" promptText="Password" styleClass="subLabel" />
+            <Label layoutX="159.0" layoutY="250.0" styleClass="subLabel" text="Login details" />
             <Label fx:id="addError" contentDisplay="CENTER" layoutX="535.0" layoutY="311.0" prefHeight="161.0" prefWidth="362.0" text="Password need 4 characters minimum&#10;Password field missing&#10;Please enter valid credit card&#10;CVV must be 3 digits&#10;Please enter a valid expiration date&#10;&#10;&#10;" textFill="RED">
                <font>
                   <Font name="Maiandra GD" size="18.0" />
                </font>
             </Label>
-            <Label layoutX="14.0" layoutY="296.0" styleClass="subLabel" text="User name" />
-            <Label layoutX="18.0" layoutY="350.0" prefHeight="30.0" prefWidth="117.0" styleClass="subLabel" text="Password" />
+            <Label layoutX="66.0" layoutY="296.0" styleClass="subLabel" text="User name" />
+            <Label layoutX="70.0" layoutY="350.0" prefHeight="30.0" prefWidth="117.0" styleClass="subLabel" text="Password" />
          </children>
       </AnchorPane>
+      <Button layoutX="6.0" layoutY="598.0" mnemonicParsing="false" onAction="#backPressed" text="Back">
+         <styleClass>
+            <String fx:value="Left-btn" />
+            <String fx:value="pressbtn" />
+         </styleClass>
+      </Button>
    </children>
 </AnchorPane>

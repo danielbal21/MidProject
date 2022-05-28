@@ -5,15 +5,15 @@ import ProtocolHandler.IOperation;
 import ProtocolHandler.ResponseWrapper;
 import server.Server;
 
-public class RegisterClientOperation implements IOperation{
+public class UpdateEmployeeRoleOperation implements IOperation{
 
 	@Override
 	public boolean Perform(String requestee, Object data, Object params) {
-		if(data instanceof PendingClientInfo && params instanceof String) {
+		if(data instanceof Roles && params instanceof String) {
+			String role = ((Roles)data).toString();
 			String userID = (String)params;
-			PendingClientInfo clientInfo = (PendingClientInfo)data;
-			Server.SqlServerManager.ActivateClient(clientInfo,userID);
-			return true; 
+		    Server.SqlServerManager.UpdateEmployeeRole(userID,role);
+			return true;
 		}
 		return false;
 	}

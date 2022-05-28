@@ -89,6 +89,7 @@ public class StartSQLPassswordConfigController {
 		this.stage= stage;
 		
 	}
+	
     @FXML
     void EnterPressed(KeyEvent event) {
     	if(event.getCode() == KeyCode.ENTER)

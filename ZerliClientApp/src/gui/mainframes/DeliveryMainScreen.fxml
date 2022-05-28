@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="843.0" prefWidth="1207.0" style="-fx-background-color: DEDEDE;" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.DeliveryFrameController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="843.0" prefWidth="1207.0" style="-fx-background-color: DEDEDE;" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.DeliveryFrameController">
    <children>
       <ImageView fitHeight="843.0" fitWidth="1289.0" layoutX="-34.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -61,9 +61,9 @@
                   <Font name="Maiandra GD" size="20.0" />
                </font>
             </Label>
-            <Label fx:id="userLabel" layoutX="66.0" layoutY="58.0" prefHeight="81.0" prefWidth="140.0" styleClass="subLabel" text="Delivery">
+            <Label fx:id="userLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="7.0" layoutY="58.0" prefHeight="81.0" prefWidth="207.0" text="Delivery">
                <font>
-                  <Font name="Maiandra GD" size="36.0" />
+                  <Font name="Maiandra GD" size="55.0" />
                </font>
             </Label>
          </children>

@@ -34,4 +34,8 @@ public enum RequestType {
 	AddItem,
 	GetPendingClient,
 	RegisterClient,
+	GetAllCustomersInfo,
+	GetAllEmployeesInfo,
+	UpdateAccountAccess,
+	UpdateEmployeeRole,
 }

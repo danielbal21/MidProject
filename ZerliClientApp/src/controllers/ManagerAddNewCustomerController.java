@@ -10,6 +10,7 @@ import ProtocolHandler.RequestType;
 import client.ClientApp;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -87,17 +88,20 @@ public class ManagerAddNewCustomerController implements UserControl{
 
     @FXML
     void SearchPressed(MouseEvent event) {
-    	addError.setVisible(false);
-    	ClientInfoWindow.setVisible(false);
-		searchErrorLBl.setVisible(false);
 		ClientInfoWindow.setVisible(false);
-		
+
     	String IDtxt = IDSearch.getText();
-    	if(IDtxt.equals("")) {
-    		searchErrorLBl.setVisible(true);
+    	
+    	if(IDtxt.length() == 0 ) {
     		searchErrorLBl.setText("Please Enter ID");
     		return;
     	}
+    	else if(IDtxt.length()!= 9 ) {
+    		searchErrorLBl.setText("Invalid ID");
+    		return;
+    	}
+    	
+    	searchErrorLBl.setText("");
     	ClientApp.ProtocolHandler.Invoke(RequestType.GetPendingClient, null, IDtxt, true);
     	pendingInfo = (PendingClientInfo)ClientApp.ProtocolHandler.GetResponse(RequestType.GetPendingClient);
     	if(pendingInfo == null) {
@@ -117,7 +121,6 @@ public class ManagerAddNewCustomerController implements UserControl{
     
     @FXML
     void addCustomerPressed(MouseEvent event) {
-    	addError.setVisible(false);
     	
     	if(!validateInput()) return;
     	else {
@@ -207,11 +210,17 @@ public class ManagerAddNewCustomerController implements UserControl{
     	
     	return valid;
 	}
+	
+
+    @FXML
+    void backPressed(ActionEvent event) {
+		LoginController.windowControl.setUserControl("/gui/usercontrols/ManagerAccountManagment.fxml");
+    }
 
 	@Override
 	public void onEnter() {
 		ClientInfoWindow.setVisible(false);
-		searchErrorLBl.setVisible(false);
+		searchErrorLBl.setText("");
 		IDSearch.setText("");
 		addError.setText("");
 		
@@ -220,7 +229,7 @@ public class ManagerAddNewCustomerController implements UserControl{
 		var months = new ArrayList<String>();
 		for(var i = currentYear;i < currentYear + 12;i++)
 			years.add(i + "");
-		for(var i = 1;i<12;i++)
+		for(var i = 1;i<=12;i++)
 			months.add((i+"").length() == 1 ? ("0"+ i) : i + "");
 		yearCB.setItems(FXCollections.observableArrayList(years));
 		expMonthCB.setItems(FXCollections.observableArrayList(months));
@@ -228,7 +237,9 @@ public class ManagerAddNewCustomerController implements UserControl{
 
 	@Override
 	public void onExit() {
-		
+		searchErrorLBl.setText("");
+		IDSearch.setText("");
+		addError.setText("");
 	}
 
 

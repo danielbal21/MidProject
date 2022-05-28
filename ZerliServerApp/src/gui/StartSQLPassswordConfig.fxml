@@ -28,7 +28,7 @@
             <String fx:value="pressbtn" />
          </styleClass>
       </Button>
-      <Label fx:id="errrorLabel" layoutX="34.0" layoutY="214.0" text="Connection Failed" textFill="RED" visible="false" />
+      <Label fx:id="errrorLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="31.0" layoutY="216.0" prefHeight="26.0" prefWidth="324.0" text="Connection Failed" textAlignment="CENTER" textFill="RED" visible="false" />
       <ImageView fx:id="exitBtn" fitHeight="54.0" fitWidth="55.0" layoutX="321.0" onMousePressed="#exitPressed" pickOnBounds="true" preserveRatio="true" styleClass="imageasbtn">
          <image>
             <Image url="@../png/X-btn.png" />

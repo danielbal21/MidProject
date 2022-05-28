@@ -12,7 +12,6 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.security.Timestamp;
 import java.sql.Blob;
 import Entities.*;
 import Utilities.GenericUtilties;
@@ -64,6 +63,9 @@ public class ServerConnSQL {
 		Server.Log("Database", "Executing Authenticate");
 		PreparedStatement stmt = null;
 		Object[] logindetails = new Object[3];
+		int Loggedin;
+		Roles role;
+		Access access;
 		ResultSet rs;
 		try {
 			stmt = conn.prepareStatement("SELECT ld.loggedin,ld.access,ud.role FROM login_details ld,user_details ud "
@@ -71,23 +73,28 @@ public class ServerConnSQL {
 			stmt.setString(1, username);
 			stmt.setString(2, password);
 			rs = stmt.executeQuery();
-			if (rs.next() == false) {
-				logindetails[1] = Access.noaut;
-				return logindetails;
-			} else
-				logindetails[0] = rs.getInt(1);
-			logindetails[1] = Access.valueOf(rs.getString(2));
-			logindetails[2] = Roles.valueOf(rs.getString(3));
-			stmt = conn.prepareStatement("UPDATE login_details SET loggedin=? WHERE user_id=?");
-			stmt.setInt(1, 1);
-			stmt.setString(2, username);
-			stmt.executeUpdate();
+			rs.next();
+			Loggedin = rs.getInt(1);
+			access = Access.valueOf(rs.getString(2));
+			role = Roles.valueOf(rs.getString(3));
+			
+			if((role == Roles.customer && Loggedin == 0)  || 
+					(role != Roles.customer && access != Access.inactive && Loggedin == 0)) {
+				stmt = conn.prepareStatement("UPDATE login_details SET loggedin=? WHERE user_id=?");
+				stmt.setInt(1, 1);
+				stmt.setString(2, username);
+				stmt.executeUpdate();
+			}
+			logindetails[0] = Loggedin;
+			logindetails[1] = access;
+			logindetails[2] =role;
+			Server.Log("Database", "Executing Authenticate: SUCCESS");
 			return logindetails;
+			
 		} catch (SQLException e1) {
 			Server.Log("Database", "Executing Authenticate: FAILED");
 			e1.printStackTrace();
-			logindetails[1] = Access.noaut;
-			return logindetails;
+			return null;
 		}
 	}
 
@@ -350,7 +357,7 @@ public class ServerConnSQL {
 		PreparedStatement stmt = null;
 		ResultSet rs;
 		try {
-			stmt = conn.prepareStatement("SELECT branch_name FROM manager_details");
+			stmt = conn.prepareStatement("SELECT Distinct branch_name FROM brach_employees");
 			rs = stmt.executeQuery();
 			while (rs.next())
 				branches.add(rs.getString(1));
@@ -509,16 +516,12 @@ public class ServerConnSQL {
 		}
 	}
 
-	public String GetBranch(String user_id, String type) {
+	public String GetBranch(String user_id) {
 		PreparedStatement stmt = null;
 		ResultSet rs;
 		try {
-			if(type.equals("Manager")) {
-				stmt = conn.prepareStatement("SELECT branch_name FROM manager_details WHERE user_id = ?");
-			}
-			if(type.equals("Delivery")) {
-				stmt = conn.prepareStatement("SELECT branch_name FROM delivery_details WHERE user_id = ?");
-			}
+	
+			stmt = conn.prepareStatement("SELECT branch_name FROM brach_employees WHERE user_id = ?");
 			stmt.setString(1, user_id);
 			rs = stmt.executeQuery();
 			if (rs.next() == false) {
@@ -533,29 +536,49 @@ public class ServerConnSQL {
 
 		}
 	}
-
-	public void GetOrdersByBranch(ArrayList<Order> orders, String branch_name) {
+	
+	public void GetOrdersByBranch(ArrayList<Order> orders, String branch_name,String role) {
 		PreparedStatement stmt = null;
 		ResultSet rs;
 		Order newOrder;
 		try {
-			stmt = conn.prepareStatement("SELECT * FROM orders WHERE branch_name = ? AND "
-					+ "status = 'pending_confirm' OR status = 'pending_cancel' ");
-			stmt.setString(1, branch_name);
-		
-			rs = stmt.executeQuery();
-			while (rs.next()) {
-				newOrder = new Order();
-				newOrder.setUserID(rs.getString(1));
-				newOrder.setOrderID(rs.getString(2));
-				newOrder.setPaymentMethod(PaymentMethods.valueOf(rs.getString(3)));
-				newOrder.setShippingMethod(ShippingMethods.valueOf(rs.getString(4)));
-				newOrder.setOrderDate(rs.getTimestamp(5));
-				newOrder.setShippingDate(rs.getTimestamp(6));
-				newOrder.setTotalPrice(rs.getInt(9));
-				newOrder.setStatus(OrderStatus.valueOf(rs.getString(10)));
-				orders.add(newOrder);
+			if(role.equals("manager")) {
+				Server.Log("Database", "Executing GetOrdersByBranch: Manager");
+				stmt = conn.prepareStatement("SELECT * FROM orders WHERE branch_name = ? AND "
+						+ "status = 'pending_confirm' OR status = 'pending_cancel' ");
+				stmt.setString(1, branch_name);
 			}
+			else {
+				Server.Log("Database", "Executing GetOrdersByBranch: Delivery");
+				stmt = conn.prepareStatement("SELECT * FROM orders WHERE branch_name = ? AND "
+						+ "status = 'confirmed' AND shipping_method='shipping'");
+				stmt.setString(1, branch_name);
+			}
+				rs = stmt.executeQuery();
+				while (rs.next()) {
+					newOrder = new Order();
+					newOrder.setUserID(rs.getString(1));
+					newOrder.setOrderID(rs.getString(2));
+					newOrder.setPaymentMethod(PaymentMethods.valueOf(rs.getString(3)));
+					newOrder.setShippingMethod(ShippingMethods.valueOf(rs.getString(4)));
+					newOrder.setOrderDate(rs.getTimestamp(5));
+					newOrder.setShippingDate(rs.getTimestamp(6));
+					newOrder.setTotalPrice(rs.getInt(9));
+					newOrder.setStatus(OrderStatus.valueOf(rs.getString(10)));
+					newOrder.setAddress(rs.getString(11));
+					newOrder.setCity(rs.getString(12));
+					
+					PreparedStatement stmt1 = null;
+					ResultSet rs1;
+					stmt1 = conn.prepareStatement("SELECT first_name,last_name,phone "
+							+ "FROM user_details WHERE user_id = ?");
+					stmt1.setString(1, rs.getString(1));
+					rs1 = stmt1.executeQuery();
+					rs1.next();
+					newOrder.setFullname(rs1.getString(1)+ " "+ rs1.getString(2));
+					newOrder.setPhone(rs1.getString(3));
+					orders.add(newOrder);
+				}
 		} catch (SQLException e1) {
 			Server.Log("Database", "Executing GetOrdersByBranch: FAILED");
 			e1.printStackTrace();
@@ -906,10 +929,7 @@ public class ServerConnSQL {
 			SetStatusStmt = conn.prepareStatement("UPDATE orders SET status = ? WHERE order_id = ?");
 			OrderDetailsStmt.setInt(1, order_id);
 			SetStatusStmt.setInt(2, order_id);
-			if(action.equals("cancel"))
-				SetStatusStmt.setString(1, "canceled");
-			if(action.equals("done"))
-				SetStatusStmt.setString(1, "completed");
+			SetStatusStmt.setString(1, "completed");
 			rs = OrderDetailsStmt.executeQuery();
 			if(rs.next())
 			{
@@ -1207,6 +1227,101 @@ public class ServerConnSQL {
 		}
 		System.out.println("Done");
 		Server.Log("Database", "Executing ActivateClient: SUCCESS");
+		
+	}
+
+
+
+	public void getAllCustomersInfo(ArrayList<AccountInfo> customers) {
+		Server.Log("Database", "Executing getAllCustomersInfo");
+		PreparedStatement stmt;
+		ResultSet rs;
+		try 
+		{
+			stmt = conn.prepareStatement("SELECT ud.user_id , ud.first_name , ud.last_name , ud.id , ld.access "
+					+ "FROM user_details ud,login_details ld "
+					+ "WHERE ud.user_id = ld.user_id AND ud.role = 'customer'");
+			rs = stmt.executeQuery();
+			while (rs.next()) {
+				AccountInfo accountinfo = new AccountInfo(rs.getString(1), rs.getString(2), 
+						rs.getString(3), rs.getString(4));
+				accountinfo.setAccess(Access.valueOf(rs.getString(5)));
+				customers.add(accountinfo);
+			}
+			
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+			Server.Log("Database", "Executing getAllCustomersInfo: FAILED");
+		}
+		Server.Log("Database", "Executing getAllCustomersInfo: SUCCESS");
+		
+	}
+
+	public void getAllEmployeesInfo(ArrayList<AccountInfo> employees,String managerUserID) {
+		Server.Log("Database", "Executing getAllEmployeesInfo");
+		PreparedStatement stmt;
+		ResultSet rs;
+		try 
+		{
+			
+			stmt = conn.prepareStatement("SELECT ud.user_id , ud.first_name , ud.last_name , ud.id , ud.role "
+					+ "FROM user_details ud, login_details ld , brach_employees be "
+					+ "WHERE ud.role != 'customer' AND ud.role != 'manager' AND ud.role != 'ceo' "
+					+ "AND ud.user_id = ld.user_id AND ud.user_id = be.user_id "
+					+ "AND be.branch_name = (SELECT branch_name FROM brach_employees WHERE user_id = ?)");
+			stmt.setString(1, managerUserID);
+			rs = stmt.executeQuery();
+			while (rs.next()) {
+				AccountInfo accountinfo = new AccountInfo(rs.getString(1), rs.getString(2), 
+						rs.getString(3), rs.getString(4));
+				accountinfo.setRole(Roles.valueOf(rs.getString(5)));
+				employees.add(accountinfo);
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+			Server.Log("Database", "Executing getAllEmployeesInfo: FAILED");
+		}
+		Server.Log("Database", "Executing getAllEmployeesInfo: SUCCESS");
+	}
+
+	public void UpdateAccountAccess(String userID, String access) {
+		Server.Log("Database", "Executing UpdateAccountAccess");
+		PreparedStatement stmt;
+		try {
+			stmt = conn.prepareStatement("UPDATE login_details SET access=? WHERE user_id=?");
+			stmt.setString(1, access);
+			stmt.setString(2, userID);
+			stmt.executeUpdate();
+		}
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+			Server.Log("Database", "Executing UpdateAccountAccess: FAILED");
+		}
+		Server.Log("Database", "Executing UpdateAccountAccess: SUCCESS");
+	}
+
+
+
+	public void UpdateEmployeeRole(String userID, String role) {
+		Server.Log("Database", "Executing UpdateEmployeeRole");
+		PreparedStatement stmt;
+		try {
+			stmt = conn.prepareStatement("UPDATE user_details SET role=? WHERE user_id=?");
+			stmt.setString(1, role);
+			stmt.setString(2, userID);
+			stmt.executeUpdate();
+		}
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+			Server.Log("Database", "Executing UpdateEmployeeRole: FAILED");
+		}
+		Server.Log("Database", "Executing UpdateEmployeeRole: SUCCESS");
 		
 	}
 }

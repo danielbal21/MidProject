@@ -15,7 +15,7 @@ public class GetBranchOperation implements IOperation {
 	@Override
 	public boolean Perform(String requestee, Object data, Object params, ResponseWrapper response) {
 		// TODO Auto-generated method stub
-		String branch = Server.SqlServerManager.GetBranch(requestee,(String)data);
+		String branch = Server.SqlServerManager.GetBranch(requestee);
 		response.SetResponse(branch);
 		return true;
 	}

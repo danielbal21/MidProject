@@ -3,10 +3,7 @@ package Utilities;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-
-import Entities.CatalogType;
-import Entities.Color;
-import Entities.ItemType;
+import Entities.*;
 import javafx.event.EventHandler;
 import javafx.scene.Parent;
 import javafx.scene.input.MouseEvent;
@@ -188,6 +185,82 @@ public class GenericUtilties {
 				return "Item";
 			case pre_define:
 				return "Product";
+			default:
+				return "Undefined: Add To Converter";
+		}
+	}
+	
+	
+	public static Roles StringToRoles(String role)
+	{
+		switch(role)
+		{	
+			case "CEO":
+				return Roles.ceo;
+			case "Manager":
+				return Roles.manager;
+			case "Customer":
+				return Roles.customer;
+			case "Delivery":
+				return Roles.delivery;
+			case "Marketing":
+				return Roles.marketing;
+			case "Service":
+				return Roles.service;
+			default:
+		}
+		return null;
+	}
+	public static String RolesToString(Roles role)
+	{
+		switch(role)
+		{	
+			case ceo:
+				return "CEO";
+			case manager:
+				return "Manager";
+			case customer:
+				return "Customer";
+			case delivery:
+				return "Delivery";
+			case marketing:
+				return "Marketing";
+			case service:
+				return "Service";
+			default:
+				return null;
+		}
+	}
+	
+	public static Access StringToAccessStatus(String access)
+	{
+		switch(access)
+		{	
+			case "Inactive":
+				return Access.inactive;
+			case "Active":
+				return Access.active;
+			case "Frozen":
+				return Access.frozen;
+			case "No authorization":
+				return Access.noaut;
+			default:
+				return null;
+		}
+	}
+	
+	public static String AccessStatusToString(Access access)
+	{
+		switch(access)
+		{	
+			case inactive:
+				return "Inactive";
+			case active:
+				return "Active";
+			case frozen:
+				return "Frozen";
+			case noaut:
+				return "No authorization";
 			default:
 				return "Undefined: Add To Converter";
 		}

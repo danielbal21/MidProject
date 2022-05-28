@@ -1,5 +1,6 @@
 package controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -23,18 +24,21 @@ public class ManagerAccountManagmentController implements UserControl{
 
     @FXML
     void editAccountsPressed(MouseEvent event) {
-    	System.out.println("2");
+    	LoginController.windowControl.setUserControl("/gui/usercontrols/ManagerEditAccounts.fxml");
+    }
+    
+    @FXML
+    void backPressed(ActionEvent event) {
+    	LoginController.windowControl.setUserControl("/gui/usercontrols/ManagerHomePage.fxml");
+
     }
 
 	@Override
 	public void onEnter() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void onExit() {
-		// TODO Auto-generated method stub
 	}
 
 }

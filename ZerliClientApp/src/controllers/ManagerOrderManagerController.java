@@ -84,8 +84,7 @@ public class ManagerOrderManagerController implements UserControl {
 		shippingMethodColumn.setCellValueFactory(new PropertyValueFactory<>("shipping_method"));
 		statusColumn.setCellValueFactory(new PropertyValueFactory<>("Order_status"));
 		
-		ClientApp.ProtocolHandler.Invoke(RequestType.GetOrdersByBranch,  LoginController.windowControl.peekPipe("Branch"), null, true);
-		
+		ClientApp.ProtocolHandler.Invoke(RequestType.GetOrdersByBranch,  LoginController.windowControl.peekPipe("Branch"), "manager", true);
 		observableList = (ObservableList<Order>)ClientApp.ProtocolHandler.GetResponse(RequestType.GetOrdersByBranch);
 		
 		ordersTable.setItems(observableList);
