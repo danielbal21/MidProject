@@ -1029,4 +1029,100 @@ public class ServerConnSQL {
 		} catch (SQLException e) {e.printStackTrace();}		
 		Server.Log("Database", "Executing InsertItem: FAILED");
 	}
+
+
+
+	public void SaveSurvey(Survey survey) {
+		Server.Log("Database", "Executing SaveSurvey");
+		PreparedStatement stmt;
+		ResultSet rs;
+		try 
+		{
+			stmt = conn.prepareStatement("insert into midproject.surveys (survey_content,q1,q2,q3,q4,q5,q6) values(?,?,?,?,?,?,?)");
+			stmt.setString(1, survey.getContent());
+			stmt.setString(2, survey.getQuestions()[0]);
+			stmt.setString(3, survey.getQuestions()[1]);
+			stmt.setString(4, survey.getQuestions()[2]);
+			stmt.setString(5, survey.getQuestions()[3]);
+			stmt.setString(6, survey.getQuestions()[4]);
+			stmt.setString(7, survey.getQuestions()[5]);
+			stmt.executeUpdate();
+		} catch (SQLException e) {e.printStackTrace();}		
+		Server.Log("Database", "Executing SaveSurvey: FAILED");
+	}
+
+
+
+	public void GetSurveysNames(ArrayList<String> list) {
+		Server.Log("Database", "Executing GetSurveysNames");
+		PreparedStatement stmt = null;
+		ResultSet rs;
+		try {
+			stmt = conn.prepareStatement("SELECT survey_id,survey_content FROM midproject.surveys");
+           	rs = stmt.executeQuery();
+           	while(rs.next()) {
+           		String string=rs.getString(1)+" "+rs.getString(2);
+           		list.add(string);
+           	}
+		}catch (SQLException e) {e.printStackTrace();}		
+		Server.Log("Database", "Executing GetSurveysNames: FAILED");
+		
+	}
+
+
+
+	public void GetSurvey(Survey survey) {
+		Server.Log("Database", "Executing GetSurvey");
+		PreparedStatement stmt;
+		ResultSet rs;
+		try 
+		{
+			stmt = conn.prepareStatement("SELECT q1,q2,q3,q4,q5,q6,survey_content FROM midproject.surveys where survey_id =?");
+			stmt.setInt(1,survey.getId());
+			rs = stmt.executeQuery();
+			rs.next();
+			survey.getQuestions()[0]=(rs.getString(1));
+			survey.getQuestions()[1]=(rs.getString(2));
+			survey.getQuestions()[2]=(rs.getString(3));
+			survey.getQuestions()[3]=(rs.getString(4));
+			survey.getQuestions()[4]=(rs.getString(5));
+			survey.getQuestions()[5]=(rs.getString(6));
+			survey.setContent((rs.getString(7)));
+			
+		} catch (SQLException e) {e.printStackTrace();}		
+		Server.Log("Database", "Executing GetSurvey: FAILED");
+	}
+
+
+
+	public void SaveSurveyAnswers(Survey survey) {
+		Server.Log("Database", "Executing SaveSurveyAnswers");
+		PreparedStatement stmt;
+		ResultSet rs;
+		try 
+		{	stmt = conn.prepareStatement("SELECT a1,a2,a3,a4,a5,a6 FROM midproject.surveys where survey_id =?");
+			stmt.setInt(1,survey.getId());
+			rs = stmt.executeQuery();
+			rs.next();
+			survey.getAnswers()[0]+=rs.getInt(1);
+			survey.getAnswers()[1]+=rs.getInt(2);
+			survey.getAnswers()[2]+=rs.getInt(3);
+			survey.getAnswers()[3]+=rs.getInt(4);
+			survey.getAnswers()[4]+=rs.getInt(5);
+			survey.getAnswers()[5]+=rs.getInt(6);
+			
+			////
+			stmt = conn.prepareStatement("UPDATE midproject.surveys SET a1=?,a2=?, a3=?,a4=?,a5=?,a6=? WHERE survey_id=?");
+			stmt.setInt(1, survey.getAnswers()[0]);
+			stmt.setInt(2, survey.getAnswers()[1]);
+			stmt.setInt(3, survey.getAnswers()[2]);
+			stmt.setInt(4, survey.getAnswers()[3]);
+			stmt.setInt(5, survey.getAnswers()[4]);
+			stmt.setInt(6, survey.getAnswers()[5]);
+			stmt.setInt(7, survey.getId());
+			stmt.executeUpdate();
+		} catch (SQLException e) {e.printStackTrace();}		
+		Server.Log("Database", "Executing SaveSurveyAnswers: FAILED");
+		
+	}
 }

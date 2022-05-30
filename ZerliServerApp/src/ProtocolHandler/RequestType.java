@@ -32,4 +32,8 @@ public enum RequestType {
 	GetItemByID,
 	UpdateItem,
 	AddItem,
+	SaveSurvey,
+	GetSurveysNames,
+	GetSurvey,
+	SaveSurveyAnswers,
 }

@@ -151,7 +151,7 @@ public class LoginController {
     				CustomerServiceFrameController mfc= loader.getController();
     				windowControl = new WindowControl(mfc);
 					mfc.init();
-    				windowControl.setUserControl("/gui/usercontrols/SurveyManager.fxml");
+    				windowControl.setUserControl("/gui/usercontrols/ManagerHomePage.fxml");
         		}
         		Stage newStage = new Stage();
         		Utilities.GenericUtilties.SetWindowMovable(root, newStage);

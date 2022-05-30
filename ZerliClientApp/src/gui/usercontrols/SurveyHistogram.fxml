@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane fx:id="activePanelContainer" prefHeight="663.0" prefWidth="957.0" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SurveyHistogramController">
+   <children>
+      <Label fx:id="surveyNameLabel" layoutX="191.0" layoutY="49.0" styleClass="MainLabel" text="survy name's histogram" />
+      <ImageView fx:id="Image" fitHeight="379.0" fitWidth="591.0" layoutX="205.0" layoutY="172.0" pickOnBounds="true" preserveRatio="true" />
+   </children>
+</AnchorPane>

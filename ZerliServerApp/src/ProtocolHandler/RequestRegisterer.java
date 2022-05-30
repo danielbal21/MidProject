@@ -36,6 +36,9 @@ public class RequestRegisterer {
 		Protocol.RegisterOperation(RequestType.GetItemByID, new GetItemByIDOperation());
 		Protocol.RegisterOperation(RequestType.UpdateItem, new UpdateItemOperation());
 		Protocol.RegisterOperation(RequestType.AddItem, new AddItemOperation());
-		
+		Protocol.RegisterOperation(RequestType.SaveSurvey, new SaveSurveyOperation());
+		Protocol.RegisterOperation(RequestType.GetSurveysNames, new GetSurveysNamesOperation());
+		Protocol.RegisterOperation(RequestType.GetSurvey, new GetSurveyOperation());
+		Protocol.RegisterOperation(RequestType.SaveSurveyAnswers, new SaveSurveyAnswersOperation());
 	}
 }

@@ -61,6 +61,12 @@ public class ItemInList implements Serializable{
 		this.catalogType = catalogType;
 	}
 	
+	public ItemInList(int item_id, String itemName, int quantity) {
+		this.item_id = item_id;
+		this.quantity = quantity;
+		this.itemName = itemName;
+	}
+
 	public byte[] getImage() {
 		return image;
 	}

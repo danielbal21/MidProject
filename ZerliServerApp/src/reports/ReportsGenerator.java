@@ -36,12 +36,14 @@ import org.knowm.xchart.style.Styler.ChartTheme;
 import org.knowm.xchart.style.Styler.LegendPosition;
 import org.knowm.xchart.style.markers.SeriesMarkers;
 
+import Entities.*;
+
 public class ReportsGenerator {
 	  
 	final int WIDTH = 595;
 	final int HEIGHT = 842;
 	String[] months = new String[] {"January","February","March","April","May","June","July","August","September","October","November","December"};
-	private BufferedImage createBarChartIncome(int width,int height,int quarter)
+	private BufferedImage createBarChartIncome(int width,int height,int quarter) 
 	{
 		quarter *= 3;
 	    CategoryChart chart = new CategoryChartBuilder().width((int)(height)).height((int)(width * 0.7f)).title("Quarterly CEO Income Report").xAxisTitle("Month").yAxisTitle("Income").build();
@@ -50,12 +52,12 @@ public class ReportsGenerator {
 	    chart.getStyler().setLegendPosition(LegendPosition.OutsideS);
 	    //chart.getStyler().setHasAnnotations(true);
 	 
-	    // Series
+	    // Series               //שם                       //
 	    chart.addSeries(months[quarter], Arrays.asList(new String[] {" "}), Arrays.asList(new Integer[] {15}));
 	    chart.addSeries(months[quarter+1], Arrays.asList(new String[] { " "}), Arrays.asList(new Integer[] {5}));
 	    chart.addSeries(months[quarter+2], Arrays.asList(new String[] { " "}), Arrays.asList(new Integer[] {10}));
 		
-	    return ImageUtil.getRotatedImage(BitmapEncoder.getBufferedImage(chart), 90) ;
+	    return ImageUtil.getRotatedImage(BitmapEncoder.getBufferedImage(chart), 90) ;//זווית סיבוב של הגרף 
 	}
 	private BufferedImage createBarChartComplaints(int width,int height,int quarter)
 	{
@@ -358,5 +360,52 @@ public class ReportsGenerator {
 	    	e.printStackTrace();
 	    }
 		return null;
-}
+}/*
+	public byte[] createQuestion(Survey survey) 
+	{
+	    try (PDDocument document = new PDDocument()) {
+		      PDPage page = new PDPage(PDRectangle.A4);
+		      page.setRotation(0);
+		 
+		      float pageWidth = page.getMediaBox().getWidth();
+		      float pageHeight = page.getMediaBox().getHeight();
+		      PDPageContentStream contentStream = new PDPageContentStream(document, page);
+		      InputStream stream = getClass().getResourceAsStream("/png/ZerliLogo.png");
+		      PDImageXObject logoImage = JPEGFactory.createFromImage(document, ImageIO.read(stream));
+		      //contentStream.transform(new Matrix(0, 1, -1, 0, pageWidth, 0));
+		      contentStream.drawImage(logoImage, 5, HEIGHT-80,150,80); 
+		      
+		      //// change offset and content
+		      
+		      contentStream.beginText();
+		      contentStream.newLineAtOffset(WIDTH/2 - 100, 760);  
+		      contentStream.setFont(new PDType1Font(Standard14Fonts.FontName.HELVETICA_BOLD), 30);
+		      contentStream.showText("Income Report");
+		      contentStream.endText();
+		      
+		      contentStream.beginText();
+		      contentStream.newLineAtOffset(80, 715);  
+		      contentStream.setLeading(20);
+		      contentStream.setFont(new PDType1Font(Standard14Fonts.FontName.COURIER),16);
+		      contentStream.showText(String.format("Created for branch %s" ,branch));
+		      contentStream.newLine();
+		      contentStream.showText(String.format("Shown Month: %s ~ %s",startDate,endDate));
+		      contentStream.endText();
+		      
+		      
+		      contentStream.close();
+		      
+		      document.addPage(page);
+		 
+		      ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+		      document.save(byteArrayOutputStream);
+		      File f = new File(path + "//" + survey.getContent() + ".pdf");
+		      FileOutputStream fs = new FileOutputStream(f);
+		      BufferedOutputStream fileWriter = new BufferedOutputStream(fs);
+		      fileWriter.write(byteArrayOutputStream.toByteArray());
+		      fileWriter.close();
+		      fs.close();
+		      
+		      return byteArrayOutputStream.toByteArray();
+	}*/
 }

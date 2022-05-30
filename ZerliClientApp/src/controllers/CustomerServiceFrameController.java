@@ -72,6 +72,7 @@ public class CustomerServiceFrameController implements IContainable {
 
     @FXML
     void homePressed(MouseEvent event) {
+    	LoginController.windowControl.setUserControl("/gui/usercontrols/ManagerHomePage.fxml");
     }
 
     @FXML
@@ -97,7 +98,7 @@ public class CustomerServiceFrameController implements IContainable {
 
     @FXML
     void surveyPressed(ActionEvent event) {
-
+    	LoginController.windowControl.setUserControl("/gui/usercontrols/SurveyMangerHomeScreen.fxml");
     }
 
 	@Override
