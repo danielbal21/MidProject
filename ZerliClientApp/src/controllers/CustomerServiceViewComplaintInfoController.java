@@ -45,8 +45,16 @@ public class CustomerServiceViewComplaintInfoController implements UserControl{
 
     @FXML
     void EndPressed(ActionEvent event) {
+    	int refund;
     	try {
-    		int refund = Integer.parseInt(refundField.getText());
+    		if(refundField.getText().equals(""))
+    		{
+    			refund =0;
+    		}
+    		else
+    		{
+    			refund = Integer.parseInt(refundField.getText());
+    		}
     		if(refund < 0)
     		{
     			errorLabel.setVisible(true);
@@ -78,6 +86,7 @@ public class CustomerServiceViewComplaintInfoController implements UserControl{
 	@Override
 	public void onEnter() {
 		// TODO Auto-generated method stub
+		errorLabel.setVisible(false);
 		complaint = (Complaint)LoginController.windowControl.peekPipe("Complaint select");
 		complaintText.setText(complaint.getComplain_text());
 		userIDlLabel.setText(complaint.getUser_id());
