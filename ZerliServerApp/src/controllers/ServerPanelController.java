@@ -20,41 +20,63 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import ocsf.server.ConnectionToClient;
+import reports.ReportScheduler;
 import server.Server;
 import server.ServerApp;
 
+/**
+ * The Class ServerPanelController is the controller part of the ServerPanelController GUI
+ * used to manage UI and control UX for the server operator side while also starting vital
+ * background processes.
+ * 
+ */
 public class ServerPanelController implements Initializable{
 	
- 	@FXML
+ 	/** Server panel exit button */
+	 @FXML
 	private ImageView exitBtn;
  	
+    /** Console text area used for matrix like logging */
     @FXML
     private TextArea console;
 
+    /** The db status server. */
     @FXML
     private Label dbStatusServer;
     
+    /** The server status label. */
     @FXML
     private Label serverStatusLbl;
     
+    /** The connected client table. */
     @FXML
     private TableView<ClientInfo> clientTable;
 
+    /** The ip column. */
     @FXML
     private TableColumn<ClientInfo, String> ipCol;
     
+    /** The connected host column. */
     @FXML
     private TableColumn<ClientInfo, String> hostCol;
 
+    /** The status column. */
     @FXML
     private TableColumn<ClientInfo, String> statusCol;
 
+    /** The clients info. */
     ObservableList<ClientInfo> clientsInfo;
     
+	/** The stage used for window control */
 	private Stage stage;
    
 	
-	 @FXML
+	 /**
+ 	 * This event invokes when the exit button is pressed
+ 	 *
+ 	 * @param The corresponding mouse event
+ 	 */
+ 	@FXML
      void exitPressed(MouseEvent event) {
 	 try {
     		ServerApp.server.close();
@@ -66,6 +88,14 @@ public class ServerPanelController implements Initializable{
     }
  
 
+	/**
+	 * Initialization of the Server Panel Controller:
+	 * property binding (ip, host, status)
+	 * the thread that periodically scans for new hosts starts here
+	 * the r-scheduler (see report scheduler for more info) compensator begins here
+	 * @param location - no use
+	 * @param resources - no use
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		ipCol.setCellValueFactory(new PropertyValueFactory<>("ip"));	
@@ -93,6 +123,8 @@ public class ServerPanelController implements Initializable{
 		Server.Log("Application", "Loading Application version " + Server.VERSION);
 		Server.Log("Database", "is connected");
 		Server.Log("Server", "is connected on port: " + Server.DEFAULT_PORT) ;
+		ReportScheduler rScheduler = new ReportScheduler();
+		rScheduler.Run();
 	}
 }
 

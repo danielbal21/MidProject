@@ -15,33 +15,54 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import reports.ReportsGenerator;
+import reports.PDFGenerator;
 import server.*;
 
 import java.io.IOException;
 
+/**
+ * The Class StartSQLPassswordConfigController serves as
+ * the controller part of the enter sql password GUI
+ * it requests the user DB password and progresses to the server panel after
+ * adequate validation.
+ */
 public class StartSQLPassswordConfigController {
 
+    /** The connect button. */
     @FXML
     private Button connectBtn;
 
+    /** The error label. */
     @FXML
     private Label errrorLabel;
 
+    /** The exit button. */
     @FXML
     private ImageView exitBtn;
 
+    /** The SQL Password text field. */
     @FXML
     private TextField SqlTextField;
 
+    /** The enter SQL prompt label. */
     @FXML
     private Label enterSQLLabel;
     
+    /** No practical use */
     @FXML
     private AnchorPane AncorePane;
 
+	/** The stage. */
 	private Stage stage;
 
+    /**
+     * This event invokes when the server operator attempts to
+     * start the server.
+     * In order to progress to the server panel the operator must
+     * enter a valid mysql-db password
+     * upon success the Server Panel window will open
+     * @param ActionEvent handler - has no use here
+     */
     @FXML
     void connectPressed(ActionEvent event) {
     	String ip = SqlTextField.getText();
@@ -79,17 +100,35 @@ public class StartSQLPassswordConfigController {
     	}
     }
 
+    /**
+     * This event invokes when the server operator shuts down
+     * the server
+     *
+     * @param MouseEvent handler - no use here
+     */
     @FXML
     void exitPressed(MouseEvent event) {
     	System.exit(0);
     }
     
   
+	/**
+	 * Standard setter:
+	 * Sets the stage.
+	 *
+	 * @param The stage to be set
+	 */
 	public void setStage(Stage stage) {
 		this.stage= stage;
 		
 	}
-	
+    
+    /**
+     * An alternative way to perform enter using
+     * only the ENTER key in the keyboard
+     *
+     * @param KeyEvent handler - used to determine which key was pressed
+     */
     @FXML
     void EnterPressed(KeyEvent event) {
     	if(event.getCode() == KeyCode.ENTER)

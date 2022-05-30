@@ -1,6 +1,7 @@
 package server;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,17 +12,29 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
 import Entities.*;
 import Utilities.GenericUtilties;
 import javafx.scene.image.Image;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ServerConnSQL.
+ */
 public class ServerConnSQL {
 
+	/** The conn. */
 	private static Connection conn;
 	// private String mySQLpassword = "123456";
 
+	/**
+	 * Start conn.
+	 *
+	 * @param mySQLpassword the my SQ lpassword
+	 * @return true, if successful
+	 */
 	public static boolean startConn(String mySQLpassword) {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
@@ -45,6 +58,13 @@ public class ServerConnSQL {
 
 
 
+	/**
+	 * Update order color and date by number.
+	 *
+	 * @param orderNumber the order number
+	 * @param newColor the new color
+	 * @param newDate the new date
+	 */
 	public void UpdateOrder_ColorAndDate_ByNumber(String orderNumber, String newColor, String newDate) {
 		PreparedStatement stmt;
 		try {
@@ -59,6 +79,13 @@ public class ServerConnSQL {
 		System.out.println("Updated order " + orderNumber);
 	}
 
+	/**
+	 * Authenticate.
+	 *
+	 * @param username the username
+	 * @param password the password
+	 * @return the object[]
+	 */
 	public Object[] Authenticate(String username, String password) {
 		Server.Log("Database", "Executing Authenticate");
 		PreparedStatement stmt = null;
@@ -98,6 +125,11 @@ public class ServerConnSQL {
 		}
 	}
 
+	/**
+	 * Logged out.
+	 *
+	 * @param username the username
+	 */
 	public void LoggedOut(String username) {
 		PreparedStatement stmt = null;
 		try {
@@ -110,6 +142,13 @@ public class ServerConnSQL {
 		}
 	}
 
+	/**
+	 * Gets the cart items.
+	 *
+	 * @param username the username
+	 * @param cartItems the cart items
+	 * @return the cart items
+	 */
 	public void getCartItems(String username,ArrayList<ItemInList> cartItems) {
 		PreparedStatement stmt = null;
 		try {
@@ -244,6 +283,12 @@ public class ServerConnSQL {
 		 System.out.println("Get Cart Items!");
 		
 	}
+	
+	/**
+	 * Removes the item by ID.
+	 *
+	 * @param id the id
+	 */
 	public void removeItemByID(int id)
 	{
 		Server.Log("Database", "Executing removeItemByID");
@@ -261,6 +306,13 @@ public class ServerConnSQL {
 		}	
 		 System.out.println("Remove Item By ID!");
 	}
+	
+	/**
+	 * Gets the item by ID.
+	 *
+	 * @param id the id
+	 * @return the item by ID
+	 */
 	public Item getItemByID(int id) {
 		Server.Log("Database", "Executing getItemByID");
 		Item item=null;
@@ -308,6 +360,13 @@ public class ServerConnSQL {
 		 return item;
 	}
 
+	/**
+	 * Gets the catalog items.
+	 *
+	 * @param catalogItems the catalog items
+	 * @param catalogType the catalog type
+	 * @return the catalog items
+	 */
 	public void getCatalogItems(ArrayList<Item> catalogItems, CatalogType catalogType) {
 		Server.Log("Database", "Executing GetCatalogItems");
 		PreparedStatement stmt = null;
@@ -351,13 +410,18 @@ public class ServerConnSQL {
 		System.out.println("Get Catalog Items!");
 	}
 
+	/**
+	 * Gets the branches.
+	 *
+	 * @return the array list
+	 */
 	public ArrayList<String> GetBranches() {
 		Server.Log("Database", "Executing GetBranches");
 		ArrayList<String> branches = new ArrayList<String>();
 		PreparedStatement stmt = null;
 		ResultSet rs;
 		try {
-			stmt = conn.prepareStatement("SELECT Distinct branch_name FROM brach_employees");
+			stmt = conn.prepareStatement("SELECT Distinct branch_name FROM branch_employees");
 			rs = stmt.executeQuery();
 			while (rs.next())
 				branches.add(rs.getString(1));
@@ -368,6 +432,12 @@ public class ServerConnSQL {
 		return branches;
 	}
 
+	/**
+	 * Gets the currency.
+	 *
+	 * @param requestee the requestee
+	 * @return the string[]
+	 */
 	public String[] GetCurrency(String requestee) {
 		Server.Log("Database", "Executing GetCurrency");
 		String[] details = null;
@@ -388,6 +458,12 @@ public class ServerConnSQL {
 		return details;
 	}
 
+	/**
+	 * Update zerli coins.
+	 *
+	 * @param requestee the requestee
+	 * @param data the data
+	 */
 	public void UpdateZerliCoins(String requestee, int data) {
 		Server.Log("Database", "Executing UpdateZerliCoins");
 		PreparedStatement stmt = null;
@@ -402,6 +478,12 @@ public class ServerConnSQL {
 		}
 	}
 
+	/**
+	 * Insert order.
+	 *
+	 * @param order the order
+	 * @param requestee the requestee
+	 */
 	public void InsertOrder(Order order,String requestee)
 	{
 		Server.Log("Database", "Executing InsertOrder");
@@ -521,7 +603,7 @@ public class ServerConnSQL {
 		ResultSet rs;
 		try {
 	
-			stmt = conn.prepareStatement("SELECT branch_name FROM brach_employees WHERE user_id = ?");
+			stmt = conn.prepareStatement("SELECT branch_name FROM branch_employees WHERE user_id = ?");
 			stmt.setString(1, user_id);
 			rs = stmt.executeQuery();
 			if (rs.next() == false) {
@@ -536,7 +618,13 @@ public class ServerConnSQL {
 
 		}
 	}
-	
+	/**
+	 * Gets the orders by branch.
+	 *
+	 * @param orders the orders
+	 * @param branch_name the branch name
+	 * @param status the status
+	 */
 	public void GetOrdersByBranch(ArrayList<Order> orders, String branch_name,String role) {
 		PreparedStatement stmt = null;
 		ResultSet rs;
@@ -587,6 +675,12 @@ public class ServerConnSQL {
 
 	}
 
+	/**
+	 * Gets the items of order.
+	 *
+	 * @param itemsOfOrder the items of order
+	 * @param order_id the order id
+	 */
 	public void GetItemsOfOrder(ArrayList<ItemInList> itemsOfOrder, int order_id) {
 		PreparedStatement stmt = null;
 		ResultSet rs;
@@ -715,6 +809,14 @@ public class ServerConnSQL {
 
 	}
 
+	/**
+	 * Adds the to cart.
+	 *
+	 * @param username the username
+	 * @param item_id the item id
+	 * @param quantity the quantity
+	 * @return the int
+	 */
 	public int AddToCart(String username, int item_id, int quantity) {
 		PreparedStatement stmt = null;
 		ResultSet rs;
@@ -756,6 +858,12 @@ public class ServerConnSQL {
 		
 	}
 
+	/**
+	 * Gets the all customer orders.
+	 *
+	 * @param username the username
+	 * @param customerOrders the customer orders
+	 */
 	public void GetAllCustomerOrders(String username, ArrayList<Order> customerOrders) {
 		PreparedStatement stmt = null;
 		ResultSet rs1,rs2;
@@ -864,6 +972,12 @@ public class ServerConnSQL {
 	
 	}
 
+	/**
+	 * Delete item from cart.
+	 *
+	 * @param usernmae the usernmae
+	 * @param data the data
+	 */
 	public void DeleteItemFromCart(String usernmae, int data) {
 		PreparedStatement stmt = null;
 		try {
@@ -881,6 +995,13 @@ public class ServerConnSQL {
 
 	}
 
+	/**
+	 * Gets the notification.
+	 *
+	 * @param username the username
+	 * @param notificationList the notification list
+	 * @return the notification
+	 */
 	public void getNotification(String username, ArrayList<NotificationInTable> notificationList) {
 		PreparedStatement stmt = null;
 		try {
@@ -904,6 +1025,12 @@ public class ServerConnSQL {
 		System.out.println("Get Notification !");
 	}
 
+	/**
+	 * Update notification.
+	 *
+	 * @param username the username
+	 * @param data the data
+	 */
 	public void UpdateNotification(String username, ArrayList<NotificationInTable> data) {
 		PreparedStatement stmt = null;
 		try {
@@ -920,6 +1047,12 @@ public class ServerConnSQL {
 		}
 	}
 
+	/**
+	 * End order.
+	 *
+	 * @param order_id the order id
+	 * @param action the action
+	 */
 	public void EndOrder(int order_id, String action) {
 		PreparedStatement OrderDetailsStmt = null;
 		PreparedStatement SetStatusStmt = null;
@@ -979,6 +1112,12 @@ public class ServerConnSQL {
 
 	}
 
+	/**
+	 * Cancel order.
+	 *
+	 * @param refundZerli the refund zerli
+	 * @param orderID the order ID
+	 */
 	public void cancelOrder(Integer refundZerli, Integer orderID) {
 		PreparedStatement stmt = null;
 		try {
@@ -995,6 +1134,11 @@ public class ServerConnSQL {
 		}
 	}
 
+	/**
+	 * Reset new customer.
+	 *
+	 * @param user_id the user id
+	 */
 	public void resetNewCustomer(String user_id) {
 		PreparedStatement stmt = null;
 		try {
@@ -1012,6 +1156,12 @@ public class ServerConnSQL {
 		System.out.println("RESET new customer for "+user_id);
 	} 
 
+	/**
+	 * Update new item in cart.
+	 *
+	 * @param username the username
+	 * @param newItem the new item
+	 */
 	public void UpdateNewItemInCart(String username,NewItem newItem) {
 		int newItemId;
 		PreparedStatement stmt;
@@ -1054,6 +1204,12 @@ public class ServerConnSQL {
 	        }		
 	}
 
+	/**
+	 * Delete item from new item list.
+	 *
+	 * @param new_item the new item
+	 * @param catalog_item the catalog item
+	 */
 	public void DeleteItemFromNewItemList(int new_item,int catalog_item) {
 		PreparedStatement stmt = null;
 		try {
@@ -1070,6 +1226,12 @@ public class ServerConnSQL {
 		System.out.println("Delete item from newItemList !");	
 	}
 
+	/**
+	 * Delete new item from cart.
+	 *
+	 * @param requestee the requestee
+	 * @param data the data
+	 */
 	public void DeleteNewItemFromCart(String requestee, int data) {
 		PreparedStatement stmt = null;
 		try {
@@ -1090,6 +1252,12 @@ public class ServerConnSQL {
 		
 	}
 
+	/**
+	 * Delete allnew item from cart.
+	 *
+	 * @param requestee the requestee
+	 * @param data the data
+	 */
 	public void DeleteAllnewItemFromCart(String requestee, int data) {
 		PreparedStatement stmt = null;
 		try {
@@ -1115,6 +1283,11 @@ public class ServerConnSQL {
 	}
 	
 
+	/**
+	 * Update item.
+	 *
+	 * @param data the data
+	 */
 	public void UpdateItem(Item data) {
 		Server.Log("Database", "Executing UpdateItem");
 		PreparedStatement stmt;
@@ -1134,6 +1307,11 @@ public class ServerConnSQL {
 
 	}
 	
+	/**
+	 * Insert item.
+	 *
+	 * @param data the data
+	 */
 	public void InsertItem(Item data)
 	{
 		Server.Log("Database", "Executing InsertItem");
@@ -1153,8 +1331,179 @@ public class ServerConnSQL {
 			stmt.setInt(7, data.isOnSale() ? 1 : 0);
 			stmt.setInt(8, data.getSalePrice());
 			stmt.executeUpdate();
-		} catch (SQLException e) {e.printStackTrace();}		
+		} catch (SQLException e) {e.printStackTrace();		
 		Server.Log("Database", "Executing InsertItem: FAILED");
+		}
+	}
+
+/**
+ * * Reports **.
+ *
+ * @param reportType the report type
+ * @param isMonthly the is monthly
+ * @param requester the requester
+ * @param reportDate the report date
+ * @return the byte[]
+ */
+	
+	
+	
+	public byte[] GetReport(ReportType reportType, boolean isMonthly, String requester, Date reportDate) {
+		Server.Log("Database", "Executing GetReport");
+		PreparedStatement stmt;
+		try 
+		{
+			stmt = conn.prepareStatement("SELECT report FROM reports WHERE date = ? AND is_monthly = ? AND branch = (SELECT branch_name FROM branch_employees WHERE user_id = ?) AND reportType = ?");
+			stmt.setDate(1, reportDate);
+			stmt.setInt(2, isMonthly? 1 : 0);
+			stmt.setString(3, requester);
+			stmt.setString(4,reportType.toString());
+			ResultSet res = stmt.executeQuery();
+			if(res.next())
+			{
+				try {
+					return res.getBlob(1).getBinaryStream().readAllBytes();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		} catch (SQLException e) {e.printStackTrace();	
+		Server.Log("Database", "Executing GetReport: FAILED");
+		}
+		return null;
+	}
+	
+	/**
+	 * Insert report.
+	 *
+	 * @param reportType the report type
+	 * @param isMonthly the is monthly
+	 * @param branch the branch
+	 * @param reportDate the report date
+	 * @param pdf the pdf
+	 */
+	public void InsertReport(ReportType reportType, boolean isMonthly, String branch, Date reportDate,byte[] pdf) {
+		Server.Log("Database", "Executing InsertReport");
+		PreparedStatement stmt;
+		try 
+		{
+			stmt = conn.prepareStatement("INSERT INTO reports (reportType,report,branch,is_monthly,date) VALUES (?,?,?,?,?)");
+			stmt.setString(1, reportType.toString());
+			stmt.setBlob(2, new ByteArrayInputStream(pdf));
+			stmt.setString(3, branch);
+			stmt.setInt(4, isMonthly? 1:0);
+			stmt.setDate(5, reportDate);
+			stmt.executeUpdate();
+		} catch (SQLException e) {e.printStackTrace();	
+		Server.Log("Database", "Executing InsertReport: FAILED");
+		}
+	}
+	
+	/**
+	 * Gets the daily financial income for branch.
+	 *
+	 * @param branch the branch
+	 * @param date the date
+	 * @return the integer[]
+	 */
+	public Integer[] GetDailyFinancialIncomeForBranch(String branch,Date date) //Gross, Refunds
+	{
+		Server.Log("Database", "Executing GetDailyFinancialIncomeForBranch");
+		Integer[] records = new Integer[3];
+		records[0] = 0;
+		records[1] = 0;
+		PreparedStatement stmt;
+		ResultSet rs;
+		try 
+		{
+			//NET = [Orders Completed]COMPLETED + [Order Cancelled](CANCEL_PRICE - CANCEL_REFUNDS)
+			stmt = conn.prepareStatement("SELECT SUM(total_price) FROM orders WHERE status = 'completed' AND branch_name = ? AND DATE(order_date) = ?");
+			stmt.setString(1, branch);
+			stmt.setDate(2,date);
+			rs = stmt.executeQuery();
+			while (rs.next()) {
+				records[0] = rs.getInt(1);
+			}
+			stmt = conn.prepareStatement("SELECT SUM(total_price)-SUM(refund_zerli) FROM orders WHERE branch_name = ? AND status = 'canceled' AND DATE(order_date) = ?");
+			stmt.setString(1, branch);
+			stmt.setDate(2,date);
+			rs = stmt.executeQuery();
+			while (rs.next()) {
+				records[1] = rs.getInt(1);
+			}
+			records[2] = records[1] + records[0];
+			return records;
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+			Server.Log("Database", "Executing GetDailyFinancialIncomeForBranch: FAILED");
+			return null;
+		}
+	}
+
+	/**
+	 * Gets the order count with item within period.
+	 *
+	 * @param t the t
+	 * @param a the a
+	 * @param b the b
+	 * @return the integer
+	 */
+	public Integer GetOrderCountWithItemWithinPeriod(ItemType t,Date a,Date b)
+	{
+		Server.Log("Database", "Executing GetOrderCountWithItemWithinPeriod");
+		PreparedStatement stmt;
+		try 
+		{
+			
+			/*stmt = conn.prepareStatement("SELECT COUNT(distinct order_id) FROM order_item WHERE item_id IN (SELECT item_id FROM items WHERE item_type = ?) AND order_id IN (SELECT order_id FROM orders WHERE DATE(order_date) BETWEEN CAST('2022-04-01' AS DATE) AND CAST('2022-04-31' AS DATE))");*/
+			stmt = conn.prepareStatement("SELECT COUNT(distinct order_id) FROM order_item WHERE item_id IN (SELECT item_id FROM items WHERE item_type = ?) AND order_id IN (SELECT order_id FROM orders WHERE DATE(order_date) BETWEEN ? AND ?)");
+			stmt.setString(1, t.toString());
+			stmt.setDate(2,a);
+			stmt.setDate(3, b);
+			ResultSet res = stmt.executeQuery();
+			if(res.next())
+			{
+				return res.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			Server.Log("Database", "Executing GetOrderCountWithItemWithinPeriod: FAILED");
+		}
+		return 0;
+	}
+
+
+	/**
+	 * Report exists.
+	 *
+	 * @param t the t
+	 * @param isMonthly the is monthly
+	 * @param branch the branch
+	 * @param reportDate the report date
+	 * @return true, if successful
+	 */
+	public boolean ReportExists(ReportType t, boolean isMonthly, String branch, Date reportDate) {
+		Server.Log("Database", "Executing ReportExists");
+		PreparedStatement stmt;
+		try 
+		{
+			stmt = conn.prepareStatement("SELECT reports_id FROM reports WHERE date = ? AND is_monthly = ? AND branch = ? AND reportType = ?");
+			stmt.setDate(1, reportDate);
+			stmt.setInt(2, isMonthly? 1 : 0);
+			stmt.setString(3, branch);
+			stmt.setString(4, t.toString());
+			ResultSet res = stmt.executeQuery();
+			if(res.next())
+			{
+				return true;
+			}
+		} catch (SQLException e) {e.printStackTrace();	
+		Server.Log("Database", "Executing ReportExists: FAILED");
+		}
+		return false;
 	}
 	
 	public void GetComplaints(ArrayList<Complaint> complaints)
@@ -1168,8 +1517,8 @@ public class ServerConnSQL {
 			while(rs.next())
 			{
 				Complaint newComplaint = new Complaint();
-				newComplaint.setUser_id(rs.getString(1));
-				newComplaint.setComplaint_id(rs.getInt(2));
+				newComplaint.setComplaint_id(rs.getInt(1));
+				newComplaint.setUser_id(rs.getString(2));
 				newComplaint.setComplain_text(rs.getString(3));
 				newComplaint.setComplain_time(rs.getTimestamp(5));
 				newComplaint.setBranch(rs.getString(7));
@@ -1339,10 +1688,10 @@ public class ServerConnSQL {
 		{
 			
 			stmt = conn.prepareStatement("SELECT ud.user_id , ud.first_name , ud.last_name , ud.id , ud.role "
-					+ "FROM user_details ud, login_details ld , brach_employees be "
+					+ "FROM user_details ud, login_details ld , branch_employees be "
 					+ "WHERE ud.role != 'customer' AND ud.role != 'manager' AND ud.role != 'ceo' "
 					+ "AND ud.user_id = ld.user_id AND ud.user_id = be.user_id "
-					+ "AND be.branch_name = (SELECT branch_name FROM brach_employees WHERE user_id = ?)");
+					+ "AND be.branch_name = (SELECT branch_name FROM branch_employees WHERE user_id = ?)");
 			stmt.setString(1, managerUserID);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -1493,3 +1842,4 @@ public class ServerConnSQL {
 		
 	}
 }
+/*** End Reports ***/

@@ -132,7 +132,7 @@
             </HBox>
          </children>
       </VBox>
-      <AnchorPane fx:id="creditCardDialog" layoutX="110.0" layoutY="176.0" prefHeight="371.0" prefWidth="463.0" visible="false">
+      <AnchorPane fx:id="creditCardDialog" disable="true" layoutX="110.0" layoutY="176.0" prefHeight="371.0" prefWidth="463.0" visible="false">
          <children>
             <ImageView fitHeight="252.0" fitWidth="396.0" layoutX="36.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -155,10 +155,6 @@
                <font>
                   <Font name="Maiandra GD" size="14.0" />
                </font></TextField>
-            <TextField fx:id="holderID" alignment="CENTER" layoutX="198.0" layoutY="319.0" prefHeight="30.0" prefWidth="141.0" promptText="XXXXXXXXX">
-               <font>
-                  <Font name="Maiandra GD" size="15.0" />
-               </font></TextField>
             <ComboBox fx:id="expMonthCB" layoutX="223.0" layoutY="214.0" prefHeight="25.0" prefWidth="56.0" promptText="09" visibleRowCount="6" />
             <ComboBox fx:id="yearCB" layoutX="291.0" layoutY="214.0" prefHeight="25.0" prefWidth="70.0" promptText="2024" visibleRowCount="6" />
             <Label layoutX="49.0" layoutY="166.0" text="Card Number">
@@ -176,11 +172,6 @@
                </font>
             </Label>
             <Label layoutX="54.0" layoutY="213.0" text="Expiratrion Date">
-               <font>
-                  <Font name="Maiandra GD" size="20.0" />
-               </font>
-            </Label>
-            <Label layoutX="49.0" layoutY="323.0" text="Card Holder ID">
                <font>
                   <Font name="Maiandra GD" size="20.0" />
                </font>

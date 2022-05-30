@@ -45,4 +45,5 @@ public enum RequestType {
 	GetSurveysNames,
 	GetSurvey,
 	SaveSurveyAnswers,
+	GetReport,
 }

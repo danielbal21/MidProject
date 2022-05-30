@@ -72,9 +72,6 @@ public class PaymentController implements UserControl {
     private ComboBox<String> expMonthCB;
 
     @FXML
-    private TextField holderID;
-
-    @FXML
     private Label netPriceLabel;
 
     @FXML
@@ -194,11 +191,6 @@ public class PaymentController implements UserControl {
 	    		error.append("CVV Cannot be empty\n");
 	    		valid = false;
 	    	}
-	    	if(holderID.getText().equals(""))
-	    	{
-	    		error.append("Please enter holder ID\n");
-	    		valid = false;
-	    	}
 	    	if(yearCB.getValue() == null || expMonthCB.getValue() == null)
 	    	{
 	    		error.append("Please enter a valid expiration date\n");
@@ -228,9 +220,9 @@ public class PaymentController implements UserControl {
 		/* load user status */
 		ClientApp.ProtocolHandler.Invoke(RequestType.GetUserCurrency,null ,null,true);
 		payDetails = (paymentInfo)ClientApp.ProtocolHandler.GetResponse(RequestType.GetUserCurrency);
-		isShipping = (boolean)LoginController.windowControl.getPipe("isShipping");
-		currentOrder = (Order)LoginController.windowControl.getPipe("orderInfo");
-    	int netPrice = (int) LoginController.windowControl.getPipe("totalCost");
+		isShipping = (boolean)LoginController.windowControl.peekPipe("isShipping");
+		currentOrder = (Order)LoginController.windowControl.peekPipe("orderInfo");
+    	int netPrice = (int) LoginController.windowControl.peekPipe("totalCost");
     	int discount = payDetails.newUser ? (int)(0.2f * netPrice) : 0;
     	int shipping = isShipping ? 15 : 0;
     	currentOrder.setTotalPrice(netPrice - discount + shipping);
@@ -295,7 +287,6 @@ public class PaymentController implements UserControl {
 		if(!save)
 		{
 			paymentMethod.selectToggle(creditCardRB);
-			holderID.clear();
 		}
 		
 	}

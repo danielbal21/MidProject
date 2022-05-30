@@ -43,18 +43,15 @@ public class HandlersRegisterer {
 		Protocol.RegisterHandler(RequestType.ComplaintResponse, null);
 		Protocol.RegisterHandler(RequestType.GetComplaints, new ArrayListToObservableHandler());
 		Protocol.RegisterHandler(RequestType.MakeComplaint, null);
-		
 		Protocol.RegisterHandler(RequestType.GetPendingClient, null);
 		Protocol.RegisterHandler(RequestType.RegisterClient, null);
 		Protocol.RegisterHandler(RequestType.GetAllCustomersInfo, new ArrayListToObservableHandler());
 		Protocol.RegisterHandler(RequestType.GetAllEmployeesInfo, new ArrayListToObservableHandler());
 		Protocol.RegisterHandler(RequestType.UpdateAccountAccess, null);
 		Protocol.RegisterHandler(RequestType.UpdateEmployeeRole, null);
-
-		
-	
 		Protocol.RegisterHandler(RequestType.SaveSurvey, null);
 		Protocol.RegisterHandler(RequestType.GetSurveysNames, new ArrayListToObservableHandler());
 		Protocol.RegisterHandler(RequestType.SaveSurveyAnswers, null);
+		Protocol.RegisterHandler(RequestType.GetReport, null);
 	}
 }

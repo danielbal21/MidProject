@@ -38,7 +38,6 @@ public class ItemInList implements Serializable{
 		this.itemType = itemType;
 		this.catalogType = catalogType;
 	}
-
 	public ItemInList(int item_id, int quantity) {
 		this.item_id = item_id;
 		this.quantity = quantity;
@@ -62,6 +61,12 @@ public class ItemInList implements Serializable{
 		this.catalogType = catalogType;
 	}
 	
+	public ItemInList(int item_id, String itemName, int quantity) {
+		this.item_id = item_id;
+		this.quantity = quantity;
+		this.itemName = itemName;
+	}
+
 	public byte[] getImage() {
 		return image;
 	}
@@ -105,6 +110,7 @@ public class ItemInList implements Serializable{
 		this.catalogType = catalogType;
 	}
 	public String getItem_type() {
+		if(itemType==null) return"";
 		switch (itemType) {
 		case bridal_bouquet: return "Bridal bouquet";
 		default:

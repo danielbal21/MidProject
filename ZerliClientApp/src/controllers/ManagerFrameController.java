@@ -77,7 +77,7 @@ public class ManagerFrameController implements IContainable {
 
     @FXML
     void viewReportsPress(ActionEvent event) {
-    	
+    	LoginController.windowControl.setUserControl("/gui/usercontrols/ManagerReportsSelection.fxml");
     }
 
 	@Override
