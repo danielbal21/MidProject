@@ -41,4 +41,8 @@ public enum RequestType {
 	GetAllEmployeesInfo,
 	UpdateAccountAccess,
 	UpdateEmployeeRole,
+	SaveSurvey,
+	GetSurveysNames,
+	GetSurvey,
+	SaveSurveyAnswers,
 }

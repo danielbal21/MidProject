@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
+
 import Entities.CatalogType;
 import Entities.Item;
 import ProtocolHandler.RequestType;
@@ -13,8 +15,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
@@ -75,11 +81,23 @@ public class CatalogViewerController implements UserControl {
     
     @FXML
     void backPressed(ActionEvent event) {
+    	Alert confirmAlert = new Alert(AlertType.NONE);
+		confirmAlert.setTitle("Leaving New item information");
+		confirmAlert.setContentText("Do you want to save typed data?");
+		ButtonType yes = new ButtonType("Yes", ButtonData.YES);
+		ButtonType no = new ButtonType("No",ButtonData.NO);
+		confirmAlert.getDialogPane().getButtonTypes().add(yes);
+		confirmAlert.getDialogPane().getButtonTypes().add(no);
+		Optional<ButtonType> result = confirmAlert.showAndWait();
+		result.ifPresent(response -> { 
+			if(response == no) Reset();
+		});
     	LoginController.windowControl.setUserControl("/gui/usercontrols/CustomerHomePage.fxml");
     }
     
     @FXML
     void browseLeft(ActionEvent event) {
+    	
     	if(currentPage.getText().equals("1")) return;
     	else {
      		ShowPage(Integer.parseInt(currentPage.getText())-1);
@@ -91,6 +109,7 @@ public class CatalogViewerController implements UserControl {
 
     @FXML
     void browseRight(ActionEvent event) {
+    	
     	if(currentPage.getText().equals(maxPages.getText())) return;
     	else {
     		ShowPage(Integer.parseInt(currentPage.getText())+1);
@@ -175,6 +194,12 @@ public class CatalogViewerController implements UserControl {
 		GridPane.getChildren().clear();
 	}
 	
+	private void Reset() {
+		LoginController.windowControl.putPipe("newItem",null);
+		
+	}
+
+
 	public void ShowPage(int num) {
 		GridPane.getChildren().clear();
 		

@@ -169,7 +169,11 @@ public class LoginController {
     				CustomerServiceFrameController mfc= loader.getController();
     				windowControl = new WindowControl(mfc);
 					mfc.init();
+<<<<<<< HEAD
     				windowControl.setUserControl("/gui/usercontrols/ServiceHomePage.fxml");
+=======
+    				windowControl.setUserControl("/gui/usercontrols/ManagerHomePage.fxml");
+>>>>>>> refs/heads/Ido
         		}
         		Stage newStage = new Stage();
         		Utilities.GenericUtilties.SetWindowMovable(root, newStage);

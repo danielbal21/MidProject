@@ -7,13 +7,15 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="activePanelContainer" prefHeight="663.0" prefWidth="957.0" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.NewItemNameAndQuantityController">
    <children>
-      <Label layoutX="210.0" layoutY="366.0" styleClass="subLabel" text="Quantity" />
-      <Label layoutX="218.0" layoutY="237.0" styleClass="subLabel" text="Name" />
-      <TextField fx:id="NameText" layoutX="380.0" layoutY="229.0" promptText="Enter Name here" styleClass="subLabel" />
-      <Label layoutX="274.0" layoutY="36.0" styleClass="MainLabel" text="Set your new item " />
+      <Label layoutX="105.0" layoutY="332.0" styleClass="subLabel" text="Quantity" />
+      <Label layoutX="110.0" layoutY="203.0" styleClass="subLabel" text="Name" />
+      <TextField fx:id="NameText" layoutX="207.0" layoutY="195.0" prefHeight="46.0" prefWidth="296.0" promptText="Enter Name here" styleClass="subLabel" />
+      <Label layoutX="55.0" layoutY="41.0" styleClass="MainLabel" text="New item operations" />
       <Button layoutX="14.0" layoutY="589.0" mnemonicParsing="false" onAction="#BackBtnPressed" prefHeight="62.0" prefWidth="88.0" text="Back">
          <styleClass>
             <String fx:value="pressbtn" />
@@ -21,8 +23,8 @@
          </styleClass></Button>
       <Label fx:id="NameErrorLabel" layoutX="414.0" layoutY="176.0" styleClass="subLabel" text="** Please enter name" textFill="RED" visible="false" />
       <Label fx:id="QuantityErrorLabel" layoutX="333.0" layoutY="315.0" styleClass="subLabel" text="** The quantity can not be zero" textFill="RED" visible="false" />
-      <Label fx:id="QuantityNumberText" alignment="CENTER" layoutX="438.0" layoutY="366.0" prefHeight="30.0" prefWidth="156.0" styleClass="subLabel" text="0" textAlignment="CENTER" />
-      <ImageView fitHeight="43.0" fitWidth="35.0" layoutX="400.0" layoutY="363.0" onMousePressed="#RemoveQuantity" pickOnBounds="true" preserveRatio="true">
+      <Label fx:id="QuantityNumberText" alignment="CENTER" layoutX="277.0" layoutY="332.0" prefHeight="30.0" prefWidth="90.0" styleClass="subLabel" text="0" textAlignment="CENTER" />
+      <ImageView fitHeight="43.0" fitWidth="35.0" layoutX="234.0" layoutY="329.0" onMousePressed="#RemoveQuantity" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../png/minusBtn.png" />
          </image>
@@ -31,7 +33,7 @@
             <String fx:value="pressbtn" />
          </styleClass>
       </ImageView>
-      <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="598.0" layoutY="362.0" onMousePressed="#AddQuantity" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="370.0" layoutY="328.0" onMousePressed="#AddQuantity" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../png/plusBtn.png" />
          </image>
@@ -40,37 +42,27 @@
             <String fx:value="pressbtn" />
          </styleClass>
       </ImageView>
-      <ImageView fitHeight="80.0" fitWidth="57.0" layoutX="127.0" layoutY="222.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="80.0" fitWidth="57.0" layoutX="21.0" layoutY="188.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../png/name.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="82.0" fitWidth="45.0" layoutX="129.0" layoutY="358.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="82.0" fitWidth="45.0" layoutX="24.0" layoutY="324.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../png/howMany.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="88.0" fitWidth="110.0" layoutX="820.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="88.0" fitWidth="110.0" layoutX="638.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../png/Imagination.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="287.0" layoutY="512.0" onMousePressed="#ResetBtn" pickOnBounds="true" preserveRatio="true">
-         <styleClass>
-            <String fx:value="pressbtn" />
-            <String fx:value="imageasbtn" />
-         </styleClass>
+      <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="19.0" layoutY="469.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../png/reset.png" />
          </image>
       </ImageView>
-      <Label layoutX="344.0" layoutY="519.0" styleClass="subLabel" text="Reset All" />
-      <ImageView fitHeight="119.0" fitWidth="98.0" layoutX="103.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../png/creation.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="80.0" fitWidth="67.0" layoutX="531.0" layoutY="486.0" onMousePressed="#NextBtnPressed" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="80.0" fitWidth="67.0" layoutX="215.0" layoutY="448.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../png/addToCart.png" />
          </image>
@@ -79,6 +71,25 @@
             <String fx:value="pressbtn" />
          </styleClass>
       </ImageView>
-      <Label layoutX="624.0" layoutY="504.0" styleClass="subLabel" text="Add new item &#10;to cart" textAlignment="CENTER" />
+      <Button layoutX="88.0" layoutY="472.0" mnemonicParsing="false" onMousePressed="#ResetBtn" text="Reset All">
+         <styleClass>
+            <String fx:value="Reg-btn" />
+            <String fx:value="pressbtn" />
+         </styleClass>
+      </Button>
+      <Button layoutX="317.0" layoutY="472.0" mnemonicParsing="false" onMousePressed="#NextBtnPressed" text="Add new item to cart">
+         <styleClass>
+            <String fx:value="Reg-btn" />
+            <String fx:value="pressbtn" />
+         </styleClass>
+      </Button>
+      <Label layoutX="718.0" layoutY="148.0" prefHeight="35.0" prefWidth="142.0" styleClass="subLabel" text="Summary" />
+      <Label layoutX="806.0" layoutY="242.0" />
+      <Line endX="72.39996337890625" layoutX="792.0" layoutY="185.0" startX="-100.0" />
+      <Label fx:id="summaryText" alignment="TOP_LEFT" layoutX="535.0" layoutY="212.0" prefHeight="429.0" prefWidth="416.0" text="summaryText">
+         <font>
+            <Font name="Maiandra GD" size="20.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

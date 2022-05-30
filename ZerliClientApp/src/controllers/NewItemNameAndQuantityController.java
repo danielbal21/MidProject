@@ -1,8 +1,14 @@
 package controllers;
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+
+import java.util.Optional;
+
 import Entities.CatalogType;
+import Entities.ItemInList;
 import Entities.NewItem;
 import Entities.RedNotificationCircle;
 import ProtocolHandler.RequestType;
@@ -10,11 +16,16 @@ import client.ClientApp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
 public class NewItemNameAndQuantityController implements UserControl{
 	private NewItem newitem;
+	
+    @FXML
+    private Label summaryText;
 	
     @FXML
     private Label NameErrorLabel;
@@ -33,7 +44,13 @@ public class NewItemNameAndQuantityController implements UserControl{
     
     @Override
 	public void onEnter() {
-    	ResetBtn(null);
+    	/////
+    	String string="";
+    	NewItem newitem = (NewItem)LoginController.windowControl.peekPipe("newItem");
+    	for (ItemInList temp : newitem.getAssemble()) {
+    		string=string+"Item name : "+temp.getItemName()+"  Quantity : "+temp.getQuantity()+"\n\n";
+    		summaryText.setText(string);
+		}
 	}
     
     @FXML
@@ -43,6 +60,21 @@ public class NewItemNameAndQuantityController implements UserControl{
 
     @FXML
     void BackBtnPressed(ActionEvent event) {
+    	if( !NameText.getText().equals("")||
+    	    	!QuantityNumberText.getText().equals("0"))
+    			{
+    				Alert confirmAlert = new Alert(AlertType.NONE);
+    				confirmAlert.setTitle("Leaving New item information");
+    				confirmAlert.setContentText("Do you want to save typed data?");
+    				ButtonType yes = new ButtonType("Yes", ButtonData.YES);
+    				ButtonType no = new ButtonType("No",ButtonData.NO);
+    				confirmAlert.getDialogPane().getButtonTypes().add(yes);
+    				confirmAlert.getDialogPane().getButtonTypes().add(no);
+    				Optional<ButtonType> result = confirmAlert.showAndWait();
+    				result.ifPresent(response -> { 
+    					if(response == no) ResetBtn(null);
+    				});
+    			}
     	LoginController.windowControl.putPipe("NewItem", CatalogType.new_item);
     	LoginController.windowControl.setUserControl("/gui/usercontrols/CustomerCatalogViewer.fxml");
     }
@@ -120,7 +152,6 @@ public class NewItemNameAndQuantityController implements UserControl{
     
 	@Override
 	public void onExit() {
-		
 	}
 
 

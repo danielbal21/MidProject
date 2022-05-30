@@ -72,7 +72,7 @@ public class ItemHBoxController extends HBox {
     			myItem = new NewItem();
     		}
     		
-    		ItemInList item = new ItemInList(id, Integer.parseInt(quntityLabel.getText()));
+    		ItemInList item = new ItemInList(id, nameLabel.getText(),Integer.parseInt(quntityLabel.getText()));
     		item.setPrice(Integer.parseInt(CostLabel.getText().substring(0,CostLabel.getText().indexOf(' '))));
 			myItem.addItem(item);
 			LoginController.windowControl.putPipe("newItem", myItem);

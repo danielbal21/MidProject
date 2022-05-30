@@ -53,5 +53,8 @@ public class HandlersRegisterer {
 
 		
 	
+		Protocol.RegisterHandler(RequestType.SaveSurvey, null);
+		Protocol.RegisterHandler(RequestType.GetSurveysNames, new ArrayListToObservableHandler());
+		Protocol.RegisterHandler(RequestType.SaveSurveyAnswers, null);
 	}
 }
