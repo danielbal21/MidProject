@@ -37,6 +37,12 @@ public class ManagerFrameController implements IContainable {
 			System.exit(0);
 		} catch (IOException e) {e.printStackTrace();}
     }
+    
+
+    @FXML
+    void manageAccountsPressed(ActionEvent event) {
+    	LoginController.windowControl.setUserControl("/gui/usercontrols/ManagerAccountManagment.fxml");
+    }
 
     @FXML
     void homePressed(MouseEvent event) {

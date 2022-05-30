@@ -18,7 +18,7 @@
             <String fx:value="pressbtn" />
          </styleClass>
       </Button>
-      <TableView fx:id="ItemTable" layoutX="152.0" layoutY="219.0" prefHeight="192.0" prefWidth="787.0">
+      <TableView fx:id="ItemTable" layoutX="152.0" layoutY="219.0" onMouseClicked="#clickOnNewItem" prefHeight="192.0" prefWidth="787.0">
         <columns>
           <TableColumn fx:id="nameItem" prefWidth="200.0" text="name" />
             <TableColumn fx:id="catalogItem" prefWidth="200.0" text="Catalog" />
@@ -27,7 +27,7 @@
             <TableColumn fx:id="quantityItem" prefWidth="105.0" text="Quantity" />
         </columns>
       </TableView>
-      <Label layoutX="41.0" layoutY="300.0" styleClass="subLabel" text="Item List:" />
+      <Label fx:id="itemListLbl" alignment="CENTER" contentDisplay="CENTER" layoutX="23.0" layoutY="219.0" prefHeight="60.0" prefWidth="118.0" styleClass="subLabel" text="New item&#10;List:" textAlignment="CENTER" />
       <Label layoutX="43.0" layoutY="464.0" styleClass="subLabel" text="Gretting &#10;card:" textAlignment="CENTER" />
       <Button fx:id="cancelOrder" layoutX="422.0" layoutY="594.0" mnemonicParsing="false" onAction="#cancelOrderPressed" text="Cancel Order">
          <styleClass>
@@ -45,17 +45,7 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="linkWord" contentDisplay="CENTER" styleClass="subLabel" text="to">
-                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </padding>
-                  </Label>
                   <Label fx:id="fullAddress" contentDisplay="CENTER" styleClass="subLabel" text="Hakerem 20 Akko">
-                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </padding>
-                  </Label>
-                  <Label contentDisplay="CENTER" styleClass="subLabel" text="at">
                      <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </padding>
@@ -134,5 +124,11 @@
             <Font name="Maiandra GD" size="25.0" />
          </font>
       </Label>
+      <Button fx:id="fullListBtn" layoutX="32.0" layoutY="296.0" mnemonicParsing="false" onAction="#showFullSpecs" text="Return to &#10;full list" textAlignment="CENTER">
+         <styleClass>
+            <String fx:value="Reg-btn" />
+            <String fx:value="pressbtn" />
+         </styleClass>
+      </Button>
    </children>
 </AnchorPane>

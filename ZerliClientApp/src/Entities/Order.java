@@ -38,6 +38,10 @@ public class Order implements Serializable {
 	
 	private String address;
 	
+	private String fullname;
+	
+	private String phone;
+	
 	private String order_date;
 	private String shipping_date;
 	private String payment_method;
@@ -196,6 +200,19 @@ public class Order implements Serializable {
 	}
 	public void setOrder_status(String order_status) {
 		this.order_status = order_status;
+	}
+	
+	public String getFullname() {
+		return fullname;
+	}
+	public void setFullname(String fullname) {
+		this.fullname = fullname;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 	@Override
 	public String toString() {

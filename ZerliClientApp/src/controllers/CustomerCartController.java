@@ -2,7 +2,9 @@ package controllers;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Optional;
 
+import Entities.Access;
 import Entities.ItemInList;
 import Entities.NewItem;
 import ProtocolHandler.RequestType;
@@ -11,8 +13,12 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -39,8 +45,19 @@ public class CustomerCartController implements UserControl {
     private Button nextBtn;
     @FXML
     void NextBtnPressed(ActionEvent event) {
-    	clearScreen();
+    	if(ClientApp.UserStatus == Access.frozen) {
+    		Alert confirmAlert = new Alert(AlertType.NONE);
+    		confirmAlert.setTitle("Acount information");
+    		confirmAlert.setContentText("Your account is frozen\nContact Zerli's administration");
+    		ButtonType ok = new ButtonType("OK", ButtonData.OK_DONE);
+    		confirmAlert.getDialogPane().getButtonTypes().add(ok);
+    		Optional<ButtonType> result = confirmAlert.showAndWait();
+    	}
+    	else {
+    		   	clearScreen();
     	LoginController.windowControl.setUserControl("/gui/usercontrols/CustomerOrderInformation.fxml");
+    	}
+ 
     }
 	@Override
 	public void onEnter() {

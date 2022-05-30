@@ -12,7 +12,7 @@ public class ConfirmOrderOperation implements IOperation {
 	@Override
 	public boolean Perform(String requestee, Object data, Object params) {
 		Order order = (Order)data;
-		  Server.SqlServerManager.ConfirmOrder(Integer.valueOf(order.getOrderID()));
+		  Server.SqlServerManager.ConfirmOrder(Integer.valueOf(order.getOrderID()),(String)params);
 			return true;
 	}
 

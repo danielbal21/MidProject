@@ -7,6 +7,7 @@ import java.util.Optional;
 import Entities.CatalogType;
 import Entities.ItemInList;
 import Entities.ItemType;
+import Entities.NewItem;
 import Entities.Order;
 import Entities.OrderStatus;
 import Entities.ShippingMethods;
@@ -20,6 +21,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 
 public class CustomerViewOrdersSpecificController implements UserControl{
 	
@@ -81,9 +84,49 @@ public class CustomerViewOrdersSpecificController implements UserControl{
     private Label statusOrder;
     
     @FXML
+    private Label itemListLbl;
+    
+    @FXML
+    private Button fullListBtn;
+    
+    @FXML
+    void clickOnNewItem(MouseEvent event) {
+    	if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 2) {
+    		if(ItemTable.getSelectionModel().getSelectedItem() instanceof NewItem) {
+    			
+    			NewItem chosenItem = (NewItem) ItemTable.getSelectionModel().getSelectedItem();
+    			itemListView = FXCollections.observableArrayList(chosenItem.getAssemble());
+    			
+        		ItemTable.setItems(itemListView);
+        		fullListBtn.setVisible(true);
+        		itemListLbl.setText("New Item\nList:");
+    		}	
+    		else return;
+    	}
+    	else return;
+    }
+    
+
+    @FXML
+    void showFullSpecs(ActionEvent event) {
+    	fullListBtn.setVisible(false);
+		itemListLbl.setText("Items\nList:");
+		
+		order = (Order) LoginController.windowControl.peekPipe("chosenOrder");
+		itemListView = FXCollections.observableArrayList((ArrayList<ItemInList>)order.getItems());
+		
+		catalogItem.setCellValueFactory(new PropertyValueFactory<>("catalog_Type"));
+		nameItem.setCellValueFactory(new PropertyValueFactory<>("itemName"));
+		priceItem.setCellValueFactory(new PropertyValueFactory<>("price"));
+		quantityItem.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+		typeItem.setCellValueFactory(new PropertyValueFactory<>("item_type"));
+		
+		ItemTable.setItems(itemListView);
+    }
+    
+    @FXML
     void backPressed(ActionEvent event) {
     	LoginController.windowControl.setUserControl("/gui/usercontrols/CustomerViewOrders.fxml");
-
     }
     
     @FXML
@@ -126,6 +169,9 @@ public class CustomerViewOrdersSpecificController implements UserControl{
 
 	@Override
 	public void onEnter() {
+		fullListBtn.setVisible(false);
+		itemListLbl.setText("Items\nList:");
+		
 		order = (Order) LoginController.windowControl.peekPipe("chosenOrder");
 		itemListView = FXCollections.observableArrayList((ArrayList<ItemInList>)order.getItems());
 		

@@ -14,12 +14,17 @@ public class GetOrdersByBranchOperation implements IOperation {
 		return false;
 	}
 
+	// data - branch
+	// params manager/delivery
 	@Override
 	public boolean Perform(String requestee, Object data, Object params, ResponseWrapper response) {
-		ArrayList<Order> Orders = new ArrayList<Order>();
-	    Server.SqlServerManager.GetOrdersByBranch(Orders, (String) data, (String)params);
-	    response.SetResponse(Orders);
-		return true;
+		if(data instanceof String && params instanceof String) {
+			ArrayList<Order> Orders = new ArrayList<Order>();
+		    Server.SqlServerManager.GetOrdersByBranch(Orders, (String)data, (String)params);
+		    response.SetResponse(Orders);
+			return true;
+		}
+		return false;
 	}
 
 }

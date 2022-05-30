@@ -55,11 +55,28 @@ public class LoginController {
     	else
     	{
     		loginLabel.setVisible(true);
-    		loginLabel.setText("Username and password field cannot be empty");
+    		loginLabel.setText("Username and password fields\ncannot be empty");
     		return false;
     	}
     }
+    
+    
+    @FXML
+    void EnterPassword(KeyEvent event) {
+    	if(event.getCode() == KeyCode.ENTER)
+    	{
+    		logIn();
+    	}
+    }
 
+    @FXML
+    void EnterUserName(KeyEvent event) {
+    	if(event.getCode() == KeyCode.ENTER)
+    	{
+    		logIn();
+    	}
+    }
+    
 	private void logIn() {
 		loginLabel.setVisible(false);
     	if(!validateInput()) return;
@@ -68,7 +85,7 @@ public class LoginController {
     	loginDetails =(Object[])ClientApp.ProtocolHandler.GetResponse(RequestType.AuthenticateUser);
 
     	Access access=(Access)loginDetails[1];
-    	if (access==Access.active)
+    	if (access==Access.active || access==Access.frozen)
     	{
     		int loggedIn=(int)loginDetails[0];
     		if (loggedIn==0)
@@ -77,6 +94,7 @@ public class LoginController {
     			FXMLLoader loader = new FXMLLoader();
     	    	Parent root = null;
     	    	ClientApp.UserID =userNameText.getText();
+    	    	ClientApp.UserStatus = access;
     	    	if(role == Roles.customer)
     	    	{
         			windowControl.stage.close();
@@ -168,7 +186,7 @@ public class LoginController {
         		return;	
     		}
     	}
-    	else if(access == Access.noaut )
+    	else if(access == Access.noaut)
     	{
     		loginLabel.setVisible(true);
     		loginLabel.setText("The Credentials entered are wrong");
@@ -176,36 +194,44 @@ public class LoginController {
     	}
     	else if(access==Access.inactive)
     	{
-    		
-    		loginLabel.setVisible(true);
-    		loginLabel.setText("Go to one of Zerli's branches to register");
-    		return;	
+    		FXMLLoader loader = new FXMLLoader();
+	    	Parent root = null;
+	    	ClientApp.UserID =userNameText.getText();
+	    	ClientApp.UserStatus = access;
+    		Roles role =(Roles)loginDetails[2];
+    		if(role == Roles.customer)
+	    	{
+    			windowControl.stage.close();
+				loader.setLocation(getClass().getResource("/gui/mainframes/CustomerMainScreen.fxml"));
+			
+				try {
+					root =  loader.load();
+				} catch (IOException e) {
+					e.printStackTrace();
+				} 
+				CustomerFrameController cfc= loader.getController();
+				windowControl = new WindowControl(cfc);
+				windowControl.setUserControl("/gui/usercontrols/CustomerHomePage.fxml");
+				cfc.init();
+				Stage newStage = new Stage();
+        		Utilities.GenericUtilties.SetWindowMovable(root, newStage);
+        		Scene scene = new Scene(root);
+        		newStage.initStyle(StageStyle.UNDECORATED);
+        		newStage.setScene(scene); 	
+        		newStage.show();
+        		windowControl.stage = newStage;
+	    	}
+    		else {
+        		loginLabel.setVisible(true);
+        		loginLabel.setText("Your employee account is inactive\nContact Zerli's administration");
+        		return;	
+    		}
     	}
-    	else 
-    	{
-    		loginLabel.setVisible(true);
-    		loginLabel.setText("Your acount is frozen please contact Zerli's administration");
-    		return;	
-		}
 	}
     @FXML
     void loginPressed(ActionEvent event) 
     {
     	logIn();
-    }
-    @FXML
-    void enterPressed(KeyEvent event) {
-    	if(event.getCode() == KeyCode.ENTER)
-    	{
-    		logIn();
-    	}
-    }
-    @FXML
-    void passwordEnterPressed(KeyEvent event) {
-    	if(event.getCode() == KeyCode.ENTER)
-    	{
-    		logIn();
-    	}
     }
 
     @FXML

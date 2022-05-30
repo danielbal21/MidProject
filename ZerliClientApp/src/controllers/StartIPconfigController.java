@@ -18,14 +18,15 @@ import javafx.stage.StageStyle;
 
 public class StartIPconfigController {
 
-    @FXML
-    private Label errrorLabel;
-    
+
     @FXML
     private Button connectBtn;
 
     @FXML
-    private Label enteripTextField;
+    private Label enterIPLabel;
+
+    @FXML
+    private Label errrorLabel;
 
     @FXML
     private TextField ipTextField;
@@ -33,19 +34,19 @@ public class StartIPconfigController {
     @FXML
     void connectPressed(ActionEvent event) {
     	startConnaction();
-    	
     }
-
 
     @FXML
     void Enter(KeyEvent event) {
     	if(event.getCode() == KeyCode.ENTER)
     		startConnaction();
     }
+    
     @FXML
     void exitPressed(MouseEvent event) {
     	System.exit(0);
     }
+    
     private void startConnaction() 
     {
     	errrorLabel.setVisible(false);
@@ -53,7 +54,6 @@ public class StartIPconfigController {
     	if(ip.equals("")) {
     		ip = "localhost";
     	}
-    	
     	ClientApp.ClientConnection = new ClientConn(ip, ClientApp.DEFAULT_PORT);
     	if(!ClientApp.ClientConnection.isConnected()) {
     		errrorLabel.setVisible(true);

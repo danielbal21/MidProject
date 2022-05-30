@@ -57,7 +57,10 @@ public class GenericUtilties {
 	{
 		return java.sql.Timestamp.valueOf(date.atTime(time));
 	}
-	
+	public static java.sql.Timestamp Convert_LocalDate_To_SQLDate(LocalDateTime datetime)
+	{
+		return java.sql.Timestamp.valueOf(datetime);
+	}
 	public static LocalDateTime Convert_LocalDate_To_SQLDate(java.sql.Timestamp datetime)
 	{
 		return datetime.toLocalDateTime();

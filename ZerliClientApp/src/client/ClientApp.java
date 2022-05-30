@@ -1,6 +1,8 @@
 package client;
 
 import java.io.IOException;
+
+import Entities.Access;
 import ProtocolHandler.Protocol;
 import controllers.LoginController;
 import controllers.ManagerOrderManagerController;
@@ -17,6 +19,7 @@ public class ClientApp extends Application {
 	final public static int DEFAULT_PORT = 5555;
 	public static Protocol ProtocolHandler = new Protocol();
 	public static String UserID = "NO-AUTH";
+	public static Access UserStatus = Access.noaut;
 	//final public static String DEFAULT_HOST = "localhost";
 	public static ClientConn ClientConnection;
 	

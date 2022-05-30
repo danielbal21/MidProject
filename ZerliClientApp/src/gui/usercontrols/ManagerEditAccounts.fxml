@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="activePanelContainer" prefHeight="663.0" prefWidth="957.0" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ManagerEditAccountsController">
+   <children>
+      <Label layoutX="308.0" layoutY="14.0" styleClass="MainLabel" text="Edit accounts" />
+      <AnchorPane layoutX="261.0" layoutY="87.0" prefHeight="59.0" prefWidth="435.0">
+         <children>
+            <Label layoutX="6.0" layoutY="16.0" styleClass="subLabel" text="Show:" />
+            <RadioButton fx:id="customerBtn" layoutX="82.0" layoutY="16.0" mnemonicParsing="false" styleClass="subLabel" text="Customers">
+               <toggleGroup>
+                  <ToggleGroup fx:id="accountType" />
+               </toggleGroup></RadioButton>
+            <RadioButton fx:id="employeeBtn" layoutX="259.0" layoutY="16.0" mnemonicParsing="false" styleClass="subLabel" text="Employees" toggleGroup="$accountType" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="accountsSection" layoutX="158.0" layoutY="146.0" prefHeight="336.0" prefWidth="642.0">
+         <children>
+            <TableView fx:id="AccountManagment" onMouseClicked="#getAccountInfo" prefHeight="329.0" prefWidth="638.0">
+              <columns>
+                <TableColumn fx:id="userIDCol" prefWidth="90.0" text="user ID" />
+                <TableColumn fx:id="firstNameCol" prefWidth="110.0" text="first name" />
+                  <TableColumn fx:id="lastNameCol" prefWidth="110.0" text="Last name" />
+                  <TableColumn fx:id="IDCol" prefWidth="139.0" text="ID" />
+                  <TableColumn fx:id="accountInfoCol" prefWidth="185.0" text="Status" />
+              </columns>
+            </TableView>
+         </children>
+      </AnchorPane>
+      <Button layoutX="6.0" layoutY="597.0" mnemonicParsing="false" onAction="#backPressed" text="Back">
+         <styleClass>
+            <String fx:value="Left-btn" />
+            <String fx:value="pressbtn" />
+         </styleClass>
+      </Button>
+      <AnchorPane fx:id="changeSection" layoutX="16.0" layoutY="488.0" prefHeight="132.0" prefWidth="926.0">
+         <children>
+            <HBox alignment="CENTER" layoutX="35.0" layoutY="14.0" prefHeight="59.0" prefWidth="856.0" spacing="10.0">
+               <children>
+                  <Label styleClass="subLabel" text="Change" />
+                  <Label fx:id="fullNameLbl" prefHeight="30.0" text="Full name" textFill="RED">
+                     <font>
+                        <Font name="Maiandra GD" size="33.0" />
+                     </font></Label>
+                  <Label styleClass="subLabel" text="From" />
+                  <Label fx:id="accountInfoLbl" prefHeight="30.0" text="Status" textFill="RED">
+                     <font>
+                        <Font name="Maiandra GD" size="33.0" />
+                     </font></Label>
+                  <Label styleClass="subLabel" text="To" />
+                  <ChoiceBox fx:id="accountInfoChoice" prefHeight="46.0" prefWidth="181.0" styleClass="subLabel" />
+               </children>
+            </HBox>
+            <Button layoutX="383.0" layoutY="73.0" mnemonicParsing="false" onAction="#ChangeAccountInfoPressed" text="Approve Change">
+               <styleClass>
+                  <String fx:value="Reg-btn" />
+                  <String fx:value="pressbtn" />
+               </styleClass>
+            </Button>
+            <Label fx:id="changeErrorLbl" alignment="CENTER" contentDisplay="CENTER" layoutX="589.0" layoutY="71.0" prefHeight="46.0" prefWidth="197.0" text="choose diffrent option &#10;from exist one" textAlignment="CENTER" textFill="RED">
+               <font>
+                  <Font name="Maiandra GD" size="17.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

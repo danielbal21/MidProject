@@ -39,6 +39,14 @@ public class RequestRegisterer {
 		Protocol.RegisterOperation(RequestType.GetComplaints, new GetComplaintsOperation());
 		Protocol.RegisterOperation(RequestType.ComplaintResponse, new ComplaintResponseOperation());
 		Protocol.RegisterOperation(RequestType.MakeComplaint, new MakeComplaintOperation());
+		Protocol.RegisterOperation(RequestType.GetPendingClient, new GetPendingClientOperation());
+		Protocol.RegisterOperation(RequestType.RegisterClient, new RegisterClientOperation());
+		Protocol.RegisterOperation(RequestType.GetAllCustomersInfo, new GetAllCustomersInfoOperation());
+		Protocol.RegisterOperation(RequestType.GetAllEmployeesInfo, new GetAllEmployeesInfoOperation());
+		Protocol.RegisterOperation(RequestType.UpdateAccountAccess, new UpdateAccountAccessOperation());
+		Protocol.RegisterOperation(RequestType.UpdateEmployeeRole, new UpdateEmployeeRoleOperation());
+
 		
+	
 	}
 }

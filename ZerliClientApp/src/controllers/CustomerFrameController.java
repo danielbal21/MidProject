@@ -1,9 +1,12 @@
 package controllers;
 
 import java.io.IOException;
+import java.io.ObjectInputFilter.Status;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
+import Entities.Access;
 import Entities.ItemInList;
 import Entities.RedNotificationCircle;
 import ProtocolHandler.RequestType;
@@ -14,8 +17,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -86,6 +93,15 @@ public class CustomerFrameController implements IContainable{
 
     @FXML
     void cartPressed(MouseEvent event) {
+    	if(ClientApp.UserStatus == Access.inactive)  {
+    		Alert confirmAlert = new Alert(AlertType.ERROR);
+			confirmAlert.setTitle("Not registered customer");
+			confirmAlert.setContentText("Your account is inactive\nContact Zerli's administration");
+			ButtonType ok = new ButtonType("OK", ButtonData.OK_DONE);
+			confirmAlert.getDialogPane().getButtonTypes().add(ok);
+			confirmAlert.showAndWait();
+			return;
+    	}
     	LoginController.windowControl.setUserControl("/gui/usercontrols/CustomerCart.fxml");
     }
 

@@ -35,4 +35,10 @@ public enum RequestType {
 	GetComplaints,
 	ComplaintResponse,
 	MakeComplaint,
+	GetPendingClient,
+	RegisterClient,
+	GetAllCustomersInfo,
+	GetAllEmployeesInfo,
+	UpdateAccountAccess,
+	UpdateEmployeeRole,
 }
