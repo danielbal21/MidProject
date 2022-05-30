@@ -240,7 +240,13 @@ public class ManagerAddNewCustomerController implements UserControl{
 		searchErrorLBl.setText("");
 		IDSearch.setText("");
 		addError.setText("");
-	}
-
-
+		passwordTxt.setText("");
+		cardNumTxt1.setText("");
+		cardNumTxt2.setText("");
+		cardNumTxt3.setText("");
+		cardNumTxt4.setText("");
+		cvvText.setText("");
+		expMonthCB.setValue(null);
+		yearCB.setValue(null);
+	}  
 }
