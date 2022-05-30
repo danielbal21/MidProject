@@ -5,7 +5,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane fx:id="activePanelContainer" prefHeight="146.0" prefWidth="250.0" style="-fx-background-color: rgba(0,0,0,0.5);" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ProgressIndicator layoutX="75.0" layoutY="15.0" minHeight="100.0" minWidth="100.0" />

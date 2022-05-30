@@ -1,16 +1,17 @@
 package controllers;
 
 import java.io.IOException;
-import java.io.ObjectInputFilter.Status;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
-
 import Entities.Access;
 import Entities.ItemInList;
+import Entities.NotificationInTable;
 import Entities.RedNotificationCircle;
 import ProtocolHandler.RequestType;
 import client.ClientApp;
+import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -33,7 +34,8 @@ public class CustomerFrameController implements IContainable{
 	
 	Map<String,Parent> map = new HashMap<>();
 	Map<String,UserControl> uc_map = new HashMap<String, UserControl>();
-
+	Thread thread;
+	
     @FXML
     private ImageView bellBtn;
 
@@ -67,7 +69,9 @@ public class CustomerFrameController implements IContainable{
     private ImageView bellRedCircleImage;
     @FXML
     private Label bellRedCricleLable;
+    
     private int cartNotificationsNumber;
+    
     void init(){
     	ClientApp.ProtocolHandler.Invoke(RequestType.GetCart, null, null, true);
     	ObservableList<ItemInList> list=(ObservableList<ItemInList>)ClientApp.ProtocolHandler.GetResponse(RequestType.GetCart);
@@ -83,6 +87,56 @@ public class CustomerFrameController implements IContainable{
     	nameLabel.setText(ClientApp.UserID.toString());
     	RedNotificationCircle cartNotification=new RedNotificationCircle(cartRedCircleImage, cartRedCricleLable, cartNotificationsNumber);
     	LoginController.windowControl.putPipe("cartLabel", cartNotification);
+    
+    	bellRedCricleLable.textProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				if(Integer.parseInt(newValue) <= 0)
+				{
+					bellRedCircleImage.setVisible(false);
+					bellRedCricleLable.setVisible(false);
+				}
+				else
+				{
+					bellRedCircleImage.setVisible(true);
+					bellRedCricleLable.setVisible(true);
+				}
+			}
+		});
+    	
+    	
+    
+     	   	
+		thread =new Thread(new Runnable() {
+			@Override
+			public void run() {
+				while(true){
+					ClientApp.ProtocolHandler.Invoke(RequestType.GetNotification, null, null, true);
+					ObservableList<NotificationInTable> list = (ObservableList<NotificationInTable>) ClientApp.ProtocolHandler.GetResponse(RequestType.GetNotification);
+					LoginController.windowControl.putPipe("All Notification", list);
+					int cnt=0;
+					for(NotificationInTable not: list) {
+						if(not.getStatus().equals("unread")) cnt++;
+					}
+					
+					String notificationNumber=String.valueOf(cnt);
+					Platform.runLater(new Runnable(){
+
+						@Override
+						public void run() {
+							bellRedCricleLable.setText(notificationNumber);							
+						}
+			    		});
+					
+					try {
+						Thread.sleep(5000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		});
+		thread.start();
     	
     }
 
@@ -107,6 +161,7 @@ public class CustomerFrameController implements IContainable{
 
     @FXML
     void exitPressed(MouseEvent event) {
+    	thread.stop();
     	ClientApp.ProtocolHandler.Invoke(RequestType.SetLogOut,null,null,false);
     	try {
 			ClientApp.ClientConnection.closeConnection();
@@ -127,6 +182,7 @@ public class CustomerFrameController implements IContainable{
 
     @FXML
     void pressLogout(ActionEvent event) {
+    	thread.stop();
     	LoginController.windowControl.stage.close();
     	Stage newStage = new Stage();
 		Parent root = null;

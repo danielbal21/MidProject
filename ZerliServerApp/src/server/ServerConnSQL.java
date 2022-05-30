@@ -1015,8 +1015,8 @@ public class ServerConnSQL {
 		try {
 			rs = stmt.executeQuery();
 			while (rs.next()) {
-				notificationList
-						.add(new NotificationInTable(rs.getInt(1), rs.getString(3), rs.getString(4), rs.getString(5)));
+				notificationList.add(new NotificationInTable(rs.getInt(1), 
+						rs.getString(3), rs.getString(4), rs.getString(5)));
 			}
 		} catch (Exception e) {
 			System.err.println("Got an exception! ");
@@ -1031,16 +1031,13 @@ public class ServerConnSQL {
 	 * @param username the username
 	 * @param data the data
 	 */
-	public void UpdateNotification(String username, ArrayList<NotificationInTable> data) {
+	public void UpdateNotification(String username, int num) {
 		PreparedStatement stmt = null;
 		try {
-			for (NotificationInTable notificationInTable : data) {			
-				stmt = conn.prepareStatement("UPDATE notifications SET status = ? WHERE notification_id = ? ");
-				stmt.setString(1, notificationInTable.getStatus());
-				stmt.setInt(2, notificationInTable.getNotificationnumber());
-				stmt.executeUpdate();
-			}
-
+					
+			stmt = conn.prepareStatement("UPDATE notifications SET status = 'read' WHERE notification_id = ? ");
+			stmt.setInt(1, num);
+			stmt.executeUpdate();
 		} catch (SQLException e1) {
 			System.err.println("Failed on UpdateNotification()");
 			e1.printStackTrace();

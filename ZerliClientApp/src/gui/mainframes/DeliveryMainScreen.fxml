@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -26,18 +25,6 @@
                   <String fx:value="Reg-btn" />
                   <String fx:value="pressbtn" />
                </styleClass></Button>
-            <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="887.0" layoutY="22.0" onMousePressed="#bellBtn" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../png/notification.png" />
-               </image>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <styleClass>
-                  <String fx:value="pressbtn" />
-                  <String fx:value="imageasbtn" />
-               </styleClass>
-            </ImageView>
             <ImageView fitHeight="100.0" fitWidth="207.0" layoutX="468.0" layoutY="3.0">
                <image>
                   <Image url="@../../png/ZerliLogo.PNG" />
