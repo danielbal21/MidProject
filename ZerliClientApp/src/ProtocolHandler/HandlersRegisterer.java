@@ -40,5 +40,6 @@ public class HandlersRegisterer {
 		Protocol.RegisterHandler(RequestType.RemoveItemByID,null);
 		Protocol.RegisterHandler(RequestType.UpdateItem, null);
 		Protocol.RegisterHandler(RequestType.AddItem, null);
+		Protocol.RegisterHandler(RequestType.GetReport, null);
 	}
 }

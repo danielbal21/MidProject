@@ -1,8 +1,22 @@
+/*
+ * 
+ */
 package ProtocolHandler;
 
 import ProtocolHandler.Operations.*;
 
+/**
+ * The Class RequestRegisterer has one method and is used
+ * to encapsulate internal ProtocolHandler operations.
+ * 
+ */
 public class RequestRegisterer {
+	
+	/**
+	 * This method is where all the RegisterOperation methods reside
+	 * When the SW Designer creates an operation to be invoked when a requestType is made
+	 * he will map between the two here using the Protocol.RegisterOperation method (See Protocol.java for more info)
+	 */
 	public static void RegisterProtocol()
 	{
 		/*** Add the mapping between your requests and operations ***/
@@ -36,6 +50,7 @@ public class RequestRegisterer {
 		Protocol.RegisterOperation(RequestType.GetItemByID, new GetItemByIDOperation());
 		Protocol.RegisterOperation(RequestType.UpdateItem, new UpdateItemOperation());
 		Protocol.RegisterOperation(RequestType.AddItem, new AddItemOperation());
+		Protocol.RegisterOperation(RequestType.GetReport, new GetReportOperation());
 		
 	}
 }

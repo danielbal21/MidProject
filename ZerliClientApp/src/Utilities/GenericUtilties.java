@@ -7,6 +7,7 @@ import java.time.LocalTime;
 import Entities.CatalogType;
 import Entities.Color;
 import Entities.ItemType;
+import Entities.ReportType;
 import javafx.event.EventHandler;
 import javafx.scene.Parent;
 import javafx.scene.input.MouseEvent;
@@ -191,5 +192,29 @@ public class GenericUtilties {
 			default:
 				return "Undefined: Add To Converter";
 		}
+	}
+	
+	public static ReportType StringToReportType(String reportType)
+	{
+		switch(reportType)
+		{
+			case "Branch Income Report":
+				return ReportType.income;
+			case "Branch Order Report":
+				return ReportType.order;
+			case "Branch Complaints Report":
+				return ReportType.service;
+		default:
+				return null;
+		}
+	}
+	
+	public static int DateToMonthly(LocalDate date)
+	{
+		return date.getMonthValue();
+	}
+	public static int DateToQuarter(LocalDate date)
+	{
+		return ((date.getMonthValue()-1) / 4) + 1; //1-4[jan-apr] : 1
 	}
 }

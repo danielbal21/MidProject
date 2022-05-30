@@ -11,5 +11,7 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="libs/pdf-renderer-1.0.5.jar"/>
+	<classpathentry kind="lib" path="libs/pdfbox-app-3.0.0-alpha3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

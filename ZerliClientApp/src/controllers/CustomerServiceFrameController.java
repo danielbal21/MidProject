@@ -79,7 +79,7 @@ public class CustomerServiceFrameController implements IContainable {
     	LoginController.windowControl.stage.close();
     	Stage newStage = new Stage();
 		Parent root = null;
-		try 
+		try   
 		{
 			ClientApp.ProtocolHandler.Invoke(RequestType.SetLogOut,null,null,false);
 			FXMLLoader loader = new FXMLLoader();

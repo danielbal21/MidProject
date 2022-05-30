@@ -31,5 +31,6 @@ public enum RequestType {
 	RemoveItemByID,
 	GetItemByID,
 	UpdateItem,
-	AddItem,
+	AddItem, 
+	GetReport,
 }
