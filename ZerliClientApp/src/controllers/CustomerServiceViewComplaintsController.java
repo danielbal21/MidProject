@@ -40,10 +40,7 @@ public class CustomerServiceViewComplaintsController implements UserControl{
     	LoginController.windowControl.setUserControl("/gui/usercontrols/CustomerServicePostComplaint.fxml");
     }
 
-    @FXML
-    void backPressed(ActionEvent event) {
-
-    }
+ 
 
     @FXML
     void getComplainInfo(MouseEvent event) {
@@ -60,12 +57,10 @@ public class CustomerServiceViewComplaintsController implements UserControl{
 	public void onEnter() {
 		// TODO Auto-generated method stub
 		userIDColumn.setCellValueFactory(new PropertyValueFactory<>("user_id"));
-		postTimeColumn.setCellValueFactory(new PropertyValueFactory<>("complain_time"));
+		postTimeColumn.setCellValueFactory(new PropertyValueFactory<>("Comp_date"));
 		branchColumn.setCellValueFactory(new PropertyValueFactory<>("branch"));
 		observableList = (ObservableList<Complaint>)LoginController.windowControl.peekPipe("Complaints");;
 		complaintsTable.setItems(observableList);
-		
-		
 	}
 
 	@Override

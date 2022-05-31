@@ -8,6 +8,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Formatter;
 
+import Utilities.GenericUtilties;
+
 public class Complaint implements Serializable{
 	private String user_id;
 	private int complaint_id;
@@ -16,6 +18,19 @@ public class Complaint implements Serializable{
 	private Timestamp complain_time;
 	private int cost;
 	private String branch;
+	private String IDnumber;
+	private String Comp_date;
+	
+	
+	public String getComp_date() {
+		return Comp_date;
+	}	
+	public String getIDnumber() {
+		return IDnumber;
+	}
+	public void setIDnumber(String iDnumber) {
+		IDnumber = iDnumber;
+	}
 	public String getBranch() {
 		return branch;
 	}
@@ -48,6 +63,7 @@ public class Complaint implements Serializable{
 	}
 	public void setComplain_time(Timestamp complain_time) {
 		this.complain_time = complain_time;
+		this.Comp_date=DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss").format(GenericUtilties.Convert_LocalDate_To_SQLDate(complain_time));
 	}
 	public int getCost() {
 		return cost;

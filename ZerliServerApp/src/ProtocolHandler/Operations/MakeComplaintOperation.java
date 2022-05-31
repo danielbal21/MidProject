@@ -17,8 +17,8 @@ public class MakeComplaintOperation implements IOperation {
 	public boolean Perform(String requestee, Object data, Object params, ResponseWrapper response) {
 		// TODO Auto-generated method stub
 	
-		boolean b= Server.SqlServerManager.MakeComplaint((Complaint)data);
-		response.SetResponse(b);
+		String s= Server.SqlServerManager.MakeComplaint((Complaint)data);
+		response.SetResponse(s);
 		return true;
 	}
 

@@ -1529,31 +1529,31 @@ public class ServerConnSQL {
 		
 	}
 	
-	public boolean MakeComplaint(Complaint complaint)
+	public String MakeComplaint(Complaint complaint)
 	{
 		PreparedStatement stmt;
 		PreparedStatement stmt2;
 		ResultSet rs;
 		try
 		{
-			stmt2 = conn.prepareStatement("SELECT user_id FROM customer_details WHERE user_id =?");
-			stmt2.setString(1, complaint.getUser_id());
+			stmt2 = conn.prepareStatement("SELECT user_id FROM user_details WHERE id =? AND role ='customer'");
+			stmt2.setString(1, complaint.getIDnumber());
 			rs=stmt2.executeQuery();
 			if(rs.next())
 			{
 				stmt = conn.prepareStatement("INSERT INTO complaints (user_id,complain_text,complain_time,response,branch) VALUES (?,?,?,?,?)");
-				stmt.setString(1, complaint.getUser_id());
+				stmt.setString(1, rs.getString(1));
 				stmt.setString(2, complaint.getComplain_text());
 				stmt.setTimestamp(3, complaint.getComplain_time() );
 				stmt.setString(4, "pending");
 				stmt.setString(5, complaint.getBranch());
 				stmt.executeUpdate();
-				return true;
+				return "done";
 			}
-			return false;
+			return "No such user";
 		} catch (SQLException e) {e.printStackTrace();}		
 		Server.Log("Database", "Executing MakeComplaint: FAILED");
-		return false;
+		return "sql error";
 		
 	}
 	
