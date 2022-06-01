@@ -3,14 +3,11 @@ package controllers;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Optional;
-
-import Entities.ItemInList;
 import Entities.NotificationInTable;
 import Entities.PendingClientInfo;
 import ProtocolHandler.RequestType;
 import client.ClientApp;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -134,7 +131,7 @@ public class ManagerAddNewCustomerController implements UserControl{
     		NotificationInTable notification = new NotificationInTable();
     		notification.setTo(pendingInfo.getUserID());
     		notification.setFrom("Manager");
-    		notification.setContent("You have new account at Zerli online Shop\nYou rcievied 20% off on first purchase ");
+    		notification.setContent("Welcome to Zerli online Shop\nPlease receive 20% off on first purchase coupon");
     		ClientApp.ProtocolHandler.Invoke(RequestType.SendNotification,notification,null,false);
     		Alert confirmAlert = new Alert(AlertType.NONE);
     		confirmAlert.setTitle("Add new customer Information");

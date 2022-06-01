@@ -202,6 +202,11 @@ public class CustomerFrameController implements IContainable{
 		catch (Exception e) {e.printStackTrace();	}
 	
     }
+    
+    @FXML
+    void myAccountPressed(ActionEvent event) {
+    	LoginController.windowControl.setUserControl("/gui/usercontrols/CustomerAccountInfo.fxml");
+    }
 
 	@Override
 	public AnchorPane getControlContainer() {

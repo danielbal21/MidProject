@@ -1,5 +1,6 @@
 package controllers;
 
+import Entities.NotificationInTable;
 import Entities.Order;
 import ProtocolHandler.RequestType;
 import client.ClientApp;
@@ -51,7 +52,25 @@ public class DeliveryViewOrderDetailsController implements UserControl {
  
     @FXML
     void donePressed(ActionEvent event) {
-    	ClientApp.ProtocolHandler.Invoke(RequestType.EndOrder,  LoginController.windowControl.peekPipe("Order select"), "done", false);
+    	Order order = (Order) LoginController.windowControl.peekPipe("Order select");
+    	ClientApp.ProtocolHandler.Invoke(RequestType.EndOrder, order, null, true);
+    	int refund = (int) ClientApp.ProtocolHandler.GetResponse(RequestType.EndOrder);
+    	
+    	NotificationInTable notification = new NotificationInTable();
+    	notification.setTo(order.getUserID());
+    	notification.setFrom("Delivery");
+    	
+    	if(refund==0) {
+    		notification.setContent("Order number " + order.getOrderID() + " has been completed"
+    				+ "\nSee full info in \"My Orders\" tab");
+    	}
+    	else {
+    		notification.setContent("Order number " + order.getOrderID() + " has arrived late"
+    				+ "\nWe apologize! please receive " + refund + " Zerli coins as refund");
+    	}
+    	
+    	ClientApp.ProtocolHandler.Invoke(RequestType.SendNotification, notification, null, false);
+    	
     	LoginController.windowControl.setUserControl("/gui/usercontrols/DeliveryOrderManager.fxml");
     }
 

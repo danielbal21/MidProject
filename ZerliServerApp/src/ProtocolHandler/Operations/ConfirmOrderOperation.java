@@ -22,9 +22,7 @@ public class ConfirmOrderOperation implements IOperation {
 	 */
 	@Override
 	public boolean Perform(String requestee, Object data, Object params) {
-		Order order = (Order)data;
-		  Server.SqlServerManager.ConfirmOrder(Integer.valueOf(order.getOrderID()),(String)params);
-			return true;
+		  return false;
 	}
 
 	/**
@@ -32,7 +30,13 @@ public class ConfirmOrderOperation implements IOperation {
 	 */
 	@Override
 	public boolean Perform(String requestee, Object data, Object params, ResponseWrapper response) {
-	  return false;
+		if(data instanceof Order ) {
+			Order order = (Order)data;
+			int num = Server.SqlServerManager.ConfirmOrder(Integer.valueOf(order.getOrderID()),(String)params);
+			response.SetResponse(num);
+			return true;
+		}
+		return false;
 	}
 
 }

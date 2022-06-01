@@ -64,6 +64,9 @@ public class RequestRegisterer {
 		Protocol.RegisterOperation(RequestType.SaveSurveyAnswers, new SaveSurveyAnswersOperation());
 		Protocol.RegisterOperation(RequestType.GetReport, new GetReportOperation());
 		Protocol.RegisterOperation(RequestType.SendNotification, new SendNotificationOperation());
+		Protocol.RegisterOperation(RequestType.GetCustomerInfo, new GetCustomerInfoOperation());
+
+		
 
 		
 	}

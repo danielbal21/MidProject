@@ -54,7 +54,6 @@ public class HandlersRegisterer {
 		Protocol.RegisterHandler(RequestType.SaveSurveyAnswers, null);
 		Protocol.RegisterHandler(RequestType.GetReport, null);
 		Protocol.RegisterHandler(RequestType.SendNotification, null);
-
-		
+		Protocol.RegisterHandler(RequestType.GetCustomerInfo, null);
 	}
 }
