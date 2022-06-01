@@ -118,17 +118,20 @@ public class AddNewSurveyController implements UserControl {
 
     @FXML
     void BackBtnPressed(ActionEvent event) {
-    	Alert confirmAlert = new Alert(AlertType.NONE);
-		confirmAlert.setTitle("Leaving Add New Survey");
-		confirmAlert.setContentText("Do you want to save typed data?");
-		ButtonType yes = new ButtonType("Yes", ButtonData.YES);
-		ButtonType no = new ButtonType("No",ButtonData.NO);
-		confirmAlert.getDialogPane().getButtonTypes().add(yes);
-		confirmAlert.getDialogPane().getButtonTypes().add(no);
-		Optional<ButtonType> result = confirmAlert.showAndWait();
-		result.ifPresent(response -> { 
-			if(response == no) resetQuestion();
-		});
+    	if(inputValid())
+    	{
+	    	Alert confirmAlert = new Alert(AlertType.NONE);
+			confirmAlert.setTitle("Leaving Add New Survey");
+			confirmAlert.setContentText("Do you want to save typed data?");
+			ButtonType yes = new ButtonType("Yes", ButtonData.YES);
+			ButtonType no = new ButtonType("No",ButtonData.NO);
+			confirmAlert.getDialogPane().getButtonTypes().add(yes);
+			confirmAlert.getDialogPane().getButtonTypes().add(no);
+			Optional<ButtonType> result = confirmAlert.showAndWait();
+			result.ifPresent(response -> { 
+				if(response == no) resetQuestion();
+			});
+    	}
     	LoginController.windowControl.setUserControl("/gui/usercontrols/SurveyMangerHomeScreen.fxml");
     }
 	@Override
@@ -136,7 +139,16 @@ public class AddNewSurveyController implements UserControl {
 		// TODO Auto-generated method stub
 		
 	}
-
+	private boolean inputValid()
+	{
+		for (TextField textField : QuestionTextArray) {
+			if (!textField.getText().equals(""))
+				return true;
+    	}
+		if(!surveyName.getText().equals(""))
+			return true;
+		return false;
+	}
 
 }
 

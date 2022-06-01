@@ -3,6 +3,8 @@ package ProtocolHandler;
 import ProtocolHandler.Handlers.ArrayListToObservableHandler;
 import ProtocolHandler.Handlers.CreditParserHandler;
 import ProtocolHandler.Handlers.PingHandler;
+import ProtocolHandler.Handlers.imageFromServerHandler;
+import controllers.newItemSpecController;
 
 public class HandlersRegisterer {
 	
@@ -53,5 +55,7 @@ public class HandlersRegisterer {
 		Protocol.RegisterHandler(RequestType.GetSurveysNames, new ArrayListToObservableHandler());
 		Protocol.RegisterHandler(RequestType.SaveSurveyAnswers, null);
 		Protocol.RegisterHandler(RequestType.GetReport, null);
+		Protocol.RegisterHandler(RequestType.GetSurveyHistogram, new imageFromServerHandler ());
+		Protocol.RegisterHandler(RequestType.SavePDF, null);
 	}
 }

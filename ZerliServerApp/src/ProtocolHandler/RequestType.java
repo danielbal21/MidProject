@@ -142,7 +142,8 @@ public enum RequestType {
 	GetSurveysNames,
 	GetSurvey,
 	SaveSurveyAnswers,
-	
+	GetSurveyHistogram,
+	SavePDF,
 	/** The Get report is used to get various reports. */
 	GetReport,
 }

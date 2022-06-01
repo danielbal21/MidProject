@@ -35,5 +35,10 @@
             <Image url="@../../png/survey.png" />
          </image>
       </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="779.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../png/gear.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

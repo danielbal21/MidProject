@@ -84,22 +84,39 @@ public class InsertAnswersIntoSurveyController implements UserControl{
     @FXML
     void BackBtnPressed(ActionEvent event) 
     {
-      	Alert confirmAlert = new Alert(AlertType.NONE);
-		confirmAlert.setTitle("Leaving Insert Answers Into Survey ");
-		confirmAlert.setContentText("Do you want to save typed data?");
-		ButtonType yes = new ButtonType("Yes", ButtonData.YES);
-		ButtonType no = new ButtonType("No",ButtonData.NO);
-		confirmAlert.getDialogPane().getButtonTypes().add(yes);
-		confirmAlert.getDialogPane().getButtonTypes().add(no);
-		Optional<ButtonType> result = confirmAlert.showAndWait();
-		result.ifPresent(response -> { 
-			if(response == no) {unsaved=true; }
-			else unsaved=false;
-		});
+    	if(inputValid())
+    	{
+	      	Alert confirmAlert = new Alert(AlertType.NONE);
+			confirmAlert.setTitle("Leaving Insert Answers Into Survey ");
+			confirmAlert.setContentText("Do you want to save typed data?");
+			ButtonType yes = new ButtonType("Yes", ButtonData.YES);
+			ButtonType no = new ButtonType("No",ButtonData.NO);
+			confirmAlert.getDialogPane().getButtonTypes().add(yes);
+			confirmAlert.getDialogPane().getButtonTypes().add(no);
+			Optional<ButtonType> result = confirmAlert.showAndWait();
+			result.ifPresent(response -> { 
+				if(response == no) {unsaved=true; }
+				else unsaved=false;
+			});
+    	}
     	LoginController.windowControl.setUserControl("/gui/usercontrols/SurveyMangerHomeScreen.fxml");
     }
 
-    @Override
+    private boolean inputValid() {
+    	if(spinnerArray[0].getValue()!=null)
+    	{
+	    	for (Spinner<Integer> spinner : spinnerArray) {	
+	    		
+	    		if(spinner.getValue()!=0)
+	    		{
+	    			return true;
+	    		}
+	    	}
+	    }
+		return false;
+	}
+
+	@Override
     public void onEnter() 
     {
     	SetArraies();

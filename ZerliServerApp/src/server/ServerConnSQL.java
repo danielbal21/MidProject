@@ -11,6 +11,10 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+
+import org.bouncycastle.asn1.dvcs.Data;
+
+import java.awt.List;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -90,11 +94,13 @@ public class ServerConnSQL {
 		Server.Log("Database", "Executing Authenticate");
 		PreparedStatement stmt = null;
 		Object[] logindetails = new Object[3];
+		ArrayList<String> listOfUserStrings=new ArrayList<String>();
 		int Loggedin;
 		Roles role;
 		Access access;
 		ResultSet rs;
 		try {
+			
 			stmt = conn.prepareStatement("SELECT ld.loggedin,ld.access,ud.role FROM login_details ld,user_details ud "
 					+ "WHERE ld.user_id=? AND ld.user_id = ud.user_id " + "And ld.password=?");
 			stmt.setString(1, username);
@@ -115,13 +121,13 @@ public class ServerConnSQL {
 			logindetails[0] = Loggedin;
 			logindetails[1] = access;
 			logindetails[2] =role;
+			System.out.println(logindetails);
 			Server.Log("Database", "Executing Authenticate: SUCCESS");
 			return logindetails;
 			
 		} catch (SQLException e1) {
-			Server.Log("Database", "Executing Authenticate: FAILED");
-			e1.printStackTrace();
-			return null;
+			logindetails[1] = Access.noaut;
+			return logindetails;
 		}
 	}
 
@@ -1749,7 +1755,7 @@ public class ServerConnSQL {
 
 
 	public void SaveSurvey(Survey survey) {
-		Server.Log("Database", "Executing SaveSurvey");
+		Server.Log("Database", "Executing Save Survey");
 		PreparedStatement stmt;
 		ResultSet rs;
 		try 
@@ -1763,14 +1769,18 @@ public class ServerConnSQL {
 			stmt.setString(6, survey.getQuestions()[4]);
 			stmt.setString(7, survey.getQuestions()[5]);
 			stmt.executeUpdate();
-		} catch (SQLException e) {e.printStackTrace();}		
-		Server.Log("Database", "Executing SaveSurvey: FAILED");
+		} catch (SQLException e) 
+		{
+			e.printStackTrace();
+			Server.Log("Database", "Executing Save Survey: FAILED");
+		}		
+		Server.Log("Database", "Executing Save Survey: SUCCESS");
 	}
 
 
 
 	public void GetSurveysNames(ArrayList<String> list) {
-		Server.Log("Database", "Executing GetSurveysNames");
+		Server.Log("Database", "Executing Get Surveys Names");
 		PreparedStatement stmt = null;
 		ResultSet rs;
 		try {
@@ -1780,15 +1790,17 @@ public class ServerConnSQL {
            		String string=rs.getString(1)+" "+rs.getString(2);
            		list.add(string);
            	}
-		}catch (SQLException e) {e.printStackTrace();}		
-		Server.Log("Database", "Executing GetSurveysNames: FAILED");
+		}catch (SQLException e) 
+		{
+			e.printStackTrace();
+			Server.Log("Database", "Executing Get Surveys Names: FAILED");
+		}		
+		Server.Log("Database", "Executing Get Surveys Names: SUCCESS");
 		
 	}
 
-
-
 	public void GetSurvey(Survey survey) {
-		Server.Log("Database", "Executing GetSurvey");
+		Server.Log("Database", "Executing Get Survey");
 		PreparedStatement stmt;
 		ResultSet rs;
 		try 
@@ -1805,41 +1817,92 @@ public class ServerConnSQL {
 			survey.getQuestions()[5]=(rs.getString(6));
 			survey.setContent((rs.getString(7)));
 			
-		} catch (SQLException e) {e.printStackTrace();}		
-		Server.Log("Database", "Executing GetSurvey: FAILED");
+		} catch (SQLException e) 
+		{
+			e.printStackTrace();
+			Server.Log("Database", "Executing Get Survey: FAILED");
+		}		
+		Server.Log("Database", "Executing Get Survey: SUCCESS");
+	}
+
+	public void SaveSurveyAnswers(Survey survey) {
+		Server.Log("Database", "Executing Save Survey Answers");
+		PreparedStatement stmt;
+		try 
+		{
+			
+				stmt = conn.prepareStatement("insert into midproject.surveys_questions ( survey_id,survey_content,answer_for_question_1,answer_for_question_2,answer_for_question_3,answer_for_question_4,answer_for_question_5,answer_for_question_6) values(?,?,?,?,?,?,?,?)");
+				
+				stmt.setInt(1, survey.getId());
+				stmt.setString(2, survey.getContent());
+				stmt.setInt(3, survey.getAnswers()[0]);
+				stmt.setInt(4, survey.getAnswers()[1]);
+				stmt.setInt(5, survey.getAnswers()[2]);
+				stmt.setInt(6, survey.getAnswers()[3]);
+				stmt.setInt(7, survey.getAnswers()[4]);
+				stmt.setInt(8, survey.getAnswers()[5]);
+				stmt.executeUpdate();
+	
+		} catch (SQLException e) 
+		{
+			e.printStackTrace();
+			Server.Log("Database", "Executing Save Survey Answers: FAILED");
+		}		
+		Server.Log("Database", "Executing Save Survey Answers: SUCCESS");
+	}
+
+	public void GetSurveyHistogram(Survey survey, ArrayList<int[]> listOfSurveyAnswers) 
+	{
+		
+		Server.Log("Database", "Executing Get Survey Histogram");
+		PreparedStatement stmt;
+		ResultSet rs;
+		try 
+		{
+			stmt = conn.prepareStatement("SELECT survey_content,answer_for_question_1,answer_for_question_2,answer_for_question_3,answer_for_question_4,answer_for_question_5,answer_for_question_6 FROM midproject.surveys_questions where survey_id=?");
+			stmt.setInt(1,survey.getId());
+			rs = stmt.executeQuery();
+			while(rs.next())
+			{
+				survey.setContent(rs.getString(1));
+				listOfSurveyAnswers.get(0)[rs.getInt(2)-1]++;
+				listOfSurveyAnswers.get(1)[rs.getInt(3)-1]++;
+				listOfSurveyAnswers.get(2)[rs.getInt(4)-1]++;
+				listOfSurveyAnswers.get(3)[rs.getInt(5)-1]++;
+				listOfSurveyAnswers.get(4)[rs.getInt(6)-1]++;
+				listOfSurveyAnswers.get(5)[rs.getInt(7)-1]++;
+			}
+		} catch (SQLException e) 
+		{
+			e.printStackTrace(); 
+			Server.Log("Database", "Executing Get Survey Histogram: FAILED");
+		}		
+		Server.Log("Database", "Executing Get Survey Histogram: SUCCESS");
 	}
 
 
 
-	public void SaveSurveyAnswers(Survey survey) {
-		Server.Log("Database", "Executing SaveSurveyAnswers");
+	public void SavePDF(String userName, Survey survey,ArrayList<byte[]> Data) {
+		Server.Log("Database", "Executing Save PDF");
 		PreparedStatement stmt;
-		ResultSet rs;
+		System.out.println(userName);
 		try 
-		{	stmt = conn.prepareStatement("SELECT a1,a2,a3,a4,a5,a6 FROM midproject.surveys where survey_id =?");
-			stmt.setInt(1,survey.getId());
-			rs = stmt.executeQuery();
-			rs.next();
-			survey.getAnswers()[0]+=rs.getInt(1);
-			survey.getAnswers()[1]+=rs.getInt(2);
-			survey.getAnswers()[2]+=rs.getInt(3);
-			survey.getAnswers()[3]+=rs.getInt(4);
-			survey.getAnswers()[4]+=rs.getInt(5);
-			survey.getAnswers()[5]+=rs.getInt(6);
-			
-			////
-			stmt = conn.prepareStatement("UPDATE midproject.surveys SET a1=?,a2=?, a3=?,a4=?,a5=?,a6=? WHERE survey_id=?");
-			stmt.setInt(1, survey.getAnswers()[0]);
-			stmt.setInt(2, survey.getAnswers()[1]);
-			stmt.setInt(3, survey.getAnswers()[2]);
-			stmt.setInt(4, survey.getAnswers()[3]);
-			stmt.setInt(5, survey.getAnswers()[4]);
-			stmt.setInt(6, survey.getAnswers()[5]);
-			stmt.setInt(7, survey.getId());
+		{
+			Blob blob1 = new javax.sql.rowset.serial.SerialBlob(Data.get(1));//expertPDF
+			Blob blob2 = new javax.sql.rowset.serial.SerialBlob(Data.get(0));//histoframPDF
+			stmt = conn.prepareStatement("insert into midproject.pdf_from_expert (expert_name,survey_content,pdf_file_from_expert,pdf_with_survey_answers) values(?,?,?,?)");
+			stmt.setString(1,userName);
+			stmt.setString(2,survey.getContent());
+			stmt.setBlob(3, blob1);
+			stmt.setBlob(4, blob2);
 			stmt.executeUpdate();
-		} catch (SQLException e) {e.printStackTrace();}		
-		Server.Log("Database", "Executing SaveSurveyAnswers: FAILED");
-		
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			Server.Log("Database", "Executing Save PDF: FAILED");		
+		}
+		Server.Log("Database", "Executing Save PDF: SUCCESS");
 	}
 }
 /*** End Reports ***/

@@ -71,7 +71,7 @@
          </image>
       </ImageView>
       <Button layoutX="28.0" layoutY="582.0" mnemonicParsing="false" onAction="#BackBtnPressed" styleClass="Left-btn" text="Back" />
-      <Label fx:id="addSurveyLabel" layoutX="357.0" layoutY="104.0" text="Label" textFill="RED">
+      <Label fx:id="addSurveyLabel" layoutX="357.0" layoutY="104.0" text="Label" textFill="RED" visible="false">
          <font>
             <Font size="18.0" />
          </font>

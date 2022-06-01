@@ -6,5 +6,6 @@ public enum Roles {
 	customer, 
 	delivery, 
 	marketing, 
-	service
+	service,
+	expert,
 }

@@ -12,6 +12,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="libs/pdf-renderer-1.0.5.jar"/>
-	<classpathentry kind="lib" path="libs/pdfbox-app-3.0.0-alpha3.jar"/>
+	<classpathentry kind="lib" path="libs/pdfbox-app-2.0.26.jar"/>
+	<classpathentry kind="lib" path="libs/xchart-3.8.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

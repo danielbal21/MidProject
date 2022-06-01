@@ -65,12 +65,12 @@ public class StartSQLPassswordConfigController {
      */
     @FXML
     void connectPressed(ActionEvent event) {
-    	String ip = SqlTextField.getText();
+    	/*String ip = SqlTextField.getText();
     	if(ip.equals("")) {
     		errrorLabel.setVisible(true);
-    	}
-    	else {
-    		if(ServerConnSQL.startConn(SqlTextField.getText()))
+    	}*/
+    	//else {
+    		if(ServerConnSQL.startConn("Ido27325571"))//SqlTextField.getText()))
     		{
 				stage.close();
 				Stage newStage = new Stage();
@@ -97,7 +97,7 @@ public class StartSQLPassswordConfigController {
         		errrorLabel.setVisible(true);	
     		} 
     		
-    	}
+    //	}
     }
 
     /**

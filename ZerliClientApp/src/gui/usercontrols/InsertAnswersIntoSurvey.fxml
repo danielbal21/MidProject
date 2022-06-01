@@ -26,7 +26,7 @@
                            <children>
                               <Spinner fx:id="spinnerQuestion1" layoutX="326.0" layoutY="15.0" prefHeight="30.0" prefWidth="140.0" />
                               <Label alignment="CENTER" contentDisplay="RIGHT" layoutX="26.0" layoutY="9.0" styleClass="subLabel" text="Q1" />
-                              <TextField fx:id="questionText1" layoutX="75.0" layoutY="15.0" prefHeight="30.0" prefWidth="220.0" />
+                              <TextField fx:id="questionText1" disable="true" editable="false" layoutX="75.0" layoutY="15.0" prefHeight="30.0" prefWidth="220.0" />
                            </children>
                         </AnchorPane>
                      </children>
@@ -37,7 +37,7 @@
                            <children>
                               <Spinner fx:id="spinnerQuestion2" layoutX="326.0" layoutY="15.0" prefHeight="30.0" prefWidth="140.0" />
                               <Label alignment="CENTER" contentDisplay="RIGHT" layoutX="20.0" layoutY="3.0" prefHeight="50.0" styleClass="subLabel" text="Q2" />
-                              <TextField fx:id="questionText2" layoutX="75.0" layoutY="15.0" prefHeight="30.0" prefWidth="220.0" />
+                              <TextField fx:id="questionText2" disable="true" editable="false" layoutX="75.0" layoutY="15.0" prefHeight="30.0" prefWidth="220.0" />
                            </children>
                         </AnchorPane>
                      </children>
@@ -48,7 +48,7 @@
                            <children>
                               <Spinner fx:id="spinnerQuestion3" layoutX="326.0" layoutY="15.0" prefHeight="30.0" prefWidth="140.0" />
                               <Label alignment="TOP_CENTER" contentDisplay="RIGHT" layoutX="22.0" layoutY="14.0" styleClass="subLabel" text="Q3" />
-                              <TextField fx:id="questionText3" layoutX="75.0" layoutY="15.0" prefHeight="30.0" prefWidth="220.0" />
+                              <TextField fx:id="questionText3" disable="true" editable="false" layoutX="75.0" layoutY="15.0" prefHeight="30.0" prefWidth="220.0" />
                            </children>
                         </AnchorPane>
                      </children>
@@ -59,7 +59,7 @@
                            <children>
                               <Spinner fx:id="spinnerQuestion4" layoutX="326.0" layoutY="15.0" prefHeight="30.0" prefWidth="140.0" />
                               <Label alignment="CENTER" contentDisplay="RIGHT" layoutX="23.0" layoutY="13.0" styleClass="subLabel" text="Q4" />
-                              <TextField fx:id="questionText4" layoutX="75.0" layoutY="15.0" prefHeight="30.0" prefWidth="220.0" />
+                              <TextField fx:id="questionText4" disable="true" editable="false" layoutX="75.0" layoutY="15.0" prefHeight="30.0" prefWidth="220.0" />
                            </children>
                         </AnchorPane>
                      </children>
@@ -70,7 +70,7 @@
                            <children>
                               <Spinner fx:id="spinnerQuestion5" layoutX="326.0" layoutY="15.0" prefHeight="30.0" prefWidth="140.0" />
                               <Label alignment="CENTER" contentDisplay="RIGHT" layoutX="26.0" layoutY="17.0" styleClass="subLabel" text="Q5" />
-                              <TextField fx:id="questionText5" layoutX="75.0" layoutY="15.0" prefHeight="30.0" prefWidth="220.0" />
+                              <TextField fx:id="questionText5" disable="true" editable="false" layoutX="75.0" layoutY="15.0" prefHeight="30.0" prefWidth="220.0" />
                            </children>
                         </AnchorPane>
                      </children>
@@ -81,7 +81,7 @@
                            <children>
                               <Spinner fx:id="spinnerQuestion6" layoutX="325.0" layoutY="15.0" prefHeight="30.0" prefWidth="140.0" />
                               <Label alignment="CENTER" contentDisplay="RIGHT" layoutX="27.0" layoutY="5.0" prefHeight="50.0" styleClass="subLabel" text="Q6" />
-                              <TextField fx:id="questionText6" layoutX="75.0" layoutY="15.0" prefHeight="30.0" prefWidth="220.0" />
+                              <TextField fx:id="questionText6" disable="true" editable="false" layoutX="75.0" layoutY="15.0" prefHeight="30.0" prefWidth="220.0" />
                            </children>
                         </AnchorPane>
                      </children>
@@ -97,7 +97,7 @@
             <Button fx:id="SubmitResult1" layoutX="165.0" layoutY="416.0" mnemonicParsing="false" onAction="#SubmitResult_Click" styleClass="Reg-btn" text="Submit" />
          </children></AnchorPane>
       <Label layoutX="299.0" layoutY="14.0" styleClass="MainLabel" text="Survey Editor" />
-      <Label fx:id="addViolationLabel" layoutX="366.0" layoutY="128.0" text="Label" textFill="RED">
+      <Label fx:id="addViolationLabel" layoutX="366.0" layoutY="128.0" text="Label" textFill="RED" visible="false">
          <font>
             <Font size="18.0" />
          </font>
