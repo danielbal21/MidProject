@@ -9,7 +9,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableColumn.SortType;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -19,8 +18,10 @@ import javafx.scene.layout.AnchorPane;
 
 public class NotificationWindowController implements UserControl {
 	
-	private ObservableList<NotificationInTable> notificationTableList;
+	private ObservableList<NotificationInTable> AllnotificationTableList;
+	private ObservableList<NotificationInTable> unreadNotificationTableList;
     private boolean allNotificationsShow=true;
+    Thread thread;
     
     @FXML
     private Label ErrorLabel;
@@ -52,16 +53,15 @@ public class NotificationWindowController implements UserControl {
     
     private ObservableList<NotificationInTable> createUnreadNotificationList()
     {
-    	ObservableList<NotificationInTable> unreadNotificationTableList= FXCollections.observableArrayList();
-		for (NotificationInTable notificationInTable : notificationTableList) {
+    	ObservableList<NotificationInTable> unreadAllnotificationTableList= FXCollections.observableArrayList();
+		for (NotificationInTable notificationInTable : AllnotificationTableList) {
 			if(notificationInTable.getStatus().equals("unread"))
-					unreadNotificationTableList.add(notificationInTable);
+					unreadAllnotificationTableList.add(notificationInTable);
 		}
-    	return unreadNotificationTableList;
+    	return unreadAllnotificationTableList;
     }
 
 
-	
     @FXML
     void setStatus(MouseEvent event) {
     	
@@ -84,9 +84,8 @@ public class NotificationWindowController implements UserControl {
   			allNotificationsShow=false;
   			NotificationsStatusBtn.setText("Show All Notifications");
   			changeNotificationsLbl.setText("Show Unread Notifications");
-    		ObservableList<NotificationInTable> list = createUnreadNotificationList();
-        	notificationsCenterTable.setItems(list);
-        	if(list.size() == 0) {
+        	notificationsCenterTable.setItems(unreadNotificationTableList);
+        	if(unreadNotificationTableList.size() == 0) {
         		ErrorLabel.setText("There are no new notifications");
         		ErrorLabel.setVisible(true);
     		}
@@ -97,7 +96,7 @@ public class NotificationWindowController implements UserControl {
     		allNotificationsShow=true;
     		changeNotificationsLbl.setText("Show All Notifications");
         	NotificationsStatusBtn.setText("Show Unread Notifications");
-        	notificationsCenterTable.setItems(notificationTableList);
+        	notificationsCenterTable.setItems(AllnotificationTableList);
     	}
     }
     
@@ -111,14 +110,38 @@ public class NotificationWindowController implements UserControl {
 		sendFrom.setCellValueFactory(new PropertyValueFactory<NotificationInTable, String>("from"));
 		content.setCellValueFactory(new PropertyValueFactory<NotificationInTable, String>("content"));
 		status.setCellValueFactory(new PropertyValueFactory<NotificationInTable, String>("status"));
-		notificationTableList = (ObservableList<NotificationInTable>) LoginController.windowControl.peekPipe("All Notification");
-    	notificationsCenterTable.setItems(notificationTableList);
-    	notificationNumber.setSortable(true);
-    	notificationNumber.setSortType(SortType.ASCENDING);
+		AllnotificationTableList = (ObservableList<NotificationInTable>) LoginController.windowControl.peekPipe("All Notification");
+    	notificationsCenterTable.setItems(AllnotificationTableList);
+    	
+		thread =new Thread(new Runnable() {
+			@Override
+			public void run() {
+				while(true){
+					try {
+						Thread.sleep(2000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					AllnotificationTableList = (ObservableList<NotificationInTable>) LoginController.windowControl.peekPipe("All Notification");
+					unreadNotificationTableList = createUnreadNotificationList();
+					if(allNotificationsShow) {
+				    	notificationsCenterTable.setItems(AllnotificationTableList);
+
+					}
+					else {
+				    	notificationsCenterTable.setItems(unreadNotificationTableList);
+					}
+				}
+			}
+		});
+		thread.start();
+
+
 	}
 	
 	@Override
 	public void onExit() {
+		thread.stop();
 	
 	}
 }

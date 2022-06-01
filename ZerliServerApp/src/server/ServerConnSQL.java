@@ -56,29 +56,6 @@ public class ServerConnSQL {
 		}
 	}
 
-
-
-	/**
-	 * Update order color and date by number.
-	 *
-	 * @param orderNumber the order number
-	 * @param newColor the new color
-	 * @param newDate the new date
-	 */
-	public void UpdateOrder_ColorAndDate_ByNumber(String orderNumber, String newColor, String newDate) {
-		PreparedStatement stmt;
-		try {
-			stmt = conn.prepareStatement("UPDATE Orders SET color=?,date=? WHERE orderNumber=?");
-			stmt.setString(1, newColor);
-			stmt.setString(2, newDate);
-			stmt.setString(3, orderNumber);
-			stmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		System.out.println("Updated order " + orderNumber);
-	}
-
 	/**
 	 * Authenticate.
 	 *
@@ -1034,7 +1011,6 @@ public class ServerConnSQL {
 	public void UpdateNotification(String username, int num) {
 		PreparedStatement stmt = null;
 		try {
-					
 			stmt = conn.prepareStatement("UPDATE notifications SET status = 'read' WHERE notification_id = ? ");
 			stmt.setInt(1, num);
 			stmt.executeUpdate();
@@ -1042,6 +1018,31 @@ public class ServerConnSQL {
 			System.err.println("Failed on UpdateNotification()");
 			e1.printStackTrace();
 		}
+	}
+	
+	/**
+	 * Send Notification
+	 *
+	 * @param notification - Instance of notification alert with all the data
+	 */
+	public void SendNotification(NotificationInTable notification) {
+		Server.Log("Database", "Executing SendNotification");
+		PreparedStatement stmt = null;
+		try {
+			stmt = conn.prepareStatement("INSERT INTO notifications "
+					+ "(user_id, from_role, content, status) VALUES "
+					+ "(?, ?, ?, ?)");
+		 	stmt.setString(1, notification.getTo());
+		 	stmt.setString(2, notification.getFrom());
+		 	stmt.setString(3, notification.getContent());
+			stmt.setString(4, "unread");
+			System.out.println(stmt.toString());
+		 	stmt.executeUpdate();
+		} catch (SQLException e1) {
+			Server.Log("Database", "Executing SendNotification: FAILED");
+			e1.printStackTrace();
+		}
+		Server.Log("Database", "Executing SendNotification: SUCCESS");
 	}
 
 	/**
@@ -1838,5 +1839,7 @@ public class ServerConnSQL {
 		Server.Log("Database", "Executing SaveSurveyAnswers: FAILED");
 		
 	}
+
+	
 }
 /*** End Reports ***/

@@ -17,7 +17,7 @@ import javafx.stage.StageStyle;
 
 public class ClientApp extends Application { 
 	final public static int DEFAULT_PORT = 5555;
-	public static Protocol ProtocolHandler = new Protocol();
+	public static Protocol ProtocolHandler  = new Protocol();
 	public static String UserID = "NO-AUTH";
 	public static Access UserStatus = Access.noaut;
 	//final public static String DEFAULT_HOST = "localhost";

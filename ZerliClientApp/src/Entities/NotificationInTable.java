@@ -8,7 +8,10 @@ public class NotificationInTable implements Serializable {
 	private String content;
 	private String status;
 	private String from;
+	private String to;
 	
+	public NotificationInTable() {}
+
 	public NotificationInTable(int notificationnumber,String from, String content, String status) {
 		this.notificationnumber = notificationnumber;
 		this.content = content;
@@ -16,6 +19,14 @@ public class NotificationInTable implements Serializable {
 		this.from = from;
 	}
 	
+	public String getTo() {
+		return to;
+	}
+
+	public void setTo(String to) {
+		this.to = to;
+	}
+
 	public int getNotificationnumber() {
 		return notificationnumber;
 	}
