@@ -46,4 +46,6 @@ public enum RequestType {
 	GetSurvey,
 	SaveSurveyAnswers,
 	GetReport,
+	SendNotification,
+	GetCustomerInfo,
 }

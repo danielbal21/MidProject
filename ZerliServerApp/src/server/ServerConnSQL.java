@@ -56,29 +56,6 @@ public class ServerConnSQL {
 		}
 	}
 
-
-
-	/**
-	 * Update order color and date by number.
-	 *
-	 * @param orderNumber the order number
-	 * @param newColor the new color
-	 * @param newDate the new date
-	 */
-	public void UpdateOrder_ColorAndDate_ByNumber(String orderNumber, String newColor, String newDate) {
-		PreparedStatement stmt;
-		try {
-			stmt = conn.prepareStatement("UPDATE Orders SET color=?,date=? WHERE orderNumber=?");
-			stmt.setString(1, newColor);
-			stmt.setString(2, newDate);
-			stmt.setString(3, orderNumber);
-			stmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		System.out.println("Updated order " + orderNumber);
-	}
-
 	/**
 	 * Authenticate.
 	 *
@@ -760,7 +737,8 @@ public class ServerConnSQL {
 	}
 
 	// confirm + cancel
-	public void ConfirmOrder(int order_id, String status) {
+	public int ConfirmOrder(int order_id, String status) {
+		int refundCancel = 0;
 		PreparedStatement stmt = null;
 		try {
 			stmt = conn.prepareStatement("UPDATE orders SET status = ? WHERE order_id = ?");
@@ -793,7 +771,7 @@ public class ServerConnSQL {
 				rs.next();
 				String user = rs.getString(1);
 				int refund = rs.getInt(2);
-				
+				refundCancel = refund;
 				stmt = conn.prepareStatement("UPDATE customer_details SET "
 						+ "zerli_coin = zerli_coin + ? WHERE user_id = ?");
 				stmt.setInt(1, refund);
@@ -806,6 +784,7 @@ public class ServerConnSQL {
 			Server.Log("Database", "Executing ConfirmOrder: FAILED");
 			e1.printStackTrace();
 		}
+		return refundCancel;
 
 	}
 
@@ -1003,26 +982,27 @@ public class ServerConnSQL {
 	 * @return the notification
 	 */
 	public void getNotification(String username, ArrayList<NotificationInTable> notificationList) {
+		Server.Log("Database", "Executing getNotification");
 		PreparedStatement stmt = null;
 		try {
 			stmt = conn.prepareStatement("SELECT * FROM notifications WHERE user_id= ?");
 			stmt.setString(1, username);
 		} catch (SQLException e1) {
-			System.err.println("Failed on createStatement()");
+			Server.Log("Database", "getNotification createStatement : FAILED");
 			e1.printStackTrace();
 		}
 		ResultSet rs;
 		try {
 			rs = stmt.executeQuery();
 			while (rs.next()) {
-				notificationList
-						.add(new NotificationInTable(rs.getInt(1), rs.getString(3), rs.getString(4), rs.getString(5)));
+				notificationList.add(new NotificationInTable(rs.getInt(1), 
+						rs.getString(3), rs.getString(4), rs.getString(5)));
 			}
 		} catch (Exception e) {
-			System.err.println("Got an exception! ");
-			System.err.println(e.getMessage());
+			Server.Log("Database", "getNotification ot an exception : FAILED");
+			e.printStackTrace();
 		}
-		System.out.println("Get Notification !");
+		Server.Log("Database", "Executing getNotification: SUCCESS");
 	}
 
 	/**
@@ -1031,20 +1011,40 @@ public class ServerConnSQL {
 	 * @param username the username
 	 * @param data the data
 	 */
-	public void UpdateNotification(String username, ArrayList<NotificationInTable> data) {
+	public void UpdateNotification(String username, int num) {
 		PreparedStatement stmt = null;
 		try {
-			for (NotificationInTable notificationInTable : data) {			
-				stmt = conn.prepareStatement("UPDATE notifications SET status = ? WHERE notification_id = ? ");
-				stmt.setString(1, notificationInTable.getStatus());
-				stmt.setInt(2, notificationInTable.getNotificationnumber());
-				stmt.executeUpdate();
-			}
-
+			stmt = conn.prepareStatement("UPDATE notifications SET status = 'read' WHERE notification_id = ? ");
+			stmt.setInt(1, num);
+			stmt.executeUpdate();
 		} catch (SQLException e1) {
 			System.err.println("Failed on UpdateNotification()");
 			e1.printStackTrace();
 		}
+	}
+	
+	/**
+	 * Send Notification
+	 *
+	 * @param notification - Instance of notification alert with all the data
+	 */
+	public void SendNotification(NotificationInTable notification) {
+		Server.Log("Database", "Executing SendNotification");
+		PreparedStatement stmt = null;
+		try {
+			stmt = conn.prepareStatement("INSERT INTO notifications "
+					+ "(user_id, from_role, content, status) VALUES "
+					+ "(?, ?, ?, ?)");
+		 	stmt.setString(1, notification.getTo());
+		 	stmt.setString(2, notification.getFrom());
+		 	stmt.setString(3, notification.getContent());
+			stmt.setString(4, "unread");
+		 	stmt.executeUpdate();
+		} catch (SQLException e1) {
+			Server.Log("Database", "Executing SendNotification: FAILED");
+			e1.printStackTrace();
+		}
+		Server.Log("Database", "Executing SendNotification: SUCCESS");
 	}
 
 	/**
@@ -1053,9 +1053,10 @@ public class ServerConnSQL {
 	 * @param order_id the order id
 	 * @param action the action
 	 */
-	public void EndOrder(int order_id, String action) {
+	public int EndOrder(int order_id) {
 		PreparedStatement OrderDetailsStmt = null;
 		PreparedStatement SetStatusStmt = null;
+		int refund = 0;
 		ResultSet rs;
 		try {
 			OrderDetailsStmt = conn.prepareStatement("SELECT user_id, shipping_date,total_price FROM orders WHERE order_id =?");
@@ -1066,6 +1067,7 @@ public class ServerConnSQL {
 			rs = OrderDetailsStmt.executeQuery();
 			if(rs.next())
 			{
+			
 				String user_id = rs.getString(1);
 				String currency[]=GetCurrency(user_id);
 				int zCoin = Integer.valueOf(currency[4]);
@@ -1073,32 +1075,13 @@ public class ServerConnSQL {
 				java.sql.Timestamp  ts=  rs.getTimestamp(2);
 				LocalDateTime requested = Utilities.GenericUtilties.Convert_LocalDate_To_SQLDate(ts);
 				Duration difference = Duration.between(requested, LocalDateTime.now()); //requested - now
-				if(difference.getSeconds() > 0 && action.equals("done"))
+				if(difference.getSeconds() > 0 )
 				{
-					//Full refund
-					zCoin +=  orderCost;
-				}
-				else if(difference.getSeconds() < 0 && action.equals("done"))
-				{
-					//full price
-				}
-				else if (difference.getSeconds() > -3600 && action.equals("cancel"))
-				{
-					//no refund
-				}
-				else if (difference.getSeconds() > -10800 && action.equals("cancel"))
-				{
-					//half refund
-					zCoin +=(orderCost/2);
-				}
-				else
-				{
-					//Full refund
+					refund = orderCost;
 					zCoin +=  orderCost;
 				}
 				UpdateZerliCoins(user_id, zCoin);
 				SetStatusStmt.executeUpdate();
-				
 			}
 			
 			
@@ -1108,8 +1091,7 @@ public class ServerConnSQL {
 			e1.printStackTrace();
 		}
 		
-		System.out.println("order end!");
-
+		return refund;
 	}
 
 	/**
@@ -1841,5 +1823,38 @@ public class ServerConnSQL {
 		Server.Log("Database", "Executing SaveSurveyAnswers: FAILED");
 		
 	}
+
+	public CustomerInfo GetCustomerInfo(String userID) {
+		Server.Log("Database", "Executing GetCustomerInfo");
+		CustomerInfo customer = new CustomerInfo();
+		PreparedStatement stmt = null;
+		ResultSet rs;
+		try {
+			stmt = conn.prepareStatement("SELECT ud.*,cd.* FROM user_details ud, customer_details cd "
+					+ "WHERE cd.user_id = ud.user_id AND cd.user_id = ?");
+			stmt.setString(1, userID);
+			rs = stmt.executeQuery();
+			while (rs.next()) {
+				customer.setFirstName(rs.getString(2));
+				customer.setLastName(rs.getString(3));
+				customer.setID(rs.getString(4));
+				customer.setEmail(rs.getString(5));
+				customer.setPhone(rs.getString(6));
+				customer.setCreditCard(rs.getString(9));
+				customer.setCvv(rs.getString(10));
+				customer.setExpMonth(rs.getString(11));
+				customer.setExpYear(rs.getString(12));
+				customer.setZerliCoins(String.valueOf(rs.getInt(13)));
+				int newCustomer = rs.getInt(14);
+				customer.setNewCustomer(newCustomer==1?true:false);
+			}
+		}catch (Exception e) {
+			Server.Log("Database", "Executing GetCustomerInfo: FAILED");
+			e.printStackTrace();
+		}
+		Server.Log("Database", "Executing GetCustomerInfo: SUCCESS");
+		return customer;
+	}
+	
 }
 /*** End Reports ***/

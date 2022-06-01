@@ -93,7 +93,7 @@
       </AnchorPane>
       <AnchorPane layoutX="7.0" layoutY="125.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="663.0" prefWidth="220.0" style="-fx-border-color: black;">
          <children>
-            <Button fx:id="ordersBtn" layoutX="58.0" layoutY="192.0" mnemonicParsing="false" onAction="#ordersPressed" stylesheets="@application.css" text="My Orders">
+            <Button fx:id="ordersBtn" layoutX="59.0" layoutY="244.0" mnemonicParsing="false" onAction="#ordersPressed" stylesheets="@application.css" text="My Orders">
                <font>
                   <Font name="Maiandra GD" size="12.0" />
                </font>
@@ -115,6 +115,12 @@
                   <Font name="Maiandra GD" size="66.0" />
                </font>
             </Label>
+            <Button layoutX="53.0" layoutY="193.0" mnemonicParsing="false" onAction="#myAccountPressed" text="My Account">
+               <styleClass>
+                  <String fx:value="Reg-btn" />
+                  <String fx:value="pressbtn" />
+               </styleClass>
+            </Button>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="controlContainer" layoutX="234.0" layoutY="125.0" prefHeight="663.0" prefWidth="959.0" style="-fx-border-color: black;" />

@@ -9,6 +9,11 @@
     -fx-font-size: 25px;
 }
 
+.miniLabel{
+    -fx-font-family: 'Maiandra GD';
+    -fx-font-size: 18px;
+}
+
 .chart-plot-background {
     -fx-background-color: transparent;
 }

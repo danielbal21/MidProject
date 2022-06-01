@@ -1,13 +1,10 @@
 package controllers;
 
-import java.util.ArrayList;
-
 import Entities.CatalogType;
-import Entities.Color;
-import Entities.Item;
 import Entities.ItemInList;
 import Entities.ItemType;
 import Entities.NewItem;
+import Entities.NotificationInTable;
 import Entities.Order;
 import Entities.OrderStatus;
 import ProtocolHandler.RequestType;
@@ -121,8 +118,25 @@ public class ManagerViewOrderDetailsController implements UserControl{
 
     @FXML
     void approvePressed(ActionEvent event) {
-    	ClientApp.ProtocolHandler.Invoke(RequestType.ConfirmOrder,  
-    			LoginController.windowControl.peekPipe("Order select"), futureStatus, false);
+    	Order order = (Order) LoginController.windowControl.peekPipe("Order select");
+    	
+    	ClientApp.ProtocolHandler.Invoke(RequestType.ConfirmOrder, order, futureStatus, true);
+    	int refund = (int) ClientApp.ProtocolHandler.GetResponse(RequestType.ConfirmOrder);
+    	NotificationInTable notification = new NotificationInTable();
+    	notification.setTo(order.getUserID());
+    	notification.setFrom("Manager");
+    	
+    	if(futureStatus.equals("confirmed")) {
+    		notification.setContent("Order number " + order.getOrderID() + " has been confirmed"
+    				+ "\nSee full info in \"My Orders\" tab");
+    	}
+    	else {
+    		notification.setContent("Order number " + order.getOrderID() + " has been canceled"
+    				+ "\nPlease receive " + refund + " Zerli coins as refund");
+    	}
+    	
+    	ClientApp.ProtocolHandler.Invoke(RequestType.SendNotification, notification, null, false);
+    	
     	LoginController.windowControl.setUserControl("/gui/usercontrols/ManagerOrderManager.fxml");
     }
 
@@ -170,8 +184,6 @@ public class ManagerViewOrderDetailsController implements UserControl{
 
 	@Override
 	public void onExit() {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

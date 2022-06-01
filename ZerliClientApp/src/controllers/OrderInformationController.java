@@ -268,6 +268,8 @@ public class OrderInformationController implements UserControl {
 			public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
 				if(!newValue.equals(oldValue))
 				{
+					if(newValue == null ) return;
+					
 					if(newValue.equals(pickupRB) )
 					{
 						cityText.setDisable(true);

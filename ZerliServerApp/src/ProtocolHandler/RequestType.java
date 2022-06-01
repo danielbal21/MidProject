@@ -145,4 +145,7 @@ public enum RequestType {
 	
 	/** The Get report is used to get various reports. */
 	GetReport,
+	
+	GetCustomerInfo,
+	SendNotification,
 }

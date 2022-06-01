@@ -1,11 +1,7 @@
 package ProtocolHandler.Operations;
 
-import java.util.ArrayList;
-
-import Entities.NotificationInTable;
 import ProtocolHandler.IOperation;
 import ProtocolHandler.ResponseWrapper;
-import javafx.collections.ObservableList;
 
 /**
  * The Class UpdateNotificationOperation defines the operation
@@ -25,9 +21,11 @@ public class UpdateNotificationOperation implements IOperation {
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean Perform(String requestee, Object data, Object params) {
-		if (data instanceof ArrayList<?>)
-			server.Server.SqlServerManager.UpdateNotification(requestee,(ArrayList<NotificationInTable>)data);
-		return true;
+		if (data instanceof Integer) {
+			server.Server.SqlServerManager.UpdateNotification(requestee,(Integer)data);
+			return true;
+		}
+		return false;
 	}
 
 	/**
@@ -35,7 +33,6 @@ public class UpdateNotificationOperation implements IOperation {
 	 */
 	@Override
 	public boolean Perform(String requestee, Object data, Object params, ResponseWrapper response) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
