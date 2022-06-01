@@ -32,7 +32,11 @@
             <Label layoutX="317.0" layoutY="187.0" styleClass="subLabel" stylesheets="@../application.css" text="Item Type" />
             <ComboBox fx:id="itemColor" layoutX="448.0" layoutY="237.0" prefHeight="46.0" prefWidth="259.0" styleClass="subLabel" />
             <Label layoutX="317.0" layoutY="245.0" styleClass="subLabel" stylesheets="@../application.css" text="Item Color" />
-            <Button fx:id="selectImage" layoutX="65.0" layoutY="262.0" mnemonicParsing="false" onAction="#selectimage_cllick" prefWidth="125.0" styleClass="Reg-btn" text="Select Image" />
+            <Button fx:id="selectImage" layoutX="65.0" layoutY="262.0" mnemonicParsing="false" onAction="#selectimage_cllick" prefWidth="125.0" text="Select Image">
+               <styleClass>
+                  <String fx:value="Reg-btn" />
+                  <String fx:value="pressbtn" />
+               </styleClass></Button>
          </children>
       </AnchorPane>
       <AnchorPane layoutX="215.0" layoutY="469.0" prefHeight="125.0" prefWidth="331.0" style="-fx-border-color: gray;">

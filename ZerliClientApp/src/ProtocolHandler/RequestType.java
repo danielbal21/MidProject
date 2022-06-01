@@ -48,4 +48,6 @@ public enum RequestType {
 	GetReport,
 	SendNotification,
 	GetCustomerInfo,
+	GetSurveyHistogram,
+	SavePDF,
 }

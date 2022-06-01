@@ -81,17 +81,20 @@ public class CatalogViewerController implements UserControl {
     
     @FXML
     void backPressed(ActionEvent event) {
-    	Alert confirmAlert = new Alert(AlertType.NONE);
-		confirmAlert.setTitle("Leaving New item information");
-		confirmAlert.setContentText("Do you want to save typed data?");
-		ButtonType yes = new ButtonType("Yes", ButtonData.YES);
-		ButtonType no = new ButtonType("No",ButtonData.NO);
-		confirmAlert.getDialogPane().getButtonTypes().add(yes);
-		confirmAlert.getDialogPane().getButtonTypes().add(no);
-		Optional<ButtonType> result = confirmAlert.showAndWait();
-		result.ifPresent(response -> { 
-			if(response == no) Reset();
-		});
+    	if(LoginController.windowControl.peekPipe("newItem") != null)
+    	{
+	    	Alert confirmAlert = new Alert(AlertType.NONE);
+			confirmAlert.setTitle("Leaving New item information");
+			confirmAlert.setContentText("Do you want to save typed data?");
+			ButtonType yes = new ButtonType("Yes", ButtonData.YES);
+			ButtonType no = new ButtonType("No",ButtonData.NO);
+			confirmAlert.getDialogPane().getButtonTypes().add(yes);
+			confirmAlert.getDialogPane().getButtonTypes().add(no);
+			Optional<ButtonType> result = confirmAlert.showAndWait();
+			result.ifPresent(response -> { 
+				if(response == no) Reset();
+			});
+    	}
     	LoginController.windowControl.setUserControl("/gui/usercontrols/CustomerHomePage.fxml");
     }
     

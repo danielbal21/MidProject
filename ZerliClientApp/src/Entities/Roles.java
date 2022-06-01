@@ -22,5 +22,6 @@ public enum Roles {
 	marketing, 
 	
 	/** The service. */
-	service
+	service,
+	expert,
 }

@@ -81,9 +81,8 @@ public class LoginController {
 		loginLabel.setVisible(false);
     	if(!validateInput()) return;
     	ClientApp.ProtocolHandler.Invoke(RequestType.AuthenticateUser, null, new String[] {userNameText.getText(),passwordText.getText()}, true);
-    	Object[] loginDetails;
+    	Object[] loginDetails;//= {0,Access.active,Roles.expert};
     	loginDetails =(Object[])ClientApp.ProtocolHandler.GetResponse(RequestType.AuthenticateUser);
-
     	Access access=(Access)loginDetails[1];
     	if (access==Access.active || access==Access.frozen)
     	{
@@ -172,6 +171,20 @@ public class LoginController {
 					mfc.init();
     				windowControl.setUserControl("/gui/usercontrols/ServiceHomePage.fxml");
 
+        		}
+        		if(role==Roles.expert)
+        		{
+        			windowControl.stage.close();
+    				loader.setLocation(getClass().getResource("/gui/mainframes/ExpertMainScreen.fxml"));
+    				try {
+    					root =  loader.load();
+    				} catch (IOException e) {
+    					e.printStackTrace();
+    				} 
+    				ExpertMainFrameController efc= loader.getController();
+    				windowControl = new WindowControl(efc);
+    				efc.init();
+    				windowControl.setUserControl("/gui/usercontrols/ExpertHomePage.fxml");
         		}
         		Stage newStage = new Stage();
         		Utilities.GenericUtilties.SetWindowMovable(root, newStage);

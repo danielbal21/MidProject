@@ -5,9 +5,6 @@ import java.io.IOException;
 import Entities.Access;
 import ProtocolHandler.Protocol;
 import controllers.LoginController;
-import controllers.ManagerOrderManagerController;
-import controllers.StartIPconfigController;
-import controllers.WindowControl;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -20,7 +17,6 @@ public class ClientApp extends Application {
 	public static Protocol ProtocolHandler  = new Protocol();
 	public static String UserID = "NO-AUTH";
 	public static Access UserStatus = Access.noaut;
-	//final public static String DEFAULT_HOST = "localhost";
 	public static ClientConn ClientConnection;
 	
 	@Override

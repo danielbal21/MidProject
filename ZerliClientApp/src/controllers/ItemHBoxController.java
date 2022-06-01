@@ -54,7 +54,7 @@ public class ItemHBoxController extends HBox {
     @FXML
     void AddToCart(ActionEvent event) {
     	if(ClientApp.UserStatus == Access.inactive)  {
-    		Alert confirmAlert = new Alert(AlertType.ERROR);
+    		Alert confirmAlert = new Alert(AlertType.NONE);
 			confirmAlert.setTitle("Not registered customer");
 			confirmAlert.setContentText("Your account is inactive\nContact Zerli's administration");
 			ButtonType ok = new ButtonType("OK", ButtonData.OK_DONE);
