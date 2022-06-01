@@ -71,7 +71,7 @@ public class ReportScheduler {
 					for(ReportType t : ReportType.values())
 					{
 						if(year == LocalDate.now().getYear())
-							if((LocalDate.now().getMonthValue() / 3) + 1 < quarter) return;
+							if((LocalDate.now().getMonthValue() / 3) + 1 <= quarter) break;
 						boolean rQ = Server.SqlServerManager.ReportExists(t,false,branch,java.sql.Date.valueOf(LocalDate.of(year, quarter, 1)));
 						if(!rQ)
 						{
@@ -82,6 +82,21 @@ public class ReportScheduler {
 				}
 			}
 		}
+//		for(int year = dawnOfTime.getYear();year <= LocalDate.now().getYear();year++)
+//		{
+//			for(int quarter = 1;quarter<=4;quarter++)
+//			{
+//
+//				if(year == LocalDate.now().getYear())
+//					if((LocalDate.now().getMonthValue() / 3) + 1 < quarter) break;
+//				boolean rQ = Server.SqlServerManager.ReportExists(ReportType.ceo,false,"*",java.sql.Date.valueOf(LocalDate.of(year, quarter, 1)));
+//				if(!rQ)
+//				{
+//					Server.Log("R-Scheduler", "CEO Report Inconsistency detected: " + quarter + "/" + year);
+//					ReportGenerator.GenerateQuarterlyReport(ReportType.ceo, "*", LocalDate.of(year, quarter, 1));
+//				}
+//			}
+//		}	
 	}
 	
 	/**
@@ -125,6 +140,7 @@ public class ReportScheduler {
 					/** wait for generation period **/
 					while(LocalDate.now().getDayOfMonth() != 1)
 					{
+						Server.Log("R-Scheduler", "Polling Reports");
 						if(!ZERLI_DEBUG)
 							Thread.sleep((1000 * 3600) * 12); //12 hours
 						else

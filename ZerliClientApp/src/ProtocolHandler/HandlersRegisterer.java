@@ -53,5 +53,6 @@ public class HandlersRegisterer {
 		Protocol.RegisterHandler(RequestType.GetSurveysNames, new ArrayListToObservableHandler());
 		Protocol.RegisterHandler(RequestType.SaveSurveyAnswers, null);
 		Protocol.RegisterHandler(RequestType.GetReport, null);
+		Protocol.RegisterHandler(RequestType.GetReportByBranch, null);
 	}
 }

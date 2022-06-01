@@ -276,6 +276,8 @@ public class GenericUtilties {
 				return ReportType.order;
 			case "Branch Complaints Report":
 				return ReportType.service;
+			case "CEO Income Report":
+				return ReportType.ceo;
 		default:
 				return null;
 		}

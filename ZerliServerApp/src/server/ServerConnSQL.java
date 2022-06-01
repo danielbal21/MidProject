@@ -1345,9 +1345,6 @@ public class ServerConnSQL {
  * @param reportDate the report date
  * @return the byte[]
  */
-	
-	
-	
 	public byte[] GetReport(ReportType reportType, boolean isMonthly, String requester, Date reportDate) {
 		Server.Log("Database", "Executing GetReport");
 		PreparedStatement stmt;
@@ -1370,6 +1367,33 @@ public class ServerConnSQL {
 			}
 		} catch (SQLException e) {e.printStackTrace();	
 		Server.Log("Database", "Executing GetReport: FAILED");
+		}
+		return null;
+	}
+	
+	public byte[] GetReportOfBranch(ReportType reportType, boolean isMonthly,String branch, Date reportDate) {
+		Server.Log("Database", "Executing GetReportOfBranch");
+		PreparedStatement stmt;
+		try 
+		{
+			System.out.println(String.format("%s %s %s %s",reportType.toString(),isMonthly,branch,reportDate));
+			stmt = conn.prepareStatement("SELECT report FROM reports WHERE date = ? AND is_monthly = ? AND branch = ? AND reportType = ?");
+			stmt.setDate(1, reportDate);
+			stmt.setInt(2, isMonthly? 1 : 0);
+			stmt.setString(3, branch);
+			stmt.setString(4,reportType.toString());
+			ResultSet res = stmt.executeQuery();
+			if(res.next())
+			{
+				try {
+					return res.getBlob(1).getBinaryStream().readAllBytes();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		} catch (SQLException e) {e.printStackTrace();	
+		Server.Log("Database", "Executing GetReportOfBranch: FAILED");
 		}
 		return null;
 	}
@@ -1451,7 +1475,7 @@ public class ServerConnSQL {
 	 * @param b the b
 	 * @return the integer
 	 */
-	public Integer GetOrderCountWithItemWithinPeriod(ItemType t,Date a,Date b)
+	public Integer GetOrderCountWithItemWithinPeriod(ItemType t,Date a,Date b,String branch)
 	{
 		Server.Log("Database", "Executing GetOrderCountWithItemWithinPeriod");
 		PreparedStatement stmt;
@@ -1459,10 +1483,11 @@ public class ServerConnSQL {
 		{
 			
 			/*stmt = conn.prepareStatement("SELECT COUNT(distinct order_id) FROM order_item WHERE item_id IN (SELECT item_id FROM items WHERE item_type = ?) AND order_id IN (SELECT order_id FROM orders WHERE DATE(order_date) BETWEEN CAST('2022-04-01' AS DATE) AND CAST('2022-04-31' AS DATE))");*/
-			stmt = conn.prepareStatement("SELECT COUNT(distinct order_id) FROM order_item WHERE item_id IN (SELECT item_id FROM items WHERE item_type = ?) AND order_id IN (SELECT order_id FROM orders WHERE DATE(order_date) BETWEEN ? AND ?)");
+			stmt = conn.prepareStatement("SELECT COUNT(distinct order_id) FROM order_item WHERE item_id IN (SELECT item_id FROM items WHERE item_type = ?) AND order_id IN (SELECT order_id FROM orders WHERE DATE(order_date) BETWEEN ? AND ? AND branch_name = ?)");
 			stmt.setString(1, t.toString());
 			stmt.setDate(2,a);
 			stmt.setDate(3, b);
+			stmt.setString(4, branch);
 			ResultSet res = stmt.executeQuery();
 			if(res.next())
 			{
@@ -1506,6 +1531,28 @@ public class ServerConnSQL {
 		return false;
 	}
 	
+	public Integer GetComplaintCountOfBranch(String branch,Date a)
+	{
+		PreparedStatement stmt;
+		ResultSet rs;
+		try
+		{
+			stmt = conn.prepareStatement("SELECT COUNT(complaint_id) FROM complaints WHERE branch = ? AND DATE(complain_time) = ?");
+			stmt.setString(1, branch);
+			stmt.setDate(2,a);
+			//stmt.setDate(3, b);
+			rs=stmt.executeQuery();
+			while(rs.next())
+			{
+				return rs.getInt(1);
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+			Server.Log("Database", "Executing GetComplaints: FAILED");
+		}		
+		throw new RuntimeException("SQL Error in complaints count");
+	}
+	
 	public void GetComplaints(ArrayList<Complaint> complaints)
 	{
 		PreparedStatement stmt;
@@ -1524,8 +1571,9 @@ public class ServerConnSQL {
 				newComplaint.setBranch(rs.getString(7));
 				complaints.add(newComplaint);
 			}
-		}catch (SQLException e) {e.printStackTrace();}		
+		}catch (SQLException e) {e.printStackTrace();		
 		Server.Log("Database", "Executing GetComplaints: FAILED");
+		}
 		
 	}
 	

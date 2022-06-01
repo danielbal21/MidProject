@@ -142,7 +142,7 @@ public enum RequestType {
 	GetSurveysNames,
 	GetSurvey,
 	SaveSurveyAnswers,
-	
-	/** The Get report is used to get various reports. */
+	/** The Get report is used to get various reports with the branch inferred by the requester. */
 	GetReport,
+	GetReportByBranch,
 }

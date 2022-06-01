@@ -59,11 +59,11 @@ public class RequestRegisterer {
 		Protocol.RegisterOperation(RequestType.GetAllEmployeesInfo, new GetAllEmployeesInfoOperation());
 		Protocol.RegisterOperation(RequestType.UpdateAccountAccess, new UpdateAccountAccessOperation());
 		Protocol.RegisterOperation(RequestType.UpdateEmployeeRole, new UpdateEmployeeRoleOperation());
-
 		Protocol.RegisterOperation(RequestType.SaveSurvey, new SaveSurveyOperation());
 		Protocol.RegisterOperation(RequestType.GetSurveysNames, new GetSurveysNamesOperation());
 		Protocol.RegisterOperation(RequestType.GetSurvey, new GetSurveyOperation());
 		Protocol.RegisterOperation(RequestType.SaveSurveyAnswers, new SaveSurveyAnswersOperation());
 		Protocol.RegisterOperation(RequestType.GetReport, new GetReportOperation());
+		Protocol.RegisterOperation(RequestType.GetReportByBranch, new GetReportByBranchOperation());
 	}
 }

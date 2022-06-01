@@ -4,4 +4,5 @@ public enum ReportType {
 	income,
 	order,
 	service,
+	ceo,
 }

@@ -24,6 +24,8 @@ import org.apache.pdfbox.pdmodel.graphics.image.JPEGFactory;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 import org.apache.pdfbox.util.Matrix;
 import org.knowm.xchart.*;
+import org.knowm.xchart.CategorySeries.CategorySeriesRenderStyle;
+import org.knowm.xchart.XYSeries.XYSeriesRenderStyle;
 import org.knowm.xchart.style.Styler.ChartTheme;
 import org.knowm.xchart.style.Styler.LegendPosition;
 import org.knowm.xchart.style.markers.SeriesMarkers;
@@ -72,6 +74,21 @@ public class PDFGenerator {
 	    return ImageUtil.getRotatedImage(BitmapEncoder.getBufferedImage(chart), 90) ;
 	}
 	
+	private BufferedImage createHistogram(int width,int height,ArrayList<Integer> X,ArrayList<Integer> Y,String name,String chartname)
+	{
+	    XYChart chart = new XYChartBuilder().width((int)(height)).height((int)(width * 0.7f)).title(name).xAxisTitle("Month").yAxisTitle("Number of complaints").build();
+	    
+	    // Customize Chart
+	    chart.getStyler().setLegendPosition(LegendPosition.InsideNW);
+	    //chart.getStyler().setHasAnnotations(true);
+	 
+	    // Series
+	    chart.getStyler().setDefaultSeriesRenderStyle(XYSeriesRenderStyle.Area);
+	    //chart.getStyler().setXAxisTickMarkSpacingHint(1)
+	    chart.addSeries(chartname,null , Y);
+	    return ImageUtil.getRotatedImage(BitmapEncoder.getBufferedImage(chart), 90) ;
+	}
+	
 	/**
 	 * Creates the bar chart complaints.
 	 *
@@ -80,20 +97,18 @@ public class PDFGenerator {
 	 * @param quarter the quarter
 	 * @return the buffered image
 	 */
-	private BufferedImage createBarChartComplaints(int width,int height,int quarter)
+	private BufferedImage createBarChartComplaints(int width,int height,ArrayList<Integer> X,ArrayList<Integer> Y)
 	{
-		quarter *= 3;
-	    CategoryChart chart = new CategoryChartBuilder().width((int)(height)).height((int)(width * 0.7f)).title("Quarterly Customer Service Report").xAxisTitle("Month").yAxisTitle("Number of complaints").build();
+	    XYChart chart = new XYChartBuilder().width((int)(height)).height((int)(width * 0.7f)).title("Quarterly Customer Service Report").xAxisTitle("Month").yAxisTitle("Number of complaints").build();
 	    
 	    // Customize Chart
-	    chart.getStyler().setLegendPosition(LegendPosition.OutsideS);
+	    chart.getStyler().setLegendPosition(LegendPosition.InsideNW);
 	    //chart.getStyler().setHasAnnotations(true);
 	 
 	    // Series
-	    chart.addSeries(months[quarter], Arrays.asList(new String[] {" "}), Arrays.asList(new Integer[] {15}));
-	    chart.addSeries(months[quarter+1], Arrays.asList(new String[] { " "}), Arrays.asList(new Integer[] {5}));
-	    chart.addSeries(months[quarter+2], Arrays.asList(new String[] { " "}), Arrays.asList(new Integer[] {10}));
-		
+	    chart.getStyler().setDefaultSeriesRenderStyle(XYSeriesRenderStyle.Area);
+	    //chart.getStyler().setXAxisTickMarkSpacingHint(1)
+	    chart.addSeries("Monthly Complaints",null , Y);
 	    return ImageUtil.getRotatedImage(BitmapEncoder.getBufferedImage(chart), 90) ;
 	}
 	
@@ -216,6 +231,15 @@ public class PDFGenerator {
 		      contentStream.newLine();
 		      contentStream.showText(String.format("Date: %s",date));
 		      contentStream.endText();
+		      
+		      contentStream.beginText();
+		      contentStream.newLineAtOffset(150, 15);  
+		      contentStream.setLeading(20);
+	    	  contentStream.setFont(PDType0Font.load(document, new File("C:\\Windows\\Fonts\\arial.ttf")), 16);
+		      contentStream.showText("All Rights Reserved To Group VI 2022 ©");
+		      contentStream.newLine();
+		      contentStream.endText();
+		      
 		      PDImageXObject chartImage = JPEGFactory.createFromImage(document,
 		      createBarChartOrder((int) pageHeight, (int) pageWidth, histo));
 		      contentStream.transform(new Matrix(0, 1, -1, 0, pageWidth, 0));
@@ -288,10 +312,17 @@ public class PDFGenerator {
 //	      contentStream.drawImage(chartImage, 80, 0); 
 	      drawTable(document,contentStream,4,data.size()+2,50,675,120,20,
 	    		  new String[] {"Date","Completed","Cancelled","Total"},data,dates);
+	      contentStream.beginText();
+	      contentStream.newLineAtOffset(150, 15);  
+	      contentStream.setLeading(20);
+    	  contentStream.setFont(PDType0Font.load(document, new File("C:\\Windows\\Fonts\\arial.ttf")), 16);
+	      contentStream.showText("All Rights Reserved To Group VI 2022 ©");
+	      contentStream.newLine();
+	      contentStream.endText();
 	      contentStream.close();
 	      document.addPage(page);
 	      ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-	      document.setVersion(1.3f);
+	      //document.setVersion(1.3f);
 	      document.save(byteArrayOutputStream);
 	      return byteArrayOutputStream.toByteArray();
 	    }
@@ -377,6 +408,59 @@ public class PDFGenerator {
 		}
 	}
 	
+	public byte[] createCEOReportForBranch(String branch,String date,ArrayList<Integer> X,ArrayList<Integer> Y) {
+	    try (PDDocument document = new PDDocument()) {
+	      PDPage page = new PDPage(PDRectangle.A4);
+	      page.setRotation(0);
+	 
+	      float pageWidth = page.getMediaBox().getWidth();
+	      float pageHeight = page.getMediaBox().getHeight();
+	      PDPageContentStream contentStream = new PDPageContentStream(document, page);
+	      InputStream stream = getClass().getResourceAsStream("/png/ZerliLogo.png");
+	      PDImageXObject logoImage = JPEGFactory.createFromImage(document, ImageIO.read(stream));
+	      //contentStream.transform(new Matrix(0, 1, -1, 0, pageWidth, 0));
+	      contentStream.drawImage(logoImage, 5, HEIGHT-80,150,80); 
+	      contentStream.beginText();
+	      contentStream.newLineAtOffset(WIDTH/2 - 140, 760);  
+    	  contentStream.setFont(PDType0Font.load(document, new File("C:\\Windows\\Fonts\\arial.ttf")), 30);
+	      contentStream.showText("CEO Income Report - " + branch);
+	      contentStream.endText();
+	      
+	      contentStream.beginText();
+	      contentStream.newLineAtOffset(80, 715);  
+	      contentStream.setLeading(20);
+    	  contentStream.setFont(PDType0Font.load(document, new File("C:\\Windows\\Fonts\\arial.ttf")), 16);
+	      contentStream.showText(String.format("Presented Branch: %s " ,branch));
+	      contentStream.newLine();
+	      contentStream.showText(String.format("Date: %s",date));
+	      contentStream.endText();
+
+	      contentStream.beginText();
+	      contentStream.newLineAtOffset(150, 15);  
+	      contentStream.setLeading(20);
+    	  contentStream.setFont(PDType0Font.load(document, new File("C:\\Windows\\Fonts\\arial.ttf")), 16);
+	      contentStream.showText("All Rights Reserved To Group VI 2022 ©");
+	      contentStream.newLine();
+	      contentStream.endText();
+	      
+	      PDImageXObject chartImage = JPEGFactory.createFromImage(document,
+	      createHistogram((int) pageHeight, (int) pageWidth, X,Y,"Income" + branch,"Income Over Quarter"));
+	      contentStream.transform(new Matrix(0, 1, -1, 0, pageWidth, 0));
+	      contentStream.drawImage(chartImage, 80, 0); 
+	      contentStream.close();
+	      document.addPage(page);
+	 
+	      ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+	      document.save(byteArrayOutputStream);
+	      return byteArrayOutputStream.toByteArray();
+	    }
+	    catch(IOException e)
+	    {
+	    	e.printStackTrace();
+	    }
+		return null;
+}
+	
 	/**
 	 * Creates the complaint report histogram.
 	 *
@@ -387,7 +471,7 @@ public class PDFGenerator {
 	 * @param endDate the end date
 	 * @return the byte[]
 	 */
-	public byte[] createComplaintReportHistogram(String path,String name,String branch,String startDate,String endDate) {
+	public byte[] createComplaintsReportHistogram(String branch,String date,ArrayList<Integer> X,ArrayList<Integer> Y) {
 	    try (PDDocument document = new PDDocument()) {
 	      PDPage page = new PDPage(PDRectangle.A4);
 	      page.setRotation(0);
@@ -401,34 +485,37 @@ public class PDFGenerator {
 	      contentStream.drawImage(logoImage, 5, HEIGHT-80,150,80); 
 	      contentStream.beginText();
 	      contentStream.newLineAtOffset(WIDTH/2 - 100, 760);  
-	      contentStream.setFont(PDType1Font.HELVETICA, 15);
-	      contentStream.showText("Order Report");
+    	  contentStream.setFont(PDType0Font.load(document, new File("C:\\Windows\\Fonts\\arial.ttf")), 30);
+	      contentStream.showText("Service Report");
 	      contentStream.endText();
 	      
+	     
 	      contentStream.beginText();
 	      contentStream.newLineAtOffset(80, 715);  
 	      contentStream.setLeading(20);
-	      contentStream.setFont(PDType1Font.HELVETICA,16);
+    	  contentStream.setFont(PDType0Font.load(document, new File("C:\\Windows\\Fonts\\arial.ttf")), 16);
 	      contentStream.showText(String.format("Created for branch %s" ,branch));
 	      contentStream.newLine();
-	      contentStream.showText(String.format("Shown Month: %s ~ %s",startDate,endDate));
+	      contentStream.showText(String.format("Date: %s",date));
 	      contentStream.endText();
+	      
+	      contentStream.beginText();
+	      contentStream.newLineAtOffset(150, 15);  
+	      contentStream.setLeading(20);
+    	  contentStream.setFont(PDType0Font.load(document, new File("C:\\Windows\\Fonts\\arial.ttf")), 16);
+	      contentStream.showText("All Rights Reserved To Group VI 2022 ©");
+	      contentStream.newLine();
+	      contentStream.endText();
+	      
 	      PDImageXObject chartImage = JPEGFactory.createFromImage(document,
-	    		  createBarChartComplaints((int) pageHeight, (int) pageWidth,1));
+	      createBarChartComplaints((int) pageHeight, (int) pageWidth, X,Y));
 	      contentStream.transform(new Matrix(0, 1, -1, 0, pageWidth, 0));
 	      contentStream.drawImage(chartImage, 80, 0); 
 	      contentStream.close();
 	      document.addPage(page);
-	      document.setVersion(1.5f);
+	 
 	      ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 	      document.save(byteArrayOutputStream);
-	      File f = new File(path + "//" + name + ".pdf");
-	      FileOutputStream fs = new FileOutputStream(f);
-	      BufferedOutputStream fileWriter = new BufferedOutputStream(fs);
-	      fileWriter.write(byteArrayOutputStream.toByteArray());
-	      fileWriter.close();
-	      fs.close();
-	      
 	      return byteArrayOutputStream.toByteArray();
 	    }
 	    catch(IOException e)
@@ -474,8 +561,13 @@ public class PDFGenerator {
 	      contentStream.newLine();
 	      contentStream.showText(String.format("Shown Month: %s ~ %s",startDate,endDate));
 	      contentStream.endText();
-	      
-	      
+	      contentStream.beginText();
+	      contentStream.newLineAtOffset(15, 150);  
+	      contentStream.setLeading(20);
+    	  contentStream.setFont(PDType0Font.load(document, new File("C:\\Windows\\Fonts\\arial.ttf")), 16);
+	      contentStream.showText("All Rights Reserved To Group VI 2022 ©");
+	      contentStream.newLine();
+	      contentStream.endText();
 	      contentStream.close();
 	      
 	      document.addPage(page);

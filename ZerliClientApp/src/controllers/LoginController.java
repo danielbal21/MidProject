@@ -172,6 +172,21 @@ public class LoginController {
     				windowControl.setUserControl("/gui/usercontrols/ServiceHomePage.fxml");
 
         		}
+        		if(role == Roles.ceo)
+        		{
+        			windowControl.stage.close();
+    				loader.setLocation(getClass().getResource("/gui/mainframes/CEOMainScreen.fxml"));
+
+    				try {
+    					root =  loader.load();
+    				} catch (IOException e) {
+    					e.printStackTrace();
+    				} 
+    				CEOFrameController mfc= loader.getController();
+    				windowControl = new WindowControl(mfc);
+					mfc.init();
+    				windowControl.setUserControl("/gui/usercontrols/CEOReportsSelection.fxml");
+        		}
         		Stage newStage = new Stage();
         		Utilities.GenericUtilties.SetWindowMovable(root, newStage);
         		Scene scene = new Scene(root);
