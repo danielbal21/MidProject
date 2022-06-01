@@ -168,6 +168,7 @@ public class LoginController {
     				} 
     				CustomerServiceFrameController mfc= loader.getController();
     				windowControl = new WindowControl(mfc);
+    				windowControl.putPipe("service frame controller", mfc);
 					mfc.init();
     				windowControl.setUserControl("/gui/usercontrols/ServiceHomePage.fxml");
 

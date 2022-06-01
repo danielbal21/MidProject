@@ -55,7 +55,6 @@ public class CustomerServiceFrameController implements IContainable {
 	boolean x = true;
     @FXML
 	void complaintsPressed(ActionEvent event) {
-    	bellRedCricleLabl.setText("0");
     	LoginController.windowControl.setUserControl("/gui/usercontrols/CustomerServiceViewComplaints.fxml");
     }
 
@@ -131,4 +130,14 @@ public class CustomerServiceFrameController implements IContainable {
 		bellRedCricleLabl.setText(String.valueOf(numberOfComplaints));
 	}
 
+	public void editCircle(int i)
+	{
+		String bellCnt = bellRedCricleLabl.getText();
+		int bellInt = Integer.valueOf(bellCnt);
+		bellInt=bellInt + i;
+		bellRedCricleLabl.setText(String.valueOf(bellInt));
+	}
+
+	
+	
 }

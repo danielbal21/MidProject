@@ -62,6 +62,8 @@ public class CustomerServicePostComplaintController implements UserControl {
     	if(((String)ClientApp.ProtocolHandler.GetResponse(RequestType.MakeComplaint)).equals("done"))
     	{
     		ClientApp.ProtocolHandler.Invoke(RequestType.GetComplaints,  null, null, true);
+    		CustomerServiceFrameController mfc= (CustomerServiceFrameController)LoginController.windowControl.peekPipe("service frame controller");
+			mfc.editCircle(1);
         	LoginController.windowControl.putPipe("Complaints", ClientApp.ProtocolHandler.GetResponse(RequestType.GetComplaints));
         	LoginController.windowControl.setUserControl("/gui/usercontrols/CustomerServiceViewComplaints.fxml");
     	}
@@ -78,13 +80,15 @@ public class CustomerServicePostComplaintController implements UserControl {
 		// TODO Auto-generated method stub
 		errorLabel.setVisible(false);
 		ClientApp.ProtocolHandler.Invoke(RequestType.GetBranches,  null, null, true);
-		branchField.getItems().addAll((ObservableList<String>)ClientApp.ProtocolHandler.GetResponse(RequestType.GetBranches));
+		branchField.setItems((ObservableList<String>)ClientApp.ProtocolHandler.GetResponse(RequestType.GetBranches));
 	}
 
 	@Override
 	public void onExit() {
 		// TODO Auto-generated method stub
-		
+		feedBackText.setText("");
+		userIDField.setText("");
+		branchField.getItems().clear();
 	}
 
 }

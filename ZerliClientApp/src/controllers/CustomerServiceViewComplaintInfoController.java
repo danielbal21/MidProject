@@ -66,6 +66,8 @@ public class CustomerServiceViewComplaintInfoController implements UserControl{
     			complaint.setRefund(refund);
     			ClientApp.ProtocolHandler.Invoke(RequestType.ComplaintResponse,complaint , null, false);
     			ClientApp.ProtocolHandler.Invoke(RequestType.GetComplaints,  null, null, true);
+    			CustomerServiceFrameController mfc= (CustomerServiceFrameController)LoginController.windowControl.peekPipe("service frame controller");
+				mfc.editCircle(-1);
     			LoginController.windowControl.putPipe("Complaints", ClientApp.ProtocolHandler.GetResponse(RequestType.GetComplaints));
         		LoginController.windowControl.setUserControl("/gui/usercontrols/CustomerServiceViewComplaints.fxml");
     		}
@@ -98,6 +100,8 @@ public class CustomerServiceViewComplaintInfoController implements UserControl{
 	@Override
 	public void onExit() {
 		// TODO Auto-generated method stub
+		AnswerText.setText("");
+		refundField.setText("");
 		
 	}
 
