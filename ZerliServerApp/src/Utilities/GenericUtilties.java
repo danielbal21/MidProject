@@ -13,7 +13,22 @@ import javafx.scene.Parent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+// TODO: Auto-generated Javadoc
+
+
+/**
+ * The Class GenericUtilties holds many useful independent
+ * methods that are generally used around the project.
+ */
 public class GenericUtilties {
+	
+	/**
+	 * Sets the window movable by clicking on it, used when creating
+	 * border-less windows (undecorated).
+	 *
+	 * @param parent the encapsulating GUI parent
+	 * @param stage the holding stage
+	 */
 	public static void SetWindowMovable(Parent parent,Stage stage)
 	{
 		class TwoInOneEventHandler {
@@ -57,19 +72,46 @@ public class GenericUtilties {
         parent.setOnMouseDragged(DoubledEvents.GetDraggedEvent());
 	}
 	
+	/**
+	 * Convert local date to SQL date.
+	 *
+	 * @param date the date localdate
+	 * @param time the time as localtime
+	 * @return the sql timestamp
+	 */
 	public static java.sql.Timestamp Convert_LocalDate_To_SQLDate(LocalDate date,LocalTime time)
 	{
 		return java.sql.Timestamp.valueOf(date.atTime(time));
 	}
+	
+	/**
+	 * Convert local date to SQL date.
+	 *
+	 * @param datetime the datetime
+	 * @return the java.sql. timestamp
+	 */
 	public static java.sql.Timestamp Convert_LocalDate_To_SQLDate(LocalDateTime datetime)
 	{
 		return java.sql.Timestamp.valueOf(datetime);
 	}
+	
+	/**
+	 * Convert local date to SQL date.
+	 *
+	 * @param datetime the datetime
+	 * @return the local date time
+	 */
 	public static LocalDateTime Convert_LocalDate_To_SQLDate(java.sql.Timestamp datetime)
 	{
 		return datetime.toLocalDateTime();
 	}
 	
+	/**
+	 * Color to string.
+	 *
+	 * @param color the color
+	 * @return the color string value
+	 */
 	public static String ColorToString(Color color)
 	{
 		switch(color)
@@ -99,6 +141,12 @@ public class GenericUtilties {
 		}
 	}
 	
+	/**
+	 * String to item type.
+	 *
+	 * @param item the item
+	 * @return the ItemType you want to return
+	 */
 	public static ItemType StringToItemType(String item)
 	{
 		switch(item)
@@ -121,6 +169,13 @@ public class GenericUtilties {
 				return ItemType.bouquet;
 		}
 	}
+	
+	/**
+	 * String to catalog type.
+	 *
+	 * @param item the item
+	 * @return the catalog type
+	 */
 	public static CatalogType StringToCatalogType(String item)
 	{
 		switch(item)
@@ -133,6 +188,13 @@ public class GenericUtilties {
 				return CatalogType.new_item;
 		}
 	}
+	
+	/**
+	 * String to color.
+	 *
+	 * @param color the color
+	 * @return the color
+	 */
 	public static Color StringToColor(String color)
 	{
 		switch(color)
@@ -162,6 +224,12 @@ public class GenericUtilties {
 		}
 	}
 	
+	/**
+	 * Item type to string.
+	 *
+	 * @param itemType the item type
+	 * @return the string
+	 */
 	public static String ItemTypeToString(ItemType itemType)
 	{
 		switch(itemType)
@@ -184,6 +252,13 @@ public class GenericUtilties {
 				return "Undefined: Add To Converter";
 		}
 	}
+	
+	/**
+	 * Catalog type to string.
+	 *
+	 * @param itemType the item type
+	 * @return the string
+	 */
 	public static String CatalogTypeToString(CatalogType itemType)
 	{
 		switch(itemType)
@@ -197,6 +272,12 @@ public class GenericUtilties {
 		}
 	}
 	
+	/**
+	 * String to report type.
+	 *
+	 * @param reportType the report type
+	 * @return the report type
+	 */
 	public static ReportType StringToReportType(String reportType)
 	{
 		switch(reportType)
@@ -212,10 +293,23 @@ public class GenericUtilties {
 		}
 	}
 	
+	/**
+	 * Date to monthly.
+	 *
+	 * @param date the date
+	 * @return the int
+	 */
 	public static int DateToMonthly(LocalDate date)
 	{
 		return date.getMonthValue();
 	}
+	
+	/**
+	 * Date to quarter.
+	 *
+	 * @param date the date
+	 * @return the int
+	 */
 	public static int DateToQuarter(LocalDate date)
 	{
 		return ((date.getMonthValue()-1) / 4) + 1; //1-4[jan-apr] : 1

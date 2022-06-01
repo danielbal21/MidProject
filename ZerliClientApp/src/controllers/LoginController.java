@@ -170,8 +170,8 @@ public class LoginController {
     				windowControl.putPipe("service frame controller", mfc);
 					mfc.init();
     				windowControl.setUserControl("/gui/usercontrols/ServiceHomePage.fxml");
-
         		}
+        		
         		if(role==Roles.expert)
         		{
         			windowControl.stage.close();
@@ -185,6 +185,21 @@ public class LoginController {
     				windowControl = new WindowControl(efc);
     				efc.init();
     				windowControl.setUserControl("/gui/usercontrols/ExpertHomePage.fxml");
+        		}
+        		if(role == Roles.ceo)
+        		{
+        			windowControl.stage.close();
+    				loader.setLocation(getClass().getResource("/gui/mainframes/CEOMainScreen.fxml"));
+
+    				try {
+    					root =  loader.load();
+    				} catch (IOException e) {
+    					e.printStackTrace();
+    				} 
+    				CEOFrameController mfc= loader.getController();
+    				windowControl = new WindowControl(mfc);
+					mfc.init();
+    				windowControl.setUserControl("/gui/usercontrols/CEOReportsSelection.fxml");
         		}
         		Stage newStage = new Stage();
         		Utilities.GenericUtilties.SetWindowMovable(root, newStage);

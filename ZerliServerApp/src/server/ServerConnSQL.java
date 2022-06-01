@@ -499,14 +499,17 @@ public class ServerConnSQL {
 				stmt.setNull(11,Types.VARCHAR);;
            	stmt.executeUpdate();
            	
-           	stmt = conn.prepareStatement("SELECT order_id FROM orders WHERE user_id = ? AND order_date = ?");
-           	stmt.setString(1, requestee);
-           	stmt.setTimestamp(2, order.getOrderDate());
+           	
+           	
+           	/*
+           	 * 
+           	 */
+           	stmt = conn.prepareStatement("SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'midproject' AND TABLE_NAME = 'orders'");
            	ResultSet rs = stmt.executeQuery();
            	int orderID = -1;
            	while(rs.next())
            	{
-           		orderID = rs.getInt(1);
+           		orderID = rs.getInt(1) - 1;
            	}
            	if(orderID == -1){
         		Server.Log("Database", "Executing InsertOrder: FAILED could not track OrderID");
@@ -1333,9 +1336,6 @@ public class ServerConnSQL {
  * @param reportDate the report date
  * @return the byte[]
  */
-	
-	
-	
 	public byte[] GetReport(ReportType reportType, boolean isMonthly, String requester, Date reportDate) {
 		Server.Log("Database", "Executing GetReport");
 		PreparedStatement stmt;
@@ -1358,6 +1358,33 @@ public class ServerConnSQL {
 			}
 		} catch (SQLException e) {e.printStackTrace();	
 		Server.Log("Database", "Executing GetReport: FAILED");
+		}
+		return null;
+	}
+	
+	public byte[] GetReportOfBranch(ReportType reportType, boolean isMonthly,String branch, Date reportDate) {
+		Server.Log("Database", "Executing GetReportOfBranch");
+		PreparedStatement stmt;
+		try 
+		{
+			System.out.println(String.format("%s %s %s %s",reportType.toString(),isMonthly,branch,reportDate));
+			stmt = conn.prepareStatement("SELECT report FROM reports WHERE date = ? AND is_monthly = ? AND branch = ? AND reportType = ?");
+			stmt.setDate(1, reportDate);
+			stmt.setInt(2, isMonthly? 1 : 0);
+			stmt.setString(3, branch);
+			stmt.setString(4,reportType.toString());
+			ResultSet res = stmt.executeQuery();
+			if(res.next())
+			{
+				try {
+					return res.getBlob(1).getBinaryStream().readAllBytes();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		} catch (SQLException e) {e.printStackTrace();	
+		Server.Log("Database", "Executing GetReportOfBranch: FAILED");
 		}
 		return null;
 	}
@@ -1439,7 +1466,7 @@ public class ServerConnSQL {
 	 * @param b the b
 	 * @return the integer
 	 */
-	public Integer GetOrderCountWithItemWithinPeriod(ItemType t,Date a,Date b)
+	public Integer GetOrderCountWithItemWithinPeriod(ItemType t,Date a,Date b,String branch)
 	{
 		Server.Log("Database", "Executing GetOrderCountWithItemWithinPeriod");
 		PreparedStatement stmt;
@@ -1447,10 +1474,11 @@ public class ServerConnSQL {
 		{
 			
 			/*stmt = conn.prepareStatement("SELECT COUNT(distinct order_id) FROM order_item WHERE item_id IN (SELECT item_id FROM items WHERE item_type = ?) AND order_id IN (SELECT order_id FROM orders WHERE DATE(order_date) BETWEEN CAST('2022-04-01' AS DATE) AND CAST('2022-04-31' AS DATE))");*/
-			stmt = conn.prepareStatement("SELECT COUNT(distinct order_id) FROM order_item WHERE item_id IN (SELECT item_id FROM items WHERE item_type = ?) AND order_id IN (SELECT order_id FROM orders WHERE DATE(order_date) BETWEEN ? AND ?)");
+			stmt = conn.prepareStatement("SELECT COUNT(distinct order_id) FROM order_item WHERE item_id IN (SELECT item_id FROM items WHERE item_type = ?) AND order_id IN (SELECT order_id FROM orders WHERE DATE(order_date) BETWEEN ? AND ? AND branch_name = ?)");
 			stmt.setString(1, t.toString());
 			stmt.setDate(2,a);
 			stmt.setDate(3, b);
+			stmt.setString(4, branch);
 			ResultSet res = stmt.executeQuery();
 			if(res.next())
 			{
@@ -1494,13 +1522,38 @@ public class ServerConnSQL {
 		return false;
 	}
 	
-	public void GetComplaints(ArrayList<Complaint> complaints)
-	{
+	public Integer GetComplaintCountOfBranch(String branch,Date a)
+	{			
+		Server.Log("Database", "Executing GetComplaintCountOfBranch");
 		PreparedStatement stmt;
 		ResultSet rs;
 		try
 		{
-			stmt = conn.prepareStatement("SELECT * FROM complaints WHERE response = 'pending'");
+			stmt = conn.prepareStatement("SELECT COUNT(complaint_id) FROM complaints WHERE branch = ? AND DATE(complain_time) = ?");
+			stmt.setString(1, branch);
+			stmt.setDate(2,a);
+			//stmt.setDate(3, b);
+			rs=stmt.executeQuery();
+			while(rs.next())
+			{
+				return rs.getInt(1);
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+			Server.Log("Database", "Executing GetComplaintCountOfBranch: FAILED");
+		}		
+		throw new RuntimeException("SQL Error in complaints count");
+	}
+	
+	public void GetComplaints(ArrayList<Complaint> complaints,String handler)
+	{
+		Server.Log("Database", "Executing GetComplaints");
+		PreparedStatement stmt;
+		ResultSet rs;
+		try
+		{
+			stmt = conn.prepareStatement("SELECT * FROM complaints WHERE response = 'pending' AND handler = ?");
+			stmt.setString(1, handler);
 			rs=stmt.executeQuery();
 			while(rs.next())
 			{
@@ -1510,15 +1563,20 @@ public class ServerConnSQL {
 				newComplaint.setComplain_text(rs.getString(3));
 				newComplaint.setComplain_time(rs.getTimestamp(5));
 				newComplaint.setBranch(rs.getString(7));
+				newComplaint.setIsNotNotified(rs.getInt(9));
 				complaints.add(newComplaint);
 			}
-		}catch (SQLException e) {e.printStackTrace();}		
-		Server.Log("Database", "Executing GetComplaints: FAILED");
+		}
+		catch (SQLException e) {
+			e.printStackTrace();		
+			Server.Log("Database", "Executing GetComplaints: FAILED");
+		}
 		
 	}
 	
-	public String MakeComplaint(Complaint complaint)
+	public String MakeComplaint(Complaint complaint,String handler)
 	{
+		Server.Log("Database", "Executing MakeComplaint");
 		PreparedStatement stmt;
 		PreparedStatement stmt2;
 		ResultSet rs;
@@ -1529,12 +1587,13 @@ public class ServerConnSQL {
 			rs=stmt2.executeQuery();
 			if(rs.next())
 			{
-				stmt = conn.prepareStatement("INSERT INTO complaints (user_id,complain_text,complain_time,response,branch) VALUES (?,?,?,?,?)");
+				stmt = conn.prepareStatement("INSERT INTO complaints (user_id,complain_text,complain_time,response,branch,handler) VALUES (?,?,?,?,?,?)");
 				stmt.setString(1, rs.getString(1));
 				stmt.setString(2, complaint.getComplain_text());
 				stmt.setTimestamp(3, complaint.getComplain_time() );
 				stmt.setString(4, "pending");
 				stmt.setString(5, complaint.getBranch());
+				stmt.setString(6, handler);
 				stmt.executeUpdate();
 				return "done";
 			}
@@ -1545,12 +1604,29 @@ public class ServerConnSQL {
 		
 	}
 	
+	public void SetComplaintAlerted(int id)
+	{
+		Server.Log("Database", "Executing SetComplaintAlerted");
+		PreparedStatement stmt;
+		try
+		{
+			stmt = conn.prepareStatement("UPDATE complaints SET open = 0 WHERE complaint_id = ?");
+			stmt.setInt(1, id);
+			stmt.executeUpdate();
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+			Server.Log("Database", "Executing SetComplaintAlerted: FAILED");
+		}
+	}
+	
 	public void ComplaintResponse(Complaint complaint)
 	{
 		PreparedStatement stmt;
 		try
 		{
-			stmt = conn.prepareStatement("UPDATE complaints SET response = 'done', answer_text = ?, refund = ? WHERE complaint_id =?");
+			stmt = conn.prepareStatement("UPDATE complaints SET response = 'done', answer_text = ?, refund = ?, open = 0 WHERE complaint_id =?");
 			stmt.setString(1, complaint.getAnswer_text());
 			stmt.setInt(2, complaint.getRefund());
 			stmt.setInt(3, complaint.getComplaint_id());
@@ -1870,6 +1946,7 @@ public class ServerConnSQL {
 		System.out.println(userName);
 		try 
 		{
+			//Set PDF survey result
 			Blob blob1 = new javax.sql.rowset.serial.SerialBlob(Data.get(1));//expertPDF
 			Blob blob2 = new javax.sql.rowset.serial.SerialBlob(Data.get(0));//histoframPDF
 			stmt = conn.prepareStatement("insert into midproject.pdf_from_expert (expert_name,survey_content,pdf_file_from_expert,pdf_with_survey_answers) values(?,?,?,?)");
@@ -1877,6 +1954,11 @@ public class ServerConnSQL {
 			stmt.setString(2,survey.getContent());
 			stmt.setBlob(3, blob1);
 			stmt.setBlob(4, blob2);
+			stmt.executeUpdate();
+			
+			//Set ready to original survey
+			stmt = conn.prepareStatement("UPDATE surveys SET ready = 1 WHERE survey_id = ?");
+			stmt.setInt(1, survey.getId());
 			stmt.executeUpdate();
 		}
 		catch (Exception e)

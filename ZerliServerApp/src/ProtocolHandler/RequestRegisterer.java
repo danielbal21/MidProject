@@ -67,6 +67,7 @@ public class RequestRegisterer {
 		Protocol.RegisterOperation(RequestType.SendNotification, new SendNotificationOperation());
 		Protocol.RegisterOperation(RequestType.GetCustomerInfo, new GetCustomerInfoOperation());
 		Protocol.RegisterOperation(RequestType.SavePDF, new SavePDFOperation());
-		
+		Protocol.RegisterOperation(RequestType.GetReportByBranch, new GetReportByBranchOperation());
+		Protocol.RegisterOperation(RequestType.SetComplaintAlerted, new SetComplaintAlertedOperation());
 	}
 }

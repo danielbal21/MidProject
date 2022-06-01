@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.TreeMap;
 
 import Entities.ItemType;
 import Entities.ReportType;
@@ -58,14 +59,25 @@ public class ReportGenerator {
 		{
 			HashMap<ItemType,Integer> histogram = new HashMap<>();
 			for(ItemType t : ItemType.values())
-				histogram.put(t, Server.SqlServerManager.GetOrderCountWithItemWithinPeriod(t,java.sql.Date.valueOf(LocalDate.of(date.getYear(), date.getMonthValue(),1)),java.sql.Date.valueOf(LocalDate.of(date.getYear(), date.getMonthValue(),date.lengthOfMonth()))));
+				histogram.put(t, Server.SqlServerManager.GetOrderCountWithItemWithinPeriod(t,java.sql.Date.valueOf(LocalDate.of(date.getYear(), date.getMonthValue(),1)),java.sql.Date.valueOf(LocalDate.of(date.getYear(), date.getMonthValue(),date.lengthOfMonth())),branch));
 			byte[] myPDF = null;
 			myPDF = generator.createOrderReportHistogram(branch, date.getMonth().toString() + "/" + date.getYear(),histogram);
 			Server.SqlServerManager.InsertReport(ReportType.order, true, branch, java.sql.Date.valueOf(LocalDate.of(date.getYear(), date.getMonthValue(),1)), myPDF);
 		}
 		else if(reportType == ReportType.service)
 		{
-			
+			LocalDate copy = date;
+			ArrayList<Integer> X = new ArrayList<Integer>(),Y = new ArrayList<Integer>();
+			for(int i = 1;i<=date.lengthOfMonth();i++)
+			{
+				X.add(copy.getDayOfYear());
+				Y.add(Server.SqlServerManager.GetComplaintCountOfBranch(branch,java.sql.Date.valueOf(LocalDate.of(copy.getYear(), copy.getMonthValue(),i))));
+				//histogram.put(copy.getMonth().toString(), Server.SqlServerManager.GetComplaintCountOfBranch(branch,java.sql.Date.valueOf(LocalDate.of(copy.getYear(), copy.getMonthValue(),1)),java.sql.Date.valueOf(LocalDate.of(copy.getYear(), copy.getMonthValue(),copy.lengthOfMonth()))));
+				copy = copy.plusDays(1);
+			}
+			byte[] myPDF = null;
+			myPDF = generator.createComplaintsReportHistogram(branch,date.getMonth().toString() + "/" + date.getYear() , X,Y);
+			Server.SqlServerManager.InsertReport(ReportType.service, true, branch, java.sql.Date.valueOf(LocalDate.of(date.getYear(), date.getMonthValue(),1)), myPDF);
 		}
 	}
 	
@@ -112,11 +124,45 @@ public class ReportGenerator {
 		}
 		else if(reportType == ReportType.order)
 		{
-			
+			HashMap<ItemType,Integer> histogram = new HashMap<>();
+			for(ItemType t : ItemType.values())
+				histogram.put(t, Server.SqlServerManager.GetOrderCountWithItemWithinPeriod(t,java.sql.Date.valueOf(LocalDate.of(date.getYear(), date.getMonthValue(),1)),java.sql.Date.valueOf(quarterEnd),branch));
+			byte[] myPDF = null;
+			myPDF = generator.createOrderReportHistogram(branch, "Quarter " + quarter + "/" + date.getYear(),histogram);
+			Server.SqlServerManager.InsertReport(ReportType.order, false, branch, java.sql.Date.valueOf(LocalDate.of(date.getYear(), quarter,1)), myPDF);
 		}
 		else if(reportType == ReportType.service)
 		{
-			
+			LocalDate copy = date;
+			ArrayList<Integer> X = new ArrayList<Integer>(),Y = new ArrayList<Integer>();
+			TreeMap<String,Integer> histogram = new TreeMap<>();
+			while(copy.isBefore(quarterEnd))
+			{
+				X.add(copy.getDayOfYear());
+				Y.add(Server.SqlServerManager.GetComplaintCountOfBranch(branch,java.sql.Date.valueOf(LocalDate.of(copy.getYear(), copy.getMonthValue(),copy.getDayOfMonth()))));
+				//histogram.put(copy.getMonth().toString(), Server.SqlServerManager.GetComplaintCountOfBranch(branch,java.sql.Date.valueOf(LocalDate.of(copy.getYear(), copy.getMonthValue(),1)),java.sql.Date.valueOf(LocalDate.of(copy.getYear(), copy.getMonthValue(),copy.lengthOfMonth()))));
+				copy = copy.plusDays(1);
+			}
+			byte[] myPDF = null;
+			myPDF = generator.createComplaintsReportHistogram(branch,"Quarter " + quarter + "/" + date.getYear() , X,Y);
+			Server.SqlServerManager.InsertReport(ReportType.service, false, branch, java.sql.Date.valueOf(LocalDate.of(date.getYear(), quarter,1)), myPDF);
+		}
+		else if(reportType == ReportType.ceo)
+		{
+			LocalDate copy = date;
+			ArrayList<Integer> X = new ArrayList<Integer>(),Y = new ArrayList<Integer>();
+			while(copy.isBefore(quarterEnd))
+			{
+				Integer[] res = Server.SqlServerManager.GetDailyFinancialIncomeForBranch
+					(branch, java.sql.Date.valueOf(copy));
+				X.add(copy.getDayOfYear());
+				Y.add(res[2]);
+				copy = copy.plusDays(1);
+			}
+			byte[] myPDF = null;
+			//	public byte[] createComplaintsReportHistogram(String branch,String date,ArrayList<Integer> X,ArrayList<Integer> Y) {
+			myPDF = generator.createCEOReportForBranch(branch, "Quarter " + quarter + "/" + date.getYear(),X,Y);
+			Server.SqlServerManager.InsertReport(ReportType.ceo, false, branch, java.sql.Date.valueOf(LocalDate.of(date.getYear(), quarter,1)), myPDF);
 		}
 	}
 }

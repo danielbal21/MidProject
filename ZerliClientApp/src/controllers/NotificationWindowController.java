@@ -141,7 +141,7 @@ public class NotificationWindowController implements UserControl {
 	
 	@Override
 	public void onExit() {
-		thread.stop();
+		thread.interrupt();
 	
 	}
 }

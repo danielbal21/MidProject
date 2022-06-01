@@ -18,7 +18,7 @@ public class GetComplaintsOperation implements IOperation {
 	@Override
 	public boolean Perform(String requestee, Object data, Object params, ResponseWrapper response) {
 		ArrayList<Complaint> complaints = new ArrayList<Complaint>();
-	    Server.SqlServerManager.GetComplaints(complaints);
+	    Server.SqlServerManager.GetComplaints(complaints,requestee);
 	    response.SetResponse(complaints);
 		return true;
 	}

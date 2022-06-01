@@ -33,6 +33,7 @@ public enum RequestType {
 	UpdateItem,
 	AddItem,
 	GetComplaints,
+	SetComplaintAlerted,
 	ComplaintResponse,
 	MakeComplaint,
 	GetPendingClient,
@@ -50,4 +51,5 @@ public enum RequestType {
 	GetCustomerInfo,
 	GetSurveyHistogram,
 	SavePDF,
+	GetReportByBranch,
 }

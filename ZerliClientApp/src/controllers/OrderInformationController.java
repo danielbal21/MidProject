@@ -150,7 +150,7 @@ public class OrderInformationController implements UserControl {
     	order.setBranchName(branchCombobox.getSelectionModel().getSelectedItem().toString());
     	order.setItems((ArrayList<ItemInList>)LoginController.windowControl.getPipe("CartItems"));
     	LocalTime time = LocalTime.of((int)(hourSlider.getValue()), (int)(minutesSlider.getValue()));
-    	order.setOrderDate(Utilities.GenericUtilties.Convert_LocalDate_To_SQLDate(LocalDateTime.now().toLocalDate(),time));
+    	order.setOrderDate(Utilities.GenericUtilties.Convert_LocalDate_To_SQLDate(LocalDateTime.now().toLocalDate(),LocalDateTime.now().toLocalTime()));
 
     	if(deliveryMethod.getSelectedToggle().equals(shippingRB))
     	{

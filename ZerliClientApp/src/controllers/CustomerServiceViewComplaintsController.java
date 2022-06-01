@@ -53,14 +53,15 @@ public class CustomerServiceViewComplaintsController implements UserControl{
     	
     }
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void onEnter() {
 		// TODO Auto-generated method stub
 		userIDColumn.setCellValueFactory(new PropertyValueFactory<>("user_id"));
 		postTimeColumn.setCellValueFactory(new PropertyValueFactory<>("Comp_date"));
 		branchColumn.setCellValueFactory(new PropertyValueFactory<>("branch"));
-		observableList = (ObservableList<Complaint>)LoginController.windowControl.peekPipe("Complaints");;
-		complaintsTable.setItems(observableList);
+		ClientApp.ProtocolHandler.Invoke(RequestType.GetComplaints,  null, null, true);
+		complaintsTable.setItems((ObservableList<Complaint>)ClientApp.ProtocolHandler.GetResponse(RequestType.GetComplaints));
 	}
 
 	@Override

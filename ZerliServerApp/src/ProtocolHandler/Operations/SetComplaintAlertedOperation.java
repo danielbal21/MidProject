@@ -1,25 +1,21 @@
 package ProtocolHandler.Operations;
 
-import Entities.Complaint;
 import ProtocolHandler.IOperation;
 import ProtocolHandler.ResponseWrapper;
 import server.Server;
 
-public class MakeComplaintOperation implements IOperation {
+public class SetComplaintAlertedOperation implements IOperation {
 
 	@Override
 	public boolean Perform(String requestee, Object data, Object params) {
-		// TODO Auto-generated method stub
-		return false;
+		Server.SqlServerManager.SetComplaintAlerted((Integer)params);
+		return true;
 	}
 
 	@Override
 	public boolean Perform(String requestee, Object data, Object params, ResponseWrapper response) {
 		// TODO Auto-generated method stub
-	
-		String s= Server.SqlServerManager.MakeComplaint((Complaint)data,requestee);
-		response.SetResponse(s);
-		return true;
+		return false;
 	}
 
 }

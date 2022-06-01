@@ -131,6 +131,7 @@ public enum RequestType {
 	AddItem,
 	GetComplaints,
 	ComplaintResponse,
+	SetComplaintAlerted,
 	MakeComplaint,
 	GetPendingClient,
 	RegisterClient,
@@ -146,7 +147,7 @@ public enum RequestType {
 	SavePDF,
 	/** The Get report is used to get various reports. */
 	GetReport,
-	
 	GetCustomerInfo,
 	SendNotification,
+	GetReportByBranch,
 }

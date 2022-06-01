@@ -14,4 +14,5 @@ public enum ReportType {
 	
 	/** The service. */
 	service,
+	ceo,
 }

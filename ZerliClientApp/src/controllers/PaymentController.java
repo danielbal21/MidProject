@@ -259,7 +259,7 @@ public class PaymentController implements UserControl {
 			w.setText("-");
 		
     	netPriceLabel.setText("" + netPrice);
-		discountPercentageLabel.setText(payDetails.newUser ? "-10%" : "-");
+		discountPercentageLabel.setText(payDetails.newUser ? "-20%" : "-");
 		totalPriceLabel.setText("" + currentOrder.getTotalPrice());
 		if(payDetails.ZerliCoins < currentOrder.getTotalPrice())
 			zerliCoinsRB.setDisable(true);

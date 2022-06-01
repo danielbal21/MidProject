@@ -58,5 +58,7 @@ public class HandlersRegisterer {
 		Protocol.RegisterHandler(RequestType.GetCustomerInfo, null);
 		Protocol.RegisterHandler(RequestType.GetSurveyHistogram, new ImageFromServerHandler ());
 		Protocol.RegisterHandler(RequestType.SavePDF, null);
+		Protocol.RegisterHandler(RequestType.GetReportByBranch, null);
+		Protocol.RegisterHandler(RequestType.SetComplaintAlerted, null);
 	}
 }

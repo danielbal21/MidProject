@@ -20,8 +20,14 @@ public class Complaint implements Serializable{
 	private String branch;
 	private String IDnumber;
 	private String Comp_date;
+	private int isNotNotified;
 	
-	
+	public int getIsNotNotified() {
+		return isNotNotified;
+	}
+	public void setIsNotNotified(int isNotNotified) {
+		this.isNotNotified = isNotNotified;
+	}
 	public String getComp_date() {
 		return Comp_date;
 	}	
@@ -89,8 +95,4 @@ public class Complaint implements Serializable{
 				+ ", answer_text=" + answer_text + ", complain_time=" + complain_time + ", cost=" + cost + ", branch="
 				+ branch + ", refund=" + refund + "]";
 	}
-	
-	
-	
-	
 }

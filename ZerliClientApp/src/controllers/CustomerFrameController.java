@@ -131,7 +131,7 @@ public class CustomerFrameController implements IContainable{
 					try {
 						Thread.sleep(5000);
 					} catch (InterruptedException e) {
-						e.printStackTrace();
+						
 					}
 				}
 			}
@@ -161,7 +161,7 @@ public class CustomerFrameController implements IContainable{
 
     @FXML
     void exitPressed(MouseEvent event) {
-    	thread.stop();
+    	thread.interrupt();
     	ClientApp.ProtocolHandler.Invoke(RequestType.SetLogOut,null,null,false);
     	try {
 			ClientApp.ClientConnection.closeConnection();
@@ -182,7 +182,7 @@ public class CustomerFrameController implements IContainable{
 
     @FXML
     void pressLogout(ActionEvent event) {
-    	thread.stop();
+    	thread.interrupt();
     	LoginController.windowControl.stage.close();
     	Stage newStage = new Stage();
 		Parent root = null;
