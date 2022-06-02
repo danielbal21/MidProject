@@ -68,7 +68,7 @@
             <Font name="Maiandra GD" size="24.0" />
          </font>
       </Label>
-      <Button fx:id="nextBtn" layoutX="853.0" layoutY="593.0" mnemonicParsing="false" onAction="#nextBtn_Click" prefHeight="50.0" prefWidth="92.0" stylesheets="@application.css" text="Next">
+      <Button fx:id="nextBtn" layoutX="872.0" layoutY="600.0" mnemonicParsing="false" onAction="#nextBtn_Click" prefHeight="57.0" prefWidth="81.0" stylesheets="@application.css" text="Next">
          <styleClass>
             <String fx:value="Next-btn" />
             <String fx:value="pressbtn" />
@@ -84,7 +84,7 @@
             <Font name="Maiandra GD" size="12.0" />
          </font>
       </Label>
-      <Button fx:id="backBtn" layoutX="14.0" layoutY="591.0" mnemonicParsing="false" onAction="#backBtn_press" prefHeight="50.0" prefWidth="92.0" styleClass="Left-btn" text="Back" />
+      <Button fx:id="backBtn" layoutX="9.0" layoutY="596.0" mnemonicParsing="false" onAction="#backBtn_press" prefHeight="60.0" prefWidth="81.0" styleClass="Left-btn" text="Back" />
       <Slider fx:id="hourSlider" blockIncrement="1.0" layoutX="494.0" layoutY="539.0" max="23.0" onMouseReleased="#hourSlide" prefHeight="14.0" prefWidth="167.0" />
       <Slider fx:id="minutesSlider" blockIncrement="1.0" layoutX="494.0" layoutY="561.0" max="59.0" onMouseReleased="#minuteSlide" prefHeight="14.0" prefWidth="167.0" />
       <Label fx:id="timePresented" layoutX="683.0" layoutY="540.0" styleClass="subLabel" text="00:00" />

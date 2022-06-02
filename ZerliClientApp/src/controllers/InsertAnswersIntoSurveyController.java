@@ -34,9 +34,6 @@ public class InsertAnswersIntoSurveyController implements UserControl{
     private AnchorPane activePanelContainer;
 
     @FXML
-    private Label addViolationLabel;
-
-    @FXML
     private TextField questionText1;
 
     @FXML

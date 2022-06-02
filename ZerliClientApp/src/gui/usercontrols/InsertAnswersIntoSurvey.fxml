@@ -18,13 +18,13 @@
       <AnchorPane layoutX="222.0" layoutY="90.0" prefHeight="565.0" prefWidth="492.0">
          <children>
             <ComboBox fx:id="surveyNameSelector" layoutX="216.0" layoutY="14.0" onAction="#SetSurvey" prefHeight="40.0" prefWidth="220.0" styleClass="miniLabel" />
-            <Label fx:id="submitLabel" layoutX="20.0" layoutY="474.0" text="Label" textFill="RED" visible="false">
+            <Label fx:id="submitLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="23.0" layoutY="463.0" prefHeight="30.0" prefWidth="442.0" styleClass="subLabel" text="Label" textAlignment="CENTER" textFill="RED" visible="false">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
             <Label alignment="CENTER" contentDisplay="RIGHT" layoutX="62.0" layoutY="19.0" styleClass="subLabel" text="Select Survey" />
-            <Button fx:id="SubmitResult1" layoutX="209.0" layoutY="501.0" mnemonicParsing="false" onAction="#SubmitResult_Click" styleClass="Reg-btn" text="Submit" />
+            <Button fx:id="SubmitResult1" layoutX="209.0" layoutY="509.0" mnemonicParsing="false" onAction="#SubmitResult_Click" styleClass="Reg-btn" text="Submit" />
             <VBox layoutX="7.0" layoutY="110.0" prefHeight="357.0" prefWidth="485.0">
                <children>
                   <HBox spacing="20.0">
@@ -99,11 +99,6 @@
             </Label>
          </children></AnchorPane>
       <Label layoutX="299.0" layoutY="14.0" styleClass="MainLabel" text="Survey Editor" />
-      <Label fx:id="addViolationLabel" layoutX="366.0" layoutY="128.0" text="Label" textFill="RED" visible="false">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
       <ImageView fitHeight="135.0" fitWidth="140.0" layoutX="758.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../png/Answers.png" />

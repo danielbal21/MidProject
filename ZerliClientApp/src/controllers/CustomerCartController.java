@@ -3,7 +3,6 @@ package controllers;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
-
 import Entities.Access;
 import Entities.ItemInList;
 import Entities.NewItem;
@@ -36,6 +35,9 @@ public class CustomerCartController implements UserControl {
     private Label CartEmpyLabel;
     
     @FXML
+    private Label currency;
+    
+    @FXML
     private Label totalCostLabel;
     
     @FXML
@@ -53,16 +55,19 @@ public class CustomerCartController implements UserControl {
     		confirmAlert.getDialogPane().getButtonTypes().add(ok);
     		Optional<ButtonType> result = confirmAlert.showAndWait();
     	}
-    	else {
-    		   	clearScreen();
-    	LoginController.windowControl.setUserControl("/gui/usercontrols/CustomerOrderInformation.fxml");
+    	else if(!totalCostLabel.getText().equals("0")){
+    		clearScreen();
+        	LoginController.windowControl.setUserControl("/gui/usercontrols/CustomerOrderInformation.fxml");
     	}
  
     }
 	@Override
 	public void onEnter() {
+		totalCostLabel.setText("0");
+		currency.setText(Utilities.Constants.SHEKEL);
 		CartEmpyLabel.setVisible(false);
 		totalCostLabel.setVisible(true);
+		currency.setVisible(true);
 		TotalCostText.setVisible(true);
 		ClientApp.ProtocolHandler.Invoke(RequestType.GetCart, null, null, true);
 		itemList=(ObservableList<ItemInList>)ClientApp.ProtocolHandler.GetResponse(RequestType.GetCart);
@@ -72,6 +77,7 @@ public class CustomerCartController implements UserControl {
 			clearScreen();
 			CartEmpyLabel.setVisible(true);
 			totalCostLabel.setVisible(false);
+			currency.setVisible(false);
 			TotalCostText.setVisible(false);
 			return;
 		}
@@ -114,7 +120,7 @@ public class CustomerCartController implements UserControl {
 		ArrayList<ItemInList> items = new ArrayList<ItemInList>();
 		for(ItemInList item : itemList)
 			items.add(item);
-		totalCostLabel.setText(String.valueOf(totalCost)+ " " + Utilities.Constants.SHEKEL);
+		totalCostLabel.setText(String.valueOf(totalCost));
 		LoginController.windowControl.putPipe("totalCost", totalCost);
 		LoginController.windowControl.putPipe("CartItems", items);
 	}

@@ -4,6 +4,7 @@ package controllers;
 
 import Entities.*;
 import ProtocolHandler.RequestType;
+import Utilities.GenericUtilties;
 import client.ClientApp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
