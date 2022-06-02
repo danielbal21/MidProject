@@ -1,21 +1,13 @@
 package controllers;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import Entities.CatalogType;
 import Entities.Color;
 import Entities.Item;
 import Entities.ItemType;
 import ProtocolHandler.RequestType;
 import client.ClientApp;
-import javafx.beans.binding.Binding;
-import javafx.beans.binding.Bindings;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -45,6 +37,9 @@ public class ItemEditorController implements UserControl {
     @FXML
     private AnchorPane activePanelContainer;
 
+    @FXML
+    private Label currency;
+    
     @FXML
     private Button cancelBtn;
 
@@ -145,6 +140,7 @@ public class ItemEditorController implements UserControl {
 
 	@Override
 	public void onEnter() {
+		currency.setText(Utilities.Constants.SHEKEL);
 		 int id = (int) LoginController.windowControl.getPipe("currentEdited");
 		 ClientApp.ProtocolHandler.Invoke(RequestType.GetItemByID, null, id, true);
 		 currentEdited = (Item)ClientApp.ProtocolHandler.GetResponse(RequestType.GetItemByID);

@@ -16,6 +16,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Ellipse;
+import javafx.scene.shape.Rectangle;
 
 public class ItemHBoxController extends HBox {
 	private int counter=0;
@@ -28,9 +31,9 @@ public class ItemHBoxController extends HBox {
     
 	@FXML
     private Label CostLabel;
-	
-	@FXML
-	private ImageView itemImage;
+
+   @FXML
+    private Rectangle imageRec;
 	
     @FXML
     private VBox V;
@@ -116,8 +119,6 @@ public class ItemHBoxController extends HBox {
 			}
 		});
 		thread.start();
-        	
-    	
 
     }
     
@@ -131,7 +132,7 @@ public class ItemHBoxController extends HBox {
 
     	CostLabel.setText(costLabel+ " " + Utilities.Constants.SHEKEL);
 		nameLabel.setText(name);
-		itemImage.setImage(image);
+		imageRec.setFill(new ImagePattern(image));
 		quntityLabel.setText("0");
 		saleLabel2.setVisible(onSale);
     }

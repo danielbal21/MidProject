@@ -48,7 +48,11 @@ public class CustomerViewOrdersController implements UserControl{
     	}
     	else return;
     }
-
+    @FXML
+    void refreshPressed(MouseEvent event) {
+    	onEnter();
+    }
+    
 	@Override
 	public void onEnter() {
 		ClientApp.ProtocolHandler.Invoke(RequestType.GetAllCustomerOrders, null, null, true);

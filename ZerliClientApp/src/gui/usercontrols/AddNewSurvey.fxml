@@ -12,48 +12,48 @@
 
 <AnchorPane fx:id="activePanelContainer" prefHeight="663.0" prefWidth="957.0" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddNewSurveyController">
    <children>
-      <AnchorPane layoutX="221.0" layoutY="134.0" prefHeight="508.0" prefWidth="446.0">
+      <AnchorPane layoutX="229.0" layoutY="101.0" prefHeight="543.0" prefWidth="446.0">
          <children>
-            <Label alignment="CENTER" contentDisplay="RIGHT" layoutX="132.0" layoutY="366.0" styleClass="subLabel" text="Survey Name" />
-            <TextField fx:id="surveyName" layoutX="30.0" layoutY="398.0" prefHeight="25.0" prefWidth="387.0" />
-            <Button fx:id="addSurvey" layoutX="155.0" layoutY="436.0" mnemonicParsing="false" onAction="#addSurvey_Cllick" prefHeight="42.0" prefWidth="136.0" styleClass="Reg-btn" text="Add" />
+            <Label alignment="CENTER" contentDisplay="RIGHT" layoutX="132.0" layoutY="401.0" styleClass="subLabel" text="Survey Name" />
+            <TextField fx:id="surveyName" layoutX="30.0" layoutY="433.0" prefHeight="40.0" prefWidth="387.0" styleClass="subLabel" />
+            <Button fx:id="addSurvey" layoutX="171.0" layoutY="487.0" mnemonicParsing="false" onAction="#addSurvey_Cllick" prefHeight="42.0" prefWidth="104.0" styleClass="Reg-btn" text="Add" />
             <VBox prefHeight="371.0" prefWidth="446.0">
                <children>
                   <Label alignment="CENTER" contentDisplay="RIGHT" styleClass="subLabel" />
-                  <HBox prefHeight="100.0" prefWidth="200.0">
+                  <HBox prefHeight="100.0" prefWidth="435.0">
                      <children>
-                        <Label alignment="CENTER" contentDisplay="RIGHT" styleClass="subLabel" text=" Question 1 " />
-                        <TextField fx:id="questionText1" prefHeight="25.0" prefWidth="277.0" />
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="137.0" styleClass="subLabel" text="Question 1 " />
+                        <TextField fx:id="questionText1" prefHeight="40.0" prefWidth="277.0" styleClass="subLabel" />
                      </children>
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label alignment="CENTER" contentDisplay="RIGHT" styleClass="subLabel" text=" Question 2 " />
-                        <TextField fx:id="questionText2" prefHeight="25.0" prefWidth="277.0" />
+                        <Label alignment="CENTER" contentDisplay="RIGHT" prefHeight="40.0" prefWidth="136.0" styleClass="subLabel" text=" Question 2 " />
+                        <TextField fx:id="questionText2" prefHeight="40.0" prefWidth="277.0" styleClass="subLabel" />
                      </children>
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label alignment="CENTER" contentDisplay="RIGHT" styleClass="subLabel" text=" Question 3 " />
-                        <TextField fx:id="questionText3" prefHeight="25.0" prefWidth="277.0" />
+                        <Label alignment="CENTER" contentDisplay="RIGHT" prefHeight="38.0" prefWidth="136.0" styleClass="subLabel" text=" Question 3 " />
+                        <TextField fx:id="questionText3" prefHeight="40.0" prefWidth="277.0" styleClass="subLabel" />
                      </children>
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label alignment="CENTER" contentDisplay="RIGHT" styleClass="subLabel" text=" Question 4 " />
-                        <TextField fx:id="questionText4" prefHeight="25.0" prefWidth="277.0" />
+                        <Label alignment="CENTER" contentDisplay="RIGHT" prefHeight="40.0" prefWidth="136.0" styleClass="subLabel" text=" Question 4 " />
+                        <TextField fx:id="questionText4" prefHeight="40.0" prefWidth="277.0" styleClass="subLabel" />
                      </children>
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label alignment="CENTER" contentDisplay="RIGHT" styleClass="subLabel" text=" Question 5 " />
-                        <TextField fx:id="questionText5" prefHeight="25.0" prefWidth="277.0" />
+                        <Label alignment="CENTER" contentDisplay="RIGHT" prefHeight="38.0" prefWidth="136.0" styleClass="subLabel" text=" Question 5 " />
+                        <TextField fx:id="questionText5" prefHeight="40.0" prefWidth="277.0" styleClass="subLabel" />
                      </children>
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label alignment="CENTER" contentDisplay="RIGHT" styleClass="subLabel" text=" Question 6 " />
-                        <TextField fx:id="questionText6" prefHeight="25.0" prefWidth="277.0" />
+                        <Label alignment="CENTER" contentDisplay="RIGHT" prefHeight="43.0" prefWidth="136.0" styleClass="subLabel" text=" Question 6 " />
+                        <TextField fx:id="questionText6" prefHeight="40.0" prefWidth="277.0" styleClass="subLabel" />
                      </children>
                   </HBox>
                </children>
@@ -70,7 +70,7 @@
             <Image url="@../../png/survey.png" />
          </image>
       </ImageView>
-      <Button layoutX="28.0" layoutY="582.0" mnemonicParsing="false" onAction="#BackBtnPressed" styleClass="Left-btn" text="Back" />
+      <Button layoutX="4.0" layoutY="599.0" mnemonicParsing="false" onAction="#BackBtnPressed" prefHeight="60.0" prefWidth="81.0" styleClass="Left-btn" text="Back" />
       <Label fx:id="addSurveyLabel" layoutX="357.0" layoutY="104.0" text="Label" textFill="RED" visible="false">
          <font>
             <Font size="18.0" />

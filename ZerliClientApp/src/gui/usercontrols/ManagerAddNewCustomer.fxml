@@ -35,56 +35,56 @@
       </AnchorPane>
       <AnchorPane fx:id="ClientInfoWindow" layoutX="23.0" layoutY="184.0" prefHeight="476.0" prefWidth="912.0">
          <children>
-            <AnchorPane fx:id="creditCardDialog" layoutX="444.0" layoutY="14.0" prefHeight="289.0" prefWidth="411.0">
+            <AnchorPane fx:id="creditCardDialog" layoutX="444.0" layoutY="14.0" prefHeight="301.0" prefWidth="411.0">
                <children>
-                  <ImageView fitHeight="245.0" fitWidth="385.0" layoutX="13.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="253.0" fitWidth="403.0" layoutX="4.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../png/CreditCardFront.jpg" />
                      </image>
                   </ImageView>
-                  <TextField fx:id="cardNumTxt1" alignment="CENTER" layoutX="156.0" layoutY="153.0" prefHeight="25.0" prefWidth="55.0" promptText="XXXX">
+                  <TextField fx:id="cardNumTxt1" alignment="CENTER" layoutX="142.0" layoutY="153.0" prefHeight="30.0" prefWidth="60.0" promptText="XXXX" styleClass="miniLabel">
                      <font>
                         <Font name="Maiandra GD" size="14.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="cardNumTxt2" alignment="CENTER" layoutX="214.0" layoutY="153.0" prefHeight="25.0" prefWidth="55.0" promptText="XXXX">
+                  <TextField fx:id="cardNumTxt2" alignment="CENTER" layoutX="208.0" layoutY="153.0" prefHeight="30.0" prefWidth="60.0" promptText="XXXX" styleClass="miniLabel">
                      <font>
                         <Font name="Maiandra GD" size="14.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="cardNumTxt3" alignment="CENTER" layoutX="273.0" layoutY="153.0" prefHeight="25.0" prefWidth="55.0" promptText="XXXX">
+                  <TextField fx:id="cardNumTxt3" alignment="CENTER" layoutX="274.0" layoutY="153.0" prefHeight="30.0" prefWidth="60.0" promptText="XXXX" styleClass="miniLabel">
                      <font>
                         <Font name="Maiandra GD" size="14.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="cardNumTxt4" alignment="CENTER" layoutX="331.0" layoutY="153.0" prefHeight="25.0" prefWidth="55.0" promptText="XXXX">
+                  <TextField fx:id="cardNumTxt4" alignment="CENTER" layoutX="341.0" layoutY="153.0" prefHeight="30.0" prefWidth="60.0" promptText="XXXX" styleClass="miniLabel">
                      <font>
                         <Font name="Maiandra GD" size="14.0" />
                      </font>
                   </TextField>
-                  <ComboBox fx:id="expMonthCB" layoutX="199.0" layoutY="192.0" prefHeight="25.0" prefWidth="56.0" visibleRowCount="6" />
-                  <ComboBox fx:id="yearCB" layoutX="268.0" layoutY="192.0" prefHeight="25.0" prefWidth="70.0" visibleRowCount="6" />
-                  <Label layoutX="26.0" layoutY="154.0" text="Card Number">
+                  <ComboBox fx:id="expMonthCB" layoutX="168.0" layoutY="197.0" prefHeight="35.0" prefWidth="90.0" styleClass="miniLabel" visibleRowCount="6" />
+                  <ComboBox fx:id="yearCB" layoutX="268.0" layoutY="196.0" prefHeight="35.0" prefWidth="120.0" styleClass="miniLabel" visibleRowCount="6" />
+                  <Label layoutX="11.0" layoutY="154.0" text="Card Number">
                      <font>
                         <Font name="Maiandra GD" size="20.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="cvvText" alignment="CENTER" layoutX="76.0" layoutY="254.0" prefHeight="30.0" prefWidth="56.0" promptText="XXX">
+                  <TextField fx:id="cvvText" alignment="CENTER" layoutX="69.0" layoutY="264.0" prefHeight="30.0" prefWidth="56.0" promptText="XXX" styleClass="miniLabel">
                      <font>
                         <Font name="Maiandra GD" size="15.0" />
                      </font>
                   </TextField>
-                  <Label layoutX="24.0" layoutY="257.0" text="CVV">
+                  <Label layoutX="17.0" layoutY="267.0" text="CVV">
                      <font>
                         <Font name="Maiandra GD" size="20.0" />
                      </font>
                   </Label>
-                  <Label layoutX="29.0" layoutY="191.0" text="Expiratrion Date">
+                  <Label layoutX="11.0" layoutY="200.0" text="Expiratrion Date">
                      <font>
                         <Font name="Maiandra GD" size="20.0" />
                      </font>
                   </Label>
-                  <Label layoutX="144.0" layoutY="258.0" text="3 digit in the back of the card">
+                  <Label layoutX="137.0" layoutY="268.0" text="3 digit in the back of the card">
                      <font>
                         <Font name="Maiandra GD" size="17.0" />
                      </font>

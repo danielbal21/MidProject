@@ -12,6 +12,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.scene.image.Image;
 
 public class CartItemHboxController extends HBox{
@@ -19,7 +21,10 @@ public class CartItemHboxController extends HBox{
 	private VBox Vbox;
     @FXML
     private Label catalogTypeLabel;
-
+    
+    @FXML
+    private Circle circle;
+    
     @FXML
     private Button deleteBtn;
 
@@ -31,9 +36,6 @@ public class CartItemHboxController extends HBox{
 
     @FXML
     private Label quntityLabel;
-    
-    @FXML
-    private ImageView image;
     
     @FXML
     private HBox hboxRoot;
@@ -52,7 +54,7 @@ public class CartItemHboxController extends HBox{
     	this.id=id;
     	this.price=price;
     	this.quntity=quntity;
-    	image.setImage(image1);
+    	circle.setFill(new ImagePattern(image1));
     	itemNameLabel.setText(name);
     	itemTypeLabel.setText(Utilities.GenericUtilties.ItemTypeToString(itemType));
     	catalogTypeLabel.setText(Utilities.GenericUtilties.CatalogTypeToString(catalogType));

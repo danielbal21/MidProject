@@ -4,7 +4,6 @@ import Entities.Order;
 import ProtocolHandler.RequestType;
 import client.ClientApp;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -50,8 +49,9 @@ public class DeliveryOrderManagerController implements UserControl{
 				LoginController.windowControl.setUserControl("/gui/usercontrols/DeliveryViewOrderDetails.fxml");
 			}
 	    }
+	    
 	    @FXML
-	    void refreshPressed(ActionEvent event) {
+	    void refreshPressed(MouseEvent event) {
 	    	onEnter();
 	    }
 		
@@ -70,7 +70,6 @@ public class DeliveryOrderManagerController implements UserControl{
 		}
 
 		@Override
-		public void onExit() {
-		}
+		public void onExit() {}
 
 }

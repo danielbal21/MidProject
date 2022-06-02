@@ -2,7 +2,6 @@ package controllers;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Optional;
 import Entities.Order;
 import Entities.OrderStatus;
@@ -248,19 +247,19 @@ public class PaymentController implements UserControl {
 			expMonthCB.getSelectionModel().select(payDetails.expirationMonth);
     	}
 		/** zerli coins view **/	
-		balanceLbl.setText(payDetails.ZerliCoins + " ZCoins");
-		postPayBalanceLbl.setText("" + (payDetails.ZerliCoins - currentOrder.getTotalPrice()));
+		balanceLbl.setText(payDetails.ZerliCoins + " Zerli Coins");
+		postPayBalanceLbl.setText("" + (payDetails.ZerliCoins - currentOrder.getTotalPrice())+ " Zerli Coins");
 
 		/** summary **/
 
 		if(isShipping)
-			w.setText("15 ILS");
+			w.setText(Utilities.Constants.SHIPPING + " " + Utilities.Constants.SHEKEL);
 		else
 			w.setText("-");
 		
-    	netPriceLabel.setText("" + netPrice);
+    	netPriceLabel.setText("" + netPrice + " " + Utilities.Constants.SHEKEL);
 		discountPercentageLabel.setText(payDetails.newUser ? "-20%" : "-");
-		totalPriceLabel.setText("" + currentOrder.getTotalPrice());
+		totalPriceLabel.setText("" + currentOrder.getTotalPrice()+ " " + Utilities.Constants.SHEKEL);
 		if(payDetails.ZerliCoins < currentOrder.getTotalPrice())
 			zerliCoinsRB.setDisable(true);
 		paymentMethod.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {

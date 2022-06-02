@@ -1,5 +1,7 @@
 package controllers;
 
+import java.util.Comparator;
+
 import Entities.NotificationInTable;
 import ProtocolHandler.RequestType;
 import client.ClientApp;
@@ -20,7 +22,7 @@ public class NotificationWindowController implements UserControl {
 	
 	private ObservableList<NotificationInTable> AllnotificationTableList;
 	private ObservableList<NotificationInTable> unreadNotificationTableList;
-    private boolean allNotificationsShow=true;
+    private boolean allNotificationsShow;
     Thread thread;
     
     @FXML
@@ -99,13 +101,16 @@ public class NotificationWindowController implements UserControl {
         	notificationsCenterTable.setItems(AllnotificationTableList);
     	}
     }
+    @FXML
+    void refreshPressed(MouseEvent event) {
+    	onExit();
+    	onEnter();
+    }
     
     @Override
 	public void onEnter()
 	{
-    	ErrorLabel.setVisible(false);
-    	changeNotificationsLbl.setText("Show All Notifications");
-    	NotificationsStatusBtn.setText("Show Unread Notifications");
+    	allNotificationsShow = true;
     	notificationNumber.setCellValueFactory(new PropertyValueFactory<NotificationInTable, Integer>("notificationnumber"));
 		sendFrom.setCellValueFactory(new PropertyValueFactory<NotificationInTable, String>("from"));
 		content.setCellValueFactory(new PropertyValueFactory<NotificationInTable, String>("content"));
@@ -122,8 +127,10 @@ public class NotificationWindowController implements UserControl {
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
+					
 					AllnotificationTableList = (ObservableList<NotificationInTable>) LoginController.windowControl.peekPipe("All Notification");
 					unreadNotificationTableList = createUnreadNotificationList();
+					
 					if(allNotificationsShow) {
 				    	notificationsCenterTable.setItems(AllnotificationTableList);
 
@@ -135,13 +142,15 @@ public class NotificationWindowController implements UserControl {
 			}
 		});
 		thread.start();
-
-
+		ErrorLabel.setVisible(false);
+    	changeNotificationsLbl.setText("Show All Notifications");
+    	NotificationsStatusBtn.setText("Show Unread Notifications");
 	}
 	
 	@Override
-	public void onExit() {
+	public void onExit() {	
 		thread.interrupt();
-	
+		notificationsCenterTable.getItems().clear();
+
 	}
 }

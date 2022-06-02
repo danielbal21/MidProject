@@ -53,6 +53,12 @@ public class ManagerOrderManagerController implements UserControl {
 			LoginController.windowControl.setUserControl("/gui/usercontrols/ManagerViewOrderDetails.fxml");
 		}
 	}
+	    
+
+    @FXML
+    void refreshPressed(MouseEvent event) {
+    	onEnter();
+    }
 
 	@Override
 	public void onEnter() {

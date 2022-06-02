@@ -161,7 +161,7 @@ public class ManagerViewOrderDetailsController implements UserControl{
 		shippingDateLabel.setText(order.getShipping_date());
 		paymentMethodLabel.setText(order.getPayment_method());
 		orderNumberLabel.setText(order.getOrderID());
-		costLabel.setText(String.valueOf(order.getTotalPrice()));
+		costLabel.setText(String.valueOf(order.getTotalPrice())+ " " + Utilities.Constants.SHEKEL);
 		statusLabel.setText(order.getOrder_status());
 		shippingMethodLabel.setText(order.getShipping_method());
 		

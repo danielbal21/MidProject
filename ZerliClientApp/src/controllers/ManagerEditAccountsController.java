@@ -1,7 +1,6 @@
 package controllers;
 
 import java.util.ArrayList;
-import java.util.Observable;
 import Entities.Access;
 import Entities.AccountInfo;
 import Entities.Roles;
@@ -14,7 +13,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
@@ -42,7 +41,7 @@ public class ManagerEditAccountsController implements UserControl{
     private TableColumn<AccountInfo, String> accountInfoCol;
 
     @FXML
-    private ChoiceBox<String> accountInfoChoice;
+    private ComboBox<String> accountInfoChoice;
 
     @FXML
     private Label accountInfoLbl;
@@ -135,6 +134,13 @@ public class ManagerEditAccountsController implements UserControl{
     	LoginController.windowControl.setUserControl("/gui/usercontrols/ManagerAccountManagment.fxml");
     }
 
+    @FXML
+    void refreshPressed(MouseEvent event) {
+    	accountType.selectToggle(null);
+    	onEnter();
+    }
+    
+    
 	@Override
 	public void onEnter() {
 		changeErrorLbl.setText("");

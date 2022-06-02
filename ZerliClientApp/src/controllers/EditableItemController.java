@@ -13,6 +13,8 @@ import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Rectangle;
 
 public class EditableItemController {
 
@@ -25,7 +27,7 @@ public class EditableItemController {
     private ImageView Remove;
 
     @FXML
-    private ImageView itemImage;
+    private Rectangle imageRec;
 
     @FXML
     private Label nameLabel;
@@ -59,6 +61,6 @@ public class EditableItemController {
     {
     	this.id=id;
 		nameLabel.setText(name);
-		itemImage.setImage(image);
+		imageRec.setFill(new ImagePattern(image));
     }
 }

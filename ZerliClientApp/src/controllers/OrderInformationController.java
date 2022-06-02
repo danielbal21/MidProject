@@ -64,7 +64,10 @@ public class OrderInformationController implements UserControl {
     
     @FXML
     private TextArea greetingText;
-
+    
+    @FXML
+    private Label shippingPrice;
+    
     @FXML
     private Button nextBtn;
 
@@ -291,6 +294,7 @@ public class OrderInformationController implements UserControl {
 		});
 		arrivalDate.valueProperty().addListener((observable, oldDate, newDate) -> { minuteSlide(null);});
 		minuteSlide(null);
+		shippingPrice.setText("+ "+ Utilities.Constants.SHIPPING + " " +Utilities.Constants.SHEKEL );
 	}
 	
 

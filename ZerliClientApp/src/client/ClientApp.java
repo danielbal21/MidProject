@@ -1,7 +1,6 @@
 package client;
 
 import java.io.IOException;
-
 import Entities.Access;
 import ProtocolHandler.Protocol;
 import controllers.LoginController;
@@ -33,8 +32,6 @@ public class ClientApp extends Application {
 			stage.setScene(scene); 	
 			stage.show();
 			LoginController.windowControl.stage = stage;
-			
-			
 		}
 		catch (Exception e) {
 			// TODO: handle exception

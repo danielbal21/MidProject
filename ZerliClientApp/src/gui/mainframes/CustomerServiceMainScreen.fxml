@@ -83,12 +83,12 @@
                   <String fx:value="pressbtn" />
                </styleClass>
             </Button>
-            <ImageView fx:id="redCircle" fitHeight="50.0" fitWidth="60.0" layoutX="171.0" layoutY="311.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="redCircle" fitHeight="50.0" fitWidth="60.0" layoutX="171.0" layoutY="316.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../png/redCircle.png" />
                </image>
             </ImageView>
-            <Label fx:id="bellRedCricleLabl" alignment="CENTER" contentDisplay="CENTER" layoutX="182.0" layoutY="321.0" prefHeight="30.0" prefWidth="28.0" styleClass="NotificationLabel" text="2" textFill="WHITE">
+            <Label fx:id="bellRedCricleLabl" alignment="CENTER" contentDisplay="CENTER" layoutX="182.0" layoutY="326.0" prefHeight="30.0" prefWidth="28.0" styleClass="NotificationLabel" text="2" textFill="WHITE">
                <font>
                   <Font size="19.0" />
                </font></Label>

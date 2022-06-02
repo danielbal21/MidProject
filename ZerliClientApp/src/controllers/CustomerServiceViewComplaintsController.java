@@ -3,7 +3,6 @@ package controllers;
 import java.sql.Timestamp;
 
 import Entities.Complaint;
-import Entities.Order;
 import ProtocolHandler.RequestType;
 import client.ClientApp;
 import javafx.collections.ObservableList;
@@ -24,7 +23,6 @@ public class CustomerServiceViewComplaintsController implements UserControl{
 
     @FXML
     private TableView<Complaint> complaintsTable;
-
 
     @FXML
     private TableColumn<Complaint, Timestamp> postTimeColumn;
@@ -51,6 +49,10 @@ public class CustomerServiceViewComplaintsController implements UserControl{
     	}
     	else return;
     	
+    }
+    @FXML
+    void refreshPressed(MouseEvent event) {
+    	onEnter();
     }
 
 	@SuppressWarnings("unchecked")

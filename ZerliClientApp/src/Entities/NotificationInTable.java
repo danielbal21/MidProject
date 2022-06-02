@@ -2,7 +2,7 @@ package Entities;
 
 import java.io.Serializable;
 
-public class NotificationInTable implements Serializable {
+public class NotificationInTable implements Serializable,Comparable<NotificationInTable> {
 
 	private int notificationnumber;
 	private String content;
@@ -57,5 +57,12 @@ public class NotificationInTable implements Serializable {
 	public String toString() {
 		return "NotificationInTable [notificationnumber=" + notificationnumber  + ", content="
 			+ content + ", status=" + status + ", from=" + from + "]";
+	}
+
+	@Override
+	public int compareTo(NotificationInTable o) {
+		if(this.getNotificationnumber() > o.getNotificationnumber()) return 1;
+		else if(this.getNotificationnumber() == o.getNotificationnumber())return 0;
+		else return -1;
 	}
 }

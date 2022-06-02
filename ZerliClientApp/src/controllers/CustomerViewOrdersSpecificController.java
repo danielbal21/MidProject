@@ -198,7 +198,7 @@ public class CustomerViewOrdersSpecificController implements UserControl{
 		paymentMethod.setText(order.getPayment_method());
 		greetingCardText.setText(order.getGreetingCard()==null? "No greeting card" : order.getGreetingCard());
 		statusOrder.setText(order.getOrder_status());
-		price.setText(String.valueOf(order.getTotalPrice()));
+		price.setText(String.valueOf(order.getTotalPrice())+ " " + Utilities.Constants.SHEKEL);
 		
 		if(order.getStatus() == OrderStatus.completed || 
 				order.getStatus() == OrderStatus.canceled ||

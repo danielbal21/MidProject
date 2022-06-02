@@ -31,7 +31,7 @@
             <String fx:value="pressbtn" />
          </styleClass>
       </Button>
-      <ImageView fitHeight="69.0" fitWidth="70.0" layoutX="1183.0" layoutY="18.0" onMousePressed="#exitPressed" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="69.0" fitWidth="70.0" layoutX="1196.0" layoutY="2.0" onMousePressed="#exitPressed" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../png/X-btn.png" />
          </image>

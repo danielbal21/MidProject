@@ -11,6 +11,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 
 public class CartNewItemListHboxController extends HBox{
 	private int id;
@@ -28,7 +30,7 @@ public class CartNewItemListHboxController extends HBox{
     private HBox hboxRoot;
 
     @FXML
-    private ImageView image;
+    private Circle circle;
 
     @FXML
     private Label itemNameLabel;
@@ -46,7 +48,7 @@ public class CartNewItemListHboxController extends HBox{
     	this.id=id;
     	this.price=price;
     	this.quntity=quntity;
-    	image.setImage(image1);
+        circle.setFill(new ImagePattern(image1));
     	itemNameLabel.setText(name);
     	itemTypeLabel.setText(Utilities.GenericUtilties.ItemTypeToString(itemType));
     	catalogTypeLabel.setText(Utilities.GenericUtilties.CatalogTypeToString(catalogType));

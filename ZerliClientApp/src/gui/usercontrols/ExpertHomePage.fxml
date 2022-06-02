@@ -11,14 +11,14 @@
 
 <AnchorPane fx:id="activePanelContainer" prefHeight="663.0" prefWidth="957.0" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ExpertHomePageController">
    <children>
-      <Label layoutX="234.0" layoutY="46.0" styleClass="MainLabel" text="Expert Home Page" />
+      <Label layoutX="234.0" layoutY="14.0" styleClass="MainLabel" text="Expert Home Page" />
       <ImageView fitHeight="121.0" fitWidth="121.0" layoutX="784.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../png/Expert.png" />
          </image></ImageView>
-      <ComboBox fx:id="surveyNameSelector" layoutX="495.0" layoutY="209.0" onAction="#surveyNameSelectorPressed" prefHeight="25.0" prefWidth="169.0" />
+      <ComboBox fx:id="surveyNameSelector" layoutX="455.0" layoutY="198.0" onAction="#surveyNameSelectorPressed" prefHeight="45.0" prefWidth="169.0" styleClass="subLabel" />
       <Label layoutX="242.0" layoutY="206.0" styleClass="subLabel" text="Survey Name" />
-      <TextField fx:id="requiredSurveysText" alignment="TOP_LEFT" editable="false" layoutX="495.0" layoutY="432.0" prefHeight="46.0" prefWidth="220.0" styleClass="subLabel" />
+      <TextField fx:id="requiredSurveysText" alignment="TOP_LEFT" editable="false" layoutX="455.0" layoutY="432.0" prefHeight="45.0" prefWidth="220.0" styleClass="subLabel" />
       <Label layoutX="237.0" layoutY="440.0" styleClass="subLabel" text="required survey" />
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="71.0" layoutY="146.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -30,7 +30,7 @@
             <Image url="@../../png/list.png" />
          </image>
       </ImageView>
-      <Button layoutX="855.0" layoutY="584.0" mnemonicParsing="false" onAction="#NextBtnPressed" text="Next">
+      <Button layoutX="870.0" layoutY="592.0" mnemonicParsing="false" onAction="#NextBtnPressed" prefHeight="62.0" prefWidth="80.0" text="Next">
          <styleClass>
             <String fx:value="Next-btn" />
             <String fx:value="pressbtn" />

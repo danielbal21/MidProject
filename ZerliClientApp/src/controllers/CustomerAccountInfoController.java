@@ -1,11 +1,8 @@
 package controllers;
 
-import Entities.CatalogType;
 import Entities.CustomerInfo;
-import Entities.Item;
 import ProtocolHandler.RequestType;
 import client.ClientApp;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

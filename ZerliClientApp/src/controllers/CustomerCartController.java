@@ -114,7 +114,7 @@ public class CustomerCartController implements UserControl {
 		ArrayList<ItemInList> items = new ArrayList<ItemInList>();
 		for(ItemInList item : itemList)
 			items.add(item);
-		totalCostLabel.setText(String.valueOf(totalCost));
+		totalCostLabel.setText(String.valueOf(totalCost)+ " " + Utilities.Constants.SHEKEL);
 		LoginController.windowControl.putPipe("totalCost", totalCost);
 		LoginController.windowControl.putPipe("CartItems", items);
 	}

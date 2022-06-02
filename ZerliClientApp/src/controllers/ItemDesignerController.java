@@ -1,12 +1,10 @@
 package controllers;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-
 import Entities.CatalogType;
 import Entities.Color;
 import Entities.Item;
@@ -26,6 +24,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 
 public class ItemDesignerController implements UserControl {
@@ -39,7 +38,10 @@ public class ItemDesignerController implements UserControl {
 	
     @FXML
     private ImageView ItemImage;
-
+  
+    @FXML
+    private Label currency;
+   
     @FXML
     private RadioButton ItemRB;
 
@@ -88,7 +90,6 @@ public class ItemDesignerController implements UserControl {
     		try {
 				buf = imagedata.readAllBytes();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
     		//ItemImage.getImage().getPixelReader().getPixels(0, 0, (int)ItemImage.getImage().getWidth(), (int)ItemImage.getImage().getHeight(), PixelFormat.getByteBgraInstance(), buf, 0, (int)ItemImage.getImage().getWidth() * 4);
@@ -165,13 +166,13 @@ public class ItemDesignerController implements UserControl {
             try {
 				imagedata = new FileInputStream(file);
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
         }
     }
 	@Override
 	public void onEnter() {
+		currency.setText(Utilities.Constants.SHEKEL);
 		 //salePrice.disableProperty().bind(onSaleCB.selectedProperty().not());
 		 for(Color c : Color.values())
 			 colors.add(Utilities.GenericUtilties.ColorToString(c));
@@ -182,9 +183,6 @@ public class ItemDesignerController implements UserControl {
 	}
 
 	@Override
-	public void onExit() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void onExit() {}
 
 }

@@ -6,11 +6,8 @@ import ProtocolHandler.RequestType;
 import client.ClientApp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-
-
 
 public class DeliveryViewOrderDetailsController implements UserControl {
 
@@ -81,7 +78,7 @@ public class DeliveryViewOrderDetailsController implements UserControl {
 		shippingDateLabel.setText(order.getShipping_date());
 		paymentMethodLabel.setText(order.getPayment_method());
 		orderNumberLabel.setText(order.getOrderID());
-		costLabel.setText(String.valueOf(order.getTotalPrice()));
+		costLabel.setText(String.valueOf(order.getTotalPrice())+ " " + Utilities.Constants.SHEKEL);
 		addressLbl.setText(order.getAddress());
 		cityLbl.setText(order.getCity());
 		fullnameLbl.setText(order.getFullname());
@@ -89,9 +86,6 @@ public class DeliveryViewOrderDetailsController implements UserControl {
 	}
 
 	@Override
-	public void onExit() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void onExit() {}
 
 }

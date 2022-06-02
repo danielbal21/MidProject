@@ -6,36 +6,40 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="activePanelContainer" prefHeight="663.0" prefWidth="957.0" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SurveyMangerHomeScreenController">
    <children>
-      <Label layoutX="143.0" layoutY="37.0" styleClass="MainLabel" text="Welcome to survey Editor" />
-      <Button layoutX="203.0" layoutY="340.0" mnemonicParsing="false" onAction="#AddNewSurvey" text="Add ">
+      <Label layoutX="138.0" layoutY="14.0" styleClass="MainLabel" text="Welcome to survey Editor" />
+      <Button layoutX="292.0" layoutY="348.0" mnemonicParsing="false" onAction="#AddNewSurvey" text="Add ">
          <styleClass>
             <String fx:value="pressbtn" />
             <String fx:value="Reg-btn" />
          </styleClass>
       </Button>
-      <Button layoutX="690.0" layoutY="347.0" mnemonicParsing="false" onAction="#InsertAnswers" text="Insert ">
+      <Button layoutX="576.0" layoutY="348.0" mnemonicParsing="false" onAction="#InsertAnswers" text="Insert ">
          <styleClass>
             <String fx:value="Reg-btn" />
             <String fx:value="pressbtn" />
          </styleClass>
       </Button>
-      <Label layoutX="131.0" layoutY="276.0" styleClass="subLabel" text="Add a new survey" />
-      <Label layoutX="593.0" layoutY="276.0" styleClass="subLabel" text="Insert answers to survey" />
-      <Label layoutX="327.0" layoutY="159.0" styleClass="subLabel" text="Please select your operation" />
-      <ImageView fitHeight="108.0" fitWidth="118.0" layoutX="670.0" layoutY="410.0" pickOnBounds="true" preserveRatio="true">
+      <Label layoutX="220.0" layoutY="283.0" styleClass="subLabel" text="Add a new survey" />
+      <Label layoutX="478.0" layoutY="283.0" styleClass="subLabel" text="Insert answers to survey" />
+      <Label layoutX="241.0" layoutY="144.0" text="Please select your operation">
+         <font>
+            <Font name="Maiandra GD" size="39.0" />
+         </font></Label>
+      <ImageView fitHeight="108.0" fitWidth="118.0" layoutX="556.0" layoutY="424.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../png/Answers.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="155.0" layoutY="389.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="244.0" layoutY="403.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../png/survey.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="779.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="793.0" layoutY="84.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../png/gear.png" />
          </image>
