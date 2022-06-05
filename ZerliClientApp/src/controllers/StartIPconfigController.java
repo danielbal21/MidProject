@@ -16,37 +16,59 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+/**
+ * The Class StartIPconfigController - insertion of the IP address in order to connect the server.
+ */
 public class StartIPconfigController {
 
-
+    /** The connectBtn - Button for connection . */
     @FXML
     private Button connectBtn;
 
+    /** The enterIPLabel - constant Label main header "Enter IP". */
     @FXML
     private Label enterIPLabel;
 
+    /** The errrorLabel -  Label for errors. */
     @FXML
     private Label errrorLabel;
 
+    /** The ipTextField- TextField for entering the IP address text . */
     @FXML
     private TextField ipTextField;
 
+    /**
+     * Button for connection pressed - execute connection to server.
+  	 * @param event - ActionEvent of button pressed
+     */
     @FXML
     void connectPressed(ActionEvent event) {
     	startConnaction();
     }
 
+    /**
+     * "ENTER" is pressed when cursor in label IP.
+  	 * @param event - Enter pressed
+     */
     @FXML
     void Enter(KeyEvent event) {
     	if(event.getCode() == KeyCode.ENTER)
     		startConnaction();
     }
     
+    /**
+     * "X" window image is pressed - exit from the entire program
+  	 * @param event - ActionEvent of button pressed
+     */
     @FXML
     void exitPressed(MouseEvent event) {
     	System.exit(0);
     }
     
+    /**
+     * Connection to server with the IP address from label.
+     * When IP address label is empty - Default is localhost.
+     */
     private void startConnaction() 
     {
     	errrorLabel.setVisible(false);

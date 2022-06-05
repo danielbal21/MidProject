@@ -1,18 +1,14 @@
 package controllers;
 
 import java.awt.geom.AffineTransform;
-import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import org.apache.pdfbox.debugger.ui.ImageUtil;
 import javax.imageio.ImageIO;
-
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
@@ -21,11 +17,8 @@ import org.apache.pdfbox.pdmodel.font.PDType0Font;
 import org.apache.pdfbox.pdmodel.graphics.image.JPEGFactory;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 import org.apache.pdfbox.util.Matrix;
-import org.knowm.xchart.BitmapEncoder;
-
 import Entities.Survey;
 import ProtocolHandler.RequestType;
-import ProtocolHandler.Handlers.ImageFromServerHandler;
 import client.ClientApp;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
@@ -38,66 +31,102 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 
+/**
+ * The Class SurveyHistogramController - implements UserControl for switching sub windows.
+ * Responsible : shows the expert user all the date of chosen survey - Histogram Q&A and option to submit PDF.
+ * 
+ */
 public class SurveyHistogramController implements UserControl {
 
+		/** The checkBox -  image of check symbol */
 		@FXML
     	private ImageView checkBox;
 		
+		/** The PdfTextBox - The Pdf text box. */
 		@FXML
 	    private TextField PdfTextBox;
 	   
-	    @FXML
+	    /** The Image1 - ImageView of Q&A number 1. */
+    	@FXML
 	    private ImageView Image1;
 
-	    @FXML
+    	 /** The Image2 - ImageView of Q&A number 2. */
+    	@FXML
 	    private ImageView Image2;
 
-	    @FXML
+    	/** The Image2 - ImageView of Q&A number 3. */
+    	@FXML
 	    private ImageView Image3;
 
-	    @FXML
+    	/** The Image2 - ImageView of Q&A number 4. */
+    	@FXML
 	    private ImageView Image4;
 
-	    @FXML
+    	/** The Image2 - ImageView of Q&A number 5. */
+    	@FXML
 	    private ImageView Image5;
 
-	    @FXML
+    	/** The Image2 - ImageView of Q&A number 6. */
+    	@FXML
 	    private ImageView Image6;
 
-	    @FXML
+    	 /** The q1Label - Label of question number 1. */
+    	@FXML
 	    private Label q1Label;
 
-	    @FXML
+    	 /** The q2Label - Label of question number 2. */
+    	@FXML
 	    private Label q2Label;
 
-	    @FXML
+    	 /** The q3Label - Label of question number 3. */
+    	@FXML
 	    private Label q3Label;
 
-	    @FXML
+    	 /** The q4Label - Label of question number 4. */
+    	@FXML
 	    private Label q4Label;
 
-	    @FXML
+    	 /** The q5Label - Label of question number 5. */
+    	@FXML
 	    private Label q5Label;
 
-	    @FXML
+    	 /** The q6Label - Label of question number 6. */
+    	@FXML
 	    private Label q6Label;
 	    
-	    @FXML
+    	/** The active panel container - AnchorPane that contains all the FXML element */
+    	@FXML
 	    private AnchorPane activePanelContainer;
 
-	    @FXML
+	    /** The surveyNameLabel - Main label upper page */
+    	@FXML
 	    private Label surveyNameLabel;
 
+		/** The survey - instance of Survey entity. */
 		private Survey survey=new Survey();
+		
+		/** The imegeTest1 - instance of image(as ByteArrayInputStream) of Q&A number 1. */
 		private Image imegeTest1;
+		
+		/** The imegeTest2 - instance of image(as ByteArrayInputStream) of Q&A number 2. */
 		private Image imegeTest2;
+		
+		/** The imegeTest2 - instance of image(as ByteArrayInputStream) of Q&A number 3. */
 		private Image imegeTest3;
+		
+		/** The imegeTest2 - instance of image(as ByteArrayInputStream) of Q&A number 4. */
 		private Image imegeTest4;
 
+		/** The imegeTest2 - instance of image(as ByteArrayInputStream) of Q&A number 5. */
 		private Image imegeTest5;
 
+		/** The imegeTest2 - instance of image(as ByteArrayInputStream) of Q&A number 6. */
 		private Image imegeTest6;
 
+	/**
+	 * Commands that the Controller do the screen will do while uploading window
+	 * Load all the images of Q&A histograms ans show them
+	 */
 	@Override
 	public void onEnter() {
 		checkBox.setVisible(false);
@@ -110,7 +139,7 @@ public class SurveyHistogramController implements UserControl {
 		ClientApp.ProtocolHandler.Invoke(RequestType.GetSurvey, survey.getId(), null, true);
 		survey=(Survey)ClientApp.ProtocolHandler.GetResponse(RequestType.GetSurvey);
 		ClientApp.ProtocolHandler.Invoke(RequestType.GetSurveyHistogram, survey, null, true);
-		listOfImages=(( ArrayList<byte[]>)ClientApp.ProtocolHandler.GetResponse(RequestType.GetSurveyHistogram));
+		listOfImages=((ArrayList<byte[]>)ClientApp.ProtocolHandler.GetResponse(RequestType.GetSurveyHistogram));
 		
 		imegeTest1=(new Image (new ByteArrayInputStream(listOfImages.get(0))));
 		Image1.setImage(imegeTest1);
@@ -137,12 +166,20 @@ public class SurveyHistogramController implements UserControl {
 		//q6Label.setText(survey.getQuestions()[5]);
 	}
 	
-	  @FXML
+	  /**
+  	 * Back to previous screen - Expert Home Page 
+  	 * @param event - ActionEvent of button pressed
+  	 */
+  	@FXML
 	    void BackBtnPressed(ActionEvent event) {
 		  LoginController.windowControl.setUserControl("/gui/usercontrols/ExpertHomePage.fxml");
 	    }
 	  
-	  @FXML
+	  /**
+  	 * Open filer chooser to insert type PDF file and Saves the PDF in Database 
+  	 * @param event - ActionEvent of button pressed
+  	 */
+  	@FXML
 	    void InsertPDFBtnpressed(ActionEvent event) {
 		  
 		  	ArrayList<byte[]> listOfPDFArrayList=new ArrayList<byte[]>();
@@ -168,7 +205,6 @@ public class SurveyHistogramController implements UserControl {
 				} 
 	            catch (Exception e) 
 	            {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 	        	
@@ -180,11 +216,18 @@ public class SurveyHistogramController implements UserControl {
 	        	ClientApp.ProtocolHandler.Invoke(RequestType.SavePDF, listOfPDFArrayList, survey, false);
 	        }
 	    }
+	
+	/**
+	 * Commands that Controller do the screen will do while existing window On exit.
+	 */
 	@Override
-	public void onExit() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void onExit() {}
+	
+	/**
+	 * Creates experts PDf contains Q&A images and expert PDF .
+	 * @param the path - String path to save file
+	 * @return the byte[] - return byte[] of PDF from path
+	 */
 	public byte[] createPDF(String path) {
 	    try (PDDocument document = new PDDocument()) {
 	      PDPage page = new PDPage(PDRectangle.A4);
@@ -260,7 +303,6 @@ public class SurveyHistogramController implements UserControl {
 		  fs.close();
 		  // FILE SAVING FOR DEBUG END
 		  */
-		  
 	      return byteArrayOutputStream.toByteArray();
 	    }
 	    catch(IOException e)
@@ -270,13 +312,18 @@ public class SurveyHistogramController implements UserControl {
 		return null;
 }
 
+    /**
+     * End of Insert PDF session 
+     * return to Expert Home Page if there all ready inserted PDF Otherwise the button is not active
+   	 * @param event - ActionEvent of button pressed
+     */
     @FXML
     void submitPDFBtnpressed(ActionEvent event) {
     	if(!PdfTextBox.getText().equals(""))
     	{
     		checkBox.setVisible(false);
     		PdfTextBox.setText("");
-    		 LoginController.windowControl.setUserControl("/gui/usercontrols/ExpertHomePage.fxml");
+    		LoginController.windowControl.setUserControl("/gui/usercontrols/ExpertHomePage.fxml");
     	}
     	
     }
