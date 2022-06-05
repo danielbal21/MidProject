@@ -25,18 +25,20 @@ import javafx.scene.image.Image;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class ServerConnSQL.
+ * The Class ServerConnSQL is responsible for the connection to the sql server
+ * and is used as the main driver for different data request and data storage
+ * protocol commands.
  */
 public class ServerConnSQL {
 
-	/** The conn. */
+	/** The Main JDBC Connection element, used to drive the communication. */
 	private static Connection conn;
 	// private String mySQLpassword = "123456";
 
 	/**
-	 * Start conn.
+	 * Starts the sql connection.
 	 *
-	 * @param mySQLpassword the my SQ lpassword
+	 * @param mySQL password the sql database password
 	 * @return true, if successful
 	 */
 	public static boolean startConn(String mySQLpassword) {
@@ -61,11 +63,11 @@ public class ServerConnSQL {
 	}
 
 	/**
-	 * Authenticate.
+	 * Authenticates a user data.
 	 *
-	 * @param username the username
-	 * @param password the password
-	 * @return the object[]
+	 * @param username the username of the attempter
+	 * @param password the password of the attempter
+	 * @return the object[] holds the transaction data, [0] - loggedin, [1] - access, [2] - role
 	 */
 	public Object[] Authenticate(String username, String password) {
 		Server.Log("Database", "Executing Authenticate");
@@ -109,9 +111,9 @@ public class ServerConnSQL {
 	}
 
 	/**
-	 * Logged out.
+	 * Logging out operation.
 	 *
-	 * @param username the username
+	 * @param username the username that asks to log out
 	 */
 	public void LoggedOut(String username) {
 		PreparedStatement stmt = null;
@@ -128,9 +130,8 @@ public class ServerConnSQL {
 	/**
 	 * Gets the cart items.
 	 *
-	 * @param username the username
-	 * @param cartItems the cart items
-	 * @return the cart items
+	 * @param username the username the owns the cart
+	 * @param cartItems the cart items collection to be altered
 	 */
 	public void getCartItems(String username,ArrayList<ItemInList> cartItems) {
 		PreparedStatement stmt = null;
@@ -270,7 +271,7 @@ public class ServerConnSQL {
 	/**
 	 * Removes the item by ID.
 	 *
-	 * @param id the id
+	 * @param id the item id
 	 */
 	public void removeItemByID(int id)
 	{
@@ -293,8 +294,8 @@ public class ServerConnSQL {
 	/**
 	 * Gets the item by ID.
 	 *
-	 * @param id the id
-	 * @return the item by ID
+	 * @param id the item id
+	 * @return the item entity
 	 */
 	public Item getItemByID(int id) {
 		Server.Log("Database", "Executing getItemByID");
@@ -346,9 +347,8 @@ public class ServerConnSQL {
 	/**
 	 * Gets the catalog items.
 	 *
-	 * @param catalogItems the catalog items
-	 * @param catalogType the catalog type
-	 * @return the catalog items
+	 * @param catalogItems the catalog items collection to be altered
+	 * @param catalogType - the catalog type which the requester asks
 	 */
 	public void getCatalogItems(ArrayList<Item> catalogItems, CatalogType catalogType) {
 		Server.Log("Database", "Executing GetCatalogItems");
@@ -396,7 +396,7 @@ public class ServerConnSQL {
 	/**
 	 * Gets the branches.
 	 *
-	 * @return the array list
+	 * @return an array list of type string that holds the branches
 	 */
 	public ArrayList<String> GetBranches() {
 		Server.Log("Database", "Executing GetBranches");
@@ -416,10 +416,10 @@ public class ServerConnSQL {
 	}
 
 	/**
-	 * Gets the currency.
+	 * Gets the currency (credit card, zcoins, etc..) of a user.
 	 *
-	 * @param requestee the requestee
-	 * @return the string[]
+	 * @param requestee the user that requests his currency
+	 * @return the string[] holds the currency data (full credit card, zcoins etc..)
 	 */
 	public String[] GetCurrency(String requestee) {
 		Server.Log("Database", "Executing GetCurrency");
@@ -442,10 +442,10 @@ public class ServerConnSQL {
 	}
 
 	/**
-	 * Update zerli coins.
+	 * Update zerli coins of a user.
 	 *
-	 * @param requestee the requestee
-	 * @param data the data
+	 * @param requestee the user that wants to get zcoins
+	 * @param data the new value of zcoins
 	 */
 	public void UpdateZerliCoins(String requestee, int data) {
 		Server.Log("Database", "Executing UpdateZerliCoins");
@@ -464,8 +464,8 @@ public class ServerConnSQL {
 	/**
 	 * Insert order.
 	 *
-	 * @param order the order
-	 * @param requestee the requestee
+	 * @param order the Order entity of the order to insert
+	 * @param requestee the user who wishes to place the order
 	 */
 	public void InsertOrder(Order order,String requestee)
 	{
@@ -585,6 +585,12 @@ public class ServerConnSQL {
 		}
 	}
 
+	/**
+	 * Gets the branch of an employee.
+	 *
+	 * @param user_id the user id of the employee who seeks to find out his allocated branch
+	 * @return the branch the user id is allocated to
+	 */
 	public String GetBranch(String user_id) {
 		PreparedStatement stmt = null;
 		ResultSet rs;
@@ -605,12 +611,13 @@ public class ServerConnSQL {
 
 		}
 	}
+	
 	/**
-	 * Gets the orders by branch.
+	 * Gets the orders placed on a specific branch.
 	 *
-	 * @param orders the orders
-	 * @param branch_name the branch name
-	 * @param status the status
+	 * @param orders - the orders collection to be altered
+	 * @param branch_name - the branch name to look on
+	 * @param role - the role of the requester
 	 */
 	public void GetOrdersByBranch(ArrayList<Order> orders, String branch_name,String role) {
 		PreparedStatement stmt = null;
@@ -663,10 +670,10 @@ public class ServerConnSQL {
 	}
 
 	/**
-	 * Gets the items of order.
+	 * Gets the items of an order.
 	 *
-	 * @param itemsOfOrder the items of order
-	 * @param order_id the order id
+	 * @param itemsOfOrder - The items in order collection to be altered
+	 * @param order_id - the order id of an order
 	 */
 	public void GetItemsOfOrder(ArrayList<ItemInList> itemsOfOrder, int order_id) {
 		PreparedStatement stmt = null;
@@ -746,6 +753,13 @@ public class ServerConnSQL {
 
 	}
 
+	/**
+	 * Confirms an order.
+	 *
+	 * @param order_id the order id to be confirmed
+	 * @param status the status in string value
+	 * @return the refund amount
+	 */
 	// confirm + cancel
 	public int ConfirmOrder(int order_id, String status) {
 		int refundCancel = 0;
@@ -799,13 +813,14 @@ public class ServerConnSQL {
 	}
 
 	/**
-	 * Adds the to cart.
+	 * Adds an item of a certain quantity into the cart 
 	 *
-	 * @param username the username
-	 * @param item_id the item id
-	 * @param quantity the quantity
-	 * @return the int
+	 * @param username the username of cart owner
+	 * @param item_id the item id to be added
+	 * @param quantity the quantity of that item
+	 * @return the quantity
 	 */
+	@SuppressWarnings("resource")
 	public int AddToCart(String username, int item_id, int quantity) {
 		PreparedStatement stmt = null;
 		ResultSet rs;
@@ -848,10 +863,10 @@ public class ServerConnSQL {
 	}
 
 	/**
-	 * Gets the all customer orders.
+	 * Gets all of the orders of a customer.
 	 *
-	 * @param username the username
-	 * @param customerOrders the customer orders
+	 * @param username the username of the customer
+	 * @param customerOrders the collection of orders to be altered
 	 */
 	public void GetAllCustomerOrders(String username, ArrayList<Order> customerOrders) {
 		PreparedStatement stmt = null;
@@ -964,16 +979,16 @@ public class ServerConnSQL {
 	/**
 	 * Delete item from cart.
 	 *
-	 * @param usernmae the usernmae
-	 * @param data the data
+	 * @param username the username of the cart owner
+	 * @param data the the item_id of the deleted item
 	 */
-	public void DeleteItemFromCart(String usernmae, int data) {
+	public void DeleteItemFromCart(String username, int data) {
 		PreparedStatement stmt = null;
 		try {
 			stmt = conn.prepareStatement(
 					"DELETE FROM cart_item WHERE item_id=? and cart_id =(select cart_id from carts WHERE user_id=? )");
 			stmt.setInt(1, data);
-			stmt.setString(2, usernmae);
+			stmt.setString(2, username);
 			stmt.executeUpdate();
 			System.out.println("Delete item");
 		} catch (SQLException e1) {
@@ -985,11 +1000,10 @@ public class ServerConnSQL {
 	}
 
 	/**
-	 * Gets the notification.
+	 * Gets notifications allocated to a username 
 	 *
-	 * @param username the username
-	 * @param notificationList the notification list
-	 * @return the notification
+	 * @param username - the username who request his notifications
+	 * @param notificationList the collection of notifications to be altered
 	 */
 	public void getNotification(String username, ArrayList<NotificationInTable> notificationList) {
 		Server.Log("Database", "Executing getNotification");
@@ -1016,10 +1030,10 @@ public class ServerConnSQL {
 	}
 
 	/**
-	 * Update notification.
+	 * Sets a notification state into "read".
 	 *
-	 * @param username the username
-	 * @param data the data
+	 * @param username - the owner of the notification
+	 * @param num the number of the notification
 	 */
 	public void UpdateNotification(String username, int num) {
 		PreparedStatement stmt = null;
@@ -1034,7 +1048,7 @@ public class ServerConnSQL {
 	}
 	
 	/**
-	 * Send Notification
+	 * Send Notification, Adds a new notification allocated to a user.
 	 *
 	 * @param notification - Instance of notification alert with all the data
 	 */
@@ -1060,8 +1074,8 @@ public class ServerConnSQL {
 	/**
 	 * End order.
 	 *
-	 * @param order_id the order id
-	 * @param action the action
+	 * @param order_id the order id which to be ended
+	 * @return the refund (if necessary)
 	 */
 	public int EndOrder(int order_id) {
 		PreparedStatement OrderDetailsStmt = null;
@@ -1105,10 +1119,10 @@ public class ServerConnSQL {
 	}
 
 	/**
-	 * Cancel order.
+	 * Cancels an order.
 	 *
-	 * @param refundZerli the refund zerli
-	 * @param orderID the order ID
+	 * @param refundZerli the refund total
+	 * @param orderID the order ID to be cancelled
 	 */
 	public void cancelOrder(Integer refundZerli, Integer orderID) {
 		PreparedStatement stmt = null;
@@ -1127,9 +1141,9 @@ public class ServerConnSQL {
 	}
 
 	/**
-	 * Reset new customer.
+	 * Removes the 20% new customer bonus
 	 *
-	 * @param user_id the user id
+	 * @param user_id the username of the customer
 	 */
 	public void resetNewCustomer(String user_id) {
 		PreparedStatement stmt = null;
@@ -1149,10 +1163,10 @@ public class ServerConnSQL {
 	} 
 
 	/**
-	 * Update new item in cart.
+	 * Update and Create a new custom item in the cart.
 	 *
-	 * @param username the username
-	 * @param newItem the new item
+	 * @param username the customer who creates/updates the new list
+	 * @param newItem the id of the custom newly created item
 	 */
 	public void UpdateNewItemInCart(String username,NewItem newItem) {
 		int newItemId;
@@ -1199,8 +1213,8 @@ public class ServerConnSQL {
 	/**
 	 * Delete item from new item list.
 	 *
-	 * @param new_item the new item
-	 * @param catalog_item the catalog item
+	 * @param new_item the new custom item id
+	 * @param catalog_item the actual catalog item id to be removed
 	 */
 	public void DeleteItemFromNewItemList(int new_item,int catalog_item) {
 		PreparedStatement stmt = null;
@@ -1219,10 +1233,10 @@ public class ServerConnSQL {
 	}
 
 	/**
-	 * Delete new item from cart.
+	 * Deletes a new item from cart.
 	 *
-	 * @param requestee the requestee
-	 * @param data the data
+	 * @param requestee the cart owner
+	 * @param data the item id of the item to be removed
 	 */
 	public void DeleteNewItemFromCart(String requestee, int data) {
 		PreparedStatement stmt = null;
@@ -1245,10 +1259,10 @@ public class ServerConnSQL {
 	}
 
 	/**
-	 * Delete allnew item from cart.
+	 * Delete all new (custom) items from cart.
 	 *
-	 * @param requestee the requestee
-	 * @param data the data
+	 * @param requestee the cart owner
+	 * @param data the item id to be removed
 	 */
 	public void DeleteAllnewItemFromCart(String requestee, int data) {
 		PreparedStatement stmt = null;
@@ -1276,9 +1290,9 @@ public class ServerConnSQL {
 	
 
 	/**
-	 * Update item.
+	 * Updates a catalog item properties.
 	 *
-	 * @param data the data
+	 * @param The newly altered item
 	 */
 	public void UpdateItem(Item data) {
 		Server.Log("Database", "Executing UpdateItem");
@@ -1300,9 +1314,9 @@ public class ServerConnSQL {
 	}
 	
 	/**
-	 * Insert item.
+	 * Insert an item to a catalog.
 	 *
-	 * @param data the data
+	 * @param data - an item entity data
 	 */
 	public void InsertItem(Item data)
 	{
@@ -1329,13 +1343,12 @@ public class ServerConnSQL {
 	}
 
 /**
- * * Reports **.
+ * * Gets a report **.
  *
- * @param reportType the report type
- * @param isMonthly the is monthly
- * @param requester the requester
- * @param reportDate the report date
- * @return the byte[]
+	 * @param reportType the report type [income,order,quarterly,ceo]
+	 * @param isMonthly - true: monthly, false: quarterly
+	 * @param reportDate the report date (month or quarter)
+	 * @return the pdf file containing the actual report
  */
 	public byte[] GetReport(ReportType reportType, boolean isMonthly, String requester, Date reportDate) {
 		Server.Log("Database", "Executing GetReport");
@@ -1363,6 +1376,15 @@ public class ServerConnSQL {
 		return null;
 	}
 	
+	/**
+	 * Gets a report of a branch.
+	 *
+	 * @param reportType the report type [income,order,quarterly,ceo]
+	 * @param isMonthly - true: monthly, false: quarterly
+	 * @param branch the branch to report is made on
+	 * @param reportDate the report date (month or quarter)
+	 * @return the pdf file containing the actual report
+	 */
 	public byte[] GetReportOfBranch(ReportType reportType, boolean isMonthly,String branch, Date reportDate) {
 		Server.Log("Database", "Executing GetReportOfBranch");
 		PreparedStatement stmt;
@@ -1391,13 +1413,13 @@ public class ServerConnSQL {
 	}
 	
 	/**
-	 * Insert report.
+	 * Insert a report.
 	 *
-	 * @param reportType the report type
-	 * @param isMonthly the is monthly
-	 * @param branch the branch
-	 * @param reportDate the report date
-	 * @param pdf the pdf
+	 * @param reportType the report type [income,order,quarterly,ceo]
+	 * @param isMonthly - true: monthly, false: quarterly
+	 * @param branch the branch to report is made on
+	 * @param reportDate the report date (month or quarter)
+	 * @param pdf the pdf file containing the actual report
 	 */
 	public void InsertReport(ReportType reportType, boolean isMonthly, String branch, Date reportDate,byte[] pdf) {
 		Server.Log("Database", "Executing InsertReport");
@@ -1417,11 +1439,11 @@ public class ServerConnSQL {
 	}
 	
 	/**
-	 * Gets the daily financial income for branch.
+	 * Gets the daily financial income for a branch.
 	 *
-	 * @param branch the branch
-	 * @param date the date
-	 * @return the integer[]
+	 * @param branch the branch to be looked on
+	 * @param date the date to be calculated
+	 * @return an income array where [0]: - value from orders, [1]: value from refunds, [2]: [1] + [2]
 	 */
 	public Integer[] GetDailyFinancialIncomeForBranch(String branch,Date date) //Gross, Refunds
 	{
@@ -1460,12 +1482,13 @@ public class ServerConnSQL {
 	}
 
 	/**
-	 * Gets the order count with item within period.
+	 * Gets the count of orders containing a certain item within a period
 	 *
-	 * @param t the t
-	 * @param a the a
-	 * @param b the b
-	 * @return the integer
+	 * @param t the type of the item to be looked upon
+	 * @param a the start date
+	 * @param b the end date
+	 * @param branch the branch to be looked on
+	 * @return the count of orders containing the item within a and b
 	 */
 	public Integer GetOrderCountWithItemWithinPeriod(ItemType t,Date a,Date b,String branch)
 	{
@@ -1494,13 +1517,13 @@ public class ServerConnSQL {
 
 
 	/**
-	 * Report exists.
+	 * Checks whether a report exists for that parameters.
 	 *
-	 * @param t the t
-	 * @param isMonthly the is monthly
-	 * @param branch the branch
-	 * @param reportDate the report date
-	 * @return true, if successful
+	 * @param t the report type
+	 * @param isMonthly - true if the reports is monthly, false if it is quarterly report
+	 * @param branch the branch that the report was made on
+	 * @param reportDate the report date (if quarterly then the month part is the quarter)
+	 * @return true, if exists
 	 */
 	public boolean ReportExists(ReportType t, boolean isMonthly, String branch, Date reportDate) {
 		Server.Log("Database", "Executing ReportExists");
@@ -1523,6 +1546,13 @@ public class ServerConnSQL {
 		return false;
 	}
 	
+	/**
+	 * Gets the complaint count of branch in a certain date
+	 *
+	 * @param branch the branch to seek compaints on
+	 * @param a - the date to be looked on
+	 * @return the count of complaints
+	 */
 	public Integer GetComplaintCountOfBranch(String branch,Date a)
 	{			
 		Server.Log("Database", "Executing GetComplaintCountOfBranch");
@@ -1546,6 +1576,12 @@ public class ServerConnSQL {
 		throw new RuntimeException("SQL Error in complaints count");
 	}
 	
+	/**
+	 * Gets the complaints of a certain handler in status pending.
+	 *
+	 * @param complaints the complaints collection to be altered
+	 * @param handler the customer service employee who took the complaint
+	 */
 	public void GetComplaints(ArrayList<Complaint> complaints,String handler)
 	{
 		Server.Log("Database", "Executing GetComplaints");
@@ -1575,6 +1611,13 @@ public class ServerConnSQL {
 		
 	}
 	
+	/**
+	 * Creates a complaint.
+	 *
+	 * @param complaint the complaint to be created
+	 * @param handler the handler of the report (customer service employee)
+	 * @return status message
+	 */
 	public String MakeComplaint(Complaint complaint,String handler)
 	{
 		Server.Log("Database", "Executing MakeComplaint");
@@ -1605,6 +1648,11 @@ public class ServerConnSQL {
 		
 	}
 	
+	/**
+	 * Sets the complaint as already alerted, therefore 24hours have passed.
+	 *
+	 * @param the id of the complaint
+	 */
 	public void SetComplaintAlerted(int id)
 	{
 		Server.Log("Database", "Executing SetComplaintAlerted");
@@ -1622,6 +1670,11 @@ public class ServerConnSQL {
 		}
 	}
 	
+	/**
+	 * Issues a response to a complaint.
+	 *
+	 * @param Complaint entity with the response
+	 */
 	public void ComplaintResponse(Complaint complaint)
 	{
 		PreparedStatement stmt;
@@ -1643,6 +1696,12 @@ public class ServerConnSQL {
 		Server.Log("Database", "Executing MakeComplaint: FAILED");
 	}
 	
+	/**
+	 * Gets a customer who has not been registered yet
+	 *
+	 * @param ID the id of the customer
+	 * @return the pending client info
+	 */
 	public PendingClientInfo GetPendingClient( String ID) {
 		Server.Log("Database", "Executing GetPendingClient");
 		
@@ -1682,6 +1741,12 @@ public class ServerConnSQL {
 		
 	}
 
+	/**
+	 * Activates a client be registering it.
+	 *
+	 * @param clientInfo the client info to be registered
+	 * @param userID the user ID of the customer who seeks registration
+	 */
 	public void ActivateClient(PendingClientInfo clientInfo, String userID) {
 		Server.Log("Database", "Executing ActivateClient");
 		System.out.println("Start");
@@ -1718,6 +1783,11 @@ public class ServerConnSQL {
 
 
 
+	/**
+	 * Gets all of the customers information.
+	 *
+	 * @param customers the customers collection to be altered
+	 */
 	public void getAllCustomersInfo(ArrayList<AccountInfo> customers) {
 		Server.Log("Database", "Executing getAllCustomersInfo");
 		PreparedStatement stmt;
@@ -1745,6 +1815,12 @@ public class ServerConnSQL {
 		
 	}
 
+	/**
+	 * Gets all of the employees info.
+	 *
+	 * @param employees the employees collection to be altered
+	 * @param managerUserID the user id of the manager who asks the information
+	 */
 	public void getAllEmployeesInfo(ArrayList<AccountInfo> employees,String managerUserID) {
 		Server.Log("Database", "Executing getAllEmployeesInfo");
 		PreparedStatement stmt;
@@ -1774,6 +1850,12 @@ public class ServerConnSQL {
 		Server.Log("Database", "Executing getAllEmployeesInfo: SUCCESS");
 	}
 
+	/**
+	 * Update a customer's account access level.
+	 *
+	 * @param userID the user ID of the customer
+	 * @param access the access level to be granted
+	 */
 	public void UpdateAccountAccess(String userID, String access) {
 		Server.Log("Database", "Executing UpdateAccountAccess");
 		PreparedStatement stmt;
@@ -1793,6 +1875,12 @@ public class ServerConnSQL {
 
 
 
+	/**
+	 * Update an employee's role.
+	 *
+	 * @param userID the user ID of the employee
+	 * @param role the new role to be designated
+	 */
 	public void UpdateEmployeeRole(String userID, String role) {
 		Server.Log("Database", "Executing UpdateEmployeeRole");
 		PreparedStatement stmt;
@@ -1813,6 +1901,11 @@ public class ServerConnSQL {
 
 
 
+	/**
+	 * Saves a survey.
+	 *
+	 * @param survey - the survey to be saved
+	 */
 	public void SaveSurvey(Survey survey) {
 		Server.Log("Database", "Executing Save Survey");
 		PreparedStatement stmt;
@@ -1838,12 +1931,17 @@ public class ServerConnSQL {
 
 
 
+	/**
+	 * Gets the surveys names.
+	 *
+	 * @param list - the list to be altered with the survey names
+	 */
 	public void GetSurveysNames(ArrayList<String> list) {
 		Server.Log("Database", "Executing Get Surveys Names");
 		PreparedStatement stmt = null;
 		ResultSet rs;
 		try {
-			stmt = conn.prepareStatement("SELECT survey_id,survey_content FROM midproject.surveys");
+			stmt = conn.prepareStatement("SELECT survey_id,survey_content FROM midproject.surveys WHERE ready = 0");
            	rs = stmt.executeQuery();
            	while(rs.next()) {
            		String string=rs.getString(1)+" "+rs.getString(2);
@@ -1855,9 +1953,13 @@ public class ServerConnSQL {
 			Server.Log("Database", "Executing Get Surveys Names: FAILED");
 		}		
 		Server.Log("Database", "Executing Get Surveys Names: SUCCESS");
-		
 	}
 
+	/**
+	 * Gets a survey.
+	 *
+	 * @param the survey to be loaded with the data
+	 */
 	public void GetSurvey(Survey survey) {
 		Server.Log("Database", "Executing Get Survey");
 		PreparedStatement stmt;
@@ -1884,6 +1986,11 @@ public class ServerConnSQL {
 		Server.Log("Database", "Executing Get Survey: SUCCESS");
 	}
 
+	/**
+	 * Save survey answers.
+	 *
+	 * @param survey the survey with the answers
+	 */
 	public void SaveSurveyAnswers(Survey survey) {
 		Server.Log("Database", "Executing Save Survey Answers");
 		PreparedStatement stmt;
@@ -1910,6 +2017,12 @@ public class ServerConnSQL {
 		Server.Log("Database", "Executing Save Survey Answers: SUCCESS");
 	}
 
+	/**
+	 * Gets the survey histogram.
+	 *
+	 * @param survey the survey of the histogram
+	 * @param listOfSurveyAnswers the list of survey answers
+	 */
 	public void GetSurveyHistogram(Survey survey, ArrayList<int[]> listOfSurveyAnswers) 
 	{
 		
@@ -1941,20 +2054,27 @@ public class ServerConnSQL {
 
 
 
+	/**
+	 * Save PDF.
+	 *
+	 * @param userName the expert's username
+	 * @param survey the survey that the pdf report is allocated to
+	 * @param the pdfs byte data
+	 */
 	public void SavePDF(String userName, Survey survey,ArrayList<byte[]> Data) {
 		Server.Log("Database", "Executing Save PDF");
 		PreparedStatement stmt;
-		System.out.println(userName);
 		try 
 		{
 			//Set PDF survey result
 			Blob blob1 = new javax.sql.rowset.serial.SerialBlob(Data.get(1));//expertPDF
 			Blob blob2 = new javax.sql.rowset.serial.SerialBlob(Data.get(0));//histoframPDF
-			stmt = conn.prepareStatement("insert into midproject.pdf_from_expert (expert_name,survey_content,pdf_file_from_expert,pdf_with_survey_answers) values(?,?,?,?)");
-			stmt.setString(1,userName);
-			stmt.setString(2,survey.getContent());
-			stmt.setBlob(3, blob1);
-			stmt.setBlob(4, blob2);
+			stmt = conn.prepareStatement("insert into midproject.pdf_from_expert (survey_id,expert_name,survey_content,pdf_file_from_expert,pdf_with_survey_answers) values(?,?,?,?,?)");
+			stmt.setInt(1, survey.getId());
+			stmt.setString(2,userName);
+			stmt.setString(3,survey.getContent());
+			stmt.setBlob(4, blob1);
+			stmt.setBlob(5, blob2);
 			stmt.executeUpdate();
 			
 			//Set ready to original survey
@@ -1970,6 +2090,12 @@ public class ServerConnSQL {
 		Server.Log("Database", "Executing Save PDF: SUCCESS");
 	}
 
+	/**
+	 * Gets the customer information
+	 *
+	 * @param userID the customer user id
+	 * @return the customers info
+	 */
 	public CustomerInfo GetCustomerInfo(String userID) {
 		Server.Log("Database", "Executing GetCustomerInfo");
 		CustomerInfo customer = new CustomerInfo();
@@ -2001,6 +2127,73 @@ public class ServerConnSQL {
 		Server.Log("Database", "Executing GetCustomerInfo: SUCCESS");
 		return customer;
 	}
+
+	/**
+	 * Gets the survey report in pdf format.
+	 *
+	 * @param content the survey name
+	 * @return the array list - ArrayList of the pdfs (result of survey, expert report)f
+	 */
+	public ArrayList<byte[]> GetSurveyReport(String content)
+	{
+		Server.Log("Database", " GetSurveyReport");
+		ArrayList<byte[]> pdfs = new ArrayList<>();
+		PreparedStatement stmt = null;
+		ResultSet rs;
+		try {
+			stmt = conn.prepareStatement("SELECT pdf_file_from_expert,pdf_with_survey_answers FROM midproject.pdf_from_expert WHERE survey_content = ?");
+           	stmt.setString(1, content);
+			rs = stmt.executeQuery();
+           	while(rs.next()) {
+           		try
+           		{
+           			pdfs.add(rs.getBlob(1).getBinaryStream().readAllBytes());
+           			pdfs.add(rs.getBlob(2).getBinaryStream().readAllBytes());
+           		}
+           		catch(Exception e)
+           		{
+           			e.printStackTrace();
+           		}
+           	}
+		}catch (SQLException e) 
+		{
+			e.printStackTrace();
+			Server.Log("Database", "GetSurveyReport: FAILED");
+		}		
+		Server.Log("Database", "GetSurveyReport: SUCCESS");
+		
+		return pdfs;
+	}
+	
+	/**
+	 * Gets the ready surveys (that have an expert report on them).
+	 *
+	 * @return ArrayList containing the ready survey elements
+	 */
+	public ArrayList<SurveyResult> GetReadySurveys() {
+		Server.Log("Database", " GetReadySurveys");
+		ArrayList<SurveyResult> surveyData = new ArrayList<>();
+		PreparedStatement stmt = null;
+		ResultSet rs;
+		try {
+			stmt = conn.prepareStatement("SELECT survey_id,survey_content,pdf_file_from_expert,pdf_with_survey_answers FROM midproject.pdf_from_expert");
+           	rs = stmt.executeQuery();
+           	while(rs.next()) {
+           		try {
+					surveyData.add(new SurveyResult(rs.getInt(1),rs.getString(2),rs.getBlob(3).getBinaryStream().readAllBytes(),rs.getBlob(4).getBinaryStream().readAllBytes()));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+           	}
+		}catch (SQLException e) 
+		{
+			e.printStackTrace();
+			Server.Log("Database", "GetReadySurveys: FAILED");
+		}		
+		Server.Log("Database", "GetReadySurveys: SUCCESS");
+		
+		return surveyData;
+	}
 	
 }
-/*** End Reports ***/

@@ -24,6 +24,7 @@ import reports.ReportScheduler;
 import server.Server;
 import server.ServerApp;
 
+
 /**
  * The Class ServerPanelController is the controller part of the ServerPanelController GUI
  * used to manage UI and control UX for the server operator side while also starting vital
@@ -32,15 +33,15 @@ import server.ServerApp;
  */
 public class ServerPanelController implements Initializable{
 	
- 	/** Server panel exit button */
+ 	/**  Server panel exit button. */
 	 @FXML
 	private ImageView exitBtn;
  	
-    /** Console text area used for matrix like logging */
+    /**  Console text area used for logging. */
     @FXML
     private TextArea console;
 
-    /** The db status server. */
+    /** The Database status server. */
     @FXML
     private Label dbStatusServer;
     
@@ -67,14 +68,14 @@ public class ServerPanelController implements Initializable{
     /** The clients info. */
     ObservableList<ClientInfo> clientsInfo;
     
-	/** The stage used for window control */
+	/**  The stage used for window control. */
 	private Stage stage;
    
 	
 	 /**
- 	 * This event invokes when the exit button is pressed
+ 	 * This event invokes when the exit button is pressed.
  	 *
- 	 * @param The corresponding mouse event
+ 	 * @param MouseEvent - not used here
  	 */
  	@FXML
      void exitPressed(MouseEvent event) {
@@ -92,7 +93,8 @@ public class ServerPanelController implements Initializable{
 	 * Initialization of the Server Panel Controller:
 	 * property binding (ip, host, status)
 	 * the thread that periodically scans for new hosts starts here
-	 * the r-scheduler (see report scheduler for more info) compensator begins here
+	 * the r-scheduler (see report scheduler for more info) compensator begins here.
+	 *
 	 * @param location - no use
 	 * @param resources - no use
 	 */

@@ -237,7 +237,7 @@ public class LoginController {
     				CEOFrameController mfc= loader.getController();
     				windowControl = new WindowControl(mfc);
 					mfc.init();
-    				windowControl.setUserControl("/gui/usercontrols/CEOReportsSelection.fxml");
+    				windowControl.setUserControl("/gui/usercontrols/ServiceHomePage.fxml");
         		}
         		Stage newStage = new Stage();
         		Utilities.GenericUtilties.SetWindowMovable(root, newStage);

@@ -340,6 +340,7 @@ public class OrderInformationController implements UserControl {
 			@SuppressWarnings("unused")
 			@Override
 			public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
+				if(newValue == null) return;
 				if(!newValue.equals(oldValue))
 				{
 					if(newValue == null ) return;

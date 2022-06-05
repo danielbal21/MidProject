@@ -51,10 +51,10 @@ public class PDFGenerator {
 	/**
 	 * Creates a bar chart for an income report.
 	 *
-	 * @param width the width
-	 * @param height the height
-	 * @param quarter the quarter
-	 * @return the buffered image
+	 * @param width - chart's width
+	 * @param height - chart's height
+	 * @param quarter - the quarter [1,2,3,4]
+	 * @return the chart as image
 	 */
 	private BufferedImage createBarChartIncome(int width,int height,int quarter)
 	{
@@ -74,6 +74,17 @@ public class PDFGenerator {
 	    return ImageUtil.getRotatedImage(BitmapEncoder.getBufferedImage(chart), 90) ;
 	}
 	
+	/**
+	 * Creates an XY Histogram.
+	 *
+	 * @param width - chart's width
+	 * @param height - chart's height
+	 * @param X - Collection of X values
+	 * @param Y - Collection of Y values
+	 * @param Name - the name of the histogram
+	 * @param chartname - the name of the chart
+	 * @return The chart as image
+	 */
 	private BufferedImage createHistogram(int width,int height,ArrayList<Integer> X,ArrayList<Integer> Y,String name,String chartname)
 	{
 	    XYChart chart = new XYChartBuilder().width((int)(height)).height((int)(width * 0.7f)).title(name).xAxisTitle("Month").yAxisTitle("Number of complaints").build();
@@ -90,12 +101,13 @@ public class PDFGenerator {
 	}
 	
 	/**
-	 * Creates the bar chart complaints.
+	 * Creates the bar chart of the complaints result
 	 *
-	 * @param width the width
-	 * @param height the height
-	 * @param quarter the quarter
-	 * @return the buffered image
+	 * @param width - width of the chart
+	 * @param height - height of the chart
+	 * @param X - collection of x axis values
+	 * @param Y - collection of y axis values
+	 * @return the chart as image
 	 */
 	private BufferedImage createBarChartComplaints(int width,int height,ArrayList<Integer> X,ArrayList<Integer> Y)
 	{
@@ -113,12 +125,12 @@ public class PDFGenerator {
 	}
 	
 	/**
-	 * Creates the bar chart order.
+	 * Creates the bar chart for the orders
 	 *
-	 * @param width the width
-	 * @param height the height
-	 * @param histo the histo
-	 * @return the buffered image
+	 * @param width - width of the chart
+	 * @param height - height of the chart
+	 * @param histo - hashmap item_type->integer as the histogram function
+	 * @return the bar chart as image
 	 */
 	private BufferedImage createBarChartOrder(int width,int height,HashMap<ItemType,Integer> histo)
 	{
@@ -139,14 +151,7 @@ public class PDFGenerator {
 		
 	    return ImageUtil.getRotatedImage(BitmapEncoder.getBufferedImage(chart), 90) ;
 	}
-	
-	/**
-	 * Creates the histogram.
-	 *
-	 * @param width the width
-	 * @param height the height
-	 * @return the buffered image
-	 */
+	/*
 	private BufferedImage createHistogram(int width,int height)
 	{
 	    // Create Chart
@@ -165,14 +170,8 @@ public class PDFGenerator {
 	    //chart.addSeries("histogram 2", histogram2.getxAxisData(), histogram2.getyAxisData());
 	    return BitmapEncoder.getBufferedImage(chart);
 	}
-	
-	/**
-	 * Creates the chart.
-	 *
-	 * @param width the width
-	 * @param height the height
-	 * @return the buffered image
-	 */
+	*/
+/*
 	@SuppressWarnings("unused")
 	private BufferedImage createChart(int width, int height) {
 		  XYChart chart = new XYChartBuilder().xAxisTitle("X").yAxisTitle("Y").width(width).height(height)
@@ -188,6 +187,7 @@ public class PDFGenerator {
 		 * @param numPoints the num points
 		 * @return the random numbers
 		 */
+	/*
 		private double[] getRandomNumbers(int numPoints) {
 		  double[] y = new double[numPoints];
 		  for (int i = 0; i < y.length; i++) {
@@ -196,14 +196,14 @@ public class PDFGenerator {
 		  return y;
 		}
 		
-		
+	*/
 	/**
 	 * Creates the order report histogram.
 	 *
-	 * @param branch the branch
-	 * @param date the date
-	 * @param histo the histo
-	 * @return the byte[]
+	 * @param branch the branch of the report
+	 * @param date the date of the report
+	 * @param histo the histogram function (item to price)
+	 * @return the byte[] stream of a pdf file
 	 */
 	public byte[] createOrderReportHistogram(String branch,String date,HashMap<ItemType,Integer> histo) {
 		    try (PDDocument document = new PDDocument()) {
@@ -261,16 +261,11 @@ public class PDFGenerator {
 	/**
 	 * Creates the income report table.
 	 *
-	 * @param branch the branch
-	 * @param date the date
-	 * @param data the data
-	 * @param dates the dates
-	 * @return the byte[]
-	 */
-	/*
-	 * 	private void drawTable(PDPageContentStream contentStream,int cols,int rows,int x,
-			int y,int cellwidth,int cellheight,String[] header)
-	 * 
+	 * @param branch - the branch of the report
+	 * @param date the date of the report
+	 * @param data the periodic income sampling (day to day income)
+	 * @param dates the dates the correspond to the periodic income
+	 * @return the byte[] stream as pdf file
 	 */
 	public byte[] createIncomeReportTable(String branch, String date, ArrayList<Integer[]> data,ArrayList<LocalDate> dates) {
 	    try (PDDocument document = new PDDocument()) {
@@ -337,17 +332,17 @@ public class PDFGenerator {
 	/**
 	 * Draw table.
 	 *
-	 * @param document the document
+	 * @param document the pdf document
 	 * @param contentStream the content stream
-	 * @param cols the cols
-	 * @param rows the rows
-	 * @param x the x
-	 * @param y the y
-	 * @param cellwidth the cellwidth
-	 * @param cellheight the cellheight
-	 * @param header the header
-	 * @param data the data
-	 * @param dates the dates
+	 * @param cols the number of cols in the table
+	 * @param rows the rows in the table
+	 * @param x the x position on the pdf document
+	 * @param y the y position on the pdf document
+	 * @param cellwidth the width of each table cell
+	 * @param cellheight the height of each table cell
+	 * @param header the first row data of each cell
+	 * @param data the data to put inside the table (divided by rows cols)
+	 * @param dates the dates that correspond to each data element
 	 */
 	private void drawTable(PDDocument document,PDPageContentStream contentStream,int cols,int rows,int x,
 			int y,int cellwidth,int cellheight,String[] header,ArrayList<Integer[]> data,ArrayList<LocalDate> dates)
@@ -408,6 +403,15 @@ public class PDFGenerator {
 		}
 	}
 	
+	/**
+	 * Creates the CEO report for branch.
+	 *
+	 * @param branch the branch which the report is created upon
+	 * @param date the date of the report
+	 * @param X the x
+	 * @param Y the y
+	 * @return the byte[]
+	 */
 	public byte[] createCEOReportForBranch(String branch,String date,ArrayList<Integer> X,ArrayList<Integer> Y) {
 	    try (PDDocument document = new PDDocument()) {
 	      PDPage page = new PDPage(PDRectangle.A4);
@@ -464,12 +468,11 @@ public class PDFGenerator {
 	/**
 	 * Creates the complaint report histogram.
 	 *
-	 * @param path the path
-	 * @param name the name
 	 * @param branch the branch
-	 * @param startDate the start date
-	 * @param endDate the end date
-	 * @return the byte[]
+	 * @param date the date
+	 * @param X - collection of x axis values
+	 * @param Y - collection of y axis values
+	 * @return the byte[] stream as pdf file
 	 */
 	public byte[] createComplaintsReportHistogram(String branch,String date,ArrayList<Integer> X,ArrayList<Integer> Y) {
 	    try (PDDocument document = new PDDocument()) {
@@ -525,16 +528,7 @@ public class PDFGenerator {
 		return null;
 }
 	
-	/**
-	 * Creates the income report table CEO.
-	 *
-	 * @param path the path
-	 * @param name the name
-	 * @param branch the branch
-	 * @param startDate the start date
-	 * @param endDate the end date
-	 * @return the byte[]
-	 */
+/*
 	public byte[] createIncomeReportTableCEO(String path,String name,String branch,String startDate,String endDate) {
 	    try (PDDocument document = new PDDocument()) {
 	      PDPage page = new PDPage(PDRectangle.A4);
@@ -589,4 +583,5 @@ public class PDFGenerator {
 	    }
 		return null;
 }
+*/
 }

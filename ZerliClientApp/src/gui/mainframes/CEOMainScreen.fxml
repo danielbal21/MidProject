@@ -62,6 +62,21 @@
                   <Font name="Maiandra GD" size="53.0" />
                </font>
             </Label>
+            <Button layoutX="38.0" layoutY="199.0" mnemonicParsing="false" onAction="#serviceAnalyzerPressed" stylesheets="@application.css" text="Service Analyzer">
+               <font>
+                  <Font name="Maiandra GD" size="12.0" />
+               </font>
+               <styleClass>
+                  <String fx:value="Reg-btn" />
+                  <String fx:value="pressbtn" />
+               </styleClass>
+            </Button>
+            <Button layoutX="52.0" layoutY="148.0" mnemonicParsing="false" onAction="#reportsPressed" text="View Reports">
+               <styleClass>
+                  <String fx:value="Reg-btn" />
+                  <String fx:value="pressbtn" />
+               </styleClass>
+            </Button>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="controlContainer" layoutX="235.0" layoutY="125.0" prefHeight="663.0" prefWidth="959.0" style="-fx-border-color: black;" />

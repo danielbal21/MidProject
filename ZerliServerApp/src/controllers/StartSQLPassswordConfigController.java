@@ -20,6 +20,7 @@ import server.*;
 
 import java.io.IOException;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class StartSQLPassswordConfigController serves as
  * the controller part of the enter sql password GUI
@@ -48,7 +49,7 @@ public class StartSQLPassswordConfigController {
     @FXML
     private Label enterSQLLabel;
     
-    /** No practical use */
+    /**  No practical use. */
     @FXML
     private AnchorPane AncorePane;
 
@@ -61,7 +62,8 @@ public class StartSQLPassswordConfigController {
      * In order to progress to the server panel the operator must
      * enter a valid mysql-db password
      * upon success the Server Panel window will open
-     * @param ActionEvent handler - has no use here
+     *
+     * @param event the event
      */
     @FXML
     void connectPressed(ActionEvent event) {
@@ -102,9 +104,9 @@ public class StartSQLPassswordConfigController {
 
     /**
      * This event invokes when the server operator shuts down
-     * the server
+     * the server.
      *
-     * @param MouseEvent handler - no use here
+     * @param event the event
      */
     @FXML
     void exitPressed(MouseEvent event) {
@@ -116,7 +118,7 @@ public class StartSQLPassswordConfigController {
 	 * Standard setter:
 	 * Sets the stage.
 	 *
-	 * @param The stage to be set
+	 * @param stage the new stage
 	 */
 	public void setStage(Stage stage) {
 		this.stage= stage;
@@ -125,9 +127,9 @@ public class StartSQLPassswordConfigController {
     
     /**
      * An alternative way to perform enter using
-     * only the ENTER key in the keyboard
+     * only the ENTER key in the keyboard.
      *
-     * @param KeyEvent handler - used to determine which key was pressed
+     * @param event the event
      */
     @FXML
     void EnterPressed(KeyEvent event) {

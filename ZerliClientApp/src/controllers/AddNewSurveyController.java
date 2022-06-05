@@ -110,6 +110,22 @@ public class AddNewSurveyController implements UserControl {
     void addSurvey_Cllick(ActionEvent event) {
     	
 	    	index=0;
+	    	if(surveyName.getText().length() < 4) {
+				addSurveyLabel.setText("**Survey name must be longer than 3 letters");
+				addSurveyLabel.setVisible(true);
+	    		new Thread(new Runnable() {
+					@Override
+					public void run() {
+						try {
+							Thread.sleep(2000);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+						addSurveyLabel.setVisible(false);
+					}
+				}).start();
+	    		return;
+	    	}
 	    	for (TextField textField : QuestionTextArray) {
 				if(textField.getText().equals(""))
 				{

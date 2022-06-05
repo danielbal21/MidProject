@@ -40,8 +40,13 @@ public class CEOFrameController implements IContainable {
      * @param event the event
      */
     @FXML
-    void bellBtn(MouseEvent event) {
-    	
+    void reportsPressed(ActionEvent event) {
+		LoginController.windowControl.setUserControl("/gui/usercontrols/CEOReportsSelection.fxml");
+    }
+
+    @FXML
+    void serviceAnalyzerPressed(ActionEvent event) {
+		LoginController.windowControl.setUserControl("/gui/usercontrols/ViewExpertReports.fxml");
     }
 
     /**
@@ -66,7 +71,7 @@ public class CEOFrameController implements IContainable {
      */
     @FXML
     void homePressed(MouseEvent event) {
-    	
+		LoginController.windowControl.setUserControl("/gui/usercontrols/ServiceHomePage.fxml");
     }
 
     /**

@@ -3,9 +3,10 @@
  */
 package ProtocolHandler;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class ResponseWrapper is used to return a response
- * from an IOperationd
+ * from an IOperationd.
  */
 public class ResponseWrapper {
 	
@@ -15,7 +16,7 @@ public class ResponseWrapper {
 	/**
 	 * Instantiates a new response wrapper.
 	 *
-	 * @param The response to be set
+	 * @param response the response
 	 */
 	public ResponseWrapper(Object response)
 	{
@@ -33,7 +34,7 @@ public class ResponseWrapper {
 	/**
 	 * Sets the response.
 	 *
-	 * @param The response to be set
+	 * @param Response the response
 	 */
 	public void SetResponse(Object Response)
 	{
