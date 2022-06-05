@@ -16,7 +16,6 @@ public class SurveyMangerHomeScreenController implements UserControl {
 
     /**
      * Open the Add new survey window.
-     *
      * @param event - button pressed 
      */
     @FXML
@@ -26,7 +25,6 @@ public class SurveyMangerHomeScreenController implements UserControl {
 
     /**
      * Open the Insert survey Answers window.
-     *
      * @param event - button pressed 
      */
     @FXML
