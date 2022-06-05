@@ -287,7 +287,7 @@ public class PDFGenerator {
 	      }
 	      catch(Throwable e)
 	      {
-	    	  System.out.println("caught patch");
+	    	  //System.out.println("caught patch");
 	      }
 	      contentStream.showText("Income Report");
 	      contentStream.endText();
@@ -324,7 +324,7 @@ public class PDFGenerator {
 	    catch(IOException e)
 	    {
 	    	e.printStackTrace();
-	    	System.out.println("nana");
+	    	//System.out.println("nana");
 	    }
 		return null;
 }

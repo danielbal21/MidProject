@@ -2,19 +2,19 @@ package Entities;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Enum ReportType.
+ * The Enum ReportType, all reports type in the system.
  */
 public enum ReportType {
 	
-	/** The income. */
+	/** income report. */
 	income,
 	
-	/** The order. */
+	/** orders report. */
 	order,
 	
-	/** The service. */
+	/** customer service report. */
 	service,
 	
-	/** The ceo. */
+	/** CEO report. */
 	ceo,
 }

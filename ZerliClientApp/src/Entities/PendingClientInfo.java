@@ -5,14 +5,14 @@ import java.util.Arrays;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class PendingClientInfo.
+ * 
  */
 public class PendingClientInfo implements Serializable{
 	
 	/** The User ID. */
 	private String UserID;
 	
-	/** The id. */
+	/** The id number of the user. */
 	private String ID;
 	
 	/** The first name. */
@@ -27,19 +27,19 @@ public class PendingClientInfo implements Serializable{
 	/** The phone. */
 	private String phone;
 	
-	/** The credit phrases. */
+	/** The credit phrases,credit card divide to 4 phrases . */
 	private String[] creditPhrases;
 	
-	/** The cvv. */
+	/** The cvv of the credit card. */
 	private String CVV;
 	
-	/** The expiration month. */
+	/** The expiration month of the credit card. */
 	private String expirationMonth;
 	
-	/** The expiration year. */
+	/** The expiration year  of the credit card. */
 	private String expirationYear;
 	
-	/** The password. */
+	/** The password of the user to enter the system. */
 	private String password;
 		
 	/**
@@ -95,7 +95,7 @@ public class PendingClientInfo implements Serializable{
 	/**
 	 * Gets the string credit phrases.
 	 *
-	 * @return the string credit phrases
+	 * @return the string credit phrases as 1 string
 	 */
 	public String getStringCreditPhrases() {
 		return creditPhrases[0]+creditPhrases[1]+creditPhrases[2]+creditPhrases[3];

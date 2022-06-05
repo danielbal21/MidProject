@@ -100,7 +100,6 @@ public class ServerConnSQL {
 			logindetails[0] = Loggedin;
 			logindetails[1] = access;
 			logindetails[2] =role;
-			System.out.println(logindetails);
 			Server.Log("Database", "Executing Authenticate: SUCCESS");
 			return logindetails;
 			
@@ -122,7 +121,6 @@ public class ServerConnSQL {
 			stmt.setString(1, username);
 			stmt.executeUpdate();
 		} catch (SQLException e1) {
-			System.err.println("Failed on LoggedOut()");
 			e1.printStackTrace();
 		}
 	}
@@ -140,7 +138,6 @@ public class ServerConnSQL {
 			stmt.setString(1, username);
 		} 
 		catch (SQLException e1) {
-            System.err.println("Failed on createStatement()");
 			e1.printStackTrace();
 		}
 		ArrayList<Integer> quantityList=new ArrayList<Integer>();
@@ -152,15 +149,13 @@ public class ServerConnSQL {
 			 	}
 		 }
 		 catch (Exception e) {
-	            System.err.println("Got an exception! ");
-	            System.err.println(e.getMessage());
+	            e.printStackTrace();
 	        }
 		try {
 			stmt = conn.prepareStatement("SELECT * FROM items WHERE item_id IN  (SELECT item_id FROM Cart_item WHERE cart_id=(SELECT cart_id FROM carts WHERE user_id= ?)) AND isAvailable=1");
 			stmt.setString(1, username);
 		} 
 		catch (SQLException e1) {
-            System.err.println("Failed on createStatement()");
 			e1.printStackTrace();
 		}
 		
@@ -261,10 +256,8 @@ public class ServerConnSQL {
             	}
      
 	        } catch (Exception e) {
-	            System.err.println("Got an exception! ");
-	            System.err.println(e.getMessage());
+	            e.printStackTrace();
 	        }
-		 System.out.println("Get Cart Items!");
 		
 	}
 	
@@ -284,11 +277,8 @@ public class ServerConnSQL {
 			stmt.executeUpdate();
 		} catch (SQLException e) {
     		Server.Log("Database", "Executing RemoveItemByID: FAILED");
-            System.err.println("Got an exception! ");
-            System.err.println(e.getMessage());
-            System.err.println(e.getStackTrace());
+    		e.printStackTrace();
 		}	
-		 System.out.println("Remove Item By ID!");
 	}
 	
 	/**
@@ -306,7 +296,6 @@ public class ServerConnSQL {
 			stmt.setInt(1, id);
 			} 
 		catch (SQLException e1) {
-            System.err.println("Failed on createStatement()");
 			e1.printStackTrace();
 		}
 		Blob image;
@@ -336,11 +325,8 @@ public class ServerConnSQL {
 	            }
 	        } catch (Exception e) {
 	    		Server.Log("Database", "Executing GetItemByID: FAILED");
-	            System.err.println("Got an exception! ");
-	            System.err.println(e.getMessage());
-	            System.err.println(e.getStackTrace());
+	    		e.printStackTrace();
 	        }
-		 System.out.println("Get Items By ID!");
 		 return item;
 	}
 
@@ -357,7 +343,6 @@ public class ServerConnSQL {
 			stmt = conn.prepareStatement("SELECT * FROM items where catalog_type=? AND isAvailable=1");
 			stmt.setString(1, catalogType.toString());
 		} catch (SQLException e1) {
-			System.err.println("Failed on createStatement()");
 			e1.printStackTrace();
 		}
 		Blob image;
@@ -386,11 +371,8 @@ public class ServerConnSQL {
 			}
 		} catch (Exception e) {
 			Server.Log("Database", "Executing GetCatalogItems: FAILED");
-			System.err.println("Got an exception! ");
-			System.err.println(e.getMessage());
-			System.err.println(e.getStackTrace());
+			e.printStackTrace();
 		}
-		System.out.println("Get Catalog Items!");
 	}
 
 	/**
@@ -404,7 +386,7 @@ public class ServerConnSQL {
 		PreparedStatement stmt = null;
 		ResultSet rs;
 		try {
-			stmt = conn.prepareStatement("SELECT Distinct branch_name FROM branch_employees");
+			stmt = conn.prepareStatement("SELECT Distinct branch_name FROM branch_employees WHERE branch_name != 'zerli'");
 			rs = stmt.executeQuery();
 			while (rs.next())
 				branches.add(rs.getString(1));
@@ -510,7 +492,6 @@ public class ServerConnSQL {
            	while(rs.next())
            	{
            		orderID = rs.getInt(1);
-           		System.out.println(orderID);
            	}
            	if(orderID == -1){
         		Server.Log("Database", "Executing InsertOrder: FAILED could not track OrderID");
@@ -605,7 +586,6 @@ public class ServerConnSQL {
 			} else
 				return rs.getString(1);
 		} catch (SQLException e1) {
-			System.err.println("Failed on GetManagerBranch()");
 			e1.printStackTrace();
 			return "";
 
@@ -854,10 +834,8 @@ public class ServerConnSQL {
            		
 		} 
 		catch (SQLException e1) {
-            System.err.println("Failed on AddToCart()");
 			e1.printStackTrace();
 		}
-		 System.out.println("Add to cart I"+ item_id + " Q="+ quantity);
 		 return quantity;
 		
 	}
@@ -968,7 +946,6 @@ public class ServerConnSQL {
 		
 		} 
 		catch (SQLException e1) {
-			System.err.println("Failed on GetAllCustomerOrders()");
 			e1.printStackTrace();
 		}
 		
@@ -990,12 +967,9 @@ public class ServerConnSQL {
 			stmt.setInt(1, data);
 			stmt.setString(2, username);
 			stmt.executeUpdate();
-			System.out.println("Delete item");
 		} catch (SQLException e1) {
-			System.err.println("Failed on DeleteItemFromCart()");
 			e1.printStackTrace();
 		}
-		System.out.println("Delete Item From Cart!");
 
 	}
 
@@ -1042,7 +1016,6 @@ public class ServerConnSQL {
 			stmt.setInt(1, num);
 			stmt.executeUpdate();
 		} catch (SQLException e1) {
-			System.err.println("Failed on UpdateNotification()");
 			e1.printStackTrace();
 		}
 	}
@@ -1111,7 +1084,6 @@ public class ServerConnSQL {
 			
 			
 		} catch (SQLException e1) {
-			System.err.println("Failed on EndOrder()");
 			e1.printStackTrace();
 		}
 		
@@ -1135,7 +1107,6 @@ public class ServerConnSQL {
            	stmt.executeUpdate(); 
 			}
 		catch (SQLException e1) {
-            System.err.println("Failed on cancelOrder()");
 			e1.printStackTrace();
 		}
 	}
@@ -1156,10 +1127,8 @@ public class ServerConnSQL {
            	stmt.executeUpdate(); 
 			}
 		catch (SQLException e1) {
-            System.err.println("Failed on resetNewCustomer()");
 			e1.printStackTrace();
 		}
-		System.out.println("RESET new customer for "+user_id);
 	} 
 
 	/**
@@ -1205,8 +1174,7 @@ public class ServerConnSQL {
 		 
 		 }
 		 catch (Exception e) {
-	            System.err.println("Got an exception! ");
-	            System.err.println(e.getMessage());
+	            e.printStackTrace();
 	        }		
 	}
 
@@ -1226,10 +1194,8 @@ public class ServerConnSQL {
            
 		} 
 		catch (SQLException e1) {
-            System.err.println("Failed on DeleteItemFromCart()");
 			e1.printStackTrace();
 		}
-		System.out.println("Delete item from newItemList !");	
 	}
 
 	/**
@@ -1251,11 +1217,8 @@ public class ServerConnSQL {
            	stmt.executeUpdate(); 
 		} 
 		catch (SQLException e1) {
-            System.err.println("Failed on DeleteItemFromCart()");
 			e1.printStackTrace();
 		}
-		System.out.println("Delete item from newItemList !");	
-		
 	}
 
 	/**
@@ -1280,10 +1243,8 @@ public class ServerConnSQL {
            	stmt.executeUpdate(); 
 		} 
 		catch (SQLException e1) {
-            System.err.println("Failed on DeleteAllnewItemFromCart()");
 			e1.printStackTrace();
 		}
-		System.out.println("Delete All new item from cart !");	
 		
 		
 	}
@@ -1390,7 +1351,6 @@ public class ServerConnSQL {
 		PreparedStatement stmt;
 		try 
 		{
-			System.out.println(String.format("%s %s %s %s",reportType.toString(),isMonthly,branch,reportDate));
 			stmt = conn.prepareStatement("SELECT report FROM reports WHERE date = ? AND is_monthly = ? AND branch = ? AND reportType = ?");
 			stmt.setDate(1, reportDate);
 			stmt.setInt(2, isMonthly? 1 : 0);
@@ -1498,7 +1458,7 @@ public class ServerConnSQL {
 		{
 			
 			/*stmt = conn.prepareStatement("SELECT COUNT(distinct order_id) FROM order_item WHERE item_id IN (SELECT item_id FROM items WHERE item_type = ?) AND order_id IN (SELECT order_id FROM orders WHERE DATE(order_date) BETWEEN CAST('2022-04-01' AS DATE) AND CAST('2022-04-31' AS DATE))");*/
-			stmt = conn.prepareStatement("SELECT COUNT(distinct order_id) FROM order_item WHERE item_id IN (SELECT item_id FROM items WHERE item_type = ?) AND order_id IN (SELECT order_id FROM orders WHERE DATE(order_date) BETWEEN ? AND ? AND branch_name = ?)");
+			stmt = conn.prepareStatement("SELECT COUNT(order_id) FROM order_item WHERE item_id IN (SELECT item_id FROM items WHERE item_type = ?) AND order_id IN (SELECT order_id FROM orders WHERE DATE(order_date) BETWEEN ? AND ? AND branch_name = ?)");
 			stmt.setString(1, t.toString());
 			stmt.setDate(2,a);
 			stmt.setDate(3, b);
@@ -1702,7 +1662,7 @@ public class ServerConnSQL {
 	 * @param ID the id of the customer
 	 * @return the pending client info
 	 */
-	public PendingClientInfo GetPendingClient( String ID) {
+	public PendingClientInfo GetPendingClient(String ID) {
 		Server.Log("Database", "Executing GetPendingClient");
 		
 		PreparedStatement stmt;
@@ -1710,24 +1670,33 @@ public class ServerConnSQL {
 		PendingClientInfo clientInfo = new PendingClientInfo();
 		try 
 		{
-			stmt = conn.prepareStatement("SELECT * FROM user_details WHERE id =? AND role = 'customer' "
-					+ "AND NOT EXISTS (SELECT * FROM customer_details WHERE user_id = "
-					+ "(SELECT user_id FROM user_details WHERE id =? AND role = 'customer'))");
-			stmt.setString(1, ID);
-			stmt.setString(2, ID);
+			stmt = conn.prepareStatement("SELECT * FROM user_details WHERE id = ?");
+			stmt.setString(1,ID);
 			rs = stmt.executeQuery();
-			
-			if(rs.next() == false) {
-				return null;
-			}
-			else {
-				clientInfo.setUserID(rs.getString(1));
-				clientInfo.setFirstName(rs.getString(2));
-				clientInfo.setLastName(rs.getString(3));
-				clientInfo.setID(rs.getString(4));
-				clientInfo.setEmail(rs.getString(5));
-				clientInfo.setPhone(rs.getString(6));
+			if(rs.next())
+			{
+				stmt = conn.prepareStatement("SELECT * FROM user_details WHERE id =? AND role = 'customer' "
+						+ "AND NOT EXISTS (SELECT * FROM customer_details WHERE user_id = "
+						+ "(SELECT user_id FROM user_details WHERE id =? AND role = 'customer'))");
+				stmt.setString(1, ID);
+				stmt.setString(2, ID);
+				rs = stmt.executeQuery();
 				
+				if(rs.next() == false) {
+					return null;
+				}
+				else {
+					clientInfo.setUserID(rs.getString(1));
+					clientInfo.setFirstName(rs.getString(2));
+					clientInfo.setLastName(rs.getString(3));
+					clientInfo.setID(rs.getString(4));
+					clientInfo.setEmail(rs.getString(5));
+					clientInfo.setPhone(rs.getString(6));
+				}
+			}
+			else
+			{
+				clientInfo.setUserID("-1");
 			}
 		} 
 		catch (SQLException e) 
@@ -1749,7 +1718,6 @@ public class ServerConnSQL {
 	 */
 	public void ActivateClient(PendingClientInfo clientInfo, String userID) {
 		Server.Log("Database", "Executing ActivateClient");
-		System.out.println("Start");
 		PreparedStatement stmt;
 		try 
 		{
@@ -1776,7 +1744,6 @@ public class ServerConnSQL {
 			e.printStackTrace();
 			Server.Log("Database", "Executing ActivateClient: FAILED");
 		}
-		System.out.println("Done");
 		Server.Log("Database", "Executing ActivateClient: SUCCESS");
 		
 	}

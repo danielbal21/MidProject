@@ -94,11 +94,12 @@
 }
 
 .Reg-btn:hover {
-		-fx-background-color: #FFFFFF;
+	-fx-background-color: #FFFFFF;
 	-fx-cursor: hand;
-	 -fx-border-width: 2;
+	-fx-border-width: 2;
 	-fx-border-radius: 10px;
-	-fx-effect: linear-gradient(to bottom, #1dbbdd44, #93f9b944);
+	-fx-scale-y: 1.12;
+	-fx-scale-x: 1.12;
 }
 
 .Reg-btn:active {
@@ -117,6 +118,12 @@
 
 
 .table-view {
+    -fx-background-color: transparent;
+}
+
+.lview {
+	-fx-font-family: 'Maiandra GD';
+	-fx-font-size: 20px;
     -fx-background-color: transparent;
 }
 

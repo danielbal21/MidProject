@@ -112,7 +112,19 @@ public class ManagerAddNewCustomerController implements UserControl{
     
     /** The pending info. */
     PendingClientInfo pendingInfo;
-
+    
+    @FXML
+    void helpBtnPressed(ActionEvent event) {
+		Alert confirmAlert = new Alert(AlertType.NONE);
+		confirmAlert.setTitle("Help - Add New User");
+		confirmAlert.setContentText("Use the ID Box to insert the id of the customer you seek to add"
+				+ "\nIf your id is valid a sub window will open, prompting you to add"
+				+ "\npassword and full credit card details");
+		ButtonType ok = new ButtonType("OK", ButtonData.OK_DONE);
+		confirmAlert.getDialogPane().getButtonTypes().add(ok);
+		confirmAlert.showAndWait();
+    }
+    
     /**
      * Search pressed.
      * When pressed search ,search the customer by his id and if he is exist show his data 
@@ -123,7 +135,7 @@ public class ManagerAddNewCustomerController implements UserControl{
 		ClientInfoWindow.setVisible(false);
 
     	String IDtxt = IDSearch.getText();
-    	
+    	onExit();
     	if(IDtxt.length() == 0 ) {
     		searchErrorLBl.setText("Please Enter ID");
     		return;
@@ -138,6 +150,11 @@ public class ManagerAddNewCustomerController implements UserControl{
     	pendingInfo = (PendingClientInfo)ClientApp.ProtocolHandler.GetResponse(RequestType.GetPendingClient);
     	if(pendingInfo == null) {
     		searchErrorLBl.setText("Customer already registered");
+    		searchErrorLBl.setVisible(true);
+    	}
+    	else if(pendingInfo.getUserID().equals("-1"))
+    	{
+    		searchErrorLBl.setText("Customer does not exist");
     		searchErrorLBl.setVisible(true);
     	}
     	else { 

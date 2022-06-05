@@ -242,7 +242,7 @@ public class SurveyHistogramController implements UserControl {
 	      contentStream.drawImage(logoImage, 5, pageHeight-80,150,80);
 	      //contentStream.drawImage(logoImage, 225, 750,150,80); 
 	      contentStream.beginText();
-	      contentStream.newLineAtOffset(200, 715);  
+	      contentStream.newLineAtOffset(50, 715);  
     	  contentStream.setFont(PDType0Font.load(document, new File("C:\\Windows\\Fonts\\arial.ttf")), 30);
 	      contentStream.showText(survey.getContent()+"'s histogram"); 
 	      contentStream.endText();

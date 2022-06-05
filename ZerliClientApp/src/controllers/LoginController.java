@@ -56,7 +56,7 @@ public class LoginController {
     void exitPressed(MouseEvent event) {
     	try {
 			ClientApp.ClientConnection.closeConnection();
-			System.out.println(ClientApp.ClientConnection.isConnected());
+			//System.out.println(ClientApp.ClientConnection.isConnected());
 			System.exit(0);
 		} catch (IOException e) {e.printStackTrace();}
     }

@@ -123,5 +123,14 @@
             <String fx:value="pressbtn" />
          </styleClass>
       </Button>
+      <Button layoutX="39.0" layoutY="24.0" mnemonicParsing="false" onAction="#helpBtnPressed" prefHeight="42.0" prefWidth="66.0" text="Help">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <styleClass>
+            <String fx:value="Reg-btn" />
+            <String fx:value="pressbtn" />
+         </styleClass>
+      </Button>
    </children>
 </AnchorPane>

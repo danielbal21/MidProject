@@ -145,6 +145,7 @@ public class CustomerFrameController implements IContainable{
 				if(Integer.parseInt(newValue)>Integer.parseInt(oldValue))
 				{
 					File tone= new File("src\\tones\\Messenger notification tone.mp3");
+					//File tone= new File("src\\tones\\MiSam.mp3");
 					mediaPlay =new MediaPlayer(new javafx.scene.media.Media(tone.toURI().toString()));
 					mediaPlay.play();				
 				}
@@ -206,7 +207,7 @@ public class CustomerFrameController implements IContainable{
     @FXML
     void cartPressed(MouseEvent event) {
     	if(ClientApp.UserStatus == Access.inactive)  {
-    		Alert confirmAlert = new Alert(AlertType.ERROR);
+    		Alert confirmAlert = new Alert(AlertType.NONE);
 			confirmAlert.setTitle("Not registered customer");
 			confirmAlert.setContentText("Your account is inactive\nContact Zerli's administration");
 			ButtonType ok = new ButtonType("OK", ButtonData.OK_DONE);
@@ -228,7 +229,7 @@ public class CustomerFrameController implements IContainable{
     	ClientApp.ProtocolHandler.Invoke(RequestType.SetLogOut,null,null,false);
     	try {
 			ClientApp.ClientConnection.closeConnection();
-			System.out.println(ClientApp.ClientConnection.isConnected());
+			//System.out.println(ClientApp.ClientConnection.isConnected());
 			System.exit(0);
 		} catch (IOException e) {e.printStackTrace();}
     }

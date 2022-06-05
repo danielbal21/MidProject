@@ -107,7 +107,7 @@ public class CustomerServiceFrameController implements IContainable {
     	try {
     		task.interrupt();
 			ClientApp.ClientConnection.closeConnection();
-			System.out.println(ClientApp.ClientConnection.isConnected());
+			//System.out.println(ClientApp.ClientConnection.isConnected());
 			System.exit(0);
 		} catch (IOException e) {e.printStackTrace();}
     }

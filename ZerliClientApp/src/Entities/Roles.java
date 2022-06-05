@@ -2,7 +2,7 @@ package Entities;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Enum Roles.
+ * The Enum Roles, all user types in the system.
  */
 public enum Roles {
 	
@@ -15,7 +15,7 @@ public enum Roles {
 	/** The customer. */
 	customer, 
 	
-	/** The delivery. */
+	/** The delivery guy. */
 	delivery, 
 	
 	/** The marketing. */
@@ -25,6 +25,5 @@ public enum Roles {
 	service,
 	
 	/** The expert. */
-	
 	expert,
 }

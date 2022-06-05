@@ -11,6 +11,10 @@ import client.ClientApp;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -53,7 +57,18 @@ public class CustomerServicePostComplaintController implements UserControl {
     void backPressed(ActionEvent event) {
     	LoginController.windowControl.setUserControl("/gui/usercontrols/CustomerServiceViewComplaints.fxml");
     }
-
+    @FXML
+    void helpBtnPressed(ActionEvent event) {
+		Alert confirmAlert = new Alert(AlertType.NONE);
+		confirmAlert.setTitle("Help - Complaint Issue");
+		confirmAlert.setContentText("Enter the id of the complaining customer in the box \"Complainant ID\""
+				+ "\nSelect the branch in the \"Branch\" Box"
+				+ "\nEnter the desired feedback"
+				+ "\nPress Post");
+		ButtonType ok = new ButtonType("OK", ButtonData.OK_DONE);
+		confirmAlert.getDialogPane().getButtonTypes().add(ok);
+		confirmAlert.showAndWait();
+    }
     /**
      * Post press.
      * When pressed post the complain get checked and update in to the system 

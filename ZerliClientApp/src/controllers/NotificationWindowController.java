@@ -157,13 +157,13 @@ public class NotificationWindowController implements UserControl {
 	@Override
 	public void onEnter()
 	{
-    	allNotificationsShow = true;
+    	allNotificationsShow = false;
     	notificationNumber.setCellValueFactory(new PropertyValueFactory<NotificationInTable, Integer>("notificationnumber"));
 		sendFrom.setCellValueFactory(new PropertyValueFactory<NotificationInTable, String>("from"));
 		content.setCellValueFactory(new PropertyValueFactory<NotificationInTable, String>("content"));
 		status.setCellValueFactory(new PropertyValueFactory<NotificationInTable, String>("status"));
 		AllnotificationTableList = (ObservableList<NotificationInTable>) LoginController.windowControl.peekPipe("All Notification");
-    	notificationsCenterTable.setItems(AllnotificationTableList);
+    	//notificationsCenterTable.setItems(AllnotificationTableList);
     	
 		thread =new Thread(new Runnable() {
 			@Override
@@ -191,8 +191,8 @@ public class NotificationWindowController implements UserControl {
 		});
 		thread.start();
 		ErrorLabel.setVisible(false);
-    	changeNotificationsLbl.setText("Show All Notifications");
-    	NotificationsStatusBtn.setText("Show Unread Notifications");
+    	changeNotificationsLbl.setText("Show Unread Notifications");
+    	NotificationsStatusBtn.setText("Show All Notifications");
 	}
 	
 	/**

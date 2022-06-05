@@ -5,7 +5,11 @@ package controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonBar.ButtonData;
 import Entities.CatalogType;
 
 /**
@@ -61,7 +65,18 @@ public class CustomerHomePageController implements UserControl{
     	LoginController.windowControl.putPipe("catalog", CatalogType.new_item);
     	LoginController.windowControl.setUserControl("/gui/usercontrols/CustomerCatalogViewer.fxml");
     }
-
+    
+    @FXML
+    void helpBtnPressed(ActionEvent event) {
+		Alert confirmAlert = new Alert(AlertType.NONE);
+		confirmAlert.setTitle("Help - Catalog Selection");
+		confirmAlert.setContentText("There are 3 buttons ahead:\n choose Pre-defined products if you seek already made for you items"
+				+ "\nchoose Single item if you seek more elemental items that can be made into products"
+				+ "\nchoose build your private products if you seek to construct a product from both catalog mentioned above");
+		ButtonType ok = new ButtonType("OK", ButtonData.OK_DONE);
+		confirmAlert.getDialogPane().getButtonTypes().add(ok);
+		confirmAlert.showAndWait();
+    }
 	/**
 	 * On enter.
 	 */

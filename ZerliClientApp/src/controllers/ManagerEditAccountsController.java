@@ -210,7 +210,7 @@ public class ManagerEditAccountsController implements UserControl{
 		
 		ArrayList<String> employeeRoleList = new ArrayList<>();
 		for (Roles role : Roles.values()) {
-			if(role == Roles.ceo || role == Roles.manager || role == Roles.customer  ) continue;
+			if(role == Roles.delivery || role == Roles.service)
 			employeeRoleList.add(GenericUtilties.RolesToString(role));
         }
 		

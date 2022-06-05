@@ -13,13 +13,17 @@ import client.ClientApp;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
@@ -183,7 +187,21 @@ public class ItemEditorController implements UserControl {
     	ClientApp.ProtocolHandler.Invoke(RequestType.UpdateItem, currentEdited, null, false);
 		 cancelBtn_press(null);
     }
-
+    @FXML
+    void helpBtnPressed(ActionEvent event) {
+		Alert confirmAlert = new Alert(AlertType.NONE);
+		confirmAlert.setTitle("Help - Item Editor");
+		confirmAlert.setContentText("Use the fields below to update your item data"
+				+ "\nName for the item displayed name"
+				+ "\nPrice for the price without discount"
+				+ "\nCatalog type to be located in: items or products"
+				+ "\nItem Type and Color"
+				+ "\nYou must specify a valid sale price however you may uncheck"
+				+ "\nThe \"On Sale\" checkbox to prevent it from being active");
+		ButtonType ok = new ButtonType("OK", ButtonData.OK_DONE);
+		confirmAlert.getDialogPane().getButtonTypes().add(ok);
+		confirmAlert.showAndWait();
+    }
 	/**
 	 * On enter.
 	 * The first action to run - initialize the table columns and get Item data from the Data Base

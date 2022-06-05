@@ -185,7 +185,18 @@ public class ReportSelectorController implements UserControl {
     	else
     		OpenReportViewer(reportMain);
     }
-    
+    @FXML
+    void helpBtnPressed(ActionEvent event) {
+		Alert confirmAlert = new Alert(AlertType.NONE);
+		confirmAlert.setTitle("Help - Report Viewer");
+		confirmAlert.setContentText("Choose the desired report type using the combo box \"Report Type\""
+				+ "\nCheck the \"Compare Box\" if you wish to compare two reports"
+				+ "\nCheck the desired checkbox for monthly report or quarterly report"
+				+ "\nSelect date and press View Report");
+		ButtonType ok = new ButtonType("OK", ButtonData.OK_DONE);
+		confirmAlert.getDialogPane().getButtonTypes().add(ok);
+		confirmAlert.showAndWait();
+    }
     /**
      * Checks if is input valid - report type, dates, comparing reports.
      * @return true, if is input valid

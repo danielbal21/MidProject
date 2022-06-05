@@ -74,7 +74,7 @@
                   <Font name="Maiandra GD" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="153.0" layoutY="7.0" styleClass="subLabel" text="Monthly">
+            <Label layoutX="159.0" layoutY="7.0" styleClass="subLabel" text="Month">
                <font>
                   <Font name="Maiandra GD" size="14.0" />
                </font>
@@ -121,5 +121,14 @@
             <Font name="Maiandra GD" size="14.0" />
          </font>
       </RadioButton>
+      <Button layoutX="49.0" layoutY="34.0" mnemonicParsing="false" onAction="#helpBtnPressed" prefHeight="42.0" prefWidth="66.0" text="Help">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <styleClass>
+            <String fx:value="Reg-btn" />
+            <String fx:value="pressbtn" />
+         </styleClass>
+      </Button>
    </children>
 </AnchorPane>

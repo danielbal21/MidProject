@@ -12,7 +12,7 @@ import Utilities.GenericUtilties;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class Order.
+ * contain order details to transfer between the server and the client.
  */
 public class Order implements Serializable {
 	
@@ -28,22 +28,22 @@ public class Order implements Serializable {
 	/** The shipping method. */
 	private ShippingMethods shippingMethod;
 	
-	/** The order date. */
+	/** The data which the order been created. */
 	private Timestamp orderDate;
 	
-	/** The shipping date. */
+	/** Estimate shipping date. */
 	private Timestamp shippingDate;
 	
-	/** The branch name. */
+	/** The name of the branch to which the order is associated. */
 	private String branchName;
 	
-	/** The total price. */
+	/** The total price of the order. */
 	private int totalPrice;
 	
-	/** The status. */
+	/** The status of the order use OrderStatus enum. */
 	private OrderStatus status;
 	
-	/** The items. */
+	/** The list of items that make up the order. */
 	private ArrayList<ItemInList> items;
 
 	/** The greeting card. */
@@ -55,19 +55,19 @@ public class Order implements Serializable {
 	/** The address. */
 	private String address;
 	
-	/** The fullname. */
+	/** The full name of the customer. */
 	private String fullname;
 	
-	/** The phone. */
+	/** The phone number of the customer. */
 	private String phone;
 	
-	/** The order date. */
+	/** The order date in string . */
 	private String order_date;
 	
-	/** The shipping date. */
+	/** The shipping date in string . */
 	private String shipping_date;
 	
-	/** The payment method. */
+	/** The payment method use PaymentMethod. */
 	private String payment_method;
 	
 	/** The shipping method. */
