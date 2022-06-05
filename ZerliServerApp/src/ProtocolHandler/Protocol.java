@@ -1,6 +1,3 @@
-/*
- * 
- */
 package ProtocolHandler;
 
 import java.io.IOException;
@@ -9,6 +6,7 @@ import java.util.HashMap;
 import ocsf.server.ConnectionToClient;
 import server.Server;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class Protocol serves the main control of the protocol handler
  * from the server side.
@@ -29,16 +27,16 @@ public class Protocol {
 	/** The definition of failure. */
 	final boolean FAIL = false;
 	
-	/** This HashMap is used to map every requestType to the designated Operation
-	 *  when the Protocol-Handler has identified a request it will perform the mapped operation
-	 *  */
+	/**  This HashMap is used to map every requestType to the designated Operation
+	 *   when the Protocol-Handler has identified a request it will perform the mapped operation. */
 	static HashMap<RequestType,IOperation> Operations = new HashMap<>();
 	
 	/**
 	 * This method is used to register a new command reaction
-	 * This method is used to encapsulate the Operation map from the programmer
-	 * @param The RequestType that will invoke the operation
-	 * @param The operation to be invoked upon a RequestType
+	 * This method is used to encapsulate the Operation map from the programmer.
+	 *
+	 * @param type the type
+	 * @param op the op
 	 */
 	public static void RegisterOperation(RequestType type, IOperation op)
 	{
@@ -47,7 +45,7 @@ public class Protocol {
 	
 	/**
 	 * When a protocol is instantiated it will register
-	 * all the RegisterOperation calls
+	 * all the RegisterOperation calls.
 	 */
 	public Protocol()
 	{
@@ -61,12 +59,12 @@ public class Protocol {
 	 * will be disregarded
 	 * The Protocol-Handler upon receiving an Transaction will peel off the layers
 	 * Parsing the request and information on the way, eventually invoking the operation
-	 * and responding accordingly
-	 * 
-	 * @param The raw object data that was received from the OCSF-Socket
-	 * @param The client that the message was received from
+	 * and responding accordingly.
+	 *
+	 * @param transmission the transmission
+	 * @param sender the sender
 	 * @return true - pass, false - error
-	 * @throws A Detailed exception when something goes wrong
+	 * @throws Exception the exception
 	 */
 	public boolean Handle(Object transmission, ConnectionToClient sender) throws Exception
 	{
@@ -105,10 +103,11 @@ public class Protocol {
 	/**
 	 * The send method is used to respond to the sending client
 	 * After the request has been done
-	 * the send method is logged by the server logger
+	 * the send method is logged by the server logger.
+	 *
 	 * @param client is the original command requester
-	 * @param is the transaction previously created by the protocol handler
-	 * @throws May throw connection related errors
+	 * @param trans the trans
+	 * @throws Exception the exception
 	 */
 	private void send(ConnectionToClient client,Transaction trans) throws Exception
 	{

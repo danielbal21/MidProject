@@ -15,8 +15,19 @@ import org.knowm.xchart.style.Styler.LegendPosition;
 
 import Entities.Survey;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SurveyHistogramGenerator is responsible for the survey histogram generation
+ */
 public class SurveyHistogramGenerator {
 	
+	/**
+	 * Gets the 6 images.
+	 *
+	 * @param listOfSurveyAnswers the list of survey answers
+	 * @param survey the survey
+	 * @return the 6 images
+	 */
 	public ArrayList<byte[]> get6images(ArrayList<int[]> listOfSurveyAnswers, Survey survey)
 	{
 		int i=0;
@@ -27,6 +38,14 @@ public class SurveyHistogramGenerator {
 		} 
 		return listOfimeges;
 	}
+	
+	/**
+	 * Creates the bar chart income.
+	 *
+	 * @param surveyAnswersArray the survey answers array
+	 * @param histogramTitle the histogram title
+	 * @return the byte[]
+	 */
 	private  byte[] createBarChartIncome(int[] surveyAnswersArray, String histogramTitle)
 	{
 		byte[] imageInBytes=null;

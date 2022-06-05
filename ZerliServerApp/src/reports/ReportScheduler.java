@@ -18,15 +18,16 @@ import server.Server;
  */
 public class ReportScheduler {
 	
+	/** The zerli debug. */
 	private final boolean ZERLI_DEBUG = true;
 	
-	/** The dawn of time is used to determine from when to check for missing reports */
+	/**  The dawn of time is used to determine from when to check for missing reports. */
 	private final LocalDate dawnOfTime = LocalDate.of(2022, 1, 1);
 	
-	/** The quarter marks are used for designating the beginning of each quarter */
+	/**  The quarter marks are used for designating the beginning of each quarter. */
 	private final List<Integer> QUARTER_MARKS = Arrays.asList(new Integer[] {1,4,7,10});
 	
-	/** The branches of the Zerli franchise */
+	/**  The branches of the Zerli franchise. */
 	ArrayList<String> branches;
 	
 	/**
@@ -126,7 +127,7 @@ public class ReportScheduler {
 	/**
 	 * Runs the report scheduler automated task
 	 * This will run the compensator and when the compensator is done
-	 * the Interrupt scheduler will step into action
+	 * the Interrupt scheduler will step into action.
 	 */
 	public void Run()
 	{

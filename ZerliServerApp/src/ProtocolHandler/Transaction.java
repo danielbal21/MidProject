@@ -16,7 +16,7 @@ public class Transaction implements Serializable{
 	//Identifier
 	String requestee;
 	
-	/** Is this request is Operate&Respond or Operate Only */
+	/**  Is this request is Operate&Respond or Operate Only. */
 	//Protocol Header
 	boolean _shouldRespond;
 	
@@ -25,13 +25,13 @@ public class Transaction implements Serializable{
 	//Data
 	RequestType requestType;
 	
-	/** The received data object from the client */
+	/**  The received data object from the client. */
 	Object received;
 	
 	/** The parameter constraints sent by the client pinned to the data. */
 	Object params;
 	
-	/** The response to be returned to the client */
+	/**  The response to be returned to the client. */
 	//Response
 	Object response;
 	

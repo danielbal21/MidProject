@@ -5,9 +5,16 @@ import ProtocolHandler.Handlers.CreditParserHandler;
 import ProtocolHandler.Handlers.PingHandler;
 import ProtocolHandler.Handlers.ImageFromServerHandler;
 
+/**
+ * The Class HandlersRegisterer has a single static method that registers a protocol handler to
+ * a request type.
+ */
 public class HandlersRegisterer {
 	
-	/** Register Response Handlers **/
+	/**
+	 *  Register Response Handlers registers a pre created handler to be invoked
+	 *  whenever a request of a certain type is echoed back (see more in IHandler.java)
+	 */
 	
 	public static void RegisterHandlers()
 	{
@@ -60,5 +67,6 @@ public class HandlersRegisterer {
 		Protocol.RegisterHandler(RequestType.SavePDF, null);
 		Protocol.RegisterHandler(RequestType.GetReportByBranch, null);
 		Protocol.RegisterHandler(RequestType.SetComplaintAlerted, null);
+		Protocol.RegisterHandler(RequestType.GetReadySurveys, null);
 	}
 }

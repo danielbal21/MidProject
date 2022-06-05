@@ -5,6 +5,7 @@ package ProtocolHandler;
 
 import ProtocolHandler.Operations.*;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class RequestRegisterer has one method and is used
  * to encapsulate internal ProtocolHandler operations.
@@ -69,5 +70,6 @@ public class RequestRegisterer {
 		Protocol.RegisterOperation(RequestType.SavePDF, new SavePDFOperation());
 		Protocol.RegisterOperation(RequestType.GetReportByBranch, new GetReportByBranchOperation());
 		Protocol.RegisterOperation(RequestType.SetComplaintAlerted, new SetComplaintAlertedOperation());
+		Protocol.RegisterOperation(RequestType.GetReadySurveys, new GetReadySurveysOperation());
 	}
 }

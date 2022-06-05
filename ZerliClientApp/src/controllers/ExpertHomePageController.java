@@ -27,6 +27,7 @@ public class ExpertHomePageController implements UserControl{
     private ComboBox<String> surveyNameSelector;
     private void setComboBox() 
     {	
+    	surveyNameSelector.getItems().clear();
     	ClientApp.ProtocolHandler.Invoke(RequestType.GetSurveysNames, survey, null, true);
     	surveyNames=(ObservableList<String>)ClientApp.ProtocolHandler.GetResponse(RequestType.GetSurveysNames);
     	surveyNameSelector.setItems(surveyNames);
@@ -34,6 +35,8 @@ public class ExpertHomePageController implements UserControl{
     }
     @FXML
     void NextBtnPressed(ActionEvent event) {
+    	if(LoginController.windowControl.peekPipe("surveyForExpert") == null) return;
+    	requiredSurveysText.clear();
     	LoginController.windowControl.setUserControl("/gui/usercontrols/SurveyHistogram.fxml");
     }
 
