@@ -6,18 +6,18 @@ package Entities;
  */
 public enum OrderStatus {
 	
-	/** The pending confirm. */
+	/** wait for manager approval. */
 	pending_confirm,
 	
 	/** The pending cancel. */
 	pending_cancel,
 	
-	/** The confirmed. */
+	/** waiting for delivery. */
 	confirmed,
 	
-	/** The canceled. */
+	/** canceled order. */
 	canceled,
 	
-	/** The completed. */
+	/** completed order. */
 	completed,
 }

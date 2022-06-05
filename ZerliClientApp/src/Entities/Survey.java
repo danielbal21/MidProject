@@ -4,20 +4,20 @@ import java.io.Serializable;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class Survey.
+ * contain survey details to transfer between the server and the client.
  */
 public class Survey implements Serializable{
 
-/** The id. */
+/** survey id in the database. */
 private int id;
 
-/** The content. */
+/** name of the survey. */
 private String content ;
 
-/** The question array. */
+/** The question array that the survey consist of. */
 private String[] questionArray=new String[6];
 
-/** The answers array. */
+/** The answers array that the user fill. */
 private int[] answersArray= new int[6];
 
 /**

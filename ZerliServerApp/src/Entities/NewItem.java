@@ -2,15 +2,29 @@ package Entities;
 
 import java.util.ArrayList;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class NewItem.
+ */
 public class NewItem extends ItemInList{
+	
+	/** The assemble. */
 	/* assemble <item_id,quantity> */
 	private ArrayList<ItemInList> assemble;
 	
+	/**
+	 * Instantiates a new new item.
+	 */
 	public NewItem() {
 		super();
 		assemble = new ArrayList<>();
 	}
 	
+	/**
+	 * Adds the item.
+	 *
+	 * @param item the item
+	 */
 	public void addItem(ItemInList item) {
 		if(assemble.size()==0) {
 			assemble.add(item);
@@ -35,6 +49,11 @@ public class NewItem extends ItemInList{
 		
 	}
 	
+	/**
+	 * Delete item.
+	 *
+	 * @param item the item
+	 */
 	public void deleteItem(ItemInList item) {
 		if(assemble.size()==0) {
 			return;
@@ -55,6 +74,12 @@ public class NewItem extends ItemInList{
 			assemble.remove(i);
 		}
 	}
+	
+	/**
+	 * To string.
+	 *
+	 * @return the string
+	 */
 	@Override
 	public String toString() {
 		String str = "";
@@ -65,10 +90,20 @@ public class NewItem extends ItemInList{
 		return str;
 	}
 		
+	/**
+	 * Gets the assemble.
+	 *
+	 * @return the assemble
+	 */
 	public ArrayList<ItemInList> getAssemble() {
 		return assemble;
 	}
 
+	/**
+	 * Sets the assemble.
+	 *
+	 * @param assemble the new assemble
+	 */
 	public void setAssemble(ArrayList<ItemInList> assemble) {
 		this.assemble = assemble;
 	}

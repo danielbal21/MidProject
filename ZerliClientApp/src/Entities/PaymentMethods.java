@@ -9,7 +9,7 @@ public enum PaymentMethods {
 	/** The credit card. */
 	credit_card,
 	
-	/** The zerli coins. */
+	/** zerli coins earned can be use in combination with creditcard. */
 	zerli_coins
 }
 

@@ -2,7 +2,7 @@ package Entities;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class paymentInfo.
+ * store transaction information.
  */
 public class paymentInfo {
 	

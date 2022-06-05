@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class RedNotificationCircle.
+ * The Class RedNotificationCircle used to show numbers of notifications .
  */
 public class RedNotificationCircle implements Serializable {
 
@@ -23,8 +23,8 @@ private int NotificationsNumber;
 /**
  * Instantiates a new red notification circle.
  *
- * @param image the image
- * @param label the label
+ * @param circle image
+ * @param label the present the number
  * @param NotificationsNumber the notifications number
  */
 public RedNotificationCircle(ImageView image, Label label, int NotificationsNumber) {
