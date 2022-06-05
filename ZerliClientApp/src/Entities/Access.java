@@ -1,20 +1,20 @@
 package Entities;
 
-// TODO: Auto-generated Javadoc
+
 /**
- * The Enum Access.
+ * The Enum Access represents the available status of a customer.
  */
 public enum Access {
 	
-	/** The inactive. */
+	/** The inactive status. */
 	inactive ,
 	
-	/** The active. */
+	/** The active status. */
 	active,
 	
-	/** The frozen. */
+	/** The frozen status. */
 	frozen,
 	
-	/** The noaut. */
+	/** The not authorized status. */
 	noaut,
 }

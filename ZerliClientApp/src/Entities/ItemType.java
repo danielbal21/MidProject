@@ -1,31 +1,30 @@
 package Entities;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Enum ItemType.
+ * The Enum ItemType represents the types an item can belong to.
  */
 public enum ItemType {
 	
-	/** The bouquet. */
+	/** Bouquet type. */
 	//for pre_defined catalog//
 	bouquet,
 	
-	/** The bridal bouquet. */
+	/** Bridal bouquet type. */
 	bridal_bouquet,
 	
-	/** The pot. */
+	/** Pot type. */
 	pot,
 	
-	/** The flower. */
+	/** Flower type. */
 	//for custom catalog//
 	flower,
 	
-	/** The seed. */
+	/** Seed type. */
 	seed,
 	
-	/** The branch. */
+	/** Branch type. */
 	branch,
 	
-	/** The soil. */
+	/** Soil type. */
 	soil,
 }

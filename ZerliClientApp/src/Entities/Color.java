@@ -1,41 +1,42 @@
 package Entities;
 
-// TODO: Auto-generated Javadoc
+
+
 /**
- * The Enum Color.
+ * The Enum Color represents the available colors for a product.
  */
 public enum Color {
 	
-	/** The red. */
+	/** The color red. */
 	red,
 	
-	/** The blue. */
+	/** The color blue. */
 	blue,
 	
-	/** The green. */
+	/** The color green. */
 	green,
 	
-	/** The white. */
+	/** The color white. */
 	white,
 	
-	/** The black. */
+	/** The color black. */
 	black,
 	
-	/** The pink. */
+	/** The color pink. */
 	pink,
 	
-	/** The purple. */
+	/** The color purple. */
 	purple,
 	
-	/** The orange. */
+	/** The color orange. */
 	orange,
 	
-	/** The yellow. */
+	/** The color yellow. */
 	yellow,
 	
-	/** The brown. */
+	/** The color brown. */
 	brown,
 	
-	/** The non color. */
+	/** No specific color. */
 	non_color,
 }

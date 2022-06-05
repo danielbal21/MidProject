@@ -7,51 +7,52 @@ import java.io.Serializable;
 
 import javafx.scene.image.Image;
 
-// TODO: Auto-generated Javadoc
+
 /**
- * The Class Item.
+ * The Class Item holds all the necessary details 
+ * about an item .
  */
 public class Item implements Serializable {
 	
-	/** The id. */
+	/** The item's ID. */
 	private int id;
 	
-	/** The name. */
+	/** The item's name. */
 	private String name;
 	
-	/** The price. */
+	/** The item's price. */
 	private int price;
 	
-	/** The catalog type. */
+	/** The item's catalog type. */
 	private  CatalogType catalogType ;
 	
-	/** The item type. */
+	/** The item's type. */
 	private ItemType itemType;
 	
-	/** The color. */
+	/** The item's color. */
 	private Color color;
 	
-	/** The image. */
+	/** The item's image. */
 	private byte[] image;
 	
-	/** The is on sale. */
+	/** Shows if an item is on sale. */
 	private boolean isOnSale = false;
 	
-	/** The sale price. */
+	/** The item's sale price. */
 	private int salePrice = -1;
 	
 	/**
 	 * Instantiates a new item.
 	 *
-	 * @param id the id
-	 * @param name the name
-	 * @param price the price
-	 * @param catalogType the catalog type
-	 * @param itemType the item type
-	 * @param color the color
-	 * @param image the image
-	 * @param isOnSale the is on sale
-	 * @param salePrice the sale price
+	 * @param id the item's ID
+	 * @param name the item's name
+	 * @param price the item's price
+	 * @param catalogType the item's catalog type
+	 * @param itemType the item's type
+	 * @param color the item's color
+	 * @param image the item's image
+	 * @param isOnSale shows if an item is on sale
+	 * @param salePrice the item's sale price
 	 */
 	public Item( int id, String name,int price, CatalogType catalogType, ItemType itemType, Color color, byte[] image,boolean isOnSale, int salePrice) {
 		this.id = id;
@@ -66,90 +67,90 @@ public class Item implements Serializable {
 	}
 	
 	/**
-	 * Checks if is on sale.
+	 * Checks if an item is on sale.
 	 *
-	 * @return true, if is on sale
+	 * @return true, if the item is on sale
 	 */
 	public boolean isOnSale() {
 		return isOnSale;
 	}
 	
 	/**
-	 * Sets the on sale.
+	 * Sets the item on sale status.
 	 *
-	 * @param isOnSale the new on sale
+	 * @param isOnSale the new  item's on sale status
 	 */
 	public void setOnSale(boolean isOnSale) {
 		this.isOnSale = isOnSale;
 	}
 	
 	/**
-	 * Gets the sale price.
+	 * Gets the item's sale price.
 	 *
-	 * @return the sale price
+	 * @return the item's sale price
 	 */
 	public int getSalePrice() {
 		return salePrice;
 	}
 	
 	/**
-	 * Sets the sale price.
+	 * Sets the item's sale price.
 	 *
-	 * @param salePrice the new sale price
+	 * @param salePrice the new item's sale price
 	 */
 	public void setSalePrice(int salePrice) {
 		this.salePrice = salePrice;
 	}
 	
 	/**
-	 * Gets the name.
+	 * Gets the item's name.
 	 *
-	 * @return the name
+	 * @return the item's name
 	 */
 	public String getName() {
 		return name;
 	}
 	
 	/**
-	 * Sets the name.
+	 * Sets the item's name.
 	 *
-	 * @param name the new name
+	 * @param name the new item's name
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 	
 	/**
-	 * Gets the id.
+	 * Gets the item's ID.
 	 *
-	 * @return the id
+	 * @return the item's ID
 	 */
 	public int getId() {
 		return id;
 	}
 	
 	/**
-	 * Sets the id.
+	 * Sets the item's ID.
 	 *
-	 * @param id the new id
+	 * @param id the new item's ID
 	 */
 	public void setId(int id) {
 		this.id = id;
 	}
 	
 	/**
-	 * Gets the price.
+	 * Gets the item's price.
 	 *
-	 * @return the price
+	 * @return the item's price
 	 */
 	public int getPrice() {
 		return price;
 	}
 	
 	/**
-	 * Gets the current price.
+	 * Gets the item's current price.
 	 *
-	 * @return the current price
+	 * @return the item's current price
 	 */
 	public int getCurrentPrice()
 	{
@@ -157,90 +158,90 @@ public class Item implements Serializable {
 	}
 	
 	/**
-	 * Sets the price.
+	 * Sets the item's price.
 	 *
-	 * @param price the new price
+	 * @param price the new item's price
 	 */
 	public void setPrice(int price) {
 		this.price = price;
 	}
 	
 	/**
-	 * Gets the catalog type.
+	 * Gets the item's catalog type.
 	 *
-	 * @return the catalog type
+	 * @return the item's catalog type
 	 */
 	public CatalogType getCatalogType() {
 		return catalogType;
 	}
 	
 	/**
-	 * Sets the catalog type.
+	 * Sets the item's catalog type.
 	 *
-	 * @param catalogType the new catalog type
+	 * @param catalogType the new item's catalog type
 	 */
 	public void setCatalogType(CatalogType catalogType) {
 		this.catalogType = catalogType;
 	}
 	
 	/**
-	 * Gets the item type.
+	 * Gets the item's type.
 	 *
-	 * @return the item type
+	 * @return the item's type
 	 */
 	public ItemType getItemType() {
 		return itemType;
 	}
 	
 	/**
-	 * Sets the item type.
+	 * Sets the item's type.
 	 *
-	 * @param itemType the new item type
+	 * @param itemType the new item's type
 	 */
 	public void setItemType(ItemType itemType) {
 		this.itemType = itemType;
 	}
 	
 	/**
-	 * Gets the color.
+	 * Gets the item's color.
 	 *
-	 * @return the color
+	 * @return the item's color
 	 */
 	public Color getColor() {
 		return color;
 	}
 	
 	/**
-	 * Sets the color.
+	 * Sets the item's color.
 	 *
-	 * @param color the new color
+	 * @param color the new item's color
 	 */
 	public void setColor(Color color) {
 		this.color = color;	
 	}
 	
 	/**
-	 * Gets the image.
+	 * Gets the item's image.
 	 *
-	 * @return the image
+	 * @return the item's image
 	 */
 	public byte[] getImage() {
 		return image;
 	}
 	
 	/**
-	 * Sets the image.
+	 * Sets the item's image.
 	 *
-	 * @param image the new image
+	 * @param image the new item's image
 	 */
 	public void setImage(byte[] image) {
 		this.image = image;
 	}
 	
 	/**
-	 * Gets the JX image.
+	 * Gets the item's JX image.
 	 *
-	 * @return the JX image
+	 * @return the item's JX image
 	 */
 	public Image getJXImage() {
 		return new Image(new ByteArrayInputStream(image));

@@ -23,5 +23,7 @@ public enum Roles {
 	
 	/** The service. */
 	service,
+	
+	/** The expert. */
 	expert,
 }

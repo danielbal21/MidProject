@@ -1,17 +1,17 @@
 package Entities;
 
-// TODO: Auto-generated Javadoc
+
 /**
- * The Enum CatalogType.
+ * The Enum CatalogType represents all types of catalogs in the Zerli system.
  */
 public enum CatalogType {
 	
-	/** The custom. */
+	/** The custom catalog type. */
 	custom,
 	
-	/** The pre define. */
+	/** The pre define catalog type. */
 	pre_define,
 	
-	/** The new item. */
+	/** The new item catalog type. */
 	new_item,
 }
