@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package controllers;
 
 import java.io.IOException;
@@ -5,20 +8,28 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
+/**
+ * The Class pdfComparer compare between 2 different pdf's.
+ */
 public class pdfComparer {
 
+    /** The pdf 1. */
     @FXML
     private AnchorPane pdf1;
 
+    /** The pdf 2. */
     @FXML
     private AnchorPane pdf2;
     
 
+	/**
+	 * Start- load 2 pdf's one beside the other one to compare between them 
+	 *
+	 * @param pdfA the pdf A
+	 * @param pdfB the pdf B
+	 */
 	public void start(byte[] pdfA, byte[] pdfB)
 	{
 		FXMLLoader loader = new FXMLLoader();

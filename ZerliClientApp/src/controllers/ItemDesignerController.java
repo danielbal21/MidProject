@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package controllers;
 
 import java.io.File;
@@ -24,63 +27,96 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 
+/**
+ *The Class ItemDesignerController is the controller part of the Customer GUI.
+ *The Class give the ability to the Customer to..
+ *The class implement user control interface to be able to insert into frame users GUI
+ */
 public class ItemDesignerController implements UserControl {
+	
+	/** The colors. */
 	ArrayList<String> colors = new ArrayList<String>();
+	
+	/** The item types. */
 	ArrayList<String> item_types = new ArrayList<String>();
+	
+	/** The image data. */
 	FileInputStream imagedata = null;
+	
+	/** The new item. */
 	private Item newItem;
 	
+	/** The error label. */
 	@FXML
 	private Label errorLabel;
 	
+    /** The Item image. */
     @FXML
     private ImageView ItemImage;
   
+    /** The currency. */
     @FXML
     private Label currency;
    
+    /** The Item RB. */
     @FXML
     private RadioButton ItemRB;
 
+    /** The active panel container. */
     @FXML
     private AnchorPane activePanelContainer;
 
+    /** The add button. */
     @FXML
     private Button addBtn;
 
+    /** The cancel button. */
     @FXML
     private Button cancelBtn;
 
+    /** The catalog types. */
     @FXML
     private ToggleGroup catalogTypes;
 
+    /** The item color. */
     @FXML
     private ComboBox<String> itemColor;
 
+    /** The item type. */
     @FXML
     private ComboBox<String> itemType;
 
+    /** The name. */
     @FXML
     private TextField name;
 
+    /** The on sale CB. */
     @FXML
     private CheckBox onSaleCB;
 
+    /** The price. */
     @FXML
     private TextField price;
 
+    /** The product RB. */
     @FXML
     private RadioButton productRB;
 
+    /** The sale price. */
     @FXML
     private TextField salePrice;
 
+    /** The select image. */
     @FXML
     private Button selectImage;
 
+    /**
+     * Adds the button click.
+     * When pressed add the new item will insert into the Data Base with all his details
+     * @param event the event
+     */
     @FXML
     void addBtn_Click(ActionEvent event) {
     	byte[] buf = null;
@@ -92,7 +128,6 @@ public class ItemDesignerController implements UserControl {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-    		//ItemImage.getImage().getPixelReader().getPixels(0, 0, (int)ItemImage.getImage().getWidth(), (int)ItemImage.getImage().getHeight(), PixelFormat.getByteBgraInstance(), buf, 0, (int)ItemImage.getImage().getWidth() * 4);
     	}
     	else
     		buf = null;
@@ -110,6 +145,10 @@ public class ItemDesignerController implements UserControl {
     	cancelBtn_press(null);
     }
 
+    /**
+     * Input validation.
+     * @return true, if successful
+     */
     private boolean inputValid() {
     	StringBuilder error = new StringBuilder("");
     	boolean valid = true;
@@ -149,10 +188,21 @@ public class ItemDesignerController implements UserControl {
 		return valid;
 	}
 
+	/**
+	 * Cancel button press.
+	 * When pressed cancel go to Marketing Catalog Editor
+	 * @param event the event
+	 */
 	@FXML
     void cancelBtn_press(ActionEvent event) {
     	LoginController.windowControl.setUserControl("/gui/usercontrols/MarketingCatalogEditor.fxml");
     }
+    
+    /**
+     * Select image click.
+     * When pressed select the system import a image file into the item iamge 
+     * @param event the event
+     */
     @FXML
     void selectimage_cllick(ActionEvent event) {
     	FileChooser imageChooser = new FileChooser();
@@ -170,6 +220,11 @@ public class ItemDesignerController implements UserControl {
 			}
         }
     }
+	
+	/**
+	 * On enter.
+	 * The first action to run - set the 
+	 */
 	@Override
 	public void onEnter() {
 		currency.setText(Utilities.Constants.SHEKEL);
@@ -182,6 +237,9 @@ public class ItemDesignerController implements UserControl {
 		 itemColor.setItems(FXCollections.observableArrayList(colors));
 	}
 
+	/**
+	 * On exit.
+	 */
 	@Override
 	public void onExit() {}
 

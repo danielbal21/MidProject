@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package controllers;
 
 import java.io.IOException;
@@ -25,67 +28,100 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+// TODO: Auto-generated Javadoc
+
+/**
+ * The Class ReportSelectorController.
+ */
 public class ReportSelectorController implements UserControl {
 
+	/** The report income. */
 	private final String report_income = "Branch Income Report";
+	
+	/** The report orders. */
 	private final String report_orders = "Branch Order Report";
+	
+	/** The report service. */
 	private final String report_service = "Branch Complaints Report";
 	   
+		/** The active panel container. */
 		@FXML
 	    private AnchorPane activePanelContainer;
 
-	    @FXML
+	    /** The error label. */
+    	@FXML
 	    private Label errorLabel;
 
-	    @FXML
+	    /** The is compare. */
+    	@FXML
 	    private CheckBox isCompare;
 
-	    @FXML
+	    /** The is monthly. */
+    	@FXML
 	    private RadioButton isMonthly;
 
-	    @FXML
+	    /** The is quarterly. */
+    	@FXML
 	    private RadioButton isQuarterly;
 
-	    @FXML
+	    /** The panel month. */
+    	@FXML
 	    private AnchorPane panelMonth;
 
-	    @FXML
+	    /** The panel quarter. */
+    	@FXML
 	    private AnchorPane panelQuarter;
 
-	    @FXML
+	    /** The period group. */
+    	@FXML
 	    private ToggleGroup periodGroup;
 	    
-	    @FXML
+	    /** The report month. */
+    	@FXML
 	    private ComboBox<String> reportMonth;
 	    
-	    @FXML
+	    /** The report year. */
+    	@FXML
 	    private ComboBox<String> reportYear;
 	    
-	    @FXML
+	    /** The compared month. */
+    	@FXML
 	    private ComboBox<String> comparedMonth;
 	    
-	    @FXML
+	    /** The compared year. */
+    	@FXML
 	    private ComboBox<String> comparedYear;
 
-	    @FXML
+	    /** The compared quarter. */
+    	@FXML
 	    private ComboBox<String> comparedQuarter;
 
-	    @FXML
+	    /** The compared quarter Y. */
+    	@FXML
 	    private ComboBox<String> comparedQuarterY;    
 
-	    @FXML
+	    /** The report quarter. */
+    	@FXML
 	    private ComboBox<String> reportQuarter;
 
-	    @FXML
+	    /** The report quarter Y. */
+    	@FXML
 	    private ComboBox<String> reportQuarterY;
 
-	    @FXML
+	    /** The report type. */
+    	@FXML
 	    private ComboBox<String> reportType;
 
-	    @FXML
+	    /** The view rep btn. */
+    	@FXML
 	    private Button viewRepBtn;
 
 
+    /**
+     * View report click.
+     *
+     * @param event the event
+     */
     @FXML
     void viewReport_click(ActionEvent event) {
     	if(!isInputValid()) return;
@@ -156,6 +192,11 @@ public class ReportSelectorController implements UserControl {
     		OpenReportViewer(reportMain);
     }
     
+    /**
+     * Checks if is input valid.
+     *
+     * @return true, if is input valid
+     */
     private boolean isInputValid()
     {
     	boolean valid = true;
@@ -206,6 +247,9 @@ public class ReportSelectorController implements UserControl {
     	return valid;
     }
     
+	/**
+	 * On enter.
+	 */
 	@Override
 	public void onEnter() {
 		
@@ -264,6 +308,9 @@ public class ReportSelectorController implements UserControl {
 		isMonthly.setSelected(true);
 	}
 
+	/**
+	 * On exit.
+	 */
 	@Override
 	public void onExit() {
 		reportType.getItems().clear();
@@ -281,6 +328,11 @@ public class ReportSelectorController implements UserControl {
 		comparedYear.getItems().clear();
 	}
 	
+	/**
+	 * Open report viewer.
+	 *
+	 * @param report the report
+	 */
 	private void OpenReportViewer(byte[] report)
 	{
 		FXMLLoader loader = new FXMLLoader();
@@ -301,6 +353,12 @@ public class ReportSelectorController implements UserControl {
 		newStage.show();
 	}
 	
+	/**
+	 * Open report viewer.
+	 *
+	 * @param reportLeft the report left
+	 * @param reportRight the report right
+	 */
 	private void OpenReportViewer(byte[] reportLeft,byte[] reportRight)
 	{
 		FXMLLoader loader = new FXMLLoader();

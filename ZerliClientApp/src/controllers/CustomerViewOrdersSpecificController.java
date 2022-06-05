@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package controllers;
 
 import java.time.LocalDateTime;
@@ -24,71 +27,103 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 
+/**
+ *The Class CustomerViewOrdersSpecificController is the controller part of the Customer GUI.
+ *The Class give the ability to the Customer to watch the order details and information
+ *The class implement user control interface to be able to insert into frame users GUI
+ */
 public class CustomerViewOrdersSpecificController implements UserControl{
 	
+	/** The item list view. */
 	ObservableList<ItemInList> itemListView =
 			FXCollections.observableArrayList(new ArrayList<ItemInList>());
 	    
+	/** The order. */
 	private Order order;
 	
+    /** The Item table. */
     @FXML
     private TableView<ItemInList> ItemTable;
 	
+    /** The catalog item. */
     @FXML
     private TableColumn<ItemInList, CatalogType> catalogItem;
 
+    /** The name item. */
     @FXML
     private TableColumn<ItemInList, String> nameItem;
     
+    /** The price item. */
     @FXML
     private TableColumn<ItemInList, Integer> priceItem;
 
+    /** The quantity item. */
     @FXML
     private TableColumn<ItemInList, Integer> quantityItem;
     
+    /** The type item. */
     @FXML
     private TableColumn<ItemInList, ItemType> typeItem;
 
 	
+    /** The branch name. */
     @FXML
     private Label brachName;
 
+    /** The cancel order. */
     @FXML
     private Button cancelOrder;
 
+    /** The full address. */
     @FXML
     private Label fullAddress;
 
+    /** The greeting card text. */
     @FXML
     private Label greetingCardText;
 
+    /** The order date. */
     @FXML
     private Label orderDate;
 
+    /** The order number. */
     @FXML
     private Label orderNumber;
 
+    /** The payment method. */
     @FXML
     private Label paymentMethod;
 
+    /** The price. */
     @FXML
     private Label price;
 
+    /** The ship method. */
     @FXML
     private Label shipMethod;
 
+    /** The shipping date. */
     @FXML
     private Label shippingDate;
 
+    /** The status order. */
     @FXML
     private Label statusOrder;
     
+    /** The item list label. */
     @FXML
     private Label itemListLbl;
     
+    /** The full list button. */
     @FXML
     private Button fullListBtn;
     
+    /**
+     * Click on new item.
+     * When the event happened show the NewItem components 
+     * @param event the event
+     * @return if the event is not a double click end the event
+     */
     @FXML
     void clickOnNewItem(MouseEvent event) {
     	if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 2) {
@@ -107,6 +142,11 @@ public class CustomerViewOrdersSpecificController implements UserControl{
     }
     
 
+    /**
+     * Show full specs.
+     * When the event happened show the all order information again
+     * @param event the event
+     */
     @FXML
     void showFullSpecs(ActionEvent event) {
     	fullListBtn.setVisible(false);
@@ -124,11 +164,22 @@ public class CustomerViewOrdersSpecificController implements UserControl{
 		ItemTable.setItems(itemListView);
     }
     
+    /**
+     * Back pressed.
+     * When the back pressed go to the previous page (Customer View Orders)
+     * @param event the event
+     */
     @FXML
     void backPressed(ActionEvent event) {
     	LoginController.windowControl.setUserControl("/gui/usercontrols/CustomerViewOrders.fxml");
     }
     
+    /**
+     * Cancel order pressed.
+     * When pressed cancel order the customer cancel his order , the order deleted from the Data Base 
+     * And the customer get refund according to the time that left 
+     * @param event the event
+     */
     @FXML
     void cancelOrderPressed(ActionEvent event) {
     	Alert confirmAlert = new Alert(AlertType.NONE);
@@ -167,6 +218,10 @@ public class CustomerViewOrdersSpecificController implements UserControl{
 		});
     }
 
+	/**
+	 * On enter.
+	 * The first action to run - initialize the table columns and set the data 
+	 */
 	@Override
 	public void onEnter() {
 		fullListBtn.setVisible(false);
@@ -209,6 +264,9 @@ public class CustomerViewOrdersSpecificController implements UserControl{
 		
 	}
 
+	/**
+	 * On exit.
+	 */
 	@Override
 	public void onExit() {}
 

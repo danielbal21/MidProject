@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package controllers;
 
 import java.io.IOException;
@@ -27,47 +30,77 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+
+/**
+ * The Class CustomerServiceFrameController is the controller part of the service static environment GUI
+ * The GUI does not change and Contains service functions 
+ * The Controller implements the IContainable interface that give to the controller the ability to add different user controls
+ */
 public class CustomerServiceFrameController implements IContainable {
 
 	
+	/** The task. */
 	Thread task;
+	
+	/** The complaints. */
 	ObservableList<Complaint> complaints;
+    
+    /** The Complaints button. */
     @FXML
     private Button ComplaintsBtn;
 
+    /** The Survey mgmt button. */
     @FXML
     private Button SurveyMgmtBtn;
 
+    /** The bell red cricle label. */
     @FXML
     private Label bellRedCricleLabl;
 
+    /** The control container. */
     @FXML
     private AnchorPane controlContainer;
 
+    /** The exit button. */
     @FXML
     private ImageView exitBtn;
 
+    /** The home button. */
     @FXML
     private ImageView homeBtn;
 
+    /** The red circle. */
     @FXML
     private ImageView redCircle;
     
+    /** The logout button. */
     @FXML
     private Button logoutBtn;
 
+    /** The name label. */
     @FXML
     private Label nameLabel;
 
 
-    /** example for testing auto-update red label circle **/
+    /**  example for testing auto-update red label circle *. */
 	boolean x = true;
+    
+    /**
+     * Complaints pressed.
+     * When pressed Complaints go t Customer Service View Complaints window
+     * @param event the event
+     */
     @FXML
 	void complaintsPressed(ActionEvent event) {
     	LoginController.windowControl.setUserControl("/gui/usercontrols/CustomerServiceViewComplaints.fxml");
     	
     }
 
+    /**
+     * Exit pressed.
+     * When the exit pressed exit from the program 
+     * @param event the event
+     */
     @FXML
     void exitPressed(MouseEvent event) {
      	ClientApp.ProtocolHandler.Invoke(RequestType.SetLogOut,null,null,false);
@@ -79,12 +112,23 @@ public class CustomerServiceFrameController implements IContainable {
 		} catch (IOException e) {e.printStackTrace();}
     }
 
+    /**
+     * Home pressed.
+     * When the home pressed go to the home page 
+     * @param event the event
+     */
     @FXML
     void homePressed(MouseEvent event) {
     	LoginController.windowControl.setUserControl("/gui/usercontrols/ManagerHomePage.fxml");
     }
 
-    @FXML
+    /**
+     * Press logout.
+     *When the logout pressed go to the insert user details window
+     * @param event the event
+     */
+    @SuppressWarnings("static-access")
+	@FXML
     void pressLogout(ActionEvent event) {
 		task.interrupt();
     	LoginController.windowControl.stage.close();
@@ -106,16 +150,31 @@ public class CustomerServiceFrameController implements IContainable {
 		catch (Exception e) {e.printStackTrace();	}
     }
 
+    /**
+     * Survey pressed.
+     * when pressed survey go to Survey Manger Home Screen window
+     * @param event the event
+     */
     @FXML
     void surveyPressed(ActionEvent event) {
     	LoginController.windowControl.setUserControl("/gui/usercontrols/SurveyMangerHomeScreen.fxml");
     }
 
+	/**
+	 * Gets the control container.
+	 * Return the user control that existing in the frame 
+	 * @return the control container
+	 */
 	@Override
 	public AnchorPane getControlContainer() {
 		return controlContainer;
 	}
 	
+	/**
+	 * Initialize the service function 
+     *Reset the notifications 
+     * Get the complains from the Data Base
+	 */
 	@SuppressWarnings("unchecked")
 	public void init()
 	{
@@ -181,6 +240,11 @@ public class CustomerServiceFrameController implements IContainable {
 		task.start();
 	}
 
+	/**
+	 * Edits the notify red circle.
+	 * 
+	 * @param i the i
+	 */
 	public void editCircle(int i)
 	{
 		String bellCnt = bellRedCricleLabl.getText();

@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package controllers;
 
 import java.awt.geom.AffineTransform;
@@ -38,66 +41,100 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SurveyHistogramController.
+ */
 public class SurveyHistogramController implements UserControl {
 
+		/** The check box. */
 		@FXML
     	private ImageView checkBox;
 		
+		/** The Pdf text box. */
 		@FXML
 	    private TextField PdfTextBox;
 	   
-	    @FXML
+	    /** The Image 1. */
+    	@FXML
 	    private ImageView Image1;
 
-	    @FXML
+	    /** The Image 2. */
+    	@FXML
 	    private ImageView Image2;
 
-	    @FXML
+	    /** The Image 3. */
+    	@FXML
 	    private ImageView Image3;
 
-	    @FXML
+	    /** The Image 4. */
+    	@FXML
 	    private ImageView Image4;
 
-	    @FXML
+	    /** The Image 5. */
+    	@FXML
 	    private ImageView Image5;
 
-	    @FXML
+	    /** The Image 6. */
+    	@FXML
 	    private ImageView Image6;
 
-	    @FXML
+	    /** The q 1 label. */
+    	@FXML
 	    private Label q1Label;
 
-	    @FXML
+	    /** The q 2 label. */
+    	@FXML
 	    private Label q2Label;
 
-	    @FXML
+	    /** The q 3 label. */
+    	@FXML
 	    private Label q3Label;
 
-	    @FXML
+	    /** The q 4 label. */
+    	@FXML
 	    private Label q4Label;
 
-	    @FXML
+	    /** The q 5 label. */
+    	@FXML
 	    private Label q5Label;
 
-	    @FXML
+	    /** The q 6 label. */
+    	@FXML
 	    private Label q6Label;
 	    
-	    @FXML
+	    /** The active panel container. */
+    	@FXML
 	    private AnchorPane activePanelContainer;
 
-	    @FXML
+	    /** The survey name label. */
+    	@FXML
 	    private Label surveyNameLabel;
 
+		/** The survey. */
 		private Survey survey=new Survey();
+		
+		/** The imege test 1. */
 		private Image imegeTest1;
+		
+		/** The imege test 2. */
 		private Image imegeTest2;
+		
+		/** The imege test 3. */
 		private Image imegeTest3;
+		
+		/** The imege test 4. */
 		private Image imegeTest4;
 
+		/** The imege test 5. */
 		private Image imegeTest5;
 
+		/** The imege test 6. */
 		private Image imegeTest6;
 
+	/**
+	 * On enter.
+	 */
 	@Override
 	public void onEnter() {
 		checkBox.setVisible(false);
@@ -137,12 +174,22 @@ public class SurveyHistogramController implements UserControl {
 		//q6Label.setText(survey.getQuestions()[5]);
 	}
 	
-	  @FXML
+	  /**
+  	 * Back btn pressed.
+  	 *
+  	 * @param event the event
+  	 */
+  	@FXML
 	    void BackBtnPressed(ActionEvent event) {
 		  LoginController.windowControl.setUserControl("/gui/usercontrols/ExpertHomePage.fxml");
 	    }
 	  
-	  @FXML
+	  /**
+  	 * Insert PDF btnpressed.
+  	 *
+  	 * @param event the event
+  	 */
+  	@FXML
 	    void InsertPDFBtnpressed(ActionEvent event) {
 		  
 		  	ArrayList<byte[]> listOfPDFArrayList=new ArrayList<byte[]>();
@@ -180,11 +227,22 @@ public class SurveyHistogramController implements UserControl {
 	        	ClientApp.ProtocolHandler.Invoke(RequestType.SavePDF, listOfPDFArrayList, survey, false);
 	        }
 	    }
+	
+	/**
+	 * On exit.
+	 */
 	@Override
 	public void onExit() {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	/**
+	 * Creates the PDF.
+	 *
+	 * @param path the path
+	 * @return the byte[]
+	 */
 	public byte[] createPDF(String path) {
 	    try (PDDocument document = new PDDocument()) {
 	      PDPage page = new PDPage(PDRectangle.A4);
@@ -270,6 +328,11 @@ public class SurveyHistogramController implements UserControl {
 		return null;
 }
 
+    /**
+     * Submit PDF btnpressed.
+     *
+     * @param event the event
+     */
     @FXML
     void submitPDFBtnpressed(ActionEvent event) {
     	if(!PdfTextBox.getText().equals(""))

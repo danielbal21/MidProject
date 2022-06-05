@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package controllers;
 
 import Entities.*;
@@ -14,39 +17,67 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
+/**
+ * The Class CartNewItemListHboxController s the controller part of the item that aper in the cart GUI.
+ * The Class extends the Hbox class to be able to be implement into the Hbox GUI component
+ */
 public class CartNewItemListHboxController extends HBox{
+	
+	/** The id. */
 	private int id;
-	private int price;
+	
+	
+	/** The quantity. */
 	private int quntity;
-	private Label totalCost;
+	
+	/** The Vbox. */
 	private VBox Vbox;
+    
+    /** The catalog type label. */
     @FXML
     private Label catalogTypeLabel;
 
+    /** The delete button. */
     @FXML
     private Button deleteBtn;
 
+    /** The hbox root. */
     @FXML
     private HBox hboxRoot;
 
+    /** The circle. */
     @FXML
     private Circle circle;
 
+    /** The item name label. */
     @FXML
     private Label itemNameLabel;
 
+    /** The item type label. */
     @FXML
     private Label itemTypeLabel;
 
+    /** The quantity label. */
     @FXML
     private Label quntityLabel;
 
+    /**
+     * Inits the.
+     *
+     * @param Vbox the vbox
+     * @param image1 the image 1
+     * @param id the id
+     * @param name the name
+     * @param itemType the item type
+     * @param catalogType the catalog type
+     * @param quntity the quantity
+     * @param price the price
+     */
     public void init ( VBox Vbox ,Image image1 ,int id,String name,
     		ItemType itemType,CatalogType catalogType,int quntity,int price)
     {
     	this.Vbox=Vbox;
     	this.id=id;
-    	this.price=price;
     	this.quntity=quntity;
         circle.setFill(new ImagePattern(image1));
     	itemNameLabel.setText(name);
@@ -54,6 +85,12 @@ public class CartNewItemListHboxController extends HBox{
     	catalogTypeLabel.setText(Utilities.GenericUtilties.CatalogTypeToString(catalogType));
     	quntityLabel.setText(String.valueOf(quntity));
     }
+    
+    /**
+     * Delete button pressed.
+     * When the delete pressed the item is deleted from the item cart list and update the amount label 
+     * @param event the event
+     */
     @FXML
     void DeleteBtnPressed(ActionEvent event) {
     	NewItem newItem =(NewItem) LoginController.windowControl.peekPipe("newItemList");

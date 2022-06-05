@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package controllers;
 
 import Entities.Order;
@@ -13,39 +16,62 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 
+/**
+ *The Class ManagerOrderManagerController is the controller part of the Manager GUI.
+ *The Class give the ability to the Manager to manage the orders (approve)
+ *The class implement user control interface to be able to insert into frame users GUI
+ */
 public class ManagerOrderManagerController implements UserControl {
 
+	/** The observable list. */
 	private ObservableList<Order> observableList;
 	
-	   @FXML
+	   /** The branch name. */
+   	@FXML
 	    private Label branchName;
 
-	    @FXML
+	    /** The expected date column. */
+    	@FXML
 	    private TableColumn<Order, String> expectedDateColumn;
 
-	    @FXML
+	    /** The order date column. */
+    	@FXML
 	    private TableColumn<Order, String> orderDateColumn;
 
-	    @FXML
+	    /** The order Id column. */
+    	@FXML
 	    private TableColumn<Order, String> orderIDcolumn;
 
-	    @FXML
+	    /** The orders table. */
+    	@FXML
 	    private TableView<Order> ordersTable;
 
-	    @FXML
+	    /** The shipping method column. */
+    	@FXML
 	    private TableColumn<Order, String> shippingMethodColumn;
 
-	    @FXML
+	    /** The status column. */
+    	@FXML
 	    private TableColumn<Order, String> statusColumn;
 
 
-	    @FXML
+	    /**
+    	 * Back pressed.
+    	 * When the back pressed go to the previous page (Manager Home Page)
+    	 * @param event the event
+    	 */
+    	@FXML
 	    void backPressed(ActionEvent event) 
 	    {
 	    	LoginController.windowControl.setUserControl("/gui/usercontrols/ManagerHomePage.fxml");
 	    }
 
-	    @FXML
+	    /**
+    	 * Gets the order info.
+    	 * @param event the event
+    	 * @return the order info
+    	 */
+    	@FXML
 	    void getOrderInfo(MouseEvent event) {
 		if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 2) {
 			Order OrderChoose = ordersTable.getSelectionModel().getSelectedItem();
@@ -55,11 +81,21 @@ public class ManagerOrderManagerController implements UserControl {
 	}
 	    
 
+    /**
+     * Refresh pressed.
+     * When pressed refresh the table set the last update data
+     * @param event the event
+     */
     @FXML
     void refreshPressed(MouseEvent event) {
     	onEnter();
     }
 
+	/**
+	 * On enter. 
+	 * The first action to run - Initialize the table columns and set the branch order data into the table
+	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void onEnter() {
 		branchName.setText((String) LoginController.windowControl.peekPipe("Branch"));
@@ -75,6 +111,9 @@ public class ManagerOrderManagerController implements UserControl {
 		ordersTable.setItems(observableList);
 	}
 
+	/**
+	 * On exit.
+	 */
 	@Override
 	public void onExit() {
 	}

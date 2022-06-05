@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package controllers;
 
 import java.time.LocalDate;
@@ -5,7 +8,6 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Optional;
-
 import Entities.ItemInList;
 import Entities.Order;
 import Entities.ShippingMethods;
@@ -35,65 +37,98 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
+/**
+ *The Class OrderInformationController is the controller part of the Customer GUI.
+ *The Class give the ability to the Customer to insert his order details 
+ *The class implement user control interface to be able to insert into frame users GUI
+ */
 public class OrderInformationController implements UserControl {
+	
+	/** The order. */
 	Order order = new Order();
 	
+    /** The back button. */
     @FXML
     private Button backBtn;
     
+    /** The active panel container. */
     @FXML
     private AnchorPane activePanelContainer;
 
+    /** The arrival date. */
     @FXML
     private DatePicker arrivalDate;
 
+    /** The branch comboBox. */
     @FXML
     private ComboBox<String> branchCombobox;
 
+    /** The city text. */
     @FXML
     private TextField cityText;
     
+    /** The use greeting. */
     @FXML
     private CheckBox useGreeting;
     
+    /** The delivery method. */
     @FXML
     private ToggleGroup deliveryMethod;
     
+    /** The error label. */
     @FXML
     private Label errorLabel;
     
+    /** The greeting text. */
     @FXML
     private TextArea greetingText;
     
+    /** The shipping price. */
     @FXML
     private Label shippingPrice;
     
+    /** The next button. */
     @FXML
     private Button nextBtn;
 
+    /** The street address text. */
     @FXML
     private TextField streetAddressText;
 
+    /** The pickup RB. */
     @FXML
     private RadioButton pickupRB;
 
+    /** The shipping RB. */
     @FXML
     private RadioButton shippingRB;
     
+    /** The hour slider. */
     @FXML
     private Slider hourSlider;
 
+    /** The minutes slider. */
     @FXML
     private Slider minutesSlider;
     
+    /** The time presented. */
     @FXML
     private Label timePresented;
+    
+    /** The system change. */
     boolean systemChange = false;
+    
+    /**
+     * Hour slide.
+     * When the event happened check if the hour it more the new data + 3 hours
+     * @param event the event
+     */
     @FXML
     void hourSlide(MouseEvent event) {
     	LocalTime timeMeasure = LocalTime.of((int)hourSlider.getValue(),(int)minutesSlider.getValue());
     	LocalDateTime arrivalFull = LocalDateTime.of(arrivalDate.getValue(), timeMeasure);
-    	long diff;
+    	@SuppressWarnings("unused")
+		long diff;
 
     		if(LocalDateTime.now().plusHours(3).isAfter(arrivalFull))
     		{
@@ -116,7 +151,13 @@ public class OrderInformationController implements UserControl {
 		*/
     }
 
-    @FXML
+    /**
+     * Minute slide.
+     *W hen the event happened check if the minutes are  more the new data + 3 hours
+     * @param event the event
+     */
+    @SuppressWarnings("unused")
+	@FXML
     void minuteSlide(MouseEvent event) {
     	LocalTime timeMeasure = LocalTime.of((int)hourSlider.getValue(),(int)minutesSlider.getValue());
     	LocalDateTime arrivalFull = LocalDateTime.of(arrivalDate.getValue(), timeMeasure);
@@ -142,10 +183,22 @@ public class OrderInformationController implements UserControl {
 			minutesSlider.setValue(minimumDate.getMinute());
 		}*/
     }
+    
+    /**
+     * Change date event.
+     *
+     * @param event the event
+     */
     @FXML
     void changeDateEvent(ActionEvent event) {
 
     }
+    
+    /**
+     * Next button click.
+     * When the next pressed check if the data is valid ,update the data into the Data Base and go to the next page (Customer Payment Window )
+     * @param event the event
+     */
     @SuppressWarnings("unchecked")
 	@FXML
     void nextBtn_Click(ActionEvent event) {
@@ -180,6 +233,10 @@ public class OrderInformationController implements UserControl {
     	LoginController.windowControl.setUserControl("/gui/usercontrols/CustomerPaymentWindow.fxml");
     }
     
+    /**
+     * Checks if is input valid.
+     * @return true, if is input valid
+     */
     private boolean isInputValid()
     {
     	StringBuilder errorNotification = new StringBuilder("");
@@ -220,13 +277,26 @@ public class OrderInformationController implements UserControl {
     	errorLabel.setText(errorNotification.toString());
     	return valid;
     }
+    
+    /** The back. */
     boolean back = false;
-	@SuppressWarnings("unchecked")
+	
+	/**
+	 * Back button press.
+	 * When the back pressed go to the previous page (Customer Cart)
+	 * @param event the event
+	 */
 	@FXML
 	void backBtn_press(ActionEvent event) {
 		back = true;
 		LoginController.windowControl.setUserControl("/gui/usercontrols/CustomerCart.fxml");
 	}
+	
+	/**
+	 * On enter.
+	 * The first action to run - set the data from the Data Base and insert options by the shipping method
+	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void onEnter() {
 		if(LoginController.windowControl.getPipe("OrderCompleted")!=null) {
@@ -267,6 +337,7 @@ public class OrderInformationController implements UserControl {
 		});
 		deliveryMethod.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
 
+			@SuppressWarnings("unused")
 			@Override
 			public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
 				if(!newValue.equals(oldValue))
@@ -298,6 +369,10 @@ public class OrderInformationController implements UserControl {
 	}
 	
 
+	/**
+	 * On exit.
+	 * The first action to run - if its needed save the typed data
+	 */
 	@Override
 	public void onExit() {
 		if(!back) return;
@@ -314,6 +389,10 @@ public class OrderInformationController implements UserControl {
 			});
 			back = false;
 	}
+	
+	/**
+	 * Clear all.
+	 */
 	public void clearAll()
 	{
     	cityText.clear();

@@ -1,12 +1,10 @@
+/*
+ * 
+ */
 package controllers;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.ArrayList;
 import java.sql.Timestamp;
-import java.time.Duration;
-import java.time.LocalDateTime;
 import Entities.Complaint;
 import ProtocolHandler.RequestType;
 import client.ClientApp;
@@ -19,28 +17,48 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
+/** 
+ *The Class CustomerServicePostComplaintController is the controller part of the service GUI.
+ *The Class give the ability to the service to post customer complaints into the system
+ *The class implement user control interface to be able to insert into frame users GUI
+ */
 public class CustomerServicePostComplaintController implements UserControl {
 
+    /** The feed back text. */
     @FXML
     private TextArea feedBackText;
 
+    /** The active panel container. */
     @FXML
     private AnchorPane activePanelContainer;
 
+    /** The branch field. */
     @FXML
     private ComboBox<String> branchField;
 
+    /** The error label. */
     @FXML
     private Label errorLabel;
 
+    /** The user ID field. */
     @FXML
     private TextField userIDField;
 
+    /**
+     * Back pressed.
+     * When the back pressed go to the previous page (Customer Service View Complaints)
+     * @param event the event
+     */
     @FXML
     void backPressed(ActionEvent event) {
     	LoginController.windowControl.setUserControl("/gui/usercontrols/CustomerServiceViewComplaints.fxml");
     }
 
+    /**
+     * Post press.
+     * When pressed post the complain get checked and update in to the system 
+     * @param event the event
+     */
     @FXML
     void postPress(ActionEvent event) {
     	//check if combo box value selected
@@ -75,6 +93,11 @@ public class CustomerServicePostComplaintController implements UserControl {
     	
     }
 
+	/**
+	 * On enter.
+	 * The first action to run - get the branches to show in the comboBox
+	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void onEnter() {
 		// TODO Auto-generated method stub
@@ -83,6 +106,10 @@ public class CustomerServicePostComplaintController implements UserControl {
 		branchField.setItems((ObservableList<String>)ClientApp.ProtocolHandler.GetResponse(RequestType.GetBranches));
 	}
 
+	/**
+	 * On exit.
+	 * The last action to run- reset the filled in complaint details 
+	 */
 	@Override
 	public void onExit() {
 		// TODO Auto-generated method stub

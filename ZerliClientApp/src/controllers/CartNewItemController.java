@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package controllers;
 
 import Entities.*;
@@ -14,30 +17,55 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
+/**
+ * The Class CartNewItemController s the controller part of the item that aper in the cart GUI.
+ * The Class extends the Hbox class to be able to be implement into the Hbox GUI component
+ */
 public class CartNewItemController extends HBox {
+	
+	/** The id. */
 	private int id;
+	
+	/** The price. */
 	private int price;
+	
+	/** The quantity. */
 	private int quntity;
+	
+	/** The delete button. */
 	@FXML
 	private Button deleteBtn;
 
+	/** The hbox root. */
 	@FXML
 	private HBox hboxRoot;
 
+	/** The circle. */
 	@FXML
 	private Circle circle;
 
+	/** The item name label. */
 	@FXML
 	private Label itemNameLabel;
 
+	/** The quantity label. */
 	@FXML
 	private Label quntityLabel;
 
+	/** The total cost. */
 	private Label totalCost;
 
+	/** The Vbox. */
 	private VBox Vbox;
+	
+	/** The new item. */
 	private NewItem newItem;
 
+	/**
+	 * View new item components.
+	 * When pressed go to window that show newIte specification
+	 * @param event the event
+	 */
 	@FXML
 	void ViewNewItemComponents(ActionEvent event) {
 		LoginController.windowControl.putPipe("newItemList", newItem);
@@ -45,6 +73,18 @@ public class CartNewItemController extends HBox {
 
 	}
 
+	/**
+	 * Inits the.
+	 *
+	 * @param totalCost the total cost
+	 * @param Vbox the vbox
+	 * @param image1 the image 1
+	 * @param id the id
+	 * @param name the name
+	 * @param quntity the quantity
+	 * @param price the price
+	 * @param newItem the new item
+	 */
 	public void init(Label totalCost, VBox Vbox, Image image1, int id, String name, int quntity, int price,
 			NewItem newItem) {
 		this.totalCost = totalCost;
@@ -58,6 +98,11 @@ public class CartNewItemController extends HBox {
 		this.newItem = newItem;
 	}
 
+	/**
+	 * Delete button pressed.
+	 * When the delete pressed the Newitem is deleted from the newItem cart list and update the amount label
+	 * @param event the event
+	 */
 	@FXML
 	void DeleteBtnPressed(ActionEvent event) {
 		Vbox.getChildren().remove(hboxRoot);

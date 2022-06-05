@@ -1,7 +1,9 @@
+/*
+ * 
+ */
 package controllers;
 
 import java.io.IOException;
-
 import ProtocolHandler.RequestType;
 import client.ClientApp;
 import javafx.event.ActionEvent;
@@ -15,14 +17,26 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+/**
+ *The Class MarketingFrameController is the controller part of the Marketing employee static environment GUI
+ * The GUI does not change and Contains Marketing employee functions 
+ * The Controller implements the IContainable interface that give to the controller the ability to add different user controls
+ */
 public class MarketingFrameController implements IContainable {
 
+    /** The control container. */
     @FXML
     private AnchorPane controlContainer;
 
+    /** The user label. */
     @FXML
     private Label userLabel;
 
+    /**
+     * Exit pressed.
+     * When the exit pressed exit from the program 
+     * @param event the event
+     */
     @FXML
     void exitPressed(MouseEvent event) {
      	ClientApp.ProtocolHandler.Invoke(RequestType.SetLogOut,null,null,false);
@@ -33,13 +47,24 @@ public class MarketingFrameController implements IContainable {
 		} catch (IOException e) {e.printStackTrace();}
     }
 
+    /**
+     * Home pressed.
+     * When the home pressed go to the home page 
+     * @param event the event
+     */
     @FXML
     void homePressed(MouseEvent event) {
     	LoginController.windowControl.setUserControl("/gui/usercontrols/MarketingCatalogEditor.fxml");
     }
 
 
-    @FXML
+    /**
+     * Press logout.
+     * When the logout pressed go to the insert user details window
+     * @param event the event
+     */
+    @SuppressWarnings("static-access")
+	@FXML
     void pressLogout(ActionEvent event) {
     	LoginController.windowControl.stage.close();
     	Stage newStage = new Stage();
@@ -61,12 +86,19 @@ public class MarketingFrameController implements IContainable {
     }
 
 
+	/**
+	 * Gets the control container.
+	 *Return the user control that existing in the frame 
+	 * @return the control container
+	 */
 	@Override
 	public AnchorPane getControlContainer() {
-		// TODO Auto-generated method stub
 		return controlContainer;
 	}
 	
+	/**
+	 * Initialize the Marketing employee name
+	 */
 	public void init()
 	{
     	userLabel.setText(ClientApp.UserID.toString());

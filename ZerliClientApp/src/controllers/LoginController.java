@@ -1,7 +1,9 @@
+/*
+ * 
+ */
 package controllers;
 
 import java.io.IOException;
-
 import Entities.Access;
 import Entities.Roles;
 import ProtocolHandler.RequestType;
@@ -21,21 +23,35 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+/**
+ * The Class LoginController.
+ */
 public class LoginController {
+	
+	/** The window control. */
 	public static WindowControl windowControl;
 	
+    /** The login button. */
     @FXML
     private Button loginBtn;
 
+    /** The login label. */
     @FXML
     private Label loginLabel;
 
+    /** The password text. */
     @FXML
     private PasswordField passwordText;
 
+    /** The user name text. */
     @FXML
     private TextField userNameText;
 
+    /**
+     * Exit pressed.
+     * When the exit pressed exit from the program 
+     * @param event the event
+     */
     @FXML
     void exitPressed(MouseEvent event) {
     	try {
@@ -45,6 +61,11 @@ public class LoginController {
 		} catch (IOException e) {e.printStackTrace();}
     }
     
+    /**
+     * Validate input.
+     *
+     * @return true, if successful
+     */
     private boolean validateInput()
     {
     	if(!passwordText.getText().equals("")  && !userNameText.getText().equals(""))
@@ -61,6 +82,11 @@ public class LoginController {
     }
     
     
+    /**
+     * Enter password.
+     * When pressed enter get the user details and start the login process
+     * @param event the event
+     */
     @FXML
     void EnterPassword(KeyEvent event) {
     	if(event.getCode() == KeyCode.ENTER)
@@ -69,6 +95,11 @@ public class LoginController {
     	}
     }
 
+    /**
+     * Enter user name.
+     * When pressed enter get the user details and start the login process
+     * @param event the event
+     */
     @FXML
     void EnterUserName(KeyEvent event) {
     	if(event.getCode() == KeyCode.ENTER)
@@ -77,6 +108,13 @@ public class LoginController {
     	}
     }
     
+	/**
+	 * Log in.
+	 * This function get the user UserName and password 
+	 * Check if the data belongs to user  
+	 * And if its belong then match it to this role and account status 
+	 */
+	@SuppressWarnings("static-access")
 	private void logIn() {
 		loginLabel.setVisible(false);
     	if(!validateInput()) return;
@@ -258,12 +296,23 @@ public class LoginController {
     		}
     	}
 	}
+    
+    /**
+     * Login pressed.
+     * When pressed Login get the user details and start the login process
+     * @param event the event
+     */
     @FXML
     void loginPressed(ActionEvent event) 
     {
     	logIn();
     }
 
+    /**
+     * Enter user name  pressed.
+     * When pressed enter get the user details and start the login process
+     * @param event the event
+     */
     @FXML
     void userNameEnterprassed(KeyEvent event) {
     	if(event.getCode() == KeyCode.ENTER)

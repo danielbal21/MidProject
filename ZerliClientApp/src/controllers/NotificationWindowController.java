@@ -1,6 +1,7 @@
+/*
+ * 
+ */
 package controllers;
-
-import java.util.Comparator;
 
 import Entities.NotificationInTable;
 import ProtocolHandler.RequestType;
@@ -18,41 +19,66 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
+/**
+ *The Class NotificationWindowController is the controller part of the Customer GUI.
+ *The Class give the ability to the Customer to see his notifications (from who, content ,status)
+ *The class implement user control interface to be able to insert into frame users GUI
+ */
 public class NotificationWindowController implements UserControl {
 	
+	/** The All notification table list. */
 	private ObservableList<NotificationInTable> AllnotificationTableList;
+	
+	/** The unread notification table list. */
 	private ObservableList<NotificationInTable> unreadNotificationTableList;
+    
+    /** The all notifications show. */
     private boolean allNotificationsShow;
+    
+    /** The thread. */
     Thread thread;
     
+    /** The Error label. */
     @FXML
     private Label ErrorLabel;
 
+    /** The Notifications status button. */
     @FXML
     private ToggleButton NotificationsStatusBtn;
 
+    /** The active panel container. */
     @FXML
     private AnchorPane activePanelContainer;
 
+    /** The content. */
     @FXML
     private TableColumn<NotificationInTable, String> content;
 
+    /** The notification number. */
     @FXML
     private TableColumn<NotificationInTable, Integer> notificationNumber;
 
+    /** The notifications center table. */
     @FXML
     private TableView<NotificationInTable> notificationsCenterTable;
 
+    /** The send from. */
     @FXML
     private TableColumn<NotificationInTable, String> sendFrom;
 
+    /** The status. */
     @FXML
     private TableColumn<NotificationInTable, String> status;
     
+    /** The change notifications label. */
     @FXML
     private Label changeNotificationsLbl;
     
     
+    /**
+     * Creates the unread notification list.
+     * @return the observable list
+     */
     private ObservableList<NotificationInTable> createUnreadNotificationList()
     {
     	ObservableList<NotificationInTable> unreadAllnotificationTableList= FXCollections.observableArrayList();
@@ -64,6 +90,11 @@ public class NotificationWindowController implements UserControl {
     }
 
 
+    /**
+     * Sets the status.
+     * When pressed set change notification status from unread to read status 
+     * @param event the new status
+     */
     @FXML
     void setStatus(MouseEvent event) {
     	
@@ -79,6 +110,11 @@ public class NotificationWindowController implements UserControl {
 		}
     }
     
+    /**
+     * Notifications status pressed.
+     * When pressed NotificationsStatus, the table data change between read and unread status 
+     * @param event the event
+     */
     @FXML
     void NotificationsStatusPressed(ActionEvent event) {
       	if (allNotificationsShow)
@@ -101,13 +137,24 @@ public class NotificationWindowController implements UserControl {
         	notificationsCenterTable.setItems(AllnotificationTableList);
     	}
     }
+    
+    /**
+     * Refresh pressed.
+     * When pressed refresh the table set the last update data
+     * @param event the event
+     */
     @FXML
     void refreshPressed(MouseEvent event) {
     	onExit();
     	onEnter();
     }
     
-    @Override
+    /**
+     * On enter.
+     * The first action to run -  initialize the notifications tables columns and set the customer notifications data
+     */
+    @SuppressWarnings("unchecked")
+	@Override
 	public void onEnter()
 	{
     	allNotificationsShow = true;
@@ -124,9 +171,7 @@ public class NotificationWindowController implements UserControl {
 				while(true){
 					try {
 						Thread.sleep(2000);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
+					
 					
 					AllnotificationTableList = (ObservableList<NotificationInTable>) LoginController.windowControl.peekPipe("All Notification");
 					unreadNotificationTableList = createUnreadNotificationList();
@@ -138,6 +183,9 @@ public class NotificationWindowController implements UserControl {
 					else {
 				    	notificationsCenterTable.setItems(unreadNotificationTableList);
 					}
+					} catch (InterruptedException e) {
+						return;
+					}
 				}
 			}
 		});
@@ -147,6 +195,10 @@ public class NotificationWindowController implements UserControl {
     	NotificationsStatusBtn.setText("Show Unread Notifications");
 	}
 	
+	/**
+	 * On exit.
+	 * The last action to run - clear the the notifications table
+	 */
 	@Override
 	public void onExit() {	
 		thread.interrupt();

@@ -1,11 +1,11 @@
+/*
+ * 
+ */
 package controllers;
-
-import java.util.ArrayList;
 
 import Entities.Survey;
 import ProtocolHandler.RequestType;
 import client.ClientApp;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,30 +13,58 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
+/**
+ *The Class ExpertHomePageController is the controller part of the Expert GUI.
+ *The Class give the ability to the Expert to select the survey to analyze it 
+ *The class implement user control interface to be able to insert into frame users GUI
+ */
 public class ExpertHomePageController implements UserControl{
+	
+	/** The survey names. */
 	private ObservableList<String> surveyNames;
+	
+	/** The survey. */
 	private Survey survey=new Survey();
-	private ArrayList<Integer> surveyList=new ArrayList<Integer>();
+	
+    /** The active panel container. */
     @FXML
     private AnchorPane activePanelContainer;
 
+    /** The required surveys text. */
     @FXML
     private TextField requiredSurveysText;
 
+    /** The survey name selector. */
     @FXML
     private ComboBox<String> surveyNameSelector;
-    private void setComboBox() 
+    
+    /**
+     * Sets the combo box.
+     */
+    @SuppressWarnings("unchecked")
+	private void setComboBox() 
     {	
     	ClientApp.ProtocolHandler.Invoke(RequestType.GetSurveysNames, survey, null, true);
     	surveyNames=(ObservableList<String>)ClientApp.ProtocolHandler.GetResponse(RequestType.GetSurveysNames);
     	surveyNameSelector.setItems(surveyNames);
     	
     }
+    
+    /**
+     * Next button pressed.
+     * When the next pressed go to the next page ( Survey Histogram)
+     * @param event the event
+     */
     @FXML
     void NextBtnPressed(ActionEvent event) {
     	LoginController.windowControl.setUserControl("/gui/usercontrols/SurveyHistogram.fxml");
     }
 
+    /**
+     * Survey name selector pressed.
+     * When pressed Survey name selector take the survey option and save it until the next press
+     * @param event the event
+     */
     @FXML
     void surveyNameSelectorPressed(ActionEvent event) 
     {
@@ -48,10 +76,18 @@ public class ExpertHomePageController implements UserControl{
 		}
     }
 		
+	/**
+	 * On enter.
+	 */
 	@Override
 	public void onEnter() {
 		setComboBox();
 	}
+	
+	/**
+	 * On exit.
+	 * The first action to run - set the comboBox to the Surveys names
+	 */
 	@Override
 	public void onExit() {
 		// TODO Auto-generated method stub

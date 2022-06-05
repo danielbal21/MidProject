@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package controllers;
 
 import java.io.IOException;
@@ -23,41 +26,75 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
+/**
+ *The Class AddNewSurveyController is the controller part of the Customer GUI.
+ *The Class give the ability to the Customer to..
+ *The class implement user control interface to be able to insert into frame users GUI
+ */
 public class MarketingEditorController implements UserControl {
+	
+	/** The item list. */
 	private ObservableList<Item> itemList = FXCollections.observableArrayList();
+	
+	/** The catalog pages. */
 	private Map< Integer ,ArrayList<Item>> catalogPages;
+    
+    /** The catalog type. */
     private CatalogType catalogType;
+    
+    /** The Grid pane. */
     @FXML
     private GridPane GridPane;
 
+    /** The active panel container. */
     @FXML
     private AnchorPane activePanelContainer;
 
+    /** The catalog name label. */
     @FXML
     private Label catalogNameLbl;
 
+    /** The current page. */
     @FXML
     private Label currentPage;
 
+    /** The items checked. */
     @FXML
     private CheckBox itemsChecked;
 
+    /** The max pages. */
     @FXML
     private Label maxPages;
 
+    /** The products checked. */
     @FXML
     private CheckBox productsChecked;
 
+    /**
+     * Back pressed.
+     *
+     * @param event the event
+     */
     @FXML
     void backPressed(ActionEvent event) {
 
     }
     
+    /**
+     * Adds the new item pressed.
+     * When the Adds pressed go to Item Adder
+     * @param event the event
+     */
     @FXML
     void addNewItemPressed(MouseEvent event) {
     	LoginController.windowControl.setUserControl("/gui/usercontrols/ItemAdder.fxml");
     }
 
+    /**
+     * Browse left.
+     * When Browse left pressed go back to the previous page in the catalog 
+     * @param event the event
+     */
     @FXML
     void browseLeft(ActionEvent event) {
     	if(currentPage.getText().equals("1")) return;
@@ -67,6 +104,11 @@ public class MarketingEditorController implements UserControl {
     	}
     }
     
+    /**
+     * Browse right.
+     * When Browse left pressed move to the next page in the catalog
+     * @param event the event
+     */
     @FXML
     void browseRight(ActionEvent event) {
     	if(currentPage.getText().equals(maxPages.getText())) return;
@@ -76,7 +118,12 @@ public class MarketingEditorController implements UserControl {
 
     	}
     }
-    private void updateCatalog()
+    
+    /**
+     * Update catalog by the item types
+     */
+    @SuppressWarnings("unchecked")
+	private void updateCatalog()
     {
     	itemList.clear();
     	if(productsChecked.isSelected())
@@ -127,6 +174,10 @@ public class MarketingEditorController implements UserControl {
 		ShowPage(1);
 	}
 
+	/**
+	 * On enter.
+	 * The first action to run -  set catalog at page 1 and set the catalog data by the user choose
+	 */
 	@Override
 	public void onEnter() {
 		
@@ -152,11 +203,20 @@ public class MarketingEditorController implements UserControl {
 		
 	}
 
+	/**
+	 * On exit.
+	 */
 	@Override
 	public void onExit() {
 		GridPane.getChildren().clear();
 		
 	}
+	
+	/**
+	 * Show page.
+	 *
+	 * @param num the number
+	 */
 	public void ShowPage(int num) {
 		GridPane.getChildren().clear();
 		

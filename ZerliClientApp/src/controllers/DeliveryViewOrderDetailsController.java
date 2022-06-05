@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package controllers;
 
 import Entities.NotificationInTable;
@@ -9,44 +12,70 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 
+/**
+ *The Class DeliveryViewOrderDetailsController is the controller part of the Delivery GUI.
+ *The Class give the ability to the DeliveryMan to accept the order and submit it into the Data Base
+ *The class implement user control interface to be able to insert into frame users GUI
+ */
 public class DeliveryViewOrderDetailsController implements UserControl {
 
-	 @FXML
+	 /** The active panel container. */
+ 	@FXML
 	    private AnchorPane activePanelContainer;
 
-	    @FXML
+	    /** The address label. */
+    	@FXML
 	    private Label addressLbl;
 
-	    @FXML
+	    /** The city label. */
+    	@FXML
 	    private Label cityLbl;
 
-	    @FXML
+	    /** The cost label. */
+    	@FXML
 	    private Label costLabel;
 
-	    @FXML
+	    /** The full name label. */
+    	@FXML
 	    private Label fullnameLbl;
 
-	    @FXML
+	    /** The order date label. */
+    	@FXML
 	    private Label orderDateLabel;
 
-	    @FXML
+	    /** The order number label. */
+    	@FXML
 	    private Label orderNumberLabel;
 
-	    @FXML
+	    /** The payment method label. */
+    	@FXML
 	    private Label paymentMethodLabel;
 
-	    @FXML
+	    /** The phone label. */
+    	@FXML
 	    private Label phoneLbl;
 
-	    @FXML
+	    /** The shipping date label. */
+    	@FXML
 	    private Label shippingDateLabel;
 
 
+    /**
+     * Back pressed.
+     * When the back pressed go to the previous page (Delivery Order Manager)
+     * @param event the event
+     */
     @FXML
     void backPressed(ActionEvent event) {
     	LoginController.windowControl.setUserControl("/gui/usercontrols/DeliveryOrderManager.fxml");
     }
  
+    /**
+     * Done pressed.
+     * When pressed done the notification update , check if refund needed, 
+     * Update that the order was send to the customer.
+     * @param event the event
+     */
     @FXML
     void donePressed(ActionEvent event) {
     	Order order = (Order) LoginController.windowControl.peekPipe("Order select");
@@ -71,6 +100,10 @@ public class DeliveryViewOrderDetailsController implements UserControl {
     	LoginController.windowControl.setUserControl("/gui/usercontrols/DeliveryOrderManager.fxml");
     }
 
+	/**
+	 * On enter.
+	 * The first action to run - set the order details 
+	 */
 	@Override
 	public void onEnter() {
 		Order order = (Order)LoginController.windowControl.peekPipe("Order select");
@@ -85,6 +118,9 @@ public class DeliveryViewOrderDetailsController implements UserControl {
 		phoneLbl.setText(order.getPhone());
 	}
 
+	/**
+	 * On exit.
+	 */
 	@Override
 	public void onExit() {}
 

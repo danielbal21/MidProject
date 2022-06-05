@@ -1,3 +1,6 @@
+/*
+ * 
+ */
  package controllers;
 
 import java.io.IOException;
@@ -24,36 +27,57 @@ import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
+/**
+ * The Class CatalogViewerController is the controller part of the Customer GUI.
+ * The Class CatalogViewerController give the Customer the ability to browse throw the catalog.
+ * The class implement user control interface to be able to insert into frame users GUI
+ */
 public class CatalogViewerController implements UserControl {
 
+	/** The item list. */
 	private ObservableList<Item> itemList;
+	
+	/** The catalog pages. */
 	private Map< Integer ,ArrayList<Item>> catalogPages;
 	
+    /** The catalog type. */
     private CatalogType catalogType;
 	
+    /** The Grid pane. */
     @FXML
     private GridPane GridPane;
     
+    /** The active panel container. */
     @FXML
     private AnchorPane activePanelContainer;
 
+    /** The catalog name label. */
     @FXML
     private Label catalogNameLbl;
     
+    /** The no item error label. */
     @FXML
     private Label noItemErrorLabel;
     
+    /** The current page. */
     @FXML
     private Label currentPage;
 
+    /** The max pages. */
     @FXML
     private Label maxPages;
     
     
+    /** The next button. */
     @FXML
     private Button nextBtn;
 
     
+    /**
+     * Next pressed.
+     * When the next pressed go to the creation of newItem ,give him name and quantity 
+     * @param event the event
+     */
     @FXML
     void nextPressed(ActionEvent event) {
     	if(LoginController.windowControl.peekPipe("newItem") == null) 
@@ -79,6 +103,11 @@ public class CatalogViewerController implements UserControl {
     }													
    
     
+    /**
+     * Back pressed.
+     *When the back pressed go to the previous page (Customer Home Page) and if its needed save the typed data 
+     * @param event the event
+     */
     @FXML
     void backPressed(ActionEvent event) {
     	if(LoginController.windowControl.peekPipe("newItem") != null)
@@ -98,6 +127,11 @@ public class CatalogViewerController implements UserControl {
     	LoginController.windowControl.setUserControl("/gui/usercontrols/CustomerHomePage.fxml");
     }
     
+    /**
+     * Browse left.
+     * When Browse left pressed go back to the previous page in the catalog
+     * @param event the event
+     */
     @FXML
     void browseLeft(ActionEvent event) {
     	
@@ -110,6 +144,11 @@ public class CatalogViewerController implements UserControl {
 
     }
 
+    /**
+     * Browse right.
+     *When Browse left pressed move to the next page in the catalog
+     * @param event the event
+     */
     @FXML
     void browseRight(ActionEvent event) {
     	
@@ -121,6 +160,10 @@ public class CatalogViewerController implements UserControl {
     	}
     }
     
+	/**
+	 * On enter.
+	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void onEnter() {	
 		noItemErrorLabel.setVisible(false);
@@ -192,17 +235,29 @@ public class CatalogViewerController implements UserControl {
 		ShowPage(1);
 	}
 	
+	/**
+	 * On exit.
+	 * The first action to run - clear the window
+	 */
 	@Override
 	public void onExit() {
 		GridPane.getChildren().clear();
 	}
 	
+	/**
+	 * Reset the item selection.
+	 */
 	private void Reset() {
 		LoginController.windowControl.putPipe("newItem",null);
 		
 	}
 
 
+	/**
+	 * Show page.
+	 * Show the current catalog page
+	 * @param num the num
+	 */
 	public void ShowPage(int num) {
 		GridPane.getChildren().clear();
 		

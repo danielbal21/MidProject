@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package controllers;
 
 import Entities.Order;
@@ -12,36 +15,56 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 
+/**
+ *The Class AddNewSurveyController is the controller part of the Delivery GUI.
+ *The Class give the ability to the DeliveryMan to
+ *The class implement user control interface to be able to insert into frame users GUI
+ */
 public class DeliveryOrderManagerController implements UserControl{
 
+	/** The observable list. */
 	private ObservableList<Order> observableList;
 	
-	    @FXML
+	    /** The address column. */
+    	@FXML
 	    private TableColumn<Order, String> adressCol;
 	
-	    @FXML
+	    /** The branch name. */
+    	@FXML
 	    private Label branchName;
 	
-	    @FXML
+	    /** The city column. */
+    	@FXML
 	    private TableColumn<Order, String> cityCol;
 
-	    @FXML
+	    /** The expected date column. */
+    	@FXML
 	    private TableColumn<Order, String> expectedDateColumn;
 
-	    @FXML
+	    /** The order date column. */
+    	@FXML
 	    private TableColumn<Order, String> orderDateColumn;
 
-	    @FXML
+	    /** The order Id column. */
+    	@FXML
 	    private TableColumn<Order, String> orderIDcolumn;
 
-	    @FXML
+	    /** The orders table. */
+    	@FXML
 	    private TableView<Order> ordersTable;
 
 
-	    @FXML
+	    /** The price column. */
+    	@FXML
 	    private TableColumn<Order, Integer> priceColumn;
 
-	    @FXML
+	    /**
+    	 * Gets the order info.
+    	 * When the event happened go to Delivery View Order Details
+    	 * If the event is not a double click end the event
+    	 * @param event the event
+    	 */
+    	@FXML
 	    void getOrderInfo(MouseEvent event) {
 			if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 2) {
 				Order OrderChoose = ordersTable.getSelectionModel().getSelectedItem();
@@ -50,11 +73,21 @@ public class DeliveryOrderManagerController implements UserControl{
 			}
 	    }
 	    
-	    @FXML
+	    /**
+    	 * Refresh pressed.
+    	 * When pressed refresh the table set the last update data
+    	 * @param event the event
+    	 */
+    	@FXML
 	    void refreshPressed(MouseEvent event) {
 	    	onEnter();
 	    }
 		
+		/**
+		 * On enter.
+		 * The first action to run - initialize the table columns and get the branches names
+		 */
+		@SuppressWarnings("unchecked")
 		@Override
 		public void onEnter() {
 			branchName.setText((String) LoginController.windowControl.peekPipe("Branch"));
@@ -69,6 +102,9 @@ public class DeliveryOrderManagerController implements UserControl{
 			ordersTable.setItems(observableList);
 		}
 
+		/**
+		 * On exit.
+		 */
 		@Override
 		public void onExit() {}
 
