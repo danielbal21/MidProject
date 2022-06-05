@@ -36,7 +36,7 @@
             <Label layoutX="317.0" layoutY="245.0" styleClass="subLabel" stylesheets="@../application.css" text="Item Color" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="305.0" layoutY="478.0" prefHeight="125.0" prefWidth="331.0" style="-fx-border-color: gray;">
+      <AnchorPane layoutX="158.0" layoutY="478.0" prefHeight="125.0" prefWidth="331.0" style="-fx-border-color: gray;">
          <children>
             <CheckBox fx:id="onSaleCB" layoutX="99.0" layoutY="20.0" mnemonicParsing="false" styleClass="subLabel" text="On Sale" />
             <Label layoutX="35.0" layoutY="73.0" styleClass="subLabel" stylesheets="@../application.css" text="Sale Price" />
@@ -46,7 +46,7 @@
       </AnchorPane>
       <Label layoutX="323.0" layoutY="15.0" styleClass="MainLabel" text="Item Editor" />
       <Label layoutX="414.0" layoutY="97.0" styleClass="subLabel" stylesheets="@../application.css" text="Item Details" />
-      <Label layoutX="410.0" layoutY="448.0" styleClass="subLabel" stylesheets="@../application.css" text="Sale Details" />
+      <Label layoutX="263.0" layoutY="448.0" styleClass="subLabel" stylesheets="@../application.css" text="Sale Details" />
       <Button fx:id="updateBtn" layoutX="850.0" layoutY="595.0" mnemonicParsing="false" onAction="#updateBtn_Click" prefHeight="60.0" prefWidth="102.0" stylesheets="@application.css" text="Update">
          <font>
             <Font name="Maiandra GD" size="12.0" />

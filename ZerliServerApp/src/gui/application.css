@@ -94,11 +94,12 @@
 }
 
 .Reg-btn:hover {
-		-fx-background-color: #FFFFFF;
+	-fx-background-color: #FFFFFF;
 	-fx-cursor: hand;
-	 -fx-border-width: 2;
+	-fx-border-width: 2;
 	-fx-border-radius: 10px;
-	-fx-effect: linear-gradient(to bottom, #1dbbdd44, #93f9b944);
+	-fx-scale-y: 1.12;
+	-fx-scale-x: 1.12;
 }
 
 .Reg-btn:active {
@@ -117,6 +118,12 @@
 
 
 .table-view {
+    -fx-background-color: transparent;
+}
+
+.lview {
+	-fx-font-family: 'Maiandra GD';
+	-fx-font-size: 20px;
     -fx-background-color: transparent;
 }
 
@@ -190,7 +197,7 @@
      -fx-alignment: center;
 }
 
-.combo-box-popup .list-view s.list-cell:filled:selected {
+.combo-box-popup .list-view .list-cell:filled:selected {
     -fx-background-color: -fx-accent;
      -fx-alignment: center;
 }
@@ -203,16 +210,29 @@
      -fx-border-radius: 10px;
     
 }
-.combo-box  {
+.combo-box {
     -fx-border-width : 1 ;
     -fx-border-radius: 10px;
     -fx-background-radius: 10px;
-}
-
-.text-field{
+} 
+.text-area{
+	
    -fx-padding: 1,1,1,1;
    -fx-border-color: black;
-   -fx-border-width: 1;
+   -fx-border-width: 1; 
+   -fx-border-radius: 10px;
+   -fx-background-color: transparent;
+   -fx-text-fill: black;
+}
+
+.text-area:focused {
+	 -fx-border-radius: 10px;
+}
+.text-field{
+	-fx-alignment: center;
+   -fx-padding: 1,1,1,1;
+   -fx-border-color: black;
+   -fx-border-width: 1; 
    -fx-border-radius: 10px;
    -fx-background-color: transparent;
    -fx-text-fill: black;
@@ -221,5 +241,61 @@
 .text-field:focused {
 	 -fx-border-radius: 10px;
 }
+
+
+.date-picker:focused{
+		-fx-color: black;
+	-fx-background-color:#E6E6E6;
+	-fx-border-width:0.0;
+}
+.date-picker .combo-box {
+	-fx-background-insets:0.0px ;
+	-fx-border-width: 0.0px;
+}
+ 
+.date-picker .text-field{
+	-fx-background-radius:0.0px ;
+	-fx-border-color: transparent;
+}
+
+.date-picker .arrow-button{
+	-fx-background-radius:0.0px ;
+	-fx-background-color: #eee;
+}
+
+.date-picker .arrow-button .arrow{
+	-fx-background-radius:0.0px ;
+	-fx-background-color: black;
+}
+
+
+ .date-picker .button {
+-fx-background-color: transparent;
+	-fx-border-color:transparent;
+	-fx-pref-height: 35.0px;
+	-fx-pref-width: 35.0px;
+}
+
+
+.date-picker .button .arrow:pressed {
+	-fx-border-color:transparent;
+	-fx-pref-height: 35.0px;
+	-fx-pref-width: 35.0px;
+}
+
+
+.date-picker .cell:focused {
+	-fx-color: black;
+	-fx-background-color:#ffe6ff;
+	-fx-pref-width:20.0px ;
+	-fx-pref-height:20.0px ;
+}
+
+.date-picker-popup  {
+	-fx-border-color: #1783CC;
+	-fx-background-color: black;
+}
+
+
 
 

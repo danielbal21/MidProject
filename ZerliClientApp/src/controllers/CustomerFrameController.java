@@ -144,10 +144,10 @@ public class CustomerFrameController implements IContainable{
 				}
 				if(Integer.parseInt(newValue)>Integer.parseInt(oldValue))
 				{
-					File tone= new File("src\\tones\\Messenger notification tone.mp3");
-					//File tone= new File("src\\tones\\MiSam.mp3");
-					mediaPlay =new MediaPlayer(new javafx.scene.media.Media(tone.toURI().toString()));
-					mediaPlay.play();				
+//					File tone= new File("src\\tones\\Messenger notification tone.mp3");
+//					//File tone= new File("src\\tones\\MiSam.mp3");
+//					mediaPlay =new MediaPlayer(new javafx.scene.media.Media(tone.toURI().toString()));
+//					mediaPlay.play();				
 				}
 			}
 		});

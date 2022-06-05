@@ -19,7 +19,7 @@ import server.Server;
 public class ReportScheduler {
 	
 	/** The zerli debug. */
-	private final boolean ZERLI_DEBUG = true;
+	private final boolean ZERLI_DEBUG = false;
 	
 	/**  The dawn of time is used to determine from when to check for missing reports. */
 	private final LocalDate dawnOfTime = LocalDate.of(2022, 1, 1);
@@ -106,7 +106,8 @@ public class ReportScheduler {
 	 */
 	public void Interrupt()
 	{
-		Server.Log("R-Scheduler", "Generation Progress Begun");
+		Compensate();
+		/*Server.Log("R-Scheduler", "Generation Progress Begun");
 		branches = Server.SqlServerManager.GetBranches();
 		for(String branch : branches) //branches * 6 or 3 [q/m]
 		{
@@ -121,7 +122,7 @@ public class ReportScheduler {
 					ReportGenerator.GenerateQuarterlyReport(t, branch, LocalDate.now());
 				}
 			}
-		}
+		}*/
 	}
 	
 	/**
@@ -147,7 +148,7 @@ public class ReportScheduler {
 						else
 							Thread.sleep(10 * 1000); //10 seconds
 					}
-					Interrupt();
+					Compensate();
 				}
 				return null;	
 			}

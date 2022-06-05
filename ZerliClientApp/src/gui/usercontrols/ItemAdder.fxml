@@ -41,7 +41,7 @@
             <ImageView fx:id="ItemImage" fitHeight="220.0" fitWidth="220.0" layoutX="40.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="313.0" layoutY="469.0" prefHeight="125.0" prefWidth="331.0" style="-fx-border-color: gray;">
+      <AnchorPane layoutX="164.0" layoutY="472.0" prefHeight="125.0" prefWidth="331.0" style="-fx-border-color: gray;">
          <children>
             <CheckBox fx:id="onSaleCB" layoutX="99.0" layoutY="20.0" mnemonicParsing="false" styleClass="subLabel" text="On Sale" />
             <Label layoutX="34.0" layoutY="71.0" styleClass="subLabel" stylesheets="@../application.css" text="Sale Price" />
@@ -51,7 +51,7 @@
       </AnchorPane>
       <Label layoutX="287.0" layoutY="8.0" styleClass="MainLabel" text="Item Designer" />
       <Label layoutX="402.0" layoutY="94.0" styleClass="subLabel" stylesheets="@../application.css" text="Item Details" />
-      <Label layoutX="406.0" layoutY="440.0" styleClass="subLabel" stylesheets="@../application.css" text="Sale Details" />
+      <Label layoutX="257.0" layoutY="443.0" styleClass="subLabel" stylesheets="@../application.css" text="Sale Details" />
       <Button fx:id="addBtn" layoutX="874.0" layoutY="594.0" mnemonicParsing="false" onAction="#addBtn_Click" prefHeight="60.0" prefWidth="77.0" stylesheets="@application.css" text="Add">
          <font>
             <Font name="Maiandra GD" size="12.0" />
