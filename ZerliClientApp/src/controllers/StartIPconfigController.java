@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package controllers;
 
 import client.ClientConn;
@@ -16,37 +19,63 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class StartIPconfigController.
+ */
 public class StartIPconfigController {
 
 
+    /** The connect btn. */
     @FXML
     private Button connectBtn;
 
+    /** The enter IP label. */
     @FXML
     private Label enterIPLabel;
 
+    /** The errror label. */
     @FXML
     private Label errrorLabel;
 
+    /** The ip text field. */
     @FXML
     private TextField ipTextField;
 
+    /**
+     * Connect pressed.
+     *
+     * @param event the event
+     */
     @FXML
     void connectPressed(ActionEvent event) {
     	startConnaction();
     }
 
+    /**
+     * Enter.
+     *
+     * @param event the event
+     */
     @FXML
     void Enter(KeyEvent event) {
     	if(event.getCode() == KeyCode.ENTER)
     		startConnaction();
     }
     
+    /**
+     * Exit pressed.
+     *
+     * @param event the event
+     */
     @FXML
     void exitPressed(MouseEvent event) {
     	System.exit(0);
     }
     
+    /**
+     * Start connaction.
+     */
     private void startConnaction() 
     {
     	errrorLabel.setVisible(false);

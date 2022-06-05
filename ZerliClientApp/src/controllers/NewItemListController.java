@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package controllers;
 
 import javafx.event.ActionEvent;
@@ -12,20 +15,39 @@ import java.io.IOException;
 
 import Entities.*;
 
+/**
+ *The Class NewItemListController is the controller part of the Customer GUI.
+ *The Class give the ability to the Customer to see his new item items in the cart
+ *The class implement user control interface to be able to insert into frame users GUI
+ */
 public class NewItemListController implements UserControl {
 
+    /** The Back button. */
     @FXML
     private Button BackBtn;
 
+    /** The Vbox. */
     @FXML
     private VBox Vbox;
 
+    /** The active panel container. */
     @FXML
     private AnchorPane activePanelContainer;
+    
+    /**
+     * Back button pressed.
+     * When the back pressed go to the previous page (Customer Cart)
+     * @param event the event
+     */
     @FXML
     void BackBtnPressed(ActionEvent event) {
     	LoginController.windowControl.setUserControl("/gui/usercontrols/CustomerCart.fxml");
     }
+	
+	/**
+	 * On enter.
+	 * The first action to run - set the new item items into the GUI list 
+	 */
 	@Override
 	public void onEnter() {
 		Vbox.getChildren().clear();
@@ -49,10 +71,12 @@ public class NewItemListController implements UserControl {
 		}
 		
 		}
+	
+	/**
+	 * On exit.
+	 */
 	@Override
 	public void onExit() {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

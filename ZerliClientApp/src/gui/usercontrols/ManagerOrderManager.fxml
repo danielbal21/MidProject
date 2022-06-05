@@ -5,17 +5,19 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="663.0" prefWidth="957.0" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ManagerOrderManagerController">
    <children>
-      <Label layoutX="385.0" layoutY="94.0" prefHeight="67.0" prefWidth="168.0" styleClass="subLabel" text="Branch:">
+      <Label layoutX="393.0" layoutY="89.0" prefHeight="38.0" prefWidth="98.0" styleClass="subLabel" text="Branch:">
          <font>
             <Font name="Maiandra GD" size="24.0" />
          </font>
       </Label>
-      <TableView fx:id="ordersTable" layoutX="14.0" layoutY="161.0" onMouseClicked="#getOrderInfo" prefHeight="411.0" prefWidth="934.0">
+      <TableView fx:id="ordersTable" layoutX="14.0" layoutY="142.0" onMouseClicked="#getOrderInfo" prefHeight="411.0" prefWidth="934.0">
         <columns>
           <TableColumn fx:id="orderIDcolumn" maxWidth="126.0" minWidth="-1.0" prefWidth="89.0" resizable="false" text="Order ID" />
             <TableColumn fx:id="shippingMethodColumn" prefWidth="155.0" resizable="false" text="Shipping method" />
@@ -27,22 +29,36 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Label layoutX="274.0" layoutY="30.0" prefHeight="73.0" prefWidth="410.0" styleClass="MainLabel" text="Order Manager" textAlignment="CENTER">
+      <Label layoutX="276.0" layoutY="14.0" prefHeight="73.0" prefWidth="410.0" styleClass="MainLabel" text="Order Manager" textAlignment="CENTER">
          <font>
             <Font name="Maiandra GD" size="24.0" />
          </font>
       </Label>
-      <Label fx:id="branchName" layoutX="479.0" layoutY="113.0" prefHeight="30.0" prefWidth="83.0" styleClass="subLabel" text="North" textAlignment="CENTER">
+      <Label fx:id="branchName" layoutX="481.0" layoutY="93.0" prefHeight="30.0" prefWidth="83.0" styleClass="subLabel" text="North" textAlignment="CENTER">
          <font>
             <Font name="Maiandra GD" size="24.0" />
          </font>
       </Label>
       <Label layoutX="479.0" layoutY="127.0" styleClass="subLabel" />
-      <Button layoutX="14.0" layoutY="594.0" mnemonicParsing="false" onAction="#backPressed" text="Back">
+      <Button layoutX="8.0" layoutY="597.0" mnemonicParsing="false" onAction="#backPressed" text="Back">
          <styleClass>
             <String fx:value="Left-btn" />
             <String fx:value="pressbtn" />
          </styleClass>
       </Button>
+      <ImageView fitHeight="57.0" fitWidth="57.0" layoutX="881.0" layoutY="570.0" onMouseClicked="#refreshPressed" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../png/refresh2.png" />
+         </image>
+         <styleClass>
+            <String fx:value="imageasbtn" />
+            <String fx:value="pressbtn" />
+         </styleClass>
+      </ImageView>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="870.0" layoutY="627.0" styleClass="subLabel" text="Refresh" textAlignment="CENTER">
+         <font>
+            <Font name="Maiandra GD" size="24.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

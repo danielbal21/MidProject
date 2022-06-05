@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package controllers;
 
 import java.io.IOException;
@@ -15,19 +18,37 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+/**
+ * The Class CEOFrameController is the controller part of the CEO static environment GUI
+ * The GUI does not change and Contains CEO functions 
+ * The Controller implements the IContainable interface that give to the controller the ability to add different user controls
+ */
 public class CEOFrameController implements IContainable {
 
+    /** The control container. */
     @FXML
     private AnchorPane controlContainer;
 
+    /** The user label. */
     @FXML
     private Label userLabel;
 
+    /**
+     * Bell button 
+.
+     *
+     * @param event the event
+     */
     @FXML
     void bellBtn(MouseEvent event) {
     	
     }
 
+    /**
+     * Exit pressed.
+     *When the exit pressed exit from the program 
+     * @param event the event
+     */
     @FXML
     void exitPressed(MouseEvent event) {
      	ClientApp.ProtocolHandler.Invoke(RequestType.SetLogOut,null,null,false);
@@ -38,12 +59,23 @@ public class CEOFrameController implements IContainable {
 		} catch (IOException e) {e.printStackTrace();}
     }
 
+    /**
+     * Home pressed.
+     * When the home pressed go to the home page 
+     * @param event the event
+     */
     @FXML
     void homePressed(MouseEvent event) {
     	
     }
 
-    @FXML
+    /**
+     * Press logout.
+     * When the logout pressed go to the insert user details window
+     * @param event the event
+     */
+    @SuppressWarnings("static-access")
+	@FXML
     void pressLogout(ActionEvent event) {
     	LoginController.windowControl.stage.close();
     	Stage newStage = new Stage();
@@ -64,12 +96,20 @@ public class CEOFrameController implements IContainable {
 		catch (Exception e) {e.printStackTrace();	}
     }
 
+	/**
+	 * Gets the control container.
+	 * Return the user control that existing in the frame 
+	 * @return the control container
+	 */
 	@Override
 	public AnchorPane getControlContainer() {
 		// TODO Auto-generated method stub
 		return controlContainer;
 	}
 
+	/**
+	 * Initialize the CEO name.
+	 */
 	public void init() {
     	userLabel.setText(ClientApp.UserID.toString());
 	}

@@ -1,7 +1,9 @@
+/*
+ * 
+ */
 package controllers;
 
 import java.util.Optional;
-
 import Entities.Survey;
 import ProtocolHandler.RequestType;
 import client.ClientApp;
@@ -21,66 +23,102 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.layout.AnchorPane;
 
+/**
+ *The Class InsertAnswersIntoSurveyController is the controller part of the service GUI.
+ *The Class give the ability to the service to insert Customer's answers into the Data Base
+ *The class implement user control interface to be able to insert into frame users GUI
+ */
 public class InsertAnswersIntoSurveyController implements UserControl{
+	
+	/** The spinner array. */
+	@SuppressWarnings("unchecked")
 	private Spinner<Integer>[] spinnerArray= new Spinner[6];
+	
+	/** The survey. */
 	private Survey survey=new Survey();
+	
+	/** The index. */
 	private int index;
+	
+	/** The Question text array. */
 	private TextField[] QuestionTextArray=new TextField[6];
+	
+	/** The survey names. */
 	private ObservableList<String> surveyNames;
+    
+    /** The Submit result 1. */
     @FXML
     private Button SubmitResult1;
 
+    /** The active panel container. */
     @FXML
     private AnchorPane activePanelContainer;
 
-    @FXML
-    private Label addViolationLabel;
-
+    /** The question text 1. */
     @FXML
     private TextField questionText1;
 
+    /** The question text 2. */
     @FXML
     private TextField questionText2;
 
+    /** The question text 3. */
     @FXML
     private TextField questionText3;
 
+    /** The question text 4. */
     @FXML
     private TextField questionText4;
 
+    /** The question text 5. */
     @FXML
     private TextField questionText5;
 
+    /** The question text 6. */
     @FXML
     private TextField questionText6;
 
+    /** The spinner question 1. */
     @FXML
     private Spinner<Integer> spinnerQuestion1;
 
+    /** The spinner question 2. */
     @FXML
     private Spinner<Integer> spinnerQuestion2;
 
+    /** The spinner question 3. */
     @FXML
     private Spinner<Integer> spinnerQuestion3;
 
+    /** The spinner question 4. */
     @FXML
     private Spinner<Integer> spinnerQuestion4;
 
+    /** The spinner question 5. */
     @FXML
     private Spinner<Integer> spinnerQuestion5;
 
+    /** The spinner question 6. */
     @FXML
     private Spinner<Integer> spinnerQuestion6;
     
 
+    /** The submit label. */
     @FXML
     private Label submitLabel;
 
+    /** The survey name selector. */
     @FXML
     private ComboBox<String> surveyNameSelector;
     
+	/** The unsaved. */
 	private boolean unsaved=true;
 
+    /**
+     * Back button pressed.
+     * When the back pressed go to the previous page (Survey Manger Home Screen) and if its needed save the typed data 
+     * @param event the event
+     */
     @FXML
     void BackBtnPressed(ActionEvent event) 
     {
@@ -102,6 +140,11 @@ public class InsertAnswersIntoSurveyController implements UserControl{
     	LoginController.windowControl.setUserControl("/gui/usercontrols/SurveyMangerHomeScreen.fxml");
     }
 
+    /**
+     * Input validation.
+     *
+     * @return true, if successful
+     */
     private boolean inputValid() {
     	if(spinnerArray[0].getValue()!=null)
     	{
@@ -116,14 +159,21 @@ public class InsertAnswersIntoSurveyController implements UserControl{
 		return false;
 	}
 
+	/**
+	 * On enter.
+	 * The first action to run - Set the surveys into the comboBox selection
+	 */
 	@Override
     public void onEnter() 
     {
-    	SetArraies();
+		SetArrays();
     	setComboBox();
     }
     
-    private void SetArraies()
+    /**
+     * Sets the arrays.
+     */
+    private void SetArrays()
     {
  	   spinnerArray[0]=spinnerQuestion1;
  	   spinnerArray[1]=spinnerQuestion2;
@@ -139,13 +189,23 @@ public class InsertAnswersIntoSurveyController implements UserControl{
  	   QuestionTextArray[4]=questionText5;
  	   QuestionTextArray[5]=questionText6;
     }
-    private void setComboBox() 
+    
+    /**
+     * Sets the combo box with data from the Data Base by the user request.
+     */
+    @SuppressWarnings("unchecked")
+	private void setComboBox() 
     {	
     	ClientApp.ProtocolHandler.Invoke(RequestType.GetSurveysNames, survey, null, true);
     	surveyNames=(ObservableList<String>)ClientApp.ProtocolHandler.GetResponse(RequestType.GetSurveysNames);
     	surveyNameSelector.setItems(FXCollections.observableArrayList(surveyNames));
     }
 
+    /**
+     * Sets the survey.
+     *
+     * @param event the event
+     */
     @FXML
     void SetSurvey(ActionEvent event) 
     {
@@ -157,6 +217,11 @@ public class InsertAnswersIntoSurveyController implements UserControl{
 		}
     }
     
+    /**
+     * Sets the survey by id.
+     *
+     * @param id the id
+     */
     private void SetSurveyById(int id) 
     {
     	if(unsaved)
@@ -168,6 +233,9 @@ public class InsertAnswersIntoSurveyController implements UserControl{
 		setQuestion();
     }
     
+    /**
+     * Sets the spinners.
+     */
     private void SetSpinners()
     {
 		for (Spinner<Integer> spinner : spinnerArray) {
@@ -178,6 +246,9 @@ public class InsertAnswersIntoSurveyController implements UserControl{
 		}
     }
 
+    /**
+     * Sets the question.
+     */
     private void setQuestion() 
     {
     	for (int i = 0; i < QuestionTextArray.length; i++) {
@@ -185,6 +256,11 @@ public class InsertAnswersIntoSurveyController implements UserControl{
     	}
     }
 
+/**
+ * Submit result click.
+ * When pressed submit validate the data and insert it into the Data Base
+ * @param event the event
+ */
 @FXML
 void SubmitResult_Click(ActionEvent event) { 
 	if (spinnerArray[0].getValue()==null) {
@@ -234,6 +310,9 @@ void SubmitResult_Click(ActionEvent event) {
 	
 }
 
+/**
+ * On exit.
+ */
 @Override
 public void onExit() {
 	

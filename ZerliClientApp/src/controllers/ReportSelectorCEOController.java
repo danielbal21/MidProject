@@ -1,10 +1,11 @@
+/*
+ * 
+ */
 package controllers;
 
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.Month;
-import java.util.ArrayList;
-
 import ProtocolHandler.RequestType;
 import client.ClientApp;
 import javafx.beans.value.ChangeListener;
@@ -22,85 +23,125 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
-import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+
+/**
+ *The Class ReportSelectorCEOController is the controller part of the service GUI.
+ *The Class give the ability to the CEO select the report to watch.
+ *The class implement user control interface to be able to insert into frame users GUI
+ */
 public class ReportSelectorCEOController implements UserControl {
 
+	/** The report income. */
 	private final String report_income = "Branch Income Report";
+	
+	/** The report orders. */
 	private final String report_orders = "Branch Order Report";
+	
+	/** The report service. */
 	private final String report_service = "Branch Complaints Report";
+    
+    /** The report ceo. */
     private final String report_ceo = "CEO Income Report";
+		
+		/** The active panel container. */
 		@FXML
 	    private AnchorPane activePanelContainer;
 
-	    @FXML
+	    /** The error label. */
+    	@FXML
 	    private Label errorLabel;
 
-	    @FXML
+	    /** The is compare. */
+    	@FXML
 	    private CheckBox isCompare;
 
-	    @FXML
+	    /** The is monthly. */
+    	@FXML
 	    private RadioButton isMonthly;
 
-	    @FXML
+	    /** The is quarterly. */
+    	@FXML
 	    private RadioButton isQuarterly;
 
-	    @FXML
+	    /** The panel month. */
+    	@FXML
 	    private AnchorPane panelMonth;
 
-	    @FXML
+	    /** The panel quarter. */
+    	@FXML
 	    private AnchorPane panelQuarter;
 
-	    @FXML
+	    /** The period group. */
+    	@FXML
 	    private ToggleGroup periodGroup;
 
-	    @FXML
+	    /** The branch selection M 1. */
+    	@FXML
 	    private ComboBox<String> branchSelectionM1;
 
-	    @FXML
+	    /** The branch selection M 2. */
+    	@FXML
 	    private ComboBox<String> branchSelectionM2;
 
-	    @FXML
+	    /** The branch selection Q 1. */
+    	@FXML
 	    private ComboBox<String> branchSelectionQ1;
 
-	    @FXML
+	    /** The branch selection Q 2. */
+    	@FXML
 	    private ComboBox<String> branchSelectionQ2;
 	    
-	    @FXML
+	    /** The report month. */
+    	@FXML
 	    private ComboBox<String> reportMonth;
 	    
-	    @FXML
+	    /** The report year. */
+    	@FXML
 	    private ComboBox<String> reportYear;
 	    
-	    @FXML
+	    /** The compared month. */
+    	@FXML
 	    private ComboBox<String> comparedMonth;
 	    
-	    @FXML
+	    /** The compared year. */
+    	@FXML
 	    private ComboBox<String> comparedYear;
 
-	    @FXML
+	    /** The compared quarter. */
+    	@FXML
 	    private ComboBox<String> comparedQuarter;
 
-	    @FXML
+	    /** The compared quarter Y. */
+    	@FXML
 	    private ComboBox<String> comparedQuarterY;    
 
-	    @FXML
+	    /** The report quarter. */
+    	@FXML
 	    private ComboBox<String> reportQuarter;
 
-	    @FXML
+	    /** The report quarter Y. */
+    	@FXML
 	    private ComboBox<String> reportQuarterY;
 
-	    @FXML
+	    /** The report type. */
+    	@FXML
 	    private ComboBox<String> reportType;
 
-	    @FXML
+	    /** The view report button. */
+    	@FXML
 	    private Button viewRepBtn;
 
 
+    /**
+     * View report click.
+     * Check if the asked report is exist , check if its needed to compare ,then show the report/s 
+     * @param event the event
+     */
     @FXML
     void viewReport_click(ActionEvent event) {
     	if(!isInputValid()) return;
@@ -178,6 +219,10 @@ public class ReportSelectorCEOController implements UserControl {
     		OpenReportViewer(reportMain);
     }
     
+    /**
+     * Checks if is input valid.
+     * @return true, if is input valid
+     */
     private boolean isInputValid()
     {
     	boolean valid = true;
@@ -249,6 +294,10 @@ public class ReportSelectorCEOController implements UserControl {
     	return valid;
     }
     
+	/**
+	 * On enter.
+	 * Get the data from the data Base and set it on the GUI
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void onEnter() {
@@ -343,6 +392,10 @@ public class ReportSelectorCEOController implements UserControl {
 		isMonthly.setSelected(true);
 	}
 
+	/**
+	 * On exit. 
+	 * Reset all of the data from the GUI
+	 */
 	@Override
 	public void onExit() {
 		reportType.getItems().clear();
@@ -365,6 +418,10 @@ public class ReportSelectorCEOController implements UserControl {
 		branchSelectionQ2.getItems().clear();
 	}
 	
+	/**
+	 * Open report viewer for one report.
+	 * @param report the report
+	 */
 	private void OpenReportViewer(byte[] report)
 	{
 		FXMLLoader loader = new FXMLLoader();
@@ -385,6 +442,11 @@ public class ReportSelectorCEOController implements UserControl {
 		newStage.show();
 	}
 	
+	/**
+	 * Open report viewer for 2 different reports .
+	 * @param reportLeft the report left
+	 * @param reportRight the report right
+	 */
 	private void OpenReportViewer(byte[] reportLeft,byte[] reportRight)
 	{
 		FXMLLoader loader = new FXMLLoader();

@@ -12,23 +12,27 @@
 
 <AnchorPane prefHeight="843.0" prefWidth="1207.0" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController">
    <children>
-      <ImageView fitHeight="940.0" fitWidth="1266.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="843.0" fitWidth="1272.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../png/W2.jpg" />
          </image>
       </ImageView>
-      <Button fx:id="loginBtn" layoutX="547.0" layoutY="504.0" mnemonicParsing="false" onAction="#loginPressed" prefHeight="58.0" prefWidth="129.0" text="Login">
+      <Button fx:id="loginBtn" layoutX="604.0" layoutY="518.0" mnemonicParsing="false" onAction="#loginPressed" prefHeight="58.0" prefWidth="129.0" text="Login">
          <styleClass>
             <String fx:value="Reg-btn" />
             <String fx:value="pressbtn" />
          </styleClass>
       </Button>
-      <ImageView fitHeight="69.0" fitWidth="70.0" layoutX="1183.0" layoutY="18.0" onMousePressed="#exitPressed" pickOnBounds="true" preserveRatio="true" styleClass="imageasbtn">
+      <ImageView fitHeight="69.0" fitWidth="70.0" layoutX="1183.0" layoutY="18.0" onMousePressed="#exitPressed" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../png/X-btn.png" />
          </image>
+         <styleClass>
+            <String fx:value="imageasbtn" />
+            <String fx:value="pressbtn" />
+         </styleClass>
       </ImageView>
-      <ImageView fitHeight="216.0" fitWidth="449.0" layoutX="396.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="216.0" fitWidth="449.0" layoutX="388.0" layoutY="124.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../png/ZerliLogo.PNG" />
          </image>
@@ -38,8 +42,8 @@
             <Font name="Maiandra GD" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="loginLabel" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="402.0" layoutY="569.0" prefHeight="128.0" prefWidth="486.0" styleClass="subLabel" text="Login Failed" textAlignment="CENTER" textFill="RED" visible="false" />
-      <AnchorPane layoutX="392.0" layoutY="317.0" prefHeight="187.0" prefWidth="445.0">
+      <Label fx:id="loginLabel" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="392.0" layoutY="582.0" prefHeight="128.0" prefWidth="486.0" styleClass="subLabel" text="Login Failed" textAlignment="CENTER" textFill="RED" visible="false" />
+      <AnchorPane layoutX="392.0" layoutY="331.0" prefHeight="187.0" prefWidth="445.0">
          <children>
             <Label layoutX="14.0" layoutY="14.0" prefHeight="73.0" prefWidth="129.0" styleClass="subLabel" text="User name">
                <font>

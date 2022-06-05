@@ -18,7 +18,7 @@
             <Image url="@../png/W2.jpg" />
          </image>
       </ImageView>
-      <TableView fx:id="clientTable" layoutX="23.0" layoutY="95.0" prefHeight="536.0" prefWidth="347.0" stylesheets="@application.css">
+      <TableView fx:id="clientTable" layoutX="23.0" layoutY="95.0" prefHeight="441.0" prefWidth="347.0" stylesheets="@application.css">
         <columns>
           <TableColumn fx:id="ipCol" prefWidth="101.0" text="IP" />
             <TableColumn fx:id="hostCol" minWidth="0.0" prefWidth="167.0" text="Host" />
@@ -34,10 +34,14 @@
             <Font name="Maiandra GD" size="35.0" />
          </font>
       </Label>
-      <ImageView fx:id="exitBtn" fitHeight="54.0" fitWidth="55.0" layoutX="913.0" layoutY="11.0" onMousePressed="#exitPressed" pickOnBounds="true" preserveRatio="true" styleClass="imageasbtn">
+      <ImageView fx:id="exitBtn" fitHeight="54.0" fitWidth="55.0" layoutX="926.0" layoutY="2.0" onMousePressed="#exitPressed" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../png/X-btn.png" />
          </image>
+         <styleClass>
+            <String fx:value="imageasbtn" />
+            <String fx:value="pressbtn" />
+         </styleClass>
       </ImageView>
       <ScrollPane layoutX="379.0" layoutY="95.0" prefHeight="536.0" prefWidth="578.0">
          <content>
@@ -49,7 +53,7 @@
             </TextArea>
          </content>
       </ScrollPane>
-      <Label fx:id="serverStatusLbl" layoutX="21.0" layoutY="26.0" style="-fx-text-fill: green;" text="Server    -   ONLINE" />
-      <Label fx:id="dbStatusServer" layoutX="23.0" layoutY="52.0" style="-fx-text-fill: green;" text="Database - ONLINE" />
+      <Label fx:id="serverStatusLbl" layoutX="84.0" layoutY="548.0" prefHeight="30.0" prefWidth="221.0" style="-fx-text-fill: green;" styleClass="subLabel" text="  Server   - ONLINE" />
+      <Label fx:id="dbStatusServer" layoutX="83.0" layoutY="582.0" style="-fx-text-fill: green;" styleClass="subLabel" text="Database - ONLINE" />
    </children>
 </AnchorPane>

@@ -1,9 +1,10 @@
+/*
+ * 
+ */
 package controllers;
 
 import java.time.format.DateTimeFormatter;
-
 import Entities.Complaint;
-import Entities.Order;
 import ProtocolHandler.RequestType;
 import Utilities.GenericUtilties;
 import client.ClientApp;
@@ -14,35 +15,54 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
+/**
+ *The Class CustomerServiceViewComplaintInfoController is the controller part of the service GUI.
+ *The Class give the ability to the service to watch customer complaints details
+ *The class implement user control interface to be able to insert into frame users GUI
+ */
 public class CustomerServiceViewComplaintInfoController implements UserControl{
 
+	/** The complaint. */
 	private Complaint complaint;
 	
+    /** The Answer text. */
     @FXML
     private TextArea AnswerText;
 
+    /** The active panel container. */
     @FXML
     private AnchorPane activePanelContainer;
 
+    /** The branch label. */
     @FXML
     private Label branchLabel;
 
+    /** The complaint text. */
     @FXML
     private Label complaintText;
 
+    /** The date label. */
     @FXML
     private Label dateLabel;
 
 
+    /** The refund field. */
     @FXML
     private TextField refundField;
 
+    /** The user Id label. */
     @FXML
     private Label userIDlLabel;
     
+    /** The error label. */
     @FXML
     private Label errorLabel;
 
+    /**
+     * End pressed.
+     * When pressed End the service employee done to handle the complain and update the result into the system
+     * @param event the event
+     */
     @FXML
     void EndPressed(ActionEvent event) {
     	int refund;
@@ -80,14 +100,23 @@ public class CustomerServiceViewComplaintInfoController implements UserControl{
     
     }
 
+    /**
+     * Back pressed.
+     * When the back pressed go to the previous page (Customer Service View Complaints)
+     * @param event the event
+     */
     @FXML
     void backPressed(ActionEvent event) {
     	LoginController.windowControl.setUserControl("/gui/usercontrols/CustomerServiceViewComplaints.fxml");
     }
 
+	/**
+	 * On enter.
+	 * The first action to run - get the complaint details and show them 
+	 */
 	@Override
 	public void onEnter() {
-		// TODO Auto-generated method stub
+		
 		errorLabel.setVisible(false);
 		complaint = (Complaint)LoginController.windowControl.peekPipe("Complaint select");
 		complaintText.setText(complaint.getComplain_text());
@@ -97,9 +126,12 @@ public class CustomerServiceViewComplaintInfoController implements UserControl{
 		
 	}
 
+	/**
+	 * On exit.
+	 * The last action to run- reset the filled in details
+	 */
 	@Override
 	public void onExit() {
-		// TODO Auto-generated method stub
 		AnswerText.setText("");
 		refundField.setText("");
 		

@@ -13,7 +13,7 @@
 
 <AnchorPane fx:id="activePanelContainer" prefHeight="663.0" prefWidth="957.0" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CatalogViewerController">
    <children>
-      <ScrollPane layoutX="15.0" layoutY="94.0" prefHeight="497.0" prefWidth="928.0" style="-fx-border-color: black;">
+      <ScrollPane layoutX="15.0" layoutY="94.0" prefHeight="497.0" prefWidth="928.0" style="-fx-border-color: black; -fx-border-radius: 10;">
          <content>
             <GridPane fx:id="GridPane" alignment="CENTER" hgap="50.0" prefHeight="131.0" prefWidth="901.0" vgap="10.0">
               <columnConstraints>
@@ -52,7 +52,7 @@
             <Font name="Maiandra GD" size="20.0" />
          </font>
       </Label>
-      <Button layoutX="8.0" layoutY="597.0" mnemonicParsing="false" onAction="#backPressed" text="Back">
+      <Button layoutX="4.0" layoutY="597.0" mnemonicParsing="false" onAction="#backPressed" prefHeight="60.0" prefWidth="81.0" text="Back">
          <styleClass>
             <String fx:value="Left-btn" />
             <String fx:value="pressbtn" />
@@ -64,13 +64,13 @@
          </font>
       </Label>
       <Label layoutX="464.0" layoutY="612.0" styleClass="subLabel" text="/" />
-      <Button fx:id="nextBtn" layoutX="862.0" layoutY="597.0" mnemonicParsing="false" onAction="#nextPressed" text="Next">
+      <Button fx:id="nextBtn" layoutX="872.0" layoutY="600.0" mnemonicParsing="false" onAction="#nextPressed" prefHeight="60.0" prefWidth="81.0" text="Next">
          <styleClass>
             <String fx:value="Next-btn" />
             <String fx:value="pressbtn" />
          </styleClass>
       </Button>
-      <Label fx:id="noItemErrorLabel" layoutX="668.0" layoutY="614.0" text="**Add at least one item" textFill="RED">
+      <Label fx:id="noItemErrorLabel" layoutX="596.0" layoutY="611.0" styleClass="subLabel" text="**Add at least one item" textFill="RED">
          <font>
             <Font size="16.0" />
          </font>

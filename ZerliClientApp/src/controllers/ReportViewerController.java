@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package controllers;
 
 import java.awt.geom.Rectangle2D;
@@ -51,27 +54,53 @@ import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
+// TODO: Auto-generated Javadoc
+
+/**
+ * The Class ReportViewerController.
+ */
 public class ReportViewerController {
 
+	/** The pagination. */
 	@FXML private Pagination pagination ;
+	
+	/** The current zoom label. */
 	@FXML private Label currentZoomLabel ;
+    
+    /** The export. */
     @FXML
     private Button export;
     
+	/** The file chooser. */
 	private FileChooser fileChooser ;
+	
+	/** The current file. */
 	private ObjectProperty<PDFFile> currentFile ;
+	
+	/** The current image. */
 	private ObjectProperty<ImageView> currentImage ;
+	
+	/** The scroller. */
 	@FXML  private ScrollPane scroller ;
+	
+	/** The zoom. */
 	private DoubleProperty zoom ;
+	
+	/** The current page dimensions. */
 	private PageDimensions currentPageDimensions ;
 	
+	/** The image load service. */
 	private ExecutorService imageLoadService ;
 	
+	/** The Constant ZOOM_DELTA. */
 	private static final double ZOOM_DELTA = 1.05 ;
 	
 	
 	// ************ Initialization *************
 	
+	/**
+	 * Initialize.
+	 */
 	public void initialize() {
 		
 		createAndConfigureImageLoadService();
@@ -101,6 +130,9 @@ public class ReportViewerController {
 		createPaginationPageFactory();
 	}
 
+	/**
+	 * Creates the and configure image load service.
+	 */
 	private void createAndConfigureImageLoadService() {
 		imageLoadService = Executors.newSingleThreadExecutor(new ThreadFactory() {
 			@Override
@@ -112,12 +144,18 @@ public class ReportViewerController {
 		});
 	}
 
+	/**
+	 * Creates the and configure file chooser.
+	 */
 	private void createAndConfigureFileChooser() {
 		fileChooser = new FileChooser();
 		fileChooser.setInitialDirectory(Paths.get(System.getProperty("user.home")).toFile());
 		fileChooser.getExtensionFilters().add(new ExtensionFilter("PDF Files", "*.pdf", "*.PDF"));
 	}
 
+	/**
+	 * Update window title when file changes.
+	 */
 	private void updateWindowTitleWhenFileChanges() {
 //		return;
 //		currentFile.addListener(new ChangeListener<PDFFile>() {
@@ -137,6 +175,9 @@ public class ReportViewerController {
 //		});
 	}
 	
+	/**
+	 * Bind pagination to current file.
+	 */
 	private void bindPaginationToCurrentFile() {
 		currentFile.addListener(new ChangeListener<PDFFile>() {
 			@Override
@@ -158,6 +199,9 @@ public class ReportViewerController {
 		pagination.disableProperty().bind(Bindings.isNull(currentFile));
 	}
 	
+	/**
+	 * Creates the pagination page factory.
+	 */
 	private void createPaginationPageFactory() {
 		pagination.setPageFactory(new Callback<Integer, Node>() {
 			@Override
@@ -175,6 +219,12 @@ public class ReportViewerController {
 			}
 		});
 	}
+    
+    /**
+     * Export action.
+     *
+     * @param event the event
+     */
     @FXML
     void exportAction(ActionEvent event) {
     	  FileChooser fileChooser = new FileChooser();
@@ -198,7 +248,15 @@ public class ReportViewerController {
         	  
           }
     }
+    
+    /** The bytefile. */
     byte[] bytefile = null;
+	
+	/**
+	 * Load report.
+	 *
+	 * @param file the file
+	 */
 	public void loadReport(byte[] file) {
 		//final File file = fileChooser.showOpenDialog(pagination.getScene().getWindow());
 		if (file != null) {
@@ -232,6 +290,9 @@ public class ReportViewerController {
 	}
 	// ************** Event Handlers ****************
 	
+	/**
+	 * Load file.
+	 */
 	@FXML private void loadFile() {
 		final File file = fileChooser.showOpenDialog(pagination.getScene().getWindow());
 		if (file != null) {
@@ -267,14 +328,23 @@ public class ReportViewerController {
 		}
 	}
 	
+	/**
+	 * Zoom in.
+	 */
 	@FXML private void zoomIn() {
 		zoom.set(zoom.get()*ZOOM_DELTA);
 	}
 	
+	/**
+	 * Zoom out.
+	 */
 	@FXML private void zoomOut() {
 		zoom.set(zoom.get()/ZOOM_DELTA);
 	}
 	
+	/**
+	 * Zoom fit.
+	 */
 	@FXML private void zoomFit() {
 		// TODO: the -20 is a kludge to account for the width of the scrollbars, if showing.
 		double horizZoom = (scroller.getWidth()-20) / currentPageDimensions.width ;
@@ -282,12 +352,20 @@ public class ReportViewerController {
 		zoom.set(Math.min(horizZoom, verticalZoom));
 	}
 	
+	/**
+	 * Zoom width.
+	 */
 	@FXML private void zoomWidth() {
 		zoom.set((scroller.getWidth()-20) / currentPageDimensions.width) ;
 	}
 
 	// *************** Background image loading ****************
 	
+	/**
+	 * Update image.
+	 *
+	 * @param pageNumber the page number
+	 */
 	private void updateImage(final int pageNumber) {
 		final Task<ImageView> updateImageTask = new Task<ImageView>() {
 			@Override
@@ -337,6 +415,12 @@ public class ReportViewerController {
 		imageLoadService.submit(updateImageTask);
 	}
 	
+	/**
+	 * Show error message.
+	 *
+	 * @param message the message
+	 * @param exception the exception
+	 */
 	private void showErrorMessage(String message, Throwable exception) {
 		
 		// TODO: move to fxml (or better, use ControlsFX)
@@ -397,13 +481,33 @@ public class ReportViewerController {
 	 * 
 	 */
 	
+	/**
+	 * The Class PageDimensions.
+	 */
 	private class PageDimensions {
+		
+		/** The width. */
 		private double width ;
+		
+		/** The height. */
 		private double height ;
+		
+		/**
+		 * Instantiates a new page dimensions.
+		 *
+		 * @param width the width
+		 * @param height the height
+		 */
 		PageDimensions(double width, double height) {
 			this.width = width ;
 			this.height = height ;
 		}
+		
+		/**
+		 * To string.
+		 *
+		 * @return the string
+		 */
 		@Override
 		public String toString() {
 			return String.format("[%.1f, %.1f]", width, height);

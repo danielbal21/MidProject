@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package controllers;
 
 import Entities.*;
@@ -16,41 +19,69 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Rectangle;
 
+/**
+ * The Class ItemHBoxController s the controller part of the item that aper in the catalog GUI.
+ * The Class extends the Hbox class to be able to be implement into the Hbox GUI component
+ */
 public class ItemHBoxController extends HBox {
+	
+	/** The counter. */
 	private int counter=0;
+	
+	/** The id. */
 	private int id;
+    
+    /** The sale label 2. */
     @FXML
     private Label saleLabel2;
     
+    /** The name label. */
     @FXML
     private Label nameLabel;
     
+	/** The Cost label. */
 	@FXML
     private Label CostLabel;
+
+   /** The image rec. */
+   @FXML
+    private Rectangle imageRec;
 	
-	@FXML
-	private ImageView itemImage;
-	
+    /** The v. */
     @FXML
     private VBox V;
 
+    /** The add to cart button. */
     @FXML
     private Button addToCartBtn;
 
+    /** The plus button. */
     @FXML
     private ImageView plusBtn;
 
+    /** The quantity label. */
     @FXML
     private Label quntityLabel;
     
+    /** The add label. */
     @FXML
     private Label addLbl;
     
+    /**
+     * Instantiates a new item H box controller.
+     */
     public ItemHBoxController() {
     	super();
 	}
     
+    /**
+     * When pressed adds the item will add to the cart.
+     *
+     * @param event the event
+     */
     @FXML
     void AddToCart(ActionEvent event) {
     	if(ClientApp.UserStatus == Access.inactive)  {
@@ -116,11 +147,18 @@ public class ItemHBoxController extends HBox {
 			}
 		});
 		thread.start();
-        	
-    	
 
     }
     
+    /**
+     * Initialize the add button to the item type and set his details
+     *
+     * @param id the id
+     * @param name the name
+     * @param costLabel the cost label
+     * @param image the image
+     * @param onSale the on sale
+     */
     public void init(int id,String name,String costLabel,Image image,boolean onSale) 
     {
     	if(LoginController.windowControl.peekPipe("catalog") == CatalogType.new_item) {
@@ -131,11 +169,16 @@ public class ItemHBoxController extends HBox {
 
     	CostLabel.setText(costLabel+ " " + Utilities.Constants.SHEKEL);
 		nameLabel.setText(name);
-		itemImage.setImage(image);
+		imageRec.setFill(new ImagePattern(image));
 		quntityLabel.setText("0");
 		saleLabel2.setVisible(onSale);
     }
 
+    /**
+     * Minus button pressed.
+     * When pressed Minus decrease the item quantity in the cart 
+     * @param event the event
+     */
     @FXML
     void MinusBtnPressed(MouseEvent event) {
     	if(counter>0)
@@ -145,6 +188,11 @@ public class ItemHBoxController extends HBox {
     	}
     }
 
+    /**
+     * Plus button pressed.
+     * When pressed Plus increase the item quantity in the cart 
+     * @param event the event
+     */
     @FXML
     void PlusBtnPressed(MouseEvent event) {
      	counter++;

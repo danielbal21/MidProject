@@ -57,9 +57,9 @@
                   <Font name="Maiandra GD" size="20.0" />
                </font>
             </Label>
-            <Label fx:id="userLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="64.0" prefHeight="30.0" prefWidth="213.0" text="Marketing" textAlignment="CENTER">
+            <Label fx:id="userLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="3.0" layoutY="63.0" prefHeight="30.0" prefWidth="213.0" text="Marketing" textAlignment="CENTER">
                <font>
-                  <Font name="Maiandra GD" size="36.0" />
+                  <Font name="Maiandra GD" size="47.0" />
                </font>
             </Label>
          </children>

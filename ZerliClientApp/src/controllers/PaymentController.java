@@ -1,8 +1,10 @@
+/*
+ * 
+ */
 package controllers;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Optional;
 import Entities.Order;
 import Entities.OrderStatus;
@@ -31,79 +33,120 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+/**
+ *The Class PaymentController is the controller part of the Customer GUI.
+ *The Class give the ability to the Customer to see his  order cost ,payment information and chose his  payment method 
+ *The class implement user control interface to be able to insert into frame users GUI
+ */
 public class PaymentController implements UserControl {
 
+	/** The current order. */
 	private Order currentOrder;
+	
+	/** The is shipping. */
 	private boolean isShipping;
+	
+	/** The save. */
 	boolean save = false;
+    
+    /** The pay details. */
     paymentInfo payDetails;
     
+    /** The back button. */
     @FXML
     private Button backBtn;
     
+    /** The active panel container 2. */
     @FXML
     private AnchorPane activePanelContainer2;
 
+    /** The card number text 1. */
     @FXML
     private TextField cardNumTxt1;
 
+    /** The card number text 2. */
     @FXML
     private TextField cardNumTxt2;
 
+    /** The card number text 3. */
     @FXML
     private TextField cardNumTxt3;
 
+    /** The card number text 4. */
     @FXML
     private TextField cardNumTxt4;
 
+    /** The credit card dialog. */
     @FXML
     private AnchorPane creditCardDialog;
 
+    /** The credit card RB. */
     @FXML
     private RadioButton creditCardRB;
 
+    /** The cvv text. */
     @FXML
     private TextField cvvText;
 
+    /** The discount percentage label. */
     @FXML
     private Label discountPercentageLabel;
 
+    /** The exertion month CB. */
     @FXML
     private ComboBox<String> expMonthCB;
 
+    /** The net price label. */
     @FXML
     private Label netPriceLabel;
 
+    /** The next button. */
     @FXML
     private Button nextBtn;
 
+    /** The payment method. */
     @FXML
     private ToggleGroup paymentMethod;
 
+    /** The total price label. */
     @FXML
     private Label totalPriceLabel;
 
+    /** The w. */
     @FXML
     private Label w;
 
+    /** The year CB. */
     @FXML
     private ComboBox<String> yearCB;
 
+    /** The zerli coins dialog. */
     @FXML
     private VBox zerliCoinsDialog;
 
+    /** The zerli coins RB. */
     @FXML
     private RadioButton zerliCoinsRB;
 
+    /** The post pay balance label. */
     @FXML
     private Label postPayBalanceLbl;
 
+    /** The balance label. */
     @FXML
     private Label balanceLbl;
     
+    /** The error label. */
     @FXML
     private Label errorLabel;
     
+    /**
+     * Next button click.
+     * When the next pressed in based on the payment method decrease the order cost from the coin or charge the credit card 
+     * Reset the cart notification 
+     * Then go to the next page (Customer Outro View Window ) 
+     * @param event the event
+     */
     @FXML
     void nextBtn_Click(ActionEvent event) {
     	if(!validateInput()) return;
@@ -154,6 +197,11 @@ public class PaymentController implements UserControl {
     	LoginController.windowControl.putPipe("OrderCompleted",true);
     }
     
+    /**
+     * Validate input.
+     *
+     * @return true, if successful
+     */
     public boolean validateInput()
     {
     	StringBuilder error = new StringBuilder("");
@@ -215,6 +263,11 @@ public class PaymentController implements UserControl {
     	}
     }
 
+	/**
+	 * On enter.
+	 * The first action to run - get from the Data Base and set the customer zerli coin and credit card details into the GUI
+	 * Check if their is enough zerli coin for this order
+	 */
 	@Override
 	public void onEnter() {
 		/* load user status */
@@ -248,19 +301,19 @@ public class PaymentController implements UserControl {
 			expMonthCB.getSelectionModel().select(payDetails.expirationMonth);
     	}
 		/** zerli coins view **/	
-		balanceLbl.setText(payDetails.ZerliCoins + " ZCoins");
-		postPayBalanceLbl.setText("" + (payDetails.ZerliCoins - currentOrder.getTotalPrice()));
+		balanceLbl.setText(payDetails.ZerliCoins + " Zerli Coins");
+		postPayBalanceLbl.setText("" + (payDetails.ZerliCoins - currentOrder.getTotalPrice())+ " Zerli Coins");
 
 		/** summary **/
 
 		if(isShipping)
-			w.setText("15 ILS");
+			w.setText(Utilities.Constants.SHIPPING + " " + Utilities.Constants.SHEKEL);
 		else
 			w.setText("-");
 		
-    	netPriceLabel.setText("" + netPrice);
+    	netPriceLabel.setText("" + netPrice + " " + Utilities.Constants.SHEKEL);
 		discountPercentageLabel.setText(payDetails.newUser ? "-20%" : "-");
-		totalPriceLabel.setText("" + currentOrder.getTotalPrice());
+		totalPriceLabel.setText("" + currentOrder.getTotalPrice()+ " " + Utilities.Constants.SHEKEL);
 		if(payDetails.ZerliCoins < currentOrder.getTotalPrice())
 			zerliCoinsRB.setDisable(true);
 		paymentMethod.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
@@ -290,12 +343,25 @@ public class PaymentController implements UserControl {
 		}
 		
 	}
+	
+	/** The back. */
 	boolean back = false;
+    
+    /**
+     * Back button press.
+     * When the back pressed go to the previous page (Customer Order Information )
+     * @param event the event
+     */
     @FXML
     void backBtn_press(ActionEvent event) {
     	back = true;
 		LoginController.windowControl.setUserControl("/gui/usercontrols/CustomerOrderInformation.fxml");
     }
+	
+	/**
+	 * On exit.
+	 * The first action to run - if its needed save the typed data
+	 */
 	@Override
 	public void onExit() {
 		if(!back) return;
@@ -314,6 +380,10 @@ public class PaymentController implements UserControl {
 		back = false;
 		
 	}
+	
+	/**
+	 * Clear all.
+	 */
 	private void clearAll() {
 		save = false;
 	}

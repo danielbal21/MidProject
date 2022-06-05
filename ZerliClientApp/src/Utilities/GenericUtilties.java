@@ -207,6 +207,8 @@ public class GenericUtilties {
 				return Roles.marketing;
 			case "Service":
 				return Roles.service;
+			case "Expert":
+				return Roles.expert;
 			default:
 		}
 		return null;
@@ -227,6 +229,8 @@ public class GenericUtilties {
 				return "Marketing";
 			case service:
 				return "Service";
+			case expert:
+				return "Expert";
 			default:
 				return null;
 		}

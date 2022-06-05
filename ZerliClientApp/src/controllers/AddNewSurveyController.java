@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package controllers;
 
 import java.util.Optional;
@@ -16,47 +19,78 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.layout.AnchorPane;
 
+/**
+ * The Class AddNewSurveyController is the controller part of the service employees GUI.
+ * THe class give to the service employees the ability to crate a new survey.
+ * The class implement user control interface to be able to insert into frame users GUI
+ */
 public class AddNewSurveyController implements UserControl {
+	
+	/** The survey. */
 	private Survey survey=new Survey();
+	
+	/** The index. */
 	private int index;
+	
+	/** The Question text array. */
 	private TextField[] QuestionTextArray=new TextField[6];
+    
+    /** The active panel container. */
     @FXML
     private AnchorPane activePanelContainer;
 
+    /** The add survey. */
     @FXML
     private Button addSurvey;
 
+    /** The add survey label. */
     @FXML
     private Label addSurveyLabel;
 
+    /** The add violation label. */
     @FXML
     private Label addViolationLabel;
 
+    /** The question text 1. */
     @FXML
     private TextField questionText1;
 
+    /** The question text 2. */
     @FXML
     private TextField questionText2;
 
+    /** The question text 3. */
     @FXML
     private TextField questionText3;
 
+    /** The question text 4. */
     @FXML
     private TextField questionText4;
 
+    /** The question text 5. */
     @FXML
     private TextField questionText5;
 
+    /** The question text 6. */
     @FXML
     private TextField questionText6;
 
+    /** The survey name label. */
     @FXML
     private TextField surveyName;
 
+	/**
+	 * On enter.
+	 * The first action to run - crate the connection between the GUI questions labels to the controller
+	 */
 	@Override
 	public void onEnter() {
 		SetQuestions();		
 	}
+    
+    /**
+     * Sets the questions.
+     */
     private void SetQuestions() {
 
   	   QuestionTextArray[0]=questionText1;
@@ -66,6 +100,12 @@ public class AddNewSurveyController implements UserControl {
   	   QuestionTextArray[4]=questionText5;
   	   QuestionTextArray[5]=questionText6;
   }
+    
+    /**
+     * Adds the survey click.
+     * Add the survey into the data base if it is valid
+     * @param event the event
+     */
     @FXML
     void addSurvey_Cllick(ActionEvent event) {
     	
@@ -109,6 +149,10 @@ public class AddNewSurveyController implements UserControl {
 		    	
 		    }
     }
+    
+    /**
+     * Reset question to "".
+     */
     private void resetQuestion() {
     	for (TextField textField : QuestionTextArray) {
 			textField.setText("");
@@ -116,6 +160,11 @@ public class AddNewSurveyController implements UserControl {
     	surveyName.setText("");
 	}
 
+    /**
+     * Back button pressed.
+     * When the back pressed go to the previous page (service home page) and if its needed save the typed data 
+     * @param event the event
+     */
     @FXML
     void BackBtnPressed(ActionEvent event) {
     	if(inputValid())
@@ -134,11 +183,21 @@ public class AddNewSurveyController implements UserControl {
     	}
     	LoginController.windowControl.setUserControl("/gui/usercontrols/SurveyMangerHomeScreen.fxml");
     }
+	
+	/**
+	 * On exit.
+	 */
 	@Override
 	public void onExit() {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	/**
+	 * Input valid.
+	 *
+	 * @return true, if successful
+	 */
 	private boolean inputValid()
 	{
 		for (TextField textField : QuestionTextArray) {

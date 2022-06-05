@@ -504,12 +504,13 @@ public class ServerConnSQL {
            	/*
            	 * 
            	 */
-           	stmt = conn.prepareStatement("SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'midproject' AND TABLE_NAME = 'orders'");
+           	stmt = conn.prepareStatement("SELECT MAX(order_id) FROM orders");
            	ResultSet rs = stmt.executeQuery();
            	int orderID = -1;
            	while(rs.next())
            	{
-           		orderID = rs.getInt(1) - 1;
+           		orderID = rs.getInt(1);
+           		System.out.println(orderID);
            	}
            	if(orderID == -1){
         		Server.Log("Database", "Executing InsertOrder: FAILED could not track OrderID");

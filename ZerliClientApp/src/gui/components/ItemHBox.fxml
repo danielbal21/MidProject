@@ -6,21 +6,22 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="227.0" prefWidth="350.0" style="-fx-border-radius: 25; -fx-border-color: black;" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ItemHBoxController">
+<AnchorPane prefHeight="227.0" prefWidth="388.0" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ItemHBoxController">
    <children>
-      <Label fx:id="nameLabel" alignment="CENTER" layoutX="4.0" layoutY="2.0" prefHeight="45.0" prefWidth="339.0" styleClass="subLabel" text="Pink Rose">
+      <Label fx:id="nameLabel" alignment="CENTER" layoutX="26.0" layoutY="7.0" prefHeight="45.0" prefWidth="339.0" styleClass="subLabel" text="Pink Rose">
          <font>
             <Font name="Maiandra GD" size="26.0" />
          </font>
       </Label>
-      <Label fx:id="CostLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="174.0" layoutY="47.0" prefHeight="30.0" prefWidth="162.0" styleClass="subLabel" text="Price :  " textAlignment="CENTER">
+      <Label fx:id="CostLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="201.0" layoutY="52.0" prefHeight="30.0" prefWidth="162.0" styleClass="subLabel" text="Price :  " textAlignment="CENTER">
          <font>
             <Font name="Maiandra GD" size="18.0" />
          </font>
       </Label>
-      <ImageView fitHeight="52.0" fitWidth="52.0" layoutX="180.0" layoutY="77.0" onMousePressed="#MinusBtnPressed" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="52.0" fitWidth="52.0" layoutX="202.0" layoutY="82.0" onMousePressed="#MinusBtnPressed" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../png/minusBtn.png" />
          </image>
@@ -29,12 +30,12 @@
             <String fx:value="pressbtn" />
          </styleClass>
       </ImageView>
-      <Label fx:id="quntityLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="225.0" layoutY="80.0" prefHeight="46.0" prefWidth="71.0" text="99" textAlignment="CENTER">
+      <Label fx:id="quntityLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="246.0" layoutY="85.0" prefHeight="46.0" prefWidth="71.0" text="99" textAlignment="CENTER">
          <font>
             <Font name="Maiandra GD" size="26.0" />
          </font>
       </Label>
-      <ImageView fx:id="plusBtn" fitHeight="52.0" fitWidth="52.0" layoutX="291.0" layoutY="77.0" onMousePressed="#PlusBtnPressed" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="plusBtn" fitHeight="52.0" fitWidth="52.0" layoutX="312.0" layoutY="82.0" onMousePressed="#PlusBtnPressed" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../png/plusBtn.png" />
          </image>
@@ -43,7 +44,8 @@
             <String fx:value="imageasbtn" />
          </styleClass>
       </ImageView>
-      <Button fx:id="addToCartBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="180.0" layoutY="140.0" mnemonicParsing="false" onAction="#AddToCart" prefHeight="76.0" prefWidth="151.0" stylesheets="@application.css" text="Add to cart" textAlignment="CENTER">
+      <Rectangle fx:id="imageRec" arcHeight="15.0" arcWidth="15.0" fill="WHITE" height="170.0" layoutX="27.0" layoutY="49.0" stroke="BLACK" strokeType="INSIDE" width="170.0" />
+      <Button fx:id="addToCartBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="204.0" layoutY="144.0" mnemonicParsing="false" onAction="#AddToCart" prefWidth="151.0" stylesheets="@application.css" text="Add to cart" textAlignment="CENTER">
          <font>
             <Font name="Maiandra GD" size="12.0" />
          </font>
@@ -52,13 +54,12 @@
             <String fx:value="pressbtn" />
          </styleClass>
       </Button>
-      <ImageView fx:id="itemImage" fitHeight="170.0" fitWidth="170.0" layoutX="7.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true" />
-      <Label fx:id="saleLabel2" layoutX="3.0" layoutY="42.0" rotate="-48.0" text="SALE!!" textFill="RED">
+      <Label fx:id="saleLabel2" layoutX="17.0" layoutY="56.0" rotate="-48.0" text="SALE!!" textFill="RED">
          <font>
             <Font size="35.0" />
          </font>
       </Label>
-      <Label fx:id="addLbl" layoutX="221.0" layoutY="148.0" styleClass="subLabel" text="Item &#10;added" textAlignment="CENTER" textFill="RED">
+      <Label fx:id="addLbl" layoutX="245.0" layoutY="152.0" styleClass="subLabel" text="Item &#10;added" textAlignment="CENTER" textFill="RED">
          <font>
             <Font size="35.0" />
          </font>

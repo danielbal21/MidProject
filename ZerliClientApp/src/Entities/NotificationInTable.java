@@ -2,11 +2,15 @@ package Entities;
 
 import java.io.Serializable;
 
+<<<<<<< HEAD
 // TODO: Auto-generated Javadoc
 /**
  * The Class NotificationInTable.
  */
 public class NotificationInTable implements Serializable {
+=======
+public class NotificationInTable implements Serializable,Comparable<NotificationInTable> {
+>>>>>>> refs/heads/Ido
 
 	/** The number of notifications. */
 	private int notificationnumber;
@@ -142,5 +146,12 @@ public class NotificationInTable implements Serializable {
 	public String toString() {
 		return "NotificationInTable [notificationnumber=" + notificationnumber  + ", content="
 			+ content + ", status=" + status + ", from=" + from + "]";
+	}
+
+	@Override
+	public int compareTo(NotificationInTable o) {
+		if(this.getNotificationnumber() > o.getNotificationnumber()) return 1;
+		else if(this.getNotificationnumber() == o.getNotificationnumber())return 0;
+		else return -1;
 	}
 }

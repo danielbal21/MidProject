@@ -46,21 +46,11 @@
             <Font name="Maiandra GD" size="47.0" />
          </font>
       </Label>
-      <ScrollPane layoutX="23.0" layoutY="124.0" prefHeight="426.0" prefWidth="912.0">
+      <ScrollPane layoutX="11.0" layoutY="124.0" prefHeight="426.0" prefWidth="935.0">
          <content>
-            <VBox fx:id="Vbox" prefHeight="389.0" prefWidth="909.0" spacing="5.0" />
+            <VBox fx:id="Vbox" prefHeight="389.0" prefWidth="916.0" spacing="5.0" />
          </content>
       </ScrollPane>
-      <Label fx:id="TotalCostText" layoutX="348.0" layoutY="552.0" prefHeight="50.0" prefWidth="150.0" styleClass="subLabel" text="Total Cost :">
-         <font>
-            <Font name="Maiandra GD" size="28.0" />
-         </font>
-      </Label>
-      <Label fx:id="totalCostLabel" layoutX="487.0" layoutY="553.0" prefHeight="50.0" prefWidth="77.0" styleClass="subLabel">
-         <font>
-            <Font name="Maiandra GD" size="28.0" />
-         </font>
-      </Label>
       <Button fx:id="nextBtn" layoutX="870.0" layoutY="595.0" mnemonicParsing="false" onAction="#NextBtnPressed" prefHeight="60.0" prefWidth="81.0" stylesheets="@application.css" text="Next">
          <styleClass>
             <String fx:value="Next-btn" />
@@ -76,5 +66,24 @@
             <Font size="26.0" />
          </font>
       </Label>
+      <HBox alignment="CENTER" layoutX="245.0" layoutY="560.0" prefHeight="34.0" prefWidth="476.0" spacing="5.0">
+         <children>
+            <Label fx:id="TotalCostText" prefHeight="34.0" prefWidth="133.0" styleClass="subLabel" text="Total Cost :">
+               <font>
+                  <Font name="Maiandra GD" size="28.0" />
+               </font>
+            </Label>
+            <Label fx:id="totalCostLabel" styleClass="subLabel" text="20">
+               <font>
+                  <Font name="Maiandra GD" size="28.0" />
+               </font>
+            </Label>
+            <Label fx:id="currency" prefHeight="30.0" prefWidth="34.0" styleClass="subLabel" text="20">
+               <font>
+                  <Font name="Maiandra GD" size="28.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

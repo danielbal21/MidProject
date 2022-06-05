@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package controllers;
 
 import java.time.LocalDateTime;
@@ -20,70 +23,101 @@ import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
+/**
+ *The Class ManagerAddNewCustomerController is the controller part of the Manager GUI.
+ *The Class give the ability to the Manager to add new customer 
+ *The class implement user control interface to be able to insert into frame users GUI
+ */
 public class ManagerAddNewCustomerController implements UserControl{
 
+    /** The add error. */
     @FXML
     private Label addError;
     
+	/** The Client info window. */
 	@FXML
     private AnchorPane ClientInfoWindow;
 	
+    /** The search error label. */
     @FXML
     private Label searchErrorLBl;
 
+    /** The ID search. */
     @FXML
     private TextField IDSearch;
 
+    /** The ID text. */
     @FXML
     private TextField IDTxt;
 
+    /** The active panel container. */
     @FXML
     private AnchorPane activePanelContainer;
 
+    /** The card number 1 text . */
     @FXML
     private TextField cardNumTxt1;
 
+    /** The card number 2 text. */
     @FXML
     private TextField cardNumTxt2;
 
+    /** The card number 3 text. */
     @FXML
     private TextField cardNumTxt3;
 
+    /** The card number 4 text. */
     @FXML
     private TextField cardNumTxt4;
 
+    /** The credit card dialog. */
     @FXML
     private AnchorPane creditCardDialog;
 
+    /** The cvv text. */
     @FXML
     private TextField cvvText;
 
+    /** The email text. */
     @FXML
     private TextField emailTxt;
 
+    /** The expired month CB. */
     @FXML
     private ComboBox<String> expMonthCB;
 
+    /** The first name text. */
     @FXML
     private TextField firstNameTxt;
 
+    /** The last name text. */
     @FXML
     private TextField lastNameTxt;
 
+    /** The password text. */
     @FXML
     private TextField passwordTxt;
 
+    /** The phone text. */
     @FXML
     private TextField phoneTxt;
 
+    /** The user name text. */
     @FXML
     private TextField userNameTxt;
 
+    /** The year CB. */
     @FXML
     private ComboBox<String> yearCB;
     
+    /** The pending info. */
     PendingClientInfo pendingInfo;
 
+    /**
+     * Search pressed.
+     * When pressed search ,search the customer by his id and if he is exist show his data 
+     * @param event the event
+     */
     @FXML
     void SearchPressed(MouseEvent event) {
 		ClientInfoWindow.setVisible(false);
@@ -117,6 +151,11 @@ public class ManagerAddNewCustomerController implements UserControl{
     	}
     }
     
+    /**
+     * Adds the customer pressed.
+     * When pressed add  , add the customer into the system and give the customer notification about his changing status
+     * @param event the event
+     */
     @FXML
     void addCustomerPressed(MouseEvent event) {
     	
@@ -148,6 +187,11 @@ public class ManagerAddNewCustomerController implements UserControl{
     	}
     }
 
+	/**
+	 * Validate input.
+	 *
+	 * @return true, if successful
+	 */
 	private boolean validateInput() {
 		StringBuilder error = new StringBuilder("");
     	boolean valid = true;
@@ -216,11 +260,20 @@ public class ManagerAddNewCustomerController implements UserControl{
 	}
 	
 
+    /**
+     * Back pressed.
+     * When the back pressed go to the previous page (Manager Account Management)
+     * @param event the event
+     */
     @FXML
     void backPressed(ActionEvent event) {
 		LoginController.windowControl.setUserControl("/gui/usercontrols/ManagerAccountManagment.fxml");
     }
 
+	/**
+	 * On enter.
+	 * The first action to run - set the Instructions labels 
+	 */
 	@Override
 	public void onEnter() {
 		ClientInfoWindow.setVisible(false);
@@ -239,6 +292,10 @@ public class ManagerAddNewCustomerController implements UserControl{
 		expMonthCB.setItems(FXCollections.observableArrayList(months));
 	}
 
+	/**
+	 * On exit.
+	 * The last action to run - reset all labels to ""
+	 */
 	@Override
 	public void onExit() {
 		searchErrorLBl.setText("");

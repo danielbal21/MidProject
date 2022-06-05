@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package controllers;
 
 import Entities.CatalogType;
@@ -22,72 +25,106 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
+/**
+ *The Class ManagerViewOrderDetailsController is the controller part of the Manager GUI.
+ *The Class give the ability to the Manager to view the orders details 
+ *The class implement user control interface to be able to insert into frame users GUI
+ */
 public class ManagerViewOrderDetailsController implements UserControl{
 
+	/** The order. */
 	private Order order;
+	
+	/** The future status. */
 	private String futureStatus;
+	
+	/** The order items. */
 	private ObservableList<ItemInList> orderItems;
 	
+	/** The observable list. */
 	private ObservableList<ItemInList> observableList;
 	
+    /** The active panel container. */
     @FXML
     private AnchorPane activePanelContainer;
 
 
+    /** The item table. */
     @FXML
     private TableView<ItemInList> itemTable;
     
+    /** The catalog column. */
     @FXML
     private TableColumn<ItemInList, CatalogType> catalogColumn;
 
 
+    /** The cost label. */
     @FXML
     private Label costLabel;
 
+    /** The item ID column. */
     @FXML
     private TableColumn<ItemInList, Integer> itemIDColumn;
 
+    /** The item name column. */
     @FXML
     private TableColumn<ItemInList, String> itemNameColumn;
 
+    /** The order date label. */
     @FXML
     private Label orderDateLabel;
 
+    /** The order number label. */
     @FXML
     private Label orderNumberLabel;
 
+    /** The payment method label. */
     @FXML
     private Label paymentMethodLabel;
 
+    /** The price column. */
     @FXML
     private TableColumn<ItemInList, Integer> priceColumn;
 
+    /** The quantity column. */
     @FXML
     private TableColumn<ItemInList, Integer> quantityColumn;
 
+    /** The shipping date label. */
     @FXML
     private Label shippingDateLabel;
 
+    /** The shipping method label. */
     @FXML
     private Label shippingMethodLabel;
 
+    /** The status label. */
     @FXML
     private Label statusLabel;
 
+    /** The type column. */
     @FXML
     private TableColumn<ItemInList, ItemType> typeColumn;
     
 
+    /** The full list button. */
     @FXML
     private Button fullListBtn;
     
+    /** The item list label. */
     @FXML
     private Label itemListLbl;
 	
+   /** The approve button. */
    @FXML
     private Button approveBtn;
     
     
+    /**
+     * New item click.
+     * When pressed new item , show the all order details
+     * @param event the event
+     */
     @FXML
     void newItemClick(MouseEvent event) {
     	if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 2) {
@@ -106,6 +143,11 @@ public class ManagerViewOrderDetailsController implements UserControl{
     }
     
 
+    /**
+     * Show full specks.
+     *
+     * @param event the event
+     */
     @FXML
     void showFullSpecs(ActionEvent event) {
     	fullListBtn.setVisible(false);
@@ -116,6 +158,11 @@ public class ManagerViewOrderDetailsController implements UserControl{
     }
     
 
+    /**
+     * Approve pressed.
+     * When pressed approve the customer pending order approved and notification will send to the customer
+     * @param event the event
+     */
     @FXML
     void approvePressed(ActionEvent event) {
     	Order order = (Order) LoginController.windowControl.peekPipe("Order select");
@@ -140,11 +187,21 @@ public class ManagerViewOrderDetailsController implements UserControl{
     	LoginController.windowControl.setUserControl("/gui/usercontrols/ManagerOrderManager.fxml");
     }
 
+    /**
+     * Back pressed.
+     * When the back pressed go to the previous page (Manager Order Manager)
+     * @param event the event
+     */
     @FXML
     void backPressed(ActionEvent event) {
     	LoginController.windowControl.setUserControl("/gui/usercontrols/ManagerOrderManager.fxml");
     }
 
+	/**
+	 * On enter.
+	 * The first action to run - Initialize the table columns and set the order details data into the table
+	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void onEnter() {
 		fullListBtn.setVisible(false);
@@ -161,7 +218,7 @@ public class ManagerViewOrderDetailsController implements UserControl{
 		shippingDateLabel.setText(order.getShipping_date());
 		paymentMethodLabel.setText(order.getPayment_method());
 		orderNumberLabel.setText(order.getOrderID());
-		costLabel.setText(String.valueOf(order.getTotalPrice()));
+		costLabel.setText(String.valueOf(order.getTotalPrice())+ " " + Utilities.Constants.SHEKEL);
 		statusLabel.setText(order.getOrder_status());
 		shippingMethodLabel.setText(order.getShipping_method());
 		
@@ -182,6 +239,9 @@ public class ManagerViewOrderDetailsController implements UserControl{
 		
 	}
 
+	/**
+	 * On exit.
+	 */
 	@Override
 	public void onExit() {
 	}

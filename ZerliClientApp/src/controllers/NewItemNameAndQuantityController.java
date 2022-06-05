@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package controllers;
 
 import javafx.scene.control.Alert;
@@ -21,27 +24,44 @@ import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
+/**
+ *The Class NewItemNameAndQuantityController is the controller part of the Customer GUI.
+ *The Class give the ability to the Customer to add a name , quantity and see the new item item 
+ *The class implement user control interface to be able to insert into frame users GUI
+ */
 public class NewItemNameAndQuantityController implements UserControl{
+	
+	/** The newItem. */
 	private NewItem newitem;
 	
+    /** The summary text. */
     @FXML
     private Label summaryText;
 	
+    /** The Name error label. */
     @FXML
     private Label NameErrorLabel;
 
+    /** The Name text. */
     @FXML
     private TextField NameText;
 
+    /** The Quantity error label. */
     @FXML
     private Label QuantityErrorLabel;
 
+    /** The Quantity number text. */
     @FXML
     private Label QuantityNumberText;
 
+    /** The active panel container. */
     @FXML
     private AnchorPane activePanelContainer;
     
+    /**
+     * On enter.
+     * The first action to run -  set the new item item list 
+     */
     @Override
 	public void onEnter() {
     	/////
@@ -53,11 +73,22 @@ public class NewItemNameAndQuantityController implements UserControl{
 		}
 	}
     
-    @FXML
+    /**
+     * Adds the quantity.
+     * When pressed add increase 1 from the new item quantity 
+     * @param event the event
+     */
+    @SuppressWarnings("static-access")
+	@FXML
     void AddQuantity(MouseEvent event) { 
     	QuantityNumberText.setText(toString().valueOf((Integer.parseInt(QuantityNumberText.getText())+1)));
     }
 
+    /**
+     * Back button pressed.
+     * When the back pressed go to the previous page (Customer Catalog Viewer) and if its needed save the typed data 
+     * @param event the event
+     */
     @FXML
     void BackBtnPressed(ActionEvent event) {
     	if( !NameText.getText().equals("")||
@@ -79,6 +110,12 @@ public class NewItemNameAndQuantityController implements UserControl{
     	LoginController.windowControl.setUserControl("/gui/usercontrols/CustomerCatalogViewer.fxml");
     }
 
+    /**
+     * Next button pressed.
+     * When the next pressed check if the name and quantity are valid, update the new item into the DataBase 
+     * And go to Customer Home Page
+     * @param event the event
+     */
     @FXML
     void NextBtnPressed(MouseEvent event) {
     	
@@ -143,18 +180,32 @@ public class NewItemNameAndQuantityController implements UserControl{
     	LoginController.windowControl.setUserControl("/gui/usercontrols/CustomerHomePage.fxml");
     }
 
-    @FXML
+    /**
+     * Removes the quantity.
+     * When pressed remove decrease 1 from the new item quantity 
+     * @param event the event
+     */
+    @SuppressWarnings("static-access")
+	@FXML
     void RemoveQuantity(MouseEvent event) {
     	if(Integer.parseInt(QuantityNumberText.getText())<1)
     		return;
     	QuantityNumberText.setText(toString().valueOf((Integer.parseInt(QuantityNumberText.getText())-1)));
     }
     
+	/**
+	 * On exit.
+	 */
 	@Override
 	public void onExit() {
 	}
 
 
+    /**
+     * Reset button.
+     * When pressed reset ,set all the name label to "" and the quantity label to 0 
+     * @param event the event
+     */
     @FXML
     void ResetBtn(MouseEvent event) {
        	NameText.setText("");
