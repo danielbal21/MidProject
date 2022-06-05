@@ -1,6 +1,3 @@
-/*
- * 
- */
 package controllers;
 
 import java.io.IOException;
@@ -38,7 +35,7 @@ public class ReportSelectorCEOController implements UserControl {
 
 	/** The report income. */
 	private final String report_income = "Branch Income Report";
-	
+
 	/** The report orders. */
 	private final String report_orders = "Branch Order Report";
 	
@@ -47,95 +44,94 @@ public class ReportSelectorCEOController implements UserControl {
     
     /** The report ceo. */
     private final String report_ceo = "CEO Income Report";
-		
-		/** The active panel container. */
-		@FXML
-	    private AnchorPane activePanelContainer;
 
-	    /** The error label. */
-    	@FXML
-	    private Label errorLabel;
+	/** The active panel container. */
+	@FXML
+    private AnchorPane activePanelContainer;
 
-	    /** The is compare. */
-    	@FXML
-	    private CheckBox isCompare;
+    /** The error label. */
+	@FXML
+    private Label errorLabel;
 
-	    /** The is monthly. */
-    	@FXML
-	    private RadioButton isMonthly;
+    /** The is compare. */
+	@FXML
+    private CheckBox isCompare;
 
-	    /** The is quarterly. */
-    	@FXML
-	    private RadioButton isQuarterly;
+    /** The is monthly. */
+	@FXML
+    private RadioButton isMonthly;
 
-	    /** The panel month. */
-    	@FXML
-	    private AnchorPane panelMonth;
+    /** The is quarterly. */
+	@FXML
+    private RadioButton isQuarterly;
 
-	    /** The panel quarter. */
-    	@FXML
-	    private AnchorPane panelQuarter;
+    /** The panel month. */
+	@FXML
+    private AnchorPane panelMonth;
 
-	    /** The period group. */
-    	@FXML
-	    private ToggleGroup periodGroup;
+    /** The panel quarter. */
+	@FXML
+    private AnchorPane panelQuarter;
 
-	    /** The branch selection M 1. */
-    	@FXML
-	    private ComboBox<String> branchSelectionM1;
+	/** The period group. */
+	@FXML
+    private ToggleGroup periodGroup;
 
-	    /** The branch selection M 2. */
-    	@FXML
-	    private ComboBox<String> branchSelectionM2;
+	/** The branch selection M 1. */
+	@FXML
+    private ComboBox<String> branchSelectionM1;
 
-	    /** The branch selection Q 1. */
-    	@FXML
-	    private ComboBox<String> branchSelectionQ1;
+    /** The branch selection M 2. */
+	@FXML
+    private ComboBox<String> branchSelectionM2;
 
-	    /** The branch selection Q 2. */
-    	@FXML
-	    private ComboBox<String> branchSelectionQ2;
+    /** The branch selection Q 1. */
+	@FXML
+    private ComboBox<String> branchSelectionQ1;
+
+    /** The branch selection Q 2. */
+	@FXML
+    private ComboBox<String> branchSelectionQ2;
+    
+    /** The report month. */
+	@FXML
+    private ComboBox<String> reportMonth;
+    
+    /** The report year. */
+	@FXML
+    private ComboBox<String> reportYear;
+    
+    /** The compared month. */
+	@FXML
+    private ComboBox<String> comparedMonth;
 	    
-	    /** The report month. */
-    	@FXML
-	    private ComboBox<String> reportMonth;
-	    
-	    /** The report year. */
-    	@FXML
-	    private ComboBox<String> reportYear;
-	    
-	    /** The compared month. */
-    	@FXML
-	    private ComboBox<String> comparedMonth;
-	    
-	    /** The compared year. */
-    	@FXML
-	    private ComboBox<String> comparedYear;
+    /** The compared year. */
+	@FXML
+    private ComboBox<String> comparedYear;
 
-	    /** The compared quarter. */
-    	@FXML
-	    private ComboBox<String> comparedQuarter;
+    /** The compared quarter. */
+	@FXML
+    private ComboBox<String> comparedQuarter;
 
-	    /** The compared quarter Y. */
-    	@FXML
-	    private ComboBox<String> comparedQuarterY;    
+    /** The compared quarter Y. */
+	@FXML
+    private ComboBox<String> comparedQuarterY;    
 
-	    /** The report quarter. */
-    	@FXML
-	    private ComboBox<String> reportQuarter;
+    /** The report quarter. */
+	@FXML
+    private ComboBox<String> reportQuarter;
 
-	    /** The report quarter Y. */
-    	@FXML
-	    private ComboBox<String> reportQuarterY;
+    /** The report quarter Y. */
+	@FXML
+    private ComboBox<String> reportQuarterY;
 
-	    /** The report type. */
-    	@FXML
-	    private ComboBox<String> reportType;
+    /** The report type. */
+	@FXML
+    private ComboBox<String> reportType;
 
-	    /** The view report button. */
-    	@FXML
-	    private Button viewRepBtn;
-
+    /** The view report button. */
+	@FXML
+    private Button viewRepBtn;
 
     /**
      * View report click.
@@ -466,5 +462,4 @@ public class ReportSelectorCEOController implements UserControl {
 		rvCtrl.start(reportLeft, reportRight);
 		newStage.show();
 	}
-
 }

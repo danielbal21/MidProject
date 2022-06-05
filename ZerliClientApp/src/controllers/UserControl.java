@@ -1,21 +1,17 @@
-/*
- * 
- */
 package controllers;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Interface UserControl.
+ * The Interface UserControl - every sub window that we load to main screen is implements of UserControl Interface
  */
 public interface UserControl {
 	
 	/**
-	 * On enter.
+	 * Commands that the Controller do the screen will do while uploading window
 	 */
 	void onEnter();
 	
 	/**
-	 * On exit.
+	 * Commands that Controller do the screen will do while existing window
 	 */
 	void onExit();
 

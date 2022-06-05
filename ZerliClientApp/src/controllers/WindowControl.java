@@ -1,59 +1,50 @@
-/*
- * 
- */
 package controllers;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-
-import javafx.animation.PauseTransition;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.ProgressIndicator;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import javafx.util.Duration;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class WindowControl.
+ * The Class WindowControl - incharge of window change between screens
+ * and save information that shared for several windows 
  */
 public class WindowControl {
 
-	/** The stage. */
+	/** The stage - saves the stage for all the windows*/
 	public static Stage stage;
 	
-	/** The frame controller. */
+	/** The frameController - saves the controller of the main window */
 	public IContainable frameController;
 	
-	/** The current control. */
+	/** The currentControl - saves the controller of the sub windows */
 	private UserControl currentControl;
 
-	/** The map. */
+	/** The map - singleton map for all loader.load() of FXMLs */
 	private Map<String,Parent> map = new HashMap<>();
 	
-	/** The uc map. */
+	/** The uc_map - singleton map for all sub windows controllers */
 	private Map<String,UserControl> uc_map = new HashMap<String, UserControl>();
 	
-	/** The pipe. */
+	/** The pipe - save information that shared for several windows */
 	private Map<String, Object> pipe = new HashMap<>();
 	
 	/**
-	 * Instantiates a new window control.
+	 * Instantiates a new IContainable main screen controller.
 	 *
-	 * @param frameController the frame controller
+	 * @param frameController -  the IContainable controller
 	 */
 	public WindowControl(IContainable frameController) {
 		this.frameController = frameController;
 	}
 	
 	/**
-	 * Put pipe.
+	 * Insert information to pipe map.
 	 *
-	 * @param tag the tag
-	 * @param data the data
+	 * @param tag - Key is a string
+	 * @param data - value is an object
 	 */
 	public void putPipe(String tag,Object data) {
 		pipe.put(tag, data);
@@ -61,10 +52,10 @@ public class WindowControl {
 	}
 	
 	/**
-	 * Gets the pipe.
+	 * Remove information from pipe and send the removed object
 	 *
-	 * @param tag the tag
-	 * @return the pipe
+	 * @param tag - Key is a string
+	 * @return data - value is an object
 	 */
 	public Object getPipe(String tag) {
 		Object object = pipe.get(tag);
@@ -73,19 +64,19 @@ public class WindowControl {
 	}
 	
 	/**
-	 * Peek pipe.
+	 * Send the value object that matched to key.
 	 *
-	 * @param tag the tag
-	 * @return the object
+	 * @param tag - Key is a string
+	 * @return data - value is an object
 	 */
 	public Object peekPipe(String tag) {
 		return pipe.get(tag);
 	}
 	
 	/**
-	 * Sets the user control.
+	 * setUserControl - open the next FXML sub window (FXML and Controller).
 	 *
-	 * @param path the new user control
+	 * @param path - path of the FXML location and name
 	 */
 	public void setUserControl(String path)
 	{
@@ -115,10 +106,9 @@ public class WindowControl {
 	}
 
 	/**
-	 * Refresh.
+	 * Refresh window and execute onEnter of the controller of the sub windows.
 	 */
 	public void Refresh() {
 		currentControl.onEnter();
-		
 	}
 }

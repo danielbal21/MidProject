@@ -1,6 +1,3 @@
-/*
- * 
- */
 package controllers;
 
 import java.awt.geom.Rectangle2D;
@@ -18,10 +15,8 @@ import java.nio.file.Paths;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
-
 import com.sun.pdfview.PDFFile;
 import com.sun.pdfview.PDFPage;
-
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.IntegerBinding;
 import javafx.beans.property.DoubleProperty;
@@ -54,52 +49,53 @@ import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
-// TODO: Auto-generated Javadoc
 
 /**
- * The Class ReportViewerController.
+ * The Class ReportViewerController - PDF Viewer of Zerli app. 
+ * Responsible : shows The PDF in different window with many options (Zoom,export PDF)
  */
 public class ReportViewerController {
 
-	/** The pagination. */
+	/** The pagination - Pagination the PDF.*/
 	@FXML private Pagination pagination ;
 	
-	/** The current zoom label. */
+	/** The currentZoomLabel - Label that shows the current zoom of PDf. */
 	@FXML private Label currentZoomLabel ;
     
-    /** The export. */
+    /** The export - Button that export PDF to local PC. */
     @FXML
     private Button export;
     
-	/** The file chooser. */
+	/** The fileChooser - FileChooser that export PDF to local PC. */
 	private FileChooser fileChooser ;
 	
-	/** The current file. */
+	/** The currentFile - ObjectProperty that binded to the PDF file. */
 	private ObjectProperty<PDFFile> currentFile ;
 	
-	/** The current image. */
+	/** The currentImage - ObjectProperty that binded to the image. */
 	private ObjectProperty<ImageView> currentImage ;
 	
-	/** The scroller. */
+	/** The scroller - ScrollPane for PDF file  */
 	@FXML  private ScrollPane scroller ;
 	
-	/** The zoom. */
+	/** The zoom - DoubleProperty for zooming the PDF image. */
 	private DoubleProperty zoom ;
 	
-	/** The current page dimensions. */
+	/** The currentPageDimensions - PageDimensions saves the current page dimensions . */
 	private PageDimensions currentPageDimensions ;
 	
-	/** The image load service. */
+	/** The imageLoadService - Thread for parallel working. */
 	private ExecutorService imageLoadService ;
 	
-	/** The Constant ZOOM_DELTA. */
+	/** The ZOOM_DELTA - Const zoom = 1.05. */
 	private static final double ZOOM_DELTA = 1.05 ;
 	
+    /** The bytefile - byte[] for image for loading PDF. */
+    byte[] bytefile = null;
 	
-	// ************ Initialization *************
 	
 	/**
-	 * Initialize.
+	 * Add PDF to window - set default zoom and changing zoom listener.
 	 */
 	public void initialize() {
 		
@@ -152,28 +148,6 @@ public class ReportViewerController {
 		fileChooser.setInitialDirectory(Paths.get(System.getProperty("user.home")).toFile());
 		fileChooser.getExtensionFilters().add(new ExtensionFilter("PDF Files", "*.pdf", "*.PDF"));
 	}
-
-	/**
-	 * Update window title when file changes.
-	 */
-	private void updateWindowTitleWhenFileChanges() {
-//		return;
-//		currentFile.addListener(new ChangeListener<PDFFile>() {
-//			@Override
-//			public void changed(ObservableValue<? extends PDFFile> observable, PDFFile oldFile, PDFFile newFile) {
-//				try {
-//					String title = newFile == null ? "PDF Viewer" : newFile.getStringMetadata("Title") ;
-//					Window window = pagination.getScene().getWindow();
-//					if (window instanceof Stage) {
-//						((Stage)window).setTitle(title);
-//					}
-//				} catch (IOException e) {
-//					showErrorMessage("Could not read title from pdf file", e);
-//				}
-//			}
-			
-//		});
-	}
 	
 	/**
 	 * Bind pagination to current file.
@@ -221,9 +195,8 @@ public class ReportViewerController {
 	}
     
     /**
-     * Export action.
-     *
-     * @param event the event
+     * Export the PDF current view.
+  	 * @param event - export button pressed
      */
     @FXML
     void exportAction(ActionEvent event) {
@@ -248,14 +221,10 @@ public class ReportViewerController {
         	  
           }
     }
-    
-    /** The bytefile. */
-    byte[] bytefile = null;
-	
+   
 	/**
-	 * Load report.
-	 *
-	 * @param file the file
+	 * Load PDf report.
+	 * @param byte[] file
 	 */
 	public void loadReport(byte[] file) {
 		//final File file = fileChooser.showOpenDialog(pagination.getScene().getWindow());
@@ -291,7 +260,7 @@ public class ReportViewerController {
 	// ************** Event Handlers ****************
 	
 	/**
-	 * Load file.
+	 * Load PDF file.
 	 */
 	@FXML private void loadFile() {
 		final File file = fileChooser.showOpenDialog(pagination.getScene().getWindow());
@@ -329,21 +298,21 @@ public class ReportViewerController {
 	}
 	
 	/**
-	 * Zoom in.
+	 * Zoom in the PDF.
 	 */
 	@FXML private void zoomIn() {
 		zoom.set(zoom.get()*ZOOM_DELTA);
 	}
 	
 	/**
-	 * Zoom out.
+	 * Zoom out the PDF.
 	 */
 	@FXML private void zoomOut() {
 		zoom.set(zoom.get()/ZOOM_DELTA);
 	}
 	
 	/**
-	 * Zoom fit.
+	 * Zoom fit the PDF.
 	 */
 	@FXML private void zoomFit() {
 		// TODO: the -20 is a kludge to account for the width of the scrollbars, if showing.
@@ -353,7 +322,7 @@ public class ReportViewerController {
 	}
 	
 	/**
-	 * Zoom width.
+	 * Zoom width the PDF.
 	 */
 	@FXML private void zoomWidth() {
 		zoom.set((scroller.getWidth()-20) / currentPageDimensions.width) ;
@@ -362,9 +331,8 @@ public class ReportViewerController {
 	// *************** Background image loading ****************
 	
 	/**
-	 * Update image.
-	 *
-	 * @param pageNumber the page number
+	 * Update image for multipages PDF.
+	 * @param pageNumber - the PDF page number
 	 */
 	private void updateImage(final int pageNumber) {
 		final Task<ImageView> updateImageTask = new Task<ImageView>() {
@@ -417,14 +385,11 @@ public class ReportViewerController {
 	
 	/**
 	 * Show error message.
-	 *
-	 * @param message the message
-	 * @param exception the exception
+	 * @param message - String of the error message
+	 * @param exception - Throwable exception
 	 */
 	private void showErrorMessage(String message, Throwable exception) {
-		
 		// TODO: move to fxml (or better, use ControlsFX)
-		
 		final Stage dialog = new Stage();
 		dialog.initOwner(pagination.getScene().getWindow());
 		dialog.initStyle(StageStyle.UNDECORATED);
@@ -473,30 +438,23 @@ public class ReportViewerController {
 		dialog.show();
 	}
 	
-	
-	/*
-	 * Struct-like class intended to represent the physical dimensions of a page in pixels
+	/**
+	 * The Class PageDimensions - like class intended to represent the physical dimensions of a page in pixels.
 	 * (as opposed to the dimensions of the (possibly zoomed) view.
 	 * Used to compute zoom factors for zoomToFit and zoomToWidth.
-	 * 
-	 */
-	
-	/**
-	 * The Class PageDimensions.
 	 */
 	private class PageDimensions {
 		
-		/** The width. */
+		/** The width - width of page. */
 		private double width ;
 		
-		/** The height. */
+		/** The height - height of page.  */
 		private double height ;
 		
 		/**
 		 * Instantiates a new page dimensions.
-		 *
-		 * @param width the width
-		 * @param height the height
+		 * @param width - width of page.
+		 * @param height - height of page.
 		 */
 		PageDimensions(double width, double height) {
 			this.width = width ;
@@ -504,14 +462,12 @@ public class ReportViewerController {
 		}
 		
 		/**
-		 * To string.
-		 *
-		 * @return the string
+		 * To string of Page dimensions.
+		 * @return String of Page dimensions "[width, height]".
 		 */
 		@Override
 		public String toString() {
 			return String.format("[%.1f, %.1f]", width, height);
 		}
 	}
-
 }

@@ -1,6 +1,3 @@
-/*
- * 
- */
 package controllers;
 
 import client.ClientConn;
@@ -19,33 +16,30 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class StartIPconfigController.
+ * The Class StartIPconfigController - insertion of the IP address in order to connect the server.
  */
 public class StartIPconfigController {
 
-
-    /** The connect btn. */
+    /** The connectBtn - Button for connection . */
     @FXML
     private Button connectBtn;
 
-    /** The enter IP label. */
+    /** The enterIPLabel - constant Label main header "Enter IP". */
     @FXML
     private Label enterIPLabel;
 
-    /** The errror label. */
+    /** The errrorLabel -  Label for errors. */
     @FXML
     private Label errrorLabel;
 
-    /** The ip text field. */
+    /** The ipTextField- TextField for entering the IP address text . */
     @FXML
     private TextField ipTextField;
 
     /**
-     * Connect pressed.
-     *
-     * @param event the event
+     * Button for connection pressed - execute connection to server.
+  	 * @param event - ActionEvent of button pressed
      */
     @FXML
     void connectPressed(ActionEvent event) {
@@ -53,9 +47,8 @@ public class StartIPconfigController {
     }
 
     /**
-     * Enter.
-     *
-     * @param event the event
+     * "ENTER" is pressed when cursor in label IP.
+  	 * @param event - Enter pressed
      */
     @FXML
     void Enter(KeyEvent event) {
@@ -64,9 +57,8 @@ public class StartIPconfigController {
     }
     
     /**
-     * Exit pressed.
-     *
-     * @param event the event
+     * "X" window image is pressed - exit from the entire program
+  	 * @param event - ActionEvent of button pressed
      */
     @FXML
     void exitPressed(MouseEvent event) {
@@ -74,7 +66,8 @@ public class StartIPconfigController {
     }
     
     /**
-     * Start connaction.
+     * Connection to server with the IP address from label.
+     * When IP address label is empty - Default is localhost.
      */
     private void startConnaction() 
     {

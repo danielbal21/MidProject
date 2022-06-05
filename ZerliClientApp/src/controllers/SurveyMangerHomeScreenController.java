@@ -1,26 +1,22 @@
-/*
- * 
- */
 package controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class SurveyMangerHomeScreenController.
+ * The Class SurveyMangerHomeScreenController - implements UserControl for switching sub windows.
+ * Responsible : shows service employee Survey home screen   
  */
 public class SurveyMangerHomeScreenController implements UserControl {
 
-    /** The active panel container. */
+    /** The activePanelContainer - AnchorPane that contains all the FXML element */
     @FXML
     private AnchorPane activePanelContainer;
 
     /**
-     * Adds the new survey.
-     *
-     * @param event the event
+     * Open the Add new survey window.
+     * @param event - button pressed 
      */
     @FXML
     void AddNewSurvey(ActionEvent event) {
@@ -28,9 +24,8 @@ public class SurveyMangerHomeScreenController implements UserControl {
     }
 
     /**
-     * Insert answers.
-     *
-     * @param event the event
+     * Open the Insert survey Answers window.
+     * @param event - button pressed 
      */
     @FXML
     void InsertAnswers(ActionEvent event) {
@@ -38,21 +33,16 @@ public class SurveyMangerHomeScreenController implements UserControl {
     }
 
 	/**
-	 * On enter.
+	 * Commands that the Controller do the screen will do while uploading window
 	 */
+    
 	@Override
-	public void onEnter() {
-		// TODO Auto-generated method stub
-		
-	}
-
+	public void onEnter() {}
+	
 	/**
-	 * On exit.
+	 * Commands that Controller do the screen will do while existing window
 	 */
 	@Override
-	public void onExit() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void onExit() {}
 
 }
