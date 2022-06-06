@@ -228,10 +228,13 @@ public class CustomerFrameController implements IContainable{
     	thread.interrupt();
     	ClientApp.ProtocolHandler.Invoke(RequestType.SetLogOut,null,null,false);
     	try {
+    		if(LoginController.windowControl.peekPipe("notif_thread") != null)
+    			((Thread)LoginController.windowControl.peekPipe("notif_thread")).interrupt();
 			ClientApp.ClientConnection.closeConnection();
 			//System.out.println(ClientApp.ClientConnection.isConnected());
 			System.exit(0);
 		} catch (IOException e) {e.printStackTrace();}
+    	
     }
 
     /**
@@ -263,6 +266,8 @@ public class CustomerFrameController implements IContainable{
 	@FXML
     void pressLogout(ActionEvent event) {
     	thread.interrupt();
+		if(LoginController.windowControl.peekPipe("notif_thread") != null)
+			((Thread)LoginController.windowControl.peekPipe("notif_thread")).interrupt();
     	LoginController.windowControl.stage.close();
     	Stage newStage = new Stage();
 		Parent root = null;

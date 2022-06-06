@@ -95,7 +95,7 @@ public class ReportGenerator {
 		int quarter = date.getMonthValue();
 		date = LocalDate.of(date.getYear(), QUARTER_MARKS.get(date.getMonthValue()-1), 1);
 		LocalDate quarterEnd = date.plusMonths(3);
-		quarterEnd.minusDays(1);
+		quarterEnd = quarterEnd.minusDays(1);
 		if(reportType == ReportType.income)
 		{
 			ArrayList<Integer[]> monthlyIncomeData = new ArrayList<Integer[]>();
@@ -120,13 +120,13 @@ public class ReportGenerator {
 			byte[] myPDF = null;
 			myPDF = generator.createIncomeReportTable(branch, "Quarter " + quarter + "/" + date.getYear(), monthlyIncomeData,dates);
 			Server.SqlServerManager.InsertReport(ReportType.income, false, branch, java.sql.Date.valueOf(LocalDate.of(date.getYear(), quarter,1)), myPDF);
-			
 		}
 		else if(reportType == ReportType.order)
 		{
 			HashMap<ItemType,Integer> histogram = new HashMap<>();
 			for(ItemType t : ItemType.values())
 				histogram.put(t, Server.SqlServerManager.GetOrderCountWithItemWithinPeriod(t,java.sql.Date.valueOf(LocalDate.of(date.getYear(), date.getMonthValue(),1)),java.sql.Date.valueOf(quarterEnd),branch));
+			System.out.println("Getting between " + LocalDate.of(date.getYear(), date.getMonthValue(),1).toString() + " TO " + quarterEnd.toString());
 			byte[] myPDF = null;
 			myPDF = generator.createOrderReportHistogram(branch, "Quarter " + quarter + "/" + date.getYear(),histogram);
 			Server.SqlServerManager.InsertReport(ReportType.order, false, branch, java.sql.Date.valueOf(LocalDate.of(date.getYear(), quarter,1)), myPDF);

@@ -22,7 +22,7 @@ public class ReportScheduler {
 	private final boolean ZERLI_DEBUG = false;
 	
 	/**  The dawn of time is used to determine from when to check for missing reports. */
-	private final LocalDate dawnOfTime = LocalDate.of(2022, 1, 1);
+	private final LocalDate dawnOfTime = LocalDate.of(2021, 1, 1);
 	
 	/**  The quarter marks are used for designating the beginning of each quarter. */
 	private final List<Integer> QUARTER_MARKS = Arrays.asList(new Integer[] {1,4,7,10});
@@ -72,7 +72,7 @@ public class ReportScheduler {
 					for(ReportType t : ReportType.values())
 					{
 						if(year == LocalDate.now().getYear())
-							if((LocalDate.now().getMonthValue() / 3) + 1 <= quarter) break;
+							if((((LocalDate.now().getMonthValue()-1) / 3) + 1) <= quarter) break;
 						boolean rQ = Server.SqlServerManager.ReportExists(t,false,branch,java.sql.Date.valueOf(LocalDate.of(year, quarter, 1)));
 						if(!rQ)
 						{

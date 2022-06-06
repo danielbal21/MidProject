@@ -11,6 +11,7 @@ import Entities.CatalogType;
 import Entities.ItemInList;
 import Entities.ItemType;
 import Entities.NewItem;
+import Entities.NotificationInTable;
 import Entities.Order;
 import Entities.OrderStatus;
 import Entities.ShippingMethods;
@@ -118,6 +119,9 @@ public class CustomerViewOrdersSpecificController implements UserControl{
     @FXML
     private Button fullListBtn;
     
+    @FXML
+    private Button pickupBtn;
+    
     /**
      * Click on new item.
      * When the event happened show the NewItem components 
@@ -174,6 +178,21 @@ public class CustomerViewOrdersSpecificController implements UserControl{
     	LoginController.windowControl.setUserControl("/gui/usercontrols/CustomerViewOrders.fxml");
     }
     
+    @FXML
+    void pickupConfirm(ActionEvent event) {
+    	ClientApp.ProtocolHandler.Invoke(RequestType.EndOrder, order, null, true);
+    	int refund = (int) ClientApp.ProtocolHandler.GetResponse(RequestType.EndOrder);
+    	NotificationInTable notification = new NotificationInTable();
+    	notification.setTo(order.getUserID());
+    	notification.setFrom("Pickup");
+		notification.setContent("Order number " + order.getOrderID() + " has been picked up"
+    				+ "\nSee full info in \"My Orders\" tab");
+    	ClientApp.ProtocolHandler.Invoke(RequestType.SendNotification, notification, null, false);
+    	pickupBtn.setVisible(false);
+		cancelOrder.setVisible(false);
+		statusOrder.setText("Completed");
+    }
+    
     /**
      * Cancel order pressed.
      * When pressed cancel order the customer cancel his order , the order deleted from the Data Base 
@@ -226,8 +245,12 @@ public class CustomerViewOrdersSpecificController implements UserControl{
 	public void onEnter() {
 		fullListBtn.setVisible(false);
 		itemListLbl.setText("Items\nList:");
-		
+		pickupBtn.setVisible(false);
 		order = (Order) LoginController.windowControl.peekPipe("chosenOrder");
+		order.setUserID(ClientApp.UserID);
+		if(order.getShippingMethod() == ShippingMethods.pickup && order.getStatus() == OrderStatus.confirmed)
+			pickupBtn.setVisible(true);
+		
 		itemListView = FXCollections.observableArrayList((ArrayList<ItemInList>)order.getItems());
 		
 		catalogItem.setCellValueFactory(new PropertyValueFactory<>("catalog_Type"));

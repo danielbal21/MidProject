@@ -123,6 +123,7 @@ public class NotificationWindowController implements UserControl {
   			NotificationsStatusBtn.setText("Show All Notifications");
   			changeNotificationsLbl.setText("Show Unread Notifications");
         	notificationsCenterTable.setItems(unreadNotificationTableList);
+        	if(unreadNotificationTableList != null)
         	if(unreadNotificationTableList.size() == 0) {
         		ErrorLabel.setText("There are no new notifications");
         		ErrorLabel.setVisible(true);
@@ -193,6 +194,7 @@ public class NotificationWindowController implements UserControl {
 		ErrorLabel.setVisible(false);
     	changeNotificationsLbl.setText("Show Unread Notifications");
     	NotificationsStatusBtn.setText("Show All Notifications");
+    	LoginController.windowControl.putPipe("notif_thread", thread);
 	}
 	
 	/**
