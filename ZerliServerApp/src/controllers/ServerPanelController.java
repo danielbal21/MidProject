@@ -126,7 +126,14 @@ public class ServerPanelController implements Initializable{
 		Server.Log("Database", "is connected");
 		Server.Log("Server", "is connected on port: " + Server.DEFAULT_PORT) ;
 		ReportScheduler rScheduler = new ReportScheduler();
-		rScheduler.Run();
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				rScheduler.Run();		
+			}
+
+		}).start();
 	}
 }
 
