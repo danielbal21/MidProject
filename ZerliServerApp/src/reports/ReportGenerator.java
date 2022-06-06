@@ -126,7 +126,7 @@ public class ReportGenerator {
 			HashMap<ItemType,Integer> histogram = new HashMap<>();
 			for(ItemType t : ItemType.values())
 				histogram.put(t, Server.SqlServerManager.GetOrderCountWithItemWithinPeriod(t,java.sql.Date.valueOf(LocalDate.of(date.getYear(), date.getMonthValue(),1)),java.sql.Date.valueOf(quarterEnd),branch));
-			System.out.println("Getting between " + LocalDate.of(date.getYear(), date.getMonthValue(),1).toString() + " TO " + quarterEnd.toString());
+			//System.out.println("Getting between " + LocalDate.of(date.getYear(), date.getMonthValue(),1).toString() + " TO " + quarterEnd.toString());
 			byte[] myPDF = null;
 			myPDF = generator.createOrderReportHistogram(branch, "Quarter " + quarter + "/" + date.getYear(),histogram);
 			Server.SqlServerManager.InsertReport(ReportType.order, false, branch, java.sql.Date.valueOf(LocalDate.of(date.getYear(), quarter,1)), myPDF);
