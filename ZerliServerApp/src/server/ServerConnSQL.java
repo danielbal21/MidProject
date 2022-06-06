@@ -1407,7 +1407,7 @@ public class ServerConnSQL {
 	 */
 	public Integer[] GetDailyFinancialIncomeForBranch(String branch,Date date) //Gross, Refunds
 	{
-		Server.Log("Database", "Executing GetDailyFinancialIncomeForBranch");
+		//Server.Log("Database", "Executing GetDailyFinancialIncomeForBranch");
 		Integer[] records = new Integer[3];
 		records[0] = 0;
 		records[1] = 0;
@@ -1452,7 +1452,7 @@ public class ServerConnSQL {
 	 */
 	public Integer GetOrderCountWithItemWithinPeriod(ItemType t,Date a,Date b,String branch)
 	{
-		Server.Log("Database", "Executing GetOrderCountWithItemWithinPeriod");
+		//Server.Log("Database", "Executing GetOrderCountWithItemWithinPeriod");
 		PreparedStatement stmt;
 		try 
 		{
@@ -1470,7 +1470,7 @@ public class ServerConnSQL {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			Server.Log("Database", "Executing GetOrderCountWithItemWithinPeriod: FAILED");
+			//Server.Log("Database", "Executing GetOrderCountWithItemWithinPeriod: FAILED");
 		}
 		return 0;
 	}
@@ -1486,7 +1486,7 @@ public class ServerConnSQL {
 	 * @return true, if exists
 	 */
 	public boolean ReportExists(ReportType t, boolean isMonthly, String branch, Date reportDate) {
-		Server.Log("Database", "Executing ReportExists");
+		//Server.Log("Database", "Executing ReportExists");
 		PreparedStatement stmt;
 		try 
 		{
@@ -1501,7 +1501,7 @@ public class ServerConnSQL {
 				return true;
 			}
 		} catch (SQLException e) {e.printStackTrace();	
-		Server.Log("Database", "Executing ReportExists: FAILED");
+		//Server.Log("Database", "Executing ReportExists: FAILED");
 		}
 		return false;
 	}
@@ -1515,7 +1515,7 @@ public class ServerConnSQL {
 	 */
 	public Integer GetComplaintCountOfBranch(String branch,Date a)
 	{			
-		Server.Log("Database", "Executing GetComplaintCountOfBranch");
+		//Server.Log("Database", "Executing GetComplaintCountOfBranch");
 		PreparedStatement stmt;
 		ResultSet rs;
 		try
@@ -1531,7 +1531,7 @@ public class ServerConnSQL {
 			}
 		}catch (SQLException e) {
 			e.printStackTrace();
-			Server.Log("Database", "Executing GetComplaintCountOfBranch: FAILED");
+			//Server.Log("Database", "Executing GetComplaintCountOfBranch: FAILED");
 		}		
 		throw new RuntimeException("SQL Error in complaints count");
 	}

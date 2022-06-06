@@ -130,7 +130,7 @@ public class ServerPanelController implements Initializable{
 
 			@Override
 			public void run() {
-				rScheduler.Run();		
+				rScheduler.Run();	
 			}
 
 		}).start();

@@ -132,35 +132,30 @@ public class ReportScheduler {
 	 */
 	public void Run()
 	{
-		final Task<Void> rScheduler = new Task<Void>() {
-			@Override
-			protected Void call() throws InterruptedException {
-				Compensate();
-				boolean x = false;
-				while(x)
-				{
-					/** wait for generation period **/
-					while(LocalDate.now().getDayOfMonth() != 1)
-					{
-						Server.Log("R-Scheduler", "Polling Reports");
-						if(!ZERLI_DEBUG)
-							Thread.sleep((1000 * 3600) * 12); //12 hours
-						else
-							Thread.sleep(10 * 1000); //10 seconds
+		Compensate();
+		boolean x = false;
+		while(x)
+		{
+			/** wait for generation period **/
+			while(LocalDate.now().getDayOfMonth() != 1)
+			{
+				Server.Log("R-Scheduler", "Polling Reports");
+				if(!ZERLI_DEBUG)
+					try {
+						Thread.sleep((1000 * 3600) * 12);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
-					Compensate();
-				}
-				return null;	
+				else
+					try {
+						Thread.sleep(10 * 1000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} //10 seconds
 			}
-		};
-		rScheduler.exceptionProperty().addListener((observable, oldValue, newValue) ->  {
-			  if(newValue != null) {
-			    Exception ex = (Exception) newValue;
-			    ex.printStackTrace();
-			  }
-			});
-		/*rScheduler.setOnSucceeded();
-		rScheduler.setOnFailed();*/
-		rScheduler.run();
+			Compensate();
+		}
 	}
 }
