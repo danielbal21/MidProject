@@ -68,10 +68,6 @@
          <image>
             <Image url="@../../png/addToCart.png" />
          </image>
-         <styleClass>
-            <String fx:value="imageasbtn" />
-            <String fx:value="pressbtn" />
-         </styleClass>
       </ImageView>
       <Button layoutX="77.0" layoutY="439.0" mnemonicParsing="false" onMousePressed="#ResetBtn" prefHeight="45.0" text="Reset All">
          <styleClass>

@@ -59,15 +59,7 @@ public class CustomerServicePostComplaintController implements UserControl {
     }
     @FXML
     void helpBtnPressed(ActionEvent event) {
-		Alert confirmAlert = new Alert(AlertType.NONE);
-		confirmAlert.setTitle("Help - Complaint Issue");
-		confirmAlert.setContentText("Enter the id of the complaining customer in the box \"Complainant ID\""
-				+ "\nSelect the branch in the \"Branch\" Box"
-				+ "\nEnter the desired feedback"
-				+ "\nPress Post");
-		ButtonType ok = new ButtonType("OK", ButtonData.OK_DONE);
-		confirmAlert.getDialogPane().getButtonTypes().add(ok);
-		confirmAlert.showAndWait();
+    	Utilities.GenericUtilties.ShowHelp("Posting a Complaint", "help_complaint.png");
     }
     /**
      * Post press.

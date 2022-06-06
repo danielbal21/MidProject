@@ -108,6 +108,11 @@ public class LoginController {
     	}
     }
     
+    @FXML
+    void helpBtnPressed(ActionEvent event) {
+    	Utilities.GenericUtilties.ShowHelp("Login","help_login.png");
+    }
+    
 	/**
 	 * Log in.
 	 * This function get the user UserName and password 

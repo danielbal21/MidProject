@@ -1,15 +1,42 @@
 package Utilities;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import Entities.*;
+import controllers.HelperController;
+import controllers.pdfComparer;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class GenericUtilties {
+	public static void ShowHelp(String title,String helpImageName)
+	{
+		FXMLLoader loader = new FXMLLoader();
+    	Parent root = null;
+		loader.setLocation(GenericUtilties.class.getResource("/gui/mainframes/helper.fxml"));
+		try {
+			root =  loader.load();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
+		HelperController hCtrl = loader.getController();
+		Stage newStage = new Stage();
+		//Utilities.GenericUtilties.SetWindowMovable(root, newStage);
+		Scene scene = new Scene(root);
+		newStage.initStyle(StageStyle.UNDECORATED);
+		SetWindowMovable(root,newStage);
+		newStage.setScene(scene); 	
+		hCtrl.SetHelper(title, helpImageName, newStage);
+		newStage.show();
+
+	}
 	public static void SetWindowMovable(Parent parent,Stage stage)
 	{
 		class TwoInOneEventHandler {

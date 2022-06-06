@@ -115,14 +115,7 @@ public class ManagerAddNewCustomerController implements UserControl{
     
     @FXML
     void helpBtnPressed(ActionEvent event) {
-		Alert confirmAlert = new Alert(AlertType.NONE);
-		confirmAlert.setTitle("Help - Add New User");
-		confirmAlert.setContentText("Use the ID Box to insert the id of the customer you seek to add"
-				+ "\nIf your id is valid a sub window will open, prompting you to add"
-				+ "\npassword and full credit card details");
-		ButtonType ok = new ButtonType("OK", ButtonData.OK_DONE);
-		confirmAlert.getDialogPane().getButtonTypes().add(ok);
-		confirmAlert.showAndWait();
+    	Utilities.GenericUtilties.ShowHelp("", "help_account_adding.png");
     }
     
     /**

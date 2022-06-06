@@ -189,18 +189,7 @@ public class ItemEditorController implements UserControl {
     }
     @FXML
     void helpBtnPressed(ActionEvent event) {
-		Alert confirmAlert = new Alert(AlertType.NONE);
-		confirmAlert.setTitle("Help - Item Editor");
-		confirmAlert.setContentText("Use the fields below to update your item data"
-				+ "\nName for the item displayed name"
-				+ "\nPrice for the price without discount"
-				+ "\nCatalog type to be located in: items or products"
-				+ "\nItem Type and Color"
-				+ "\nYou must specify a valid sale price however you may uncheck"
-				+ "\nThe \"On Sale\" checkbox to prevent it from being active");
-		ButtonType ok = new ButtonType("OK", ButtonData.OK_DONE);
-		confirmAlert.getDialogPane().getButtonTypes().add(ok);
-		confirmAlert.showAndWait();
+    	Utilities.GenericUtilties.ShowHelp("Item Editor", "help_marketing_editor.png");
     }
 	/**
 	 * On enter.

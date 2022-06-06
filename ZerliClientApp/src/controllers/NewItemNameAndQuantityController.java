@@ -176,7 +176,7 @@ public class NewItemNameAndQuantityController implements UserControl{
         image.setVisible(true);
     	label.setText(String.valueOf(cartNotificationsNumber));
     	LoginController.windowControl.putPipe("cartLabel", cartLabelAndImage);
-    	
+    	ResetBtn(null);
     	LoginController.windowControl.setUserControl("/gui/usercontrols/CustomerHomePage.fxml");
     }
 
