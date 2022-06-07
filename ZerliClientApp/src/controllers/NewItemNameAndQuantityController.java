@@ -65,6 +65,8 @@ public class NewItemNameAndQuantityController implements UserControl{
     @Override
 	public void onEnter() {
     	/////
+    	QuantityErrorLabel.setVisible(false);
+    	NameErrorLabel.setVisible(false);
     	String string="";
     	NewItem newitem = (NewItem)LoginController.windowControl.peekPipe("newItem");
     	for (ItemInList temp : newitem.getAssemble()) {

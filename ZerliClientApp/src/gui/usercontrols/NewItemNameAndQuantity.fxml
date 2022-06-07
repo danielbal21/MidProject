@@ -23,8 +23,8 @@
             <String fx:value="pressbtn" />
             <String fx:value="Left-btn" />
          </styleClass></Button>
-      <Label fx:id="NameErrorLabel" layoutX="414.0" layoutY="176.0" styleClass="subLabel" text="** Please enter name" textFill="RED" visible="false" />
-      <Label fx:id="QuantityErrorLabel" layoutX="333.0" layoutY="315.0" styleClass="subLabel" text="** The quantity can not be zero" textFill="RED" visible="false" />
+      <Label fx:id="NameErrorLabel" layoutX="242.0" layoutY="155.0" styleClass="subLabel" text="* Please enter name" textFill="RED" />
+      <Label fx:id="QuantityErrorLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="99.0" layoutY="259.0" prefHeight="45.0" prefWidth="356.0" styleClass="subLabel" text="* The quantity can not be zero" textFill="RED" />
       <Label fx:id="QuantityNumberText" alignment="CENTER" layoutX="302.0" layoutY="315.0" prefHeight="30.0" prefWidth="90.0" styleClass="subLabel" text="0" textAlignment="CENTER" />
       <ImageView fitHeight="43.0" fitWidth="35.0" layoutX="259.0" layoutY="312.0" onMousePressed="#RemoveQuantity" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -59,30 +59,29 @@
             <Image url="@../../png/Imagination.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="27.0" layoutY="439.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="28.0" layoutY="402.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../png/reset.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="80.0" fitWidth="67.0" layoutX="217.0" layoutY="422.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="80.0" fitWidth="67.0" layoutX="218.0" layoutY="385.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../png/addToCart.png" />
          </image>
       </ImageView>
-      <Button layoutX="77.0" layoutY="439.0" mnemonicParsing="false" onMousePressed="#ResetBtn" prefHeight="45.0" text="Reset All">
+      <Button layoutX="78.0" layoutY="402.0" mnemonicParsing="false" onMousePressed="#ResetBtn" prefHeight="45.0" text="Reset All">
          <styleClass>
             <String fx:value="Reg-btn" />
             <String fx:value="pressbtn" />
          </styleClass>
       </Button>
-      <Button layoutX="291.0" layoutY="438.0" mnemonicParsing="false" onMousePressed="#NextBtnPressed" prefHeight="45.0" text="Add new item to cart">
+      <Button layoutX="292.0" layoutY="401.0" mnemonicParsing="false" onMousePressed="#NextBtnPressed" prefHeight="45.0" text="Add new item to cart">
          <styleClass>
             <String fx:value="Reg-btn" />
             <String fx:value="pressbtn" />
          </styleClass>
       </Button>
       <Label layoutX="683.0" layoutY="152.0" prefHeight="35.0" prefWidth="109.0" styleClass="subLabel" text="Summary" />
-      <Label layoutX="806.0" layoutY="242.0" />
       <Line endX="72.39996337890625" layoutX="751.0" layoutY="187.0" startX="-100.0" />
       <ScrollPane layoutX="508.0" layoutY="194.0" prefHeight="420.0" prefWidth="439.0" style="-fx-border-color: black; -fx-border-radius: 10;">
          <content>

@@ -27,7 +27,6 @@
             <Font name="Maiandra GD" size="24.0" />
          </font>
       </Label>
-      <Label layoutX="479.0" layoutY="127.0" styleClass="subLabel" />
       <Button fx:id="PostButton" layoutX="386.0" layoutY="582.0" mnemonicParsing="false" onAction="#PostComplaintPress" prefHeight="50.0" prefWidth="186.0" text="Post new complaint">
          <styleClass>
             <String fx:value="Reg-btn" />

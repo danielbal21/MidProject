@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -11,30 +12,30 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane style="-fx-background-color: E5E5E5;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ServerPanelController">
+<AnchorPane prefHeight="726.0" prefWidth="1095.0" style="-fx-background-color: E5E5E5;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ServerPanelController">
    <children>
-      <ImageView fitHeight="654.0" fitWidth="1136.0" layoutY="-16.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="753.0" fitWidth="1120.0" layoutY="-16.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../png/W2.jpg" />
          </image>
       </ImageView>
-      <TableView fx:id="clientTable" layoutX="23.0" layoutY="95.0" prefHeight="441.0" prefWidth="347.0" stylesheets="@application.css">
+      <TableView fx:id="clientTable" layoutX="11.0" layoutY="95.0" prefHeight="441.0" prefWidth="445.0" stylesheets="@application.css">
         <columns>
-          <TableColumn fx:id="ipCol" prefWidth="101.0" text="IP" />
-            <TableColumn fx:id="hostCol" minWidth="0.0" prefWidth="167.0" text="Host" />
-            <TableColumn fx:id="statusCol" prefWidth="78.0" text="Status" />
+          <TableColumn fx:id="ipCol" prefWidth="148.0" text="IP" />
+            <TableColumn fx:id="hostCol" minWidth="0.0" prefWidth="177.0" text="Host" />
+            <TableColumn fx:id="statusCol" prefWidth="116.0" text="Status" />
         </columns>
          <styleClass>
             <String fx:value="column-header-background" />
             <String fx:value="table-cell" />
          </styleClass>
       </TableView>
-      <Label layoutX="350.0" layoutY="16.0" styleClass="MainLabel" text="Zerli Server">
+      <Label layoutX="413.0" layoutY="10.0" styleClass="MainLabel" text="Zerli Server">
          <font>
             <Font name="Maiandra GD" size="35.0" />
          </font>
       </Label>
-      <ImageView fx:id="exitBtn" fitHeight="54.0" fitWidth="55.0" layoutX="926.0" layoutY="2.0" onMousePressed="#exitPressed" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="exitBtn" fitHeight="54.0" fitWidth="55.0" layoutX="1060.0" layoutY="7.0" onMousePressed="#exitPressed" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../png/X-btn.png" />
          </image>
@@ -43,9 +44,9 @@
             <String fx:value="pressbtn" />
          </styleClass>
       </ImageView>
-      <ScrollPane layoutX="379.0" layoutY="95.0" prefHeight="536.0" prefWidth="578.0">
+      <ScrollPane layoutX="465.0" layoutY="95.0" prefHeight="626.0" prefWidth="641.0">
          <content>
-            <TextArea fx:id="console" prefHeight="532.0" prefWidth="576.0" style="-fx-control-inner-background:#000000; -fx-font-family: Consolas; -fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #000000; -fx-text-fill: #00ff00; ">
+            <TextArea fx:id="console" prefHeight="624.0" prefWidth="624.0" style="-fx-control-inner-background:#000000; -fx-font-family: Consolas; -fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #000000; -fx-text-fill: #00ff00; ">
                <font>
                   <Font name="Consolas" size="14.0" />
                </font>
@@ -53,7 +54,13 @@
             </TextArea>
          </content>
       </ScrollPane>
-      <Label fx:id="serverStatusLbl" layoutX="84.0" layoutY="548.0" prefHeight="30.0" prefWidth="221.0" style="-fx-text-fill: green;" styleClass="subLabel" text="  Server   - ONLINE" />
-      <Label fx:id="dbStatusServer" layoutX="83.0" layoutY="582.0" style="-fx-text-fill: green;" styleClass="subLabel" text="Database - ONLINE" />
+      <Label fx:id="serverStatusLbl" layoutX="124.0" layoutY="644.0" prefHeight="30.0" prefWidth="221.0" style="-fx-text-fill: green;" styleClass="subLabel" text="  Server   - ONLINE" />
+      <Label fx:id="dbStatusServer" layoutX="123.0" layoutY="678.0" style="-fx-text-fill: green;" styleClass="subLabel" text="Database - ONLINE" />
+      <Button fx:id="importBtn" layoutX="128.0" layoutY="565.0" mnemonicParsing="false" onAction="#importPressed" prefHeight="54.0" prefWidth="204.0" text="Import data">
+         <styleClass>
+            <String fx:value="Reg-btn" />
+            <String fx:value="pressbtn" />
+         </styleClass>
+      </Button>
    </children>
 </AnchorPane>

@@ -20,7 +20,7 @@
             <String fx:value="Left-btn" />
          </styleClass>
       </Button>
-      <TextField fx:id="zerliCoins" alignment="CENTER" editable="false" layoutX="682.0" layoutY="395.0" prefHeight="40.0" prefWidth="121.0" promptText="Zerli Coins" styleClass="subLabel" />
+      <TextField fx:id="zerliCoins" alignment="CENTER" editable="false" layoutX="682.0" layoutY="395.0" prefHeight="40.0" prefWidth="139.0" promptText="Zerli Coins" styleClass="subLabel" />
       <Label layoutX="37.0" layoutY="310.0" styleClass="subLabel" text="Credit card:" />
       <Label layoutX="551.0" layoutY="397.0" styleClass="subLabel" text="Zerli coins:" />
       <AnchorPane layoutX="167.0" layoutY="290.0" prefHeight="245.0" prefWidth="375.0">

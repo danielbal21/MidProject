@@ -16,9 +16,9 @@
          <image>
             <Image url="@../../png/Expert.png" />
          </image></ImageView>
-      <ComboBox fx:id="surveyNameSelector" layoutX="506.0" layoutY="236.0" onAction="#surveyNameSelectorPressed" prefHeight="46.0" prefWidth="323.0" styleClass="subLabel" />
+      <ComboBox fx:id="surveyNameSelector" layoutX="506.0" layoutY="236.0" onAction="#surveyNameSelectorPressed" prefHeight="46.0" prefWidth="323.0" styleClass="miniLabel" />
       <Label layoutX="300.0" layoutY="244.0" styleClass="subLabel" text="Survey Name" />
-      <TextField fx:id="requiredSurveysText" alignment="TOP_LEFT" editable="false" layoutX="506.0" layoutY="406.0" prefHeight="45.0" prefWidth="323.0" styleClass="subLabel" />
+      <TextField fx:id="requiredSurveysText" alignment="TOP_LEFT" editable="false" layoutX="506.0" layoutY="406.0" prefHeight="45.0" prefWidth="323.0" styleClass="miniLabel" />
       <Label layoutX="288.0" layoutY="414.0" styleClass="subLabel" text="required survey" />
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="129.0" layoutY="184.0" pickOnBounds="true" preserveRatio="true">
          <image>

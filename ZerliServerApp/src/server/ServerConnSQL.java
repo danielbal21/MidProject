@@ -11,10 +11,6 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-
-import org.bouncycastle.asn1.dvcs.Data;
-
-import java.awt.List;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -60,6 +56,26 @@ public class ServerConnSQL {
 			System.out.println("VendorError: " + ex.getErrorCode());
 			return false;
 		}
+	}
+	public static void importData() {
+		Server.Log("Database", "Executing importData");
+		String[] users = {
+				"INSERT INTO `midproject`.`user_details` (`user_id`, `first_name`, `last_name`, `id`, `email`, `phone`, `role`) VALUES ('haim', 'haim ', 'svhvili', '951951951', 'hs@gmail.com', '0523654123', 'customer');",
+				"INSERT INTO `midproject`.`user_details` (`user_id`, `first_name`, `last_name`, `id`, `email`, `phone`, `role`) VALUES ('naor', 'naor', 'azran', '010203040', 'na@gmail.com', '0583216545', 'customer');",
+				"INSERT INTO `midproject`.`user_details` (`user_id`, `first_name`, `last_name`, `id`, `email`, `phone`, `role`) VALUES ('liran', 'liran ', 'greyshirt', '090807060', 'lgs@gmail.com', '0598745212', 'customer');"
+				};
+		PreparedStatement stmt;
+		 try {
+			 	for(String user : users) {
+			 		stmt = conn.prepareStatement(user);
+				 	stmt.executeUpdate();
+			 	}
+		 }
+		 catch (Exception e) {
+	            e.printStackTrace();
+	        	Server.Log("Database", "Executing importData : FAILED");
+	        }	
+		 Server.Log("Database", "Executing importData : SUCCESS");
 	}
 
 	/**
@@ -107,6 +123,7 @@ public class ServerConnSQL {
 			logindetails[1] = Access.noaut;
 			return logindetails;
 		}
+
 	}
 
 	/**
@@ -115,6 +132,8 @@ public class ServerConnSQL {
 	 * @param username the username that asks to log out
 	 */
 	public void LoggedOut(String username) {
+    	Server.Log("Database", "Executing LoggedOut");
+
 		PreparedStatement stmt = null;
 		try {
 			stmt = conn.prepareStatement("UPDATE login_details SET loggedin='0' WHERE user_id=?");
@@ -122,7 +141,10 @@ public class ServerConnSQL {
 			stmt.executeUpdate();
 		} catch (SQLException e1) {
 			e1.printStackTrace();
+			Server.Log("Database", "Executing LoggedOut: FAILED");
 		}
+    	Server.Log("Database", "Executing LoggedOut: SUCCESS");
+
 	}
 
 	/**
@@ -132,6 +154,7 @@ public class ServerConnSQL {
 	 * @param cartItems the cart items collection to be altered
 	 */
 	public void getCartItems(String username,ArrayList<ItemInList> cartItems) {
+    	Server.Log("Database", "Executing getCartItems");
 		PreparedStatement stmt = null;
 		try {
 			stmt = conn.prepareStatement("SELECT quantity FROM cart_item WHERE cart_id=(SELECT cart_id FROM carts WHERE user_id= ?)");
@@ -258,7 +281,7 @@ public class ServerConnSQL {
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	        }
-		
+		 Server.Log("Database", "Executing getCartItems: SUCCESS");
 	}
 	
 	/**
@@ -2162,5 +2185,6 @@ public class ServerConnSQL {
 		
 		return surveyData;
 	}
+	
 	
 }

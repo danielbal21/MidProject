@@ -3,7 +3,6 @@ package controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import Entities.ClientInfo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -70,7 +69,9 @@ public class ServerPanelController implements Initializable{
     
 	/**  The stage used for window control. */
 	private Stage stage;
-   
+	
+    @FXML
+    private Button importBtn;
 	
 	 /**
  	 * This event invokes when the exit button is pressed.
@@ -98,6 +99,13 @@ public class ServerPanelController implements Initializable{
 	 * @param location - no use
 	 * @param resources - no use
 	 */
+ 	
+	  @FXML
+	    void importPressed(ActionEvent event) {
+		  server.ServerConnSQL.importData();
+		  importBtn.setVisible(false);
+	    }
+ 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		ipCol.setCellValueFactory(new PropertyValueFactory<>("ip"));	

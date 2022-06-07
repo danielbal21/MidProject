@@ -38,7 +38,6 @@
             <Font name="Maiandra GD" size="24.0" />
          </font>
       </Label>
-      <Label layoutX="479.0" layoutY="127.0" styleClass="subLabel" />
       <ImageView fitHeight="57.0" fitWidth="57.0" layoutX="882.0" layoutY="572.0" onMouseClicked="#refreshPressed" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../png/refresh2.png" />

@@ -55,7 +55,7 @@
             <Label fx:id="shippingDateLabel" layoutX="174.0" layoutY="44.0" styleClass="subLabel" text="2022-05-09 19:22:00" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="259.0" layoutY="495.0" prefHeight="85.0" prefWidth="426.0">
+      <AnchorPane layoutX="259.0" layoutY="484.0" prefHeight="85.0" prefWidth="426.0">
          <children>
             <Label layoutX="17.0" layoutY="43.0" prefHeight="30.0" prefWidth="121.0" styleClass="subLabel" text="Total cost:" />
             <Label fx:id="costLabel" layoutX="138.0" layoutY="43.0" styleClass="subLabel" text="100" />

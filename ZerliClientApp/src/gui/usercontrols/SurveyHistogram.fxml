@@ -34,7 +34,7 @@
             <Image url="@../../png/checkBox.png" />
          </image>
       </ImageView>
-      <TextField fx:id="PdfTextBox" editable="false" layoutX="215.0" layoutY="604.0" prefHeight="42.0" prefWidth="298.0" styleClass="subLabel" />
+      <TextField fx:id="PdfTextBox" editable="false" layoutX="215.0" layoutY="604.0" prefHeight="42.0" prefWidth="298.0" styleClass="miniLabel" />
       <Button layoutX="668.0" layoutY="604.0" mnemonicParsing="false" onAction="#submitPDFBtnpressed" prefHeight="42.0" prefWidth="137.0" text="Submit PDF">
          <styleClass>
             <String fx:value="pressbtn" />

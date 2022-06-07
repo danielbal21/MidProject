@@ -57,8 +57,8 @@
          </styleClass>
       </Button>
       <Button fx:id="cancelBtn" layoutX="6.0" layoutY="596.0" mnemonicParsing="false" onAction="#cancelBtn_press" prefHeight="60.0" prefWidth="102.0" styleClass="Left-btn" text="Cancel" />
-      <Label fx:id="errorLabel" layoutX="551.0" layoutY="469.0" styleClass="subLabel" textFill="RED" />
-      <Button layoutX="35.0" layoutY="31.0" mnemonicParsing="false" onAction="#helpBtnPressed" prefHeight="42.0" prefWidth="66.0" text="Help">
+      <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="507.0" layoutY="444.0" prefHeight="207.0" prefWidth="325.0" styleClass="miniLabel" textFill="RED" />
+      <Button layoutX="875.0" layoutY="19.0" mnemonicParsing="false" onAction="#helpBtnPressed" prefHeight="42.0" prefWidth="66.0" text="Help">
          <font>
             <Font size="18.0" />
          </font>

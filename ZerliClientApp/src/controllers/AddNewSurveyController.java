@@ -85,6 +85,7 @@ public class AddNewSurveyController implements UserControl {
 	 */
 	@Override
 	public void onEnter() {
+		addSurveyLabel.setVisible(false);
 		SetQuestions();		
 	}
     

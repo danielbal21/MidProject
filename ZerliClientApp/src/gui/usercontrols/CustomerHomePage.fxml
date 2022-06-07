@@ -130,7 +130,7 @@
             <Image url="@../../png/Imagination.png" />
          </image>
       </ImageView>
-      <Button layoutX="27.0" layoutY="607.0" mnemonicParsing="false" onAction="#helpBtnPressed" prefHeight="42.0" prefWidth="66.0" text="Help">
+      <Button layoutX="872.0" layoutY="24.0" mnemonicParsing="false" onAction="#helpBtnPressed" prefHeight="42.0" prefWidth="66.0" text="Help">
          <font>
             <Font size="18.0" />
          </font>

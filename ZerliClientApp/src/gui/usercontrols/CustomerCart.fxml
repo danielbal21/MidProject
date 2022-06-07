@@ -61,7 +61,7 @@
          </font>
       </Button>
       <ProgressBar layoutX="214.0" layoutY="600.0" prefHeight="50.0" prefWidth="517.0" progress="0.25" />
-      <Label fx:id="CartEmpyLabel" alignment="CENTER" layoutX="209.0" layoutY="187.0" prefHeight="101.0" prefWidth="554.0" styleClass="MainLabel" text="Cart is empty" textFill="RED">
+      <Label fx:id="CartEmpyLabel" alignment="CENTER" layoutX="209.0" layoutY="258.0" prefHeight="101.0" prefWidth="554.0" styleClass="MainLabel" text="Cart is empty" textFill="RED">
          <font>
             <Font size="26.0" />
          </font>

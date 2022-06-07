@@ -47,7 +47,7 @@
             <Font size="32.0" />
          </font>
       </Label>
-      <TextField fx:id="refundField" alignment="CENTER" layoutX="542.0" layoutY="467.0" prefHeight="46.0" prefWidth="140.0" styleClass="subLabel" />
+      <TextField fx:id="refundField" alignment="CENTER" layoutX="542.0" layoutY="467.0" prefHeight="46.0" prefWidth="163.0" styleClass="subLabel" />
       <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="200.0" layoutY="529.0" prefHeight="42.0" prefWidth="558.0" styleClass="subLabel" text="error" textAlignment="CENTER" textFill="RED" />
       <HBox alignment="CENTER" layoutX="15.0" layoutY="87.0" prefHeight="48.0" prefWidth="927.0" spacing="10.0">
          <children>

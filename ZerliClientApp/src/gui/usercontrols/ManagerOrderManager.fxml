@@ -39,7 +39,6 @@
             <Font name="Maiandra GD" size="24.0" />
          </font>
       </Label>
-      <Label layoutX="479.0" layoutY="127.0" styleClass="subLabel" />
       <Button layoutX="8.0" layoutY="597.0" mnemonicParsing="false" onAction="#backPressed" text="Back">
          <styleClass>
             <String fx:value="Left-btn" />

@@ -43,10 +43,10 @@
          </font></Label>
       <Label layoutX="283.0" layoutY="132.0" prefHeight="52.0" prefWidth="186.0" styleClass="subLabel" text="Complainant ID:" />
       <Label layoutX="329.0" layoutY="194.0" prefHeight="35.0" prefWidth="90.0" styleClass="subLabel" text="Branch:" />
-      <TextField fx:id="userIDField" layoutX="469.0" layoutY="138.0" prefHeight="42.0" prefWidth="139.0" styleClass="miniLabel" />
-      <ComboBox fx:id="branchField" layoutX="469.0" layoutY="191.0" prefHeight="42.0" prefWidth="139.0" styleClass="miniLabel" />
+      <TextField fx:id="userIDField" layoutX="469.0" layoutY="138.0" prefHeight="42.0" prefWidth="192.0" styleClass="miniLabel" />
+      <ComboBox fx:id="branchField" layoutX="469.0" layoutY="191.0" prefHeight="42.0" prefWidth="192.0" styleClass="miniLabel" />
       <Line endX="390.5" endY="305.5" layoutX="5.0" startX="508.29290771484375" startY="305.5" />
-      <Button layoutX="36.0" layoutY="30.0" mnemonicParsing="false" onAction="#helpBtnPressed" prefHeight="42.0" prefWidth="66.0" text="Help">
+      <Button layoutX="877.0" layoutY="19.0" mnemonicParsing="false" onAction="#helpBtnPressed" prefHeight="42.0" prefWidth="66.0" text="Help">
          <font>
             <Font size="18.0" />
          </font>

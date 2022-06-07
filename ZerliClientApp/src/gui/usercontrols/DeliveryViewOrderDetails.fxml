@@ -59,12 +59,12 @@
             <Label layoutX="14.0" layoutY="161.0" prefHeight="30.0" prefWidth="113.0" styleClass="subLabel" text="Address:" />
             <Label layoutX="14.0" layoutY="193.0" prefHeight="30.0" prefWidth="137.0" styleClass="subLabel" text="City:" />
             <Label fx:id="fullnameLbl" layoutX="136.0" layoutY="93.0" prefHeight="30.0" prefWidth="276.0" styleClass="subLabel" text="ido mialy" />
-            <Label fx:id="phoneLbl" layoutX="136.0" layoutY="128.0" prefHeight="30.0" prefWidth="276.0" styleClass="subLabel" text="0547896325" />
-            <Label fx:id="addressLbl" layoutX="136.0" layoutY="160.0" prefHeight="30.0" prefWidth="276.0" styleClass="subLabel" text="hakerem 20" />
+            <Label fx:id="phoneLbl" layoutX="136.0" layoutY="130.0" prefHeight="30.0" prefWidth="276.0" styleClass="subLabel" text="0547896325" />
+            <Label fx:id="addressLbl" layoutX="136.0" layoutY="162.0" prefHeight="30.0" prefWidth="276.0" styleClass="subLabel" text="hakerem 20" />
             <Label fx:id="cityLbl" layoutX="136.0" layoutY="193.0" prefHeight="30.0" prefWidth="276.0" styleClass="subLabel" text="akko" />
          </children>
       </AnchorPane>
-      <HBox alignment="CENTER" layoutX="52.0" layoutY="453.0" prefHeight="79.0" prefWidth="794.0">
+      <HBox alignment="CENTER" layoutX="52.0" layoutY="453.0" prefHeight="79.0" prefWidth="837.0">
          <children>
             <Label styleClass="MainLabel" text="Total cost:" />
             <Label fx:id="costLabel" styleClass="MainLabel" text="100" />

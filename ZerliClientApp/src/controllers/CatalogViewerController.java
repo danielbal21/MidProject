@@ -8,11 +8,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-
 import Entities.CatalogType;
 import Entities.Item;
 import ProtocolHandler.RequestType;
 import client.ClientApp;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,6 +22,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.layout.AnchorPane;
@@ -34,6 +35,13 @@ import javafx.scene.layout.GridPane;
  */
 public class CatalogViewerController implements UserControl {
 
+	
+    @FXML
+    private TextField rangeNumber;
+    
+    /** The item list. */
+	private ObservableList<Item> itemRangeList;
+	
 	/** The item list. */
 	private ObservableList<Item> itemList;
 	
@@ -72,6 +80,34 @@ public class CatalogViewerController implements UserControl {
     @FXML
     private Button nextBtn;
 
+    @FXML
+    private Label ValidNumberError;
+    
+    @FXML
+    void searchRangePressed(ActionEvent event) {
+    	int number; 
+    	try {
+        	number = Integer.parseInt(rangeNumber.getText());
+
+		} catch (Exception e) {
+			ValidNumberError.setVisible(true);
+			return;
+		}
+    	ValidNumberError.setVisible(false);
+    	itemRangeList = FXCollections.observableArrayList();
+    	for(Item item: itemList) {
+    		if(item.getPrice()<= number)
+    			itemRangeList.add(item);
+    	}
+    	GridPane.getChildren().clear();
+    	CatalogBuilder(itemRangeList);
+    }
+    
+    @FXML
+    void showAllPressed(ActionEvent event) {
+    	GridPane.getChildren().clear();
+    	CatalogBuilder(itemList);
+    }
     
     /**
      * Next pressed.
@@ -160,44 +196,19 @@ public class CatalogViewerController implements UserControl {
     	}
     }
     
-	/**
-	 * On enter.
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public void onEnter() {	
-		noItemErrorLabel.setVisible(false);
-		catalogType = (CatalogType) LoginController.windowControl.peekPipe("catalog");
-		if(catalogType == CatalogType.new_item) {
-			ClientApp.ProtocolHandler.Invoke(RequestType.GetCatalog, null,CatalogType.pre_define, true);
-			itemList=(ObservableList<Item>) ClientApp.ProtocolHandler.GetResponse(RequestType.GetCatalog);
-			ClientApp.ProtocolHandler.Invoke(RequestType.GetCatalog, null,CatalogType.custom, true);
-			itemList.addAll((ObservableList<Item>) ClientApp.ProtocolHandler.GetResponse(RequestType.GetCatalog));		
+    public void CatalogBuilder(ObservableList<Item> itemList) {
+    	int maxpages = ((itemList.size())/(GridPane.getColumnCount()*GridPane.getRowCount()));
+		if((itemList.size())%(GridPane.getColumnCount()*GridPane.getRowCount())!=0) maxpages++;
+		if(maxpages == 0) {
+			maxPages.setText("0");
+			currentPage.setText("0");
+			return;
 		}
 		else {
-			ClientApp.ProtocolHandler.Invoke(RequestType.GetCatalog, null,catalogType, true);
-			itemList=(ObservableList<Item>) ClientApp.ProtocolHandler.GetResponse(RequestType.GetCatalog);
+			maxPages.setText(String.valueOf(maxpages));
+			currentPage.setText("1");
 		}
 	
-		if(catalogType== CatalogType.custom) {
-			catalogNameLbl.setText("Zerli items");
-			nextBtn.setVisible(false);
-		}
-		else if(catalogType== CatalogType.pre_define){
-			catalogNameLbl.setText("Zerli products");
-			nextBtn.setVisible(false);
-
-		}
-		else {
-			catalogNameLbl.setText("Full Zerli catalog");
-			nextBtn.setVisible(true);
-		}
-		
-		int maxpages = ((itemList.size())/(GridPane.getColumnCount()*GridPane.getRowCount()));
-		if((itemList.size())%(GridPane.getColumnCount()*GridPane.getRowCount())!=0) maxpages++;
-		
-		maxPages.setText(String.valueOf(maxpages));
-		currentPage.setText("1");
 		
 		catalogPages = new HashMap<>();
 		int currentpages = 1;
@@ -233,6 +244,45 @@ public class CatalogViewerController implements UserControl {
 		}	
 		
 		ShowPage(1);
+    }
+    
+    
+	/**
+	 * On enter.
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public void onEnter() {	
+    	ValidNumberError.setVisible(false);
+		noItemErrorLabel.setVisible(false);
+		catalogType = (CatalogType) LoginController.windowControl.peekPipe("catalog");
+		if(catalogType == CatalogType.new_item) {
+			ClientApp.ProtocolHandler.Invoke(RequestType.GetCatalog, null,CatalogType.pre_define, true);
+			itemList=(ObservableList<Item>) ClientApp.ProtocolHandler.GetResponse(RequestType.GetCatalog);
+			ClientApp.ProtocolHandler.Invoke(RequestType.GetCatalog, null,CatalogType.custom, true);
+			itemList.addAll((ObservableList<Item>) ClientApp.ProtocolHandler.GetResponse(RequestType.GetCatalog));		
+		}
+		else {
+			ClientApp.ProtocolHandler.Invoke(RequestType.GetCatalog, null,catalogType, true);
+			itemList=(ObservableList<Item>) ClientApp.ProtocolHandler.GetResponse(RequestType.GetCatalog);
+		}
+	
+		if(catalogType== CatalogType.custom) {
+			catalogNameLbl.setText("Zerli items");
+			nextBtn.setVisible(false);
+		}
+		else if(catalogType== CatalogType.pre_define){
+			catalogNameLbl.setText("Zerli products");
+			nextBtn.setVisible(false);
+
+		}
+		else {
+			catalogNameLbl.setText("Full Zerli catalog");
+			nextBtn.setVisible(true);
+		}
+		GridPane.getChildren().clear();
+		CatalogBuilder(itemList);
+		
 	}
 	
 	/**
@@ -242,6 +292,7 @@ public class CatalogViewerController implements UserControl {
 	@Override
 	public void onExit() {
 		GridPane.getChildren().clear();
+		rangeNumber.setText("");
 	}
 	
 	/**
@@ -262,6 +313,7 @@ public class CatalogViewerController implements UserControl {
 		GridPane.getChildren().clear();
 		
 		ArrayList<Item> page = catalogPages.get(num);
+		if(page == null) return;
 		int columnIndex=0,rowIndex=0;
 		for (Item item : page) {
 		
